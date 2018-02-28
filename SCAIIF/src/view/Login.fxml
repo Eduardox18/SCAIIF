@@ -19,19 +19,14 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="4.0" layoutY="323.0" text="Desarrolladores:">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Label>
-            <Label layoutX="4.0" layoutY="330.0" prefHeight="64.0" prefWidth="222.0" text="Domínguez Delgado Ángel Eduardo Domínguez González José Andrés Hernández González Esmeralda Yamileth" wrapText="true">
+            <Label layoutX="2.0" layoutY="374.0" prefHeight="27.0" prefWidth="76.0" text="Rockola Inc.®" wrapText="true">
                <font>
                   <Font size="11.0" />
                </font>
             </Label>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="15.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../resources/FlorconUV1024x768SinFondo.png" />
+                  <Image url="@resources/FlorconUV1024x768SinFondo.png" />
                </image>
             </ImageView>
          </children>
@@ -57,7 +52,7 @@
             <JFXButton fx:id="botonIngresar" buttonType="RAISED" disable="true" layoutX="126.0" layoutY="318.0" onAction="#ingresarSistema" prefHeight="36.0" prefWidth="129.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Ingresar" textFill="WHITE" />
             <ImageView fitHeight="49.0" fitWidth="45.0" layoutX="74.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../resources/img_326343.png" />
+                  <Image url="@resources/img_326343.png" />
                </image>
             </ImageView>
          </children>
