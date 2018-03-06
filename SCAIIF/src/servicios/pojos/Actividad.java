@@ -1,0 +1,82 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package servicios.pojos;
+
+import java.sql.Time;
+import java.util.Date;
+
+/**
+ *
+ * @author lalo
+ */
+public class Actividad {
+
+    private int noActividad;
+    private String nombre;
+    private Time horaInicio;
+    private Time horaFin;
+    private Date fecha;
+    private int cupo;
+
+    public Actividad() {}
+
+    public Actividad(int noActividad, String nombre, Time horaInicio, Time horaFin, Date fecha, int cupo) {
+        this.noActividad = noActividad;
+        this.nombre = nombre;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.fecha = fecha;
+        this.cupo = cupo;
+    }
+
+    public int getNoActividad() {
+        return noActividad;
+    }
+
+    public void setNoActividad(int noActividad) {
+        this.noActividad = noActividad;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Time getHoraInicio() {
+        return horaInicio;
+    }
+
+    public void setHoraInicio(Time horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public Time getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(Time horaFin) {
+        this.horaFin = horaFin;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public int getCupo() {
+        return cupo;
+    }
+
+    public void setCupo(int cupo) {
+        this.cupo = cupo;
+    }
+}

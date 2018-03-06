@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <environments default="development">
+        
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED" >
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/scaiif"/>
+                <property name="username" value="usuariocadi"/>
+                <property name="password" value="scaiifcadi"/>
+                <property name="poolMaximumActiveConnections" value="50"/>
+            </dataSource>
+        </environment>
+        
+    </environments>
+    
+    <mappers>
+        <mapper resource="modelo/mybatis/mappers/ActividadMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/AlumnoMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/AvisoMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/CalendarioMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/CalificacionMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/CargoMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/ConversacionMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/CursoMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/InduccionMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/MaterialReportarMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/ModuloMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/ObservacionMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/ReservacionMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/SeccionMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/UsuarioMapper.xml"/>
+    </mappers>
+</configuration>

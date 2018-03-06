@@ -4,9 +4,17 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import modelo.mybatis.MyBatisUtils;
+import org.apache.ibatis.session.SqlSession;
+import servicios.pojos.Actividad;
+import servicios.pojos.Usuario;
 
 /**
  *
