@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modulosandres.controlador.ComentarioController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ComentarioController">
    <children>
       <JFXTextField fx:id="campoMatricula" focusColor="#082f8a" labelFloat="true" layoutX="376.0" layoutY="25.0" prefHeight="27.0" prefWidth="198.0" promptText="Ingrese matrícula del alumno" unFocusColor="BLACK" />
       <TableView fx:id="tablaALumnos" layoutX="14.0" layoutY="66.0" prefHeight="273.0" prefWidth="572.0">

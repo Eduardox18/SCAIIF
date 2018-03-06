@@ -1,4 +1,4 @@
-package modulosandres.controlador;
+package controlador;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,7 +20,7 @@ import javafx.scene.control.TableView;
  *
  * @author andres
  */
-public class ComentarioControlller implements Initializable {
+public class ComentarioController implements Initializable {
     
     @FXML
     JFXButton botonRegistrar = new JFXButton();
