@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="SCAIIFPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>datos.entidades.Seccion</class>
+    <class>datos.entidades.Alumno</class>
+    <class>datos.entidades.Calendario</class>
+    <class>datos.entidades.Induccion</class>
+    <class>datos.entidades.Modulo</class>
+    <class>datos.entidades.Cargo</class>
+    <class>datos.entidades.MaterialReportar</class>
+    <class>datos.entidades.Observacion</class>
+    <class>datos.entidades.Curso</class>
+    <class>datos.entidades.Aviso</class>
+    <class>datos.entidades.Usuario</class>
+    <class>datos.entidades.Calificacion</class>
+    <class>datos.entidades.Reservacion</class>
+    <class>datos.entidades.Conversacion</class>
+    <class>datos.entidades.Actividad</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/scaiif?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="usuariocadi"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="scaiifcadi"/>
+    </properties>
+  </persistence-unit>
+</persistence>
