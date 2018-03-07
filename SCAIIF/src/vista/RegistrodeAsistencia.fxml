@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.shape.*?>
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.RegistrodeAsistenciaController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.RegistrodeAsistenciaController">
     <children>
       <ImageView fitHeight="65.0" fitWidth="79.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -18,9 +18,8 @@
          </image>
       </ImageView>
       <Label layoutX="26.0" layoutY="88.0" text="Usuario" />
-      <JFXComboBox layoutX="137.0" layoutY="47.0" prefHeight="25.0" prefWidth="136.0" promptText="Seleccionar hora" />
-      <JFXComboBox layoutX="324.0" layoutY="47.0" prefHeight="25.0" prefWidth="136.0" promptText="Seleccionar actividad" />
-      <JFXComboBox layoutX="517.0" layoutY="47.0" prefHeight="25.0" prefWidth="136.0" promptText="Seleccionar curso" />
+      <JFXComboBox layoutX="222.0" layoutY="47.0" prefHeight="25.0" prefWidth="136.0" promptText="Seleccionar fecha" />
+      <JFXComboBox layoutX="444.0" layoutY="47.0" prefHeight="25.0" prefWidth="136.0" promptText="Seleccionar actividad" />
       <TableView layoutX="43.0" layoutY="129.0" prefHeight="293.0" prefWidth="610.0">
         <columns>
           <TableColumn prefWidth="506.0" text="Nombre" />
