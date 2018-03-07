@@ -4,4 +4,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Calificación">
+    
+    <insert id="insertarCalificacion" parameterType="double" timeout="10">
+        INSERT INTO calificacion (calificacion) 
+        VALUES (#{calificacion})
+    </insert>
 </mapper>

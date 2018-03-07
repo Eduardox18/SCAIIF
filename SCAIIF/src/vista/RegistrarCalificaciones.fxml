@@ -23,35 +23,35 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="178.0" layoutY="145.0" prefHeight="25.0" prefWidth="171.0" unFocusColor="#0b6b04" />
+      <JFXTextField fx:id="TFMatricula" layoutX="178.0" layoutY="145.0" prefHeight="25.0" prefWidth="171.0" unFocusColor="#0b6b04" />
       <Label layoutX="23.0" layoutY="214.0" text="Seleccionar Curso:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXComboBox layoutX="178.0" layoutY="211.0" prefHeight="25.0" prefWidth="166.0" unFocusColor="#0b6b04" />
+      <JFXComboBox fx:id="CBCurso" layoutX="178.0" layoutY="211.0" prefHeight="25.0" prefWidth="166.0" unFocusColor="#0b6b04" />
       <JFXDatePicker defaultColor="#0b6b04" layoutX="417.0" layoutY="145.0" prefHeight="25.0" prefWidth="227.0" />
       <Label layoutX="26.0" layoutY="297.0" prefHeight="25.0" prefWidth="52.0" text="Módulo:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXComboBox layoutX="96.0" layoutY="297.0" unFocusColor="#0b6b04" />
+      <JFXComboBox fx:id="CBModulo" layoutX="96.0" layoutY="297.0" unFocusColor="#0b6b04" />
       <Label layoutX="191.0" layoutY="302.0" text="Autoevaluación:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXComboBox layoutX="309.0" layoutY="300.0" unFocusColor="#0b6b04" />
+      <JFXComboBox fx:id="CBAutoevaluacion" layoutX="309.0" layoutY="300.0" unFocusColor="#0b6b04" />
       <Label layoutX="401.0" layoutY="303.0" text="Calificación:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="495.0" layoutY="300.0" prefHeight="25.0" prefWidth="149.0" unFocusColor="#0b6b04" />
-      <JFXButton layoutX="251.0" layoutY="432.0" prefHeight="38.0" prefWidth="93.0" text="Guardar" />
-      <JFXButton layoutX="344.0" layoutY="432.0" prefHeight="38.0" prefWidth="93.0" ripplerFill="#d30000" text="Cancelar" />
-      <JFXButton layoutX="35.0" layoutY="439.0" ripplerFill="#0d0d0d" text="&lt; Volver">
+      <JFXTextField fx:id="TFCalificacion" layoutX="495.0" layoutY="300.0" prefHeight="25.0" prefWidth="149.0" unFocusColor="#0b6b04" />
+      <JFXButton fx:id="BTGuardar" layoutX="251.0" layoutY="432.0" prefHeight="38.0" prefWidth="93.0" text="Guardar" />
+      <JFXButton fx:id="BTCancelar" layoutX="344.0" layoutY="432.0" prefHeight="38.0" prefWidth="93.0" ripplerFill="#d30000" text="Cancelar" />
+      <JFXButton fx:id="BTVolver" layoutX="35.0" layoutY="439.0" onAction="#volverPrincipal" ripplerFill="#0d0d0d" text="&lt; Volver">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
