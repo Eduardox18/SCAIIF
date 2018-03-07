@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="481.0" prefWidth="205.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@recursos/FlorconUV1024x768SinFondo.png" />
+         </image>
+      </ImageView>
+      <JFXButton prefHeight="27.0" prefWidth="205.0" style="-fx-background-color: #FFFFFF;" text="Administración actividad" />
+      <JFXButton prefWidth="205.0" text="Administración alumno" />
+      <JFXButton prefHeight="27.0" prefWidth="205.0" style="-fx-background-color: #FFFFFF;" text="Calendario de curso" />
+      <JFXButton prefWidth="205.0" text="Administración aviso" />
+      <JFXButton prefWidth="205.0" style="-fx-background-color: #FFFFFF;" text="Listas de asistencia" />
+      <JFXButton prefWidth="205.0" text="Administración observaciones" />
+      <JFXButton prefWidth="205.0" style="-fx-background-color: #FFFFFF;" text="Registrar calificaciones" />
+      <JFXButton prefWidth="205.0" text="Consultar actividades" />
+      <JFXButton prefWidth="205.0" style="-fx-background-color: #FFFFFF;" text="Información de alumno" />
+      <JFXButton prefWidth="205.0" text="Inducción" />
+      <JFXButton prefWidth="205.0" style="-fx-background-color: #FFFFFF;" text="Calendario de actividades" />
+      <JFXButton prefWidth="205.0" text="Salir" />
+   </children>
+</VBox>
