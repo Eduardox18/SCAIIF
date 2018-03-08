@@ -6,7 +6,6 @@ package controlador;
  * and open the template in the editor.
  */
 
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
@@ -31,22 +30,16 @@ public class ComentarioController implements Initializable {
     @FXML
     TableView tablaALumnos = new TableView();
     
-    @FXML
-    private void imprimirTF() {
-        if(!campoMatricula.getText().equals("")) {
-            System.out.println(campoMatricula.getText());
-            campoMatricula.setText("");
-        } else {
-            
-        }
-    }
-
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-    }    
+    } 
     
+    private void llenarTabla(String nombreAlumno) {
+        
+        
+    }
 }

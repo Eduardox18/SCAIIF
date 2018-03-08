@@ -3,8 +3,8 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="Alumno
-    <select id="getAlumnos" resultType="servicios.pojos.Alumno">
-        SELECT * FROM Alumno;
+<mapper namespace="Alumno">
+    <select id="getAlumnos" parameterType="map" resultType="servicios.pojos.Alumno">
+        SELECT * FROM Alumno WHERE matriucla LIKE '${matricula}%';
     </select>
 </mapper>

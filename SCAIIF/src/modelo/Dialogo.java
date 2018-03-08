@@ -5,10 +5,19 @@
  */
 package modelo;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
 /**
  *
  * @author andres
  */
-public class Dialogo {
+public class Dialogo extends Alert{
+    
+    public Dialogo(AlertType alertType, String title, String contentText, ButtonType... buttons) {
+        super(alertType, contentText, buttons);
+        this.setHeaderText(null);
+        this.setTitle(title);
+    }
     
 }

@@ -10,7 +10,7 @@
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ComentarioController">
    <children>
       <JFXTextField fx:id="campoMatricula" focusColor="#082f8a" labelFloat="true" layoutX="376.0" layoutY="25.0" prefHeight="27.0" prefWidth="198.0" promptText="Ingrese matrícula del alumno" unFocusColor="BLACK" />
-      <TableView fx:id="tablaALumnos" layoutX="14.0" layoutY="66.0" prefHeight="273.0" prefWidth="572.0">
+      <TableView fx:id="tablaALumnos" layoutX="14.0" layoutY="66.0" prefHeight="273.0" prefWidth="572.0" style="-fx-background-color: #ffffff;">
         <columns>
           <TableColumn prefWidth="75.0" text="Nombre" />
           <TableColumn prefWidth="75.0" text="Matrícula" />
@@ -20,7 +20,12 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <JFXButton fx:id="botonRegistrar" layoutX="411.0" layoutY="351.0" onAction="#imprimirTF" prefHeight="35.0" prefWidth="175.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Registrar comentario" textFill="WHITE">
+      <JFXButton fx:id="botonRegistrar" layoutX="411.0" layoutY="351.0" prefHeight="35.0" prefWidth="175.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Registrar comentario" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="14.0" layoutY="351.0" prefHeight="35.0" prefWidth="175.0" ripplerFill="#55f8ff" style="-fx-background-color: #0f9d58;" text="Regresar" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>

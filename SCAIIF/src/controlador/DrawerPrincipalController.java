@@ -1,11 +1,16 @@
 package controlador;
 
 import com.jfoenix.controls.JFXButton;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -76,5 +81,23 @@ public class DrawerPrincipalController implements Initializable {
     @FXML
     void salirSistema(ActionEvent event) {
         System.exit(0);
+    }
+    
+    @FXML
+    public void lanzarComentarioAlumno () {
+        Stage stage = new Stage();
+
+            try {
+                Parent menu = FXMLLoader.load(getClass().getResource("/vista/Comentario.fxml"));
+
+                Scene scene = new Scene(menu);
+
+                stage.setScene(scene);
+                stage.show();
+                Stage actualStage = (Stage) salirButton.getScene().getWindow();
+                actualStage.close();
+            } catch (IOException ioEx) {
+                ioEx.printStackTrace();
+            }
     }
 }
