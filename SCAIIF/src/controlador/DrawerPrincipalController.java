@@ -10,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
@@ -82,20 +84,15 @@ public class DrawerPrincipalController implements Initializable {
     void salirSistema(ActionEvent event) {
         System.exit(0);
     }
-    
+
     @FXML
     public void lanzarComentarioAlumno () {
-        Stage stage = new Stage();
-
             try {
-                Parent menu = FXMLLoader.load(getClass().getResource("/vista/Comentario.fxml"));
-
-                Scene scene = new Scene(menu);
-
-                stage.setScene(scene);
-                stage.show();
-                Stage actualStage = (Stage) salirButton.getScene().getWindow();
-                actualStage.close();
+                URL comentarioAlumno = getClass().getResource("/vista/Comentario.fxml");
+                AnchorPane paneComentario = FXMLLoader.load(comentarioAlumno);
+                
+                BorderPane border = LoginController.getPrincipal();
+                border.setCenter(paneComentario);
             } catch (IOException ioEx) {
                 ioEx.printStackTrace();
             }

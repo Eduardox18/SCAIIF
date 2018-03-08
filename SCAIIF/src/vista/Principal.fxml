@@ -8,7 +8,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.PrincipalController">
    <children>
-      <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="220.0" layoutX="-2.0" layoutY="1.0" onMouseClicked="#mostrarIcono" prefHeight="500.0" prefWidth="700.0" />
+      <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" layoutX="-2.0" layoutY="1.0" onMouseClicked="#mostrarIcono" prefHeight="500.0" prefWidth="700.0" />
       <Label layoutX="258.0" layoutY="210.0" text="SCAIIF">
          <font>
             <Font size="66.0" />
