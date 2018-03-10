@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo;
+package vista;
 
+import java.util.Optional;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
@@ -14,10 +15,10 @@ import javafx.scene.control.ButtonType;
  */
 public class Dialogo extends Alert{
     
-    public Dialogo(AlertType alertType, String title, String contentText, ButtonType... buttons) {
+    public Dialogo(AlertType alertType, String contentText, String titulo, ButtonType... buttons) {
         super(alertType, contentText, buttons);
         this.setHeaderText(null);
-        this.setTitle(title);
+        this.setTitle(titulo);
+        this.setResizable(false);
     }
-    
 }

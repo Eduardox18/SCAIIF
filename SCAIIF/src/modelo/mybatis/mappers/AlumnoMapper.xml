@@ -5,6 +5,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="Alumno">
     <select id="getAlumnos" parameterType="String" resultType="servicios.pojos.Alumno">
-        SELECT * FROM Alumno WHERE matricula LIKE '${matricula}%';
+        SELECT * FROM Alumno WHERE matricula LIKE CONCAT(#{matricula},'%') OR nombre LIKE CONCAT(#{matricula},'%');
     </select>
 </mapper>

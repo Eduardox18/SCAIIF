@@ -81,6 +81,12 @@ public class ComentarioController implements Initializable {
         campoMatricula.textProperty().addListener((observable, oldValue, newValue) -> {
             llenarTabla(newValue);
         });
+        
+        botonRegistrar.setDisable(true);
+        
+        tablaALumnos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            botonRegistrar.setDisable(false);
+}       );
     } 
     
     @FXML
@@ -99,7 +105,7 @@ public class ComentarioController implements Initializable {
             conn = MyBatisUtils.getSession();
             alumnos = conn.selectList("Alumno.getAlumnos", matricula);
         } catch(IOException ioEx) {
-            System.out.println(ioEx);
+            System.out.println("marrano");
         } finally {
             if (conn != null) {
                 conn.close();
@@ -107,11 +113,12 @@ public class ComentarioController implements Initializable {
         }
         
         ObservableList<Alumno> alumnosObservable = FXCollections.observableArrayList();
-        alumnosObservable = (ObservableList<Alumno>) alumnos;
+        alumnosObservable = FXCollections.observableArrayList(alumnos);
         
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colMatricula.setCellValueFactory(new PropertyValueFactory<>("matricula"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("correo"));
         tablaALumnos.setItems(alumnosObservable);
     }
+    
 }
