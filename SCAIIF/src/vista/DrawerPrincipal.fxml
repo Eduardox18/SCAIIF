@@ -1,29 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="481.0" prefWidth="205.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="258.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.DrawerPrincipalController">
    <children>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="128.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@recursos/FlorconUV1024x768SinFondo.png" />
          </image>
       </ImageView>
-      <JFXButton prefHeight="27.0" prefWidth="205.0" style="-fx-background-color: #FFFFFF;" text="Administración actividad" />
-      <JFXButton prefWidth="205.0" text="Administración alumno" />
-      <JFXButton prefHeight="27.0" prefWidth="205.0" style="-fx-background-color: #FFFFFF;" text="Calendario de curso" />
-      <JFXButton prefWidth="205.0" text="Administración aviso" />
-      <JFXButton prefWidth="205.0" style="-fx-background-color: #FFFFFF;" text="Listas de asistencia" />
-      <JFXButton prefWidth="205.0" text="Administración observaciones" />
-      <JFXButton prefWidth="205.0" style="-fx-background-color: #FFFFFF;" text="Registrar calificaciones" />
-      <JFXButton prefWidth="205.0" text="Consultar actividades" />
-      <JFXButton prefWidth="205.0" style="-fx-background-color: #FFFFFF;" text="Información de alumno" />
-      <JFXButton prefWidth="205.0" text="Inducción" />
-      <JFXButton prefWidth="205.0" style="-fx-background-color: #FFFFFF;" text="Calendario de actividades" />
-      <JFXButton prefWidth="205.0" text="Salir" />
+      <Accordion focusTraversable="false" prefHeight="345.0" prefWidth="271.0" style="-fx-background-color: #FFFFFF;">
+         <panes>
+            <TitledPane contentDisplay="TOP" style="-fx-background-color: #082f8a;" text="Alumnos" textOverrun="CLIP">
+               <content>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF;">
+                     <children>
+                        <JFXButton fx:id="altaAlumnoButton" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Dar de alta" textFill="WHITE" />
+                        <JFXButton fx:id="bajaAlumnoButton" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Dar de baja" textFill="WHITE" />
+                        <JFXButton fx:id="registrarInduccionButton" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Registrar inducción" textFill="WHITE" />
+                        <JFXButton fx:id="registrarObservacionButton" onAction="#lanzarComentarioAlumno" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Registrar observación" textFill="WHITE" />
+                        <JFXButton fx:id="registrarCalificacionButton" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Registrar calificación" textFill="WHITE" />
+                     </children>
+                  </VBox>
+               </content>
+            </TitledPane>
+            <TitledPane prefHeight="25.0" prefWidth="385.0" text="Asesor">
+               <content>
+                  <VBox alignment="TOP_CENTER" prefHeight="98.0" prefWidth="383.0" style="-fx-background-color: #FFFFFF;">
+                     <children>
+                        <JFXButton fx:id="registrarAvisoButton" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Registrar aviso" textFill="WHITE" />
+                        <JFXButton fx:id="consultarActividadAsesorButton" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Consultar actividad" textFill="WHITE" />
+                     </children>
+                  </VBox>
+               </content>
+            </TitledPane>
+            <TitledPane prefHeight="264.0" prefWidth="286.0" text="Actividades">
+               <content>
+                  <VBox alignment="TOP_CENTER" prefHeight="212.0" prefWidth="383.0" style="-fx-background-color: #FFFFFF;">
+                     <children>
+                        <JFXButton fx:id="reservarActividadButton" prefHeight="27.0" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Reservar" textFill="WHITE" />
+                        <JFXButton fx:id="cancelarActividadButton" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Cancelar" textFill="WHITE" />
+                        <JFXButton fx:id="consultarPorImpartirButton" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Consultar actividad por impartir" textFill="WHITE" />
+                        <JFXButton fx:id="consultarListaAsistenciaButton" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Consultar lista de asistencia" textFill="WHITE" />
+                        <JFXButton fx:id="registrarAsistenciaButton" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Registrar asistencia" textFill="WHITE" />
+                        <JFXButton fx:id="crearCalendarioActButton" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Crea calendario" textFill="WHITE" />
+                        <JFXButton fx:id="consultarCalendarioActButton" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Consultar calendario" textFill="WHITE" />
+                        <JFXButton fx:id="proximasActividadesButton" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Próximas actividades" textFill="WHITE" />
+                     </children>
+                  </VBox>
+               </content>
+            </TitledPane>
+            <TitledPane style="-fx-background-color: #FFFFFF;" text="Curso">
+               <content>
+                  <VBox alignment="TOP_CENTER" prefHeight="209.0" prefWidth="392.0" style="-fx-background-color: #FFFFFF;">
+                     <children>
+                        <JFXButton fx:id="registrarCalendarioCursoButton" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Registrar calendario" textFill="WHITE" />
+                        <JFXButton fx:id="consultarCalendarioCursoButton" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Consultar calendario" textFill="WHITE" />
+                     </children>
+                  </VBox>
+               </content>
+            </TitledPane>
+         </panes>
+      </Accordion>
+      <JFXButton fx:id="salirButton" onAction="#salirSistema" prefHeight="24.0" prefWidth="724.0" ripplerFill="#0f9d58" style="-fx-background-color: #082f8a;" text="Salir" textFill="WHITE" />
    </children>
 </VBox>
