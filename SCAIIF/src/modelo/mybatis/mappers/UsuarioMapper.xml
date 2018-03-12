@@ -7,6 +7,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getUsuario" parameterType="map" resultType="servicios.pojos.Usuario">
         SELECT * FROM usuario WHERE noPersonal = '${noPersonal}';
     </select>
+    
+    <select id="getNombreUsuario" parameterType="int" resultType="servicios.pojos.Usuario">
+        SELECT nombre, apPaterno, apMaterno FROM usuario WHERE noPersonal = #{noPersonal};
+    </select>
 </mapper>
 
 

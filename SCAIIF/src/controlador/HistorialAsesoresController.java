@@ -22,6 +22,7 @@ import modelo.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import servicios.pojos.Induccion;
 import servicios.pojos.Reservacion;
+import servicios.pojos.Usuario;
 
 /**
  * FXML Controller class
@@ -39,12 +40,18 @@ public class HistorialAsesoresController implements Initializable {
     @FXML
     JFXTextField campoNoPersonal = new JFXTextField();
     @FXML
+    TableView tablaInduccion = new TableView();
+    @FXML
+    TableColumn colMatricula = new TableColumn();
+    @FXML
+    TableColumn colFecha = new TableColumn();
+    @FXML
     TableView tablaActividades = new TableView();
     @FXML
-    TableColumn colAsesoriasIntroductorias = new TableColumn();
+    TableColumn colMatActividad = new TableColumn();
     @FXML
-    TableColumn colActividades = new TableColumn();
-
+    TableColumn colFechaAct = new TableColumn();
+    
     /**
      * Initializes the controller class.
      */
@@ -67,6 +74,9 @@ public class HistorialAsesoresController implements Initializable {
         
     }
     
+    /**
+     * Método que hace visible e invisible el menú drawer. 
+     */
     @FXML
     public void mostrarIcono() {
         if (!menuDrawer.isShown()) {
@@ -75,13 +85,41 @@ public class HistorialAsesoresController implements Initializable {
         }
     }
     
+    /**
+     * Llamada al método consultar Actividades asignada al botón buscar, así como
+     * la recuperación del nombre del asesor que coincide con el noPersonal
+     * ingresado por el Coordinador. 
+     */
     @FXML
     private void consultarHistorialAsesores () {
-        consultarAsesoriasIntroductorias();
-        
+        recuperarNombreAsesor();
+        consultarActividades();
     }
     
-    private void consultarAsesoriasIntroductorias () {
+    private void recuperarNombreAsesor () {
+        int noPersonal = Integer.parseInt(campoNoPersonal.getText());
+        Usuario nombreAsesor = null;
+        SqlSession conn = null;
+        try {
+            conn = MyBatisUtils.getSession();
+            nombreAsesor = conn.selectOne("Usuario.getNombreUsuario", noPersonal);
+        } catch (IOException ex) {
+            System.out.println("Error al Nombre");
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        campoNombre.setText(nombreAsesor.getNombre() + " " + nombreAsesor.getApPaterno() +" " + nombreAsesor.getApMaterno());
+    }
+    
+    
+    /**
+     * Método que realiza la búsqueda en la base de datos de las matrículas
+     * y fechas de las asesorías introductorias impartidas por el asesor ingresado
+     * por el coordinador, así como de las actividaes impartidas o que impartirá.
+     */
+    private void consultarActividades () {
         List<Induccion> historialAsesores = new ArrayList<>();
         List<Reservacion> historialReservaciones = new ArrayList<>();
         int noPersonal = Integer.parseInt(campoNoPersonal.getText());
@@ -98,20 +136,16 @@ public class HistorialAsesoresController implements Initializable {
             }
         }
         
-        ObservableList<Induccion> asesoriasIntro = FXCollections.observableArrayList();
-        asesoriasIntro = FXCollections.observableArrayList(historialAsesores);
-        colAsesoriasIntroductorias.setCellValueFactory(new PropertyValueFactory<>("fecha"));
-        tablaActividades.setItems(asesoriasIntro);
+        ObservableList<Induccion> actividadesIntro = FXCollections.observableArrayList();
+        actividadesIntro = FXCollections.observableArrayList(historialAsesores);
+        colMatricula.setCellValueFactory(new PropertyValueFactory<>("matricula"));
+        colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+        tablaInduccion.setItems(actividadesIntro);
+        
         ObservableList<Reservacion> actividades = FXCollections.observableArrayList();
         actividades = FXCollections.observableArrayList(historialReservaciones);
-        colActividades.setCellValueFactory(new PropertyValueFactory<>("fecha"));
-        tablaActividades.setItems(actividades);
-        
-        
-        
-    }
-    
-    
-        
-    
+        colMatActividad.setCellValueFactory(new PropertyValueFactory<>("matricula"));
+        colFechaAct.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+        tablaActividades.setItems(actividades);        
+    }  
 }

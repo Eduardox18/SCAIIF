@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="Induccion">
     <select id="getHistorial" parameterType="int" resultType="servicios.pojos.Induccion">
-        SELECT fecha FROM Induccion INNER JOIN Curso ON
+        SELECT matricula,fecha FROM Induccion INNER JOIN Curso ON
         Induccion.nrc = Curso.nrc
         WHERE noPersonal = #{noPersonal};
     </select>

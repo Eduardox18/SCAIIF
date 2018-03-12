@@ -34,16 +34,32 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TableView fx:id="tablaActividades" layoutX="47.0" layoutY="150.0" prefHeight="280.0" prefWidth="602.0">
+      <TableView fx:id="tablaInduccion" layoutX="46.0" layoutY="158.0" prefHeight="125.0" prefWidth="602.0">
         <columns>
-          <TableColumn fx:id="colAsesoriasIntroductorias" editable="false" prefWidth="304.0" text="Asesorías Introductorias" />
-          <TableColumn fx:id="colActividades" editable="false" minWidth="0.0" prefWidth="297.0" text="Actividades" />
+          <TableColumn fx:id="colMatricula" prefWidth="303.0" text="Matrícula" />
+          <TableColumn fx:id="colFecha" prefWidth="298.0" text="Fecha" />
         </columns>
       </TableView>
-      <JFXButton fx:id="botonImprimir" layoutX="306.0" layoutY="441.0" prefHeight="39.0" prefWidth="84.0" ripplerFill="#1a688c" text="Imprimir" />
-      <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" layoutY="-6.0" onMouseClicked="#mostrarIcono" prefHeight="506.0" prefWidth="700.0" />
+      <TableView fx:id="tablaActividades" layoutX="47.0" layoutY="321.0" prefHeight="109.0" prefWidth="602.0">
+        <columns>
+          <TableColumn fx:id="colMatActividad" editable="false" prefWidth="304.0" text="Matrícula" />
+          <TableColumn fx:id="colFechaAct" editable="false" minWidth="0.0" prefWidth="297.0" text="Fecha" />
+        </columns>
+      </TableView>
+      <JFXButton fx:id="botonImprimir" layoutX="306.0" layoutY="441.0" prefHeight="39.0" prefWidth="84.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Imprimir" textFill="WHITE" />
+      <JFXTextField fx:id="campoNombre" layoutX="283.0" layoutY="83.0" prefHeight="25.0" prefWidth="246.0" />
+      <JFXButton fx:id="botonBuscar" layoutX="492.0" layoutY="46.0" onAction="#consultarHistorialAsesores" prefHeight="25.0" prefWidth="77.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Buscar" textFill="WHITE" />
+      <Label layoutX="272.0" layoutY="130.0" text="Asesorías Introductorias">
+         <font>
+            <Font name="Book Antiqua Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="227.0" layoutY="297.0" text="Actividades Impartidas / Por Impartir">
+         <font>
+            <Font name="Book Antiqua Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" onMouseClicked="#mostrarIcono" prefHeight="500.0" prefWidth="700.0" />
       <JFXHamburger fx:id="menuIcon" layoutX="16.0" layoutY="15.0" />
-      <JFXTextField fx:id="campoNombre" layoutX="184.0" layoutY="91.0" prefHeight="25.0" prefWidth="342.0" />
-      <JFXButton fx:id="botonBuscar" layoutX="492.0" layoutY="46.0" onAction="#consultarHistorialAsesores" ripplerFill="#1a466f" text="Buscar" />
    </children>
 </AnchorPane>
