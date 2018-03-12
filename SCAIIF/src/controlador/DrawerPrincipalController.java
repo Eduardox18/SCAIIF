@@ -97,4 +97,21 @@ public class DrawerPrincipalController implements Initializable {
                 ioEx.printStackTrace();
             }
     }
+    
+    /**
+     * Método que abre la ventana para consultar el historial de los asesores 
+     * (Actividades que han impartido y actividades que impartirán)
+     */
+    @FXML
+    public void abrirHistorialAsesores () {
+            try {
+                URL historialAsesores = getClass().getResource("/vista/HistorialAsesores.fxml");
+                AnchorPane paneHistorial = FXMLLoader.load(historialAsesores);
+                
+                BorderPane border = LoginController.getPrincipal();
+                border.setCenter(paneHistorial);
+            } catch (IOException ioEx) {
+                ioEx.printStackTrace();
+            }
+    }
 }

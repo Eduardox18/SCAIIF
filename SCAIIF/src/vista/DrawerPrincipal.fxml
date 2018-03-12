@@ -34,7 +34,7 @@
                   <VBox alignment="TOP_CENTER" prefHeight="98.0" prefWidth="383.0" style="-fx-background-color: #FFFFFF;">
                      <children>
                         <JFXButton fx:id="registrarAvisoButton" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Registrar aviso" textFill="WHITE" />
-                        <JFXButton fx:id="consultarActividadAsesorButton" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Consultar actividad" textFill="WHITE" />
+                        <JFXButton fx:id="consultarActividadAsesorButton" onAction="#abrirHistorialAsesores" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Consultar actividad" textFill="WHITE" />
                      </children>
                   </VBox>
                </content>

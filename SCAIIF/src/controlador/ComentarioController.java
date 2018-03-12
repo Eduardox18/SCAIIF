@@ -83,7 +83,6 @@ public class ComentarioController implements Initializable {
         });
         
         botonRegistrar.setDisable(true);
-        
         tablaALumnos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             botonRegistrar.setDisable(false);
 }       );

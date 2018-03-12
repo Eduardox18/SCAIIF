@@ -4,10 +4,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Reservacion">
-        <select id="getListaAsistencia" parameterType="date" resultMap="">
-        SELECT nombre, asistencia 
-            FROM reservacion
-            INNER JOIN alumno ON reservacion.matricula = alumno.matricula
-            WHERE noActividad = #{noActividad} AND fecha = #{fecha}
+    <select id="getActividades" parameterType="int" resultType="servicios.pojos.Reservacion">
+        SELECT fecha FROM Reservacion WHERE noPersonal = #{noPersonal};
     </select>
+    
 </mapper>
