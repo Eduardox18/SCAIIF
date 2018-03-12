@@ -100,11 +100,11 @@ public class HistorialAsesoresController implements Initializable {
         
         ObservableList<Induccion> asesoriasIntro = FXCollections.observableArrayList();
         asesoriasIntro = FXCollections.observableArrayList(historialAsesores);
-        colAsesoriasIntroductorias.setCellValueFactory(new PropertyValueFactory<>("Introductorias"));
+        colAsesoriasIntroductorias.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         tablaActividades.setItems(asesoriasIntro);
         ObservableList<Reservacion> actividades = FXCollections.observableArrayList();
         actividades = FXCollections.observableArrayList(historialReservaciones);
-        colActividades.setCellValueFactory(new PropertyValueFactory<>("actividades"));
+        colActividades.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         tablaActividades.setItems(actividades);
         
         
