@@ -125,13 +125,13 @@ public class ComentarioController implements Initializable {
         tablaALumnos.setItems(alumnosObservable);
     }
     
-    @FXML
-    private void lanzarEditorComentario () {
-        try{
-            
-        } catch(IOException ioEx){
-            ioEx.printStackTrace();
-        }
-    }
-    
+//    @FXML
+//    private void lanzarEditorComentario () {
+//        try{
+//            
+//        } catch(IOException ioEx){
+//            ioEx.printStackTrace();
+//        }
+//    }
+//    
 }

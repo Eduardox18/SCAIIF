@@ -9,12 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -30,6 +27,8 @@ import servicios.pojos.Usuario;
  */
 public class LoginController extends Application {
     
+    private static int cargoLog = 0;
+    private static int noPersonalLog = 0;
     private static BorderPane root = new BorderPane();
     private static BorderPane panePrincipal = new BorderPane();
 
@@ -47,6 +46,14 @@ public class LoginController extends Application {
     
     public static BorderPane getPrincipal() {
         return panePrincipal;
+    }
+    
+    public static int returnCargo() {
+        return cargoLog;
+    }
+    
+    public static int returnNoPersonalLog() {
+        return noPersonalLog;
     }
     
     @Override
@@ -90,6 +97,7 @@ public class LoginController extends Application {
             ingresado = conn.selectList("Usuario.getUsuario", parametros);
         } catch (Exception ioEx) {
             ioEx.printStackTrace();
+            System.out.println("Servidor no disponible, intente más tarde");
         } finally {
             if (conn != null) {
                 conn.close();
@@ -100,8 +108,9 @@ public class LoginController extends Application {
             System.out.println("El usuario ingresado no existe");
         } else if (ingresado.get(0).getPassword().equals(
                 cifrar.cifrarCadena(campoContrasenia.getText()))) {
-
             try {
+                cargoLog = ingresado.get(0).getIdCargo();
+                noPersonalLog = ingresado.get(0).getNoPersonal();
                 Stage stagePrincipal = new Stage();
                 URL panePrincipalURL = getClass().getResource(("/vista/Principal.fxml"));
                 AnchorPane paneInicial = FXMLLoader.load(panePrincipalURL);
@@ -117,7 +126,7 @@ public class LoginController extends Application {
                 ioEx.printStackTrace();
             }
         } else {
-            System.out.println("La contraseña es incorrecta!");
+            System.out.println("Los datos ingresados son incorrectos, intente de nuevo");
         }
     }
 

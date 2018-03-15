@@ -20,16 +20,18 @@ public class Actividad {
     private Time horaFin;
     private Date fecha;
     private int cupo;
+    private int noPersonal;
 
     public Actividad() {}
 
-    public Actividad(int noActividad, String nombre, Time horaInicio, Time horaFin, Date fecha, int cupo) {
+    public Actividad(int noActividad, String nombre, Time horaInicio, Time horaFin, Date fecha, int cupo, int noPersonal) {
         this.noActividad = noActividad;
         this.nombre = nombre;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
         this.fecha = fecha;
         this.cupo = cupo;
+        this.noPersonal = noPersonal;
     }
 
     public int getNoActividad() {
@@ -78,5 +80,13 @@ public class Actividad {
 
     public void setCupo(int cupo) {
         this.cupo = cupo;
+    }
+    
+    public int getNoPersonal() {
+        return noPersonal;
+    }
+    
+    public void setNoPersonal(int noPersonal) {
+        this.noPersonal = noPersonal;
     }
 }
