@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -13,6 +14,8 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
@@ -53,12 +56,16 @@ public class RegistrarAlumnoController implements Initializable {
     
     @FXML
     JFXHamburger menuIcon = new JFXHamburger();
+    
+    @FXML
+    JFXButton btnRegistrar = new JFXButton();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         try {
             VBox box = FXMLLoader.load(getClass().getResource("/vista/DrawerPrincipal.fxml"));
             menuDrawer.setSidePane(box);
@@ -66,6 +73,7 @@ public class RegistrarAlumnoController implements Initializable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        
         menuIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
             menuDrawer.open();
             menuDrawer.setDisable(false);
@@ -83,11 +91,16 @@ public class RegistrarAlumnoController implements Initializable {
     
     @FXML
     public void accionBoton () {
-        if (agregarAlumno()) {
-            System.out.println("Todo salió bien");
+        if (comprobarMatricula()) {
+            if (agregarAlumno()) {
+                System.out.println("Todo salió bien");
+            } else {
+                System.out.println("Algo salió mal");
+            }
         } else {
-            System.out.println("Algo salió mal");
+            System.out.println("La matriucla ya existe");
         }
+        
     }
     
     private boolean agregarAlumno () {
@@ -97,7 +110,7 @@ public class RegistrarAlumnoController implements Initializable {
         alumno.setMatricula(tfMatricula.getText());
         alumno.setNombre(tfNombre.getText());
         alumno.setApPaterno(tfApellidoPaterno.getText());
-        alumno.setApMaterno(tfApellidoMaterno.getText());
+        alumno.setApMaterno(determinarApMaterno());
         alumno.setCorreo(tfCorreoElectronico.getText());
         alumno.setLenguaIndigena(determinarLengua());
         
@@ -124,4 +137,50 @@ public class RegistrarAlumnoController implements Initializable {
         return resultado;
     }
     
+    private String determinarApMaterno () {
+        String apMaterno = tfApellidoMaterno.getText();
+        if (apMaterno.length() == 0 && apMaterno == null){
+            apMaterno = null;
+        }
+        return apMaterno;
+    }
+    
+    @FXML
+    private void activarBoton () {
+        String matricula = tfMatricula.getText();
+        String nombre = tfNombre.getText();
+        String apellidoPaterno = tfApellidoPaterno.getText();
+        String correo = tfCorreoElectronico.getText();
+        
+        if (matricula != null && matricula.length() > 0 && nombre != null && nombre.length() > 0
+                && apellidoPaterno != null && apellidoPaterno.length() > 0 && correo != null 
+                && correo.length() > 0) {
+            btnRegistrar.setDisable(false);
+        } else {
+            btnRegistrar.setDisable(true);
+        }
+    }
+    
+    private boolean comprobarMatricula () {
+        boolean resultado = false;
+        SqlSession conn = null;
+        List<Alumno> listaAlumnos = new ArrayList<>();
+        
+        try {
+            conn = MyBatisUtils.getSession();
+            listaAlumnos = conn.selectList("Alumno.getAlumnos", tfMatricula.getText());
+        } catch (IOException ex) {
+            Logger.getLogger(RegistrarAlumnoController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        
+        if(listaAlumnos.isEmpty()){
+            resultado = true;
+        }
+        
+        return resultado;
+    }
 }

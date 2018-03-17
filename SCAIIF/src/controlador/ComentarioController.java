@@ -15,16 +15,24 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import modelo.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import servicios.pojos.Alumno;
@@ -86,6 +94,8 @@ public class ComentarioController implements Initializable {
         tablaALumnos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             botonRegistrar.setDisable(false);
 }       );
+        
+        llenarTabla("");
     } 
     
     @FXML
@@ -120,13 +130,17 @@ public class ComentarioController implements Initializable {
         tablaALumnos.setItems(alumnosObservable);
     }
     
-//    @FXML
-//    private void lanzarEditorComentario () {
-//        try{
-//            
-//        } catch(IOException ioEx){
-//            ioEx.printStackTrace();
-//        }
-//    }
+    @FXML
+    private void lanzarEditorComentario (){
+        try {
+            URL crearComent = getClass().getResource("/vista/CrearComentario.fxml");
+            AnchorPane paneLista = FXMLLoader.load(crearComent);
+
+            BorderPane border = LoginController.getPrincipal();
+            border.setCenter(paneLista);
+        } catch (IOException ioEx) {
+            ioEx.printStackTrace();
+        }
+    }
 //    
 }
