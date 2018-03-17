@@ -4,7 +4,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Alumno">
-    <select id="getAlumnos" parameterType="String" resultType="servicios.pojos.Alumno">
-        SELECT * FROM Alumno WHERE matricula LIKE CONCAT(#{matricula},'%') OR nombre LIKE CONCAT(#{matricula},'%');
+    <select id="getAlumnos" parameterType="String" 
+            resultType="servicios.pojos.Alumno">
+        SELECT * FROM Alumno WHERE matricula LIKE CONCAT(#{matricula},'%') OR 
+        nombre LIKE CONCAT(#{matricula},'%');
     </select>
+    
+    <insert id="agregarAlumno" parameterType="servicios.pojos.Alumno">
+        INSERT INTO Alumno (matricula, nombre, apPaterno, apMaterno, correo, 
+        lenguaIndigena) VALUES (#{matricula}, #{nombre}, #{apPaterno}, 
+        #{apMaterno}, #{correo}, #{lenguaIndigena});
+    </insert>
 </mapper>
