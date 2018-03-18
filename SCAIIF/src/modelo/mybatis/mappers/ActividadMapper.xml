@@ -9,4 +9,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT nombre FROM actividad WHERE noPersonal = #{noPersonal};
     </select>
     
+    <select id="getActividades" parameterType="int" resultType="servicios.pojos.Actividad">
+        SELECT matricula,Reservacion.fecha FROM Actividad INNER JOIN Reservacion ON
+        Actividad.noActividad = Reservacion.noActividad
+        WHERE noPersonal = #{noPersonal};
+    </select>
+    
+    
 </mapper>

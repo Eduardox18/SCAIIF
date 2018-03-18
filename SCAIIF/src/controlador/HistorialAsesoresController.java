@@ -20,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import modelo.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
+import servicios.pojos.Actividad;
 import servicios.pojos.Induccion;
 import servicios.pojos.Reservacion;
 import servicios.pojos.Usuario;
@@ -121,13 +122,13 @@ public class HistorialAsesoresController implements Initializable {
      */
     private void consultarActividades () {
         List<Induccion> historialAsesores = new ArrayList<>();
-        List<Reservacion> historialReservaciones = new ArrayList<>();
+        List<Actividad> historialReservaciones = new ArrayList<>();
         int noPersonal = Integer.parseInt(campoNoPersonal.getText());
         SqlSession conn = null;
         try {
             conn = MyBatisUtils.getSession();
             historialAsesores = conn.selectList("Induccion.getHistorial", noPersonal);
-            historialReservaciones = conn.selectList("Reservacion.getActividades", noPersonal);
+            historialReservaciones = conn.selectList("Actividad.getActividades", noPersonal);
         } catch (IOException ex) {
             System.out.println("Error al recuperar Actividades");
         } finally {
@@ -142,7 +143,7 @@ public class HistorialAsesoresController implements Initializable {
         colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         tablaInduccion.setItems(actividadesIntro);
         
-        ObservableList<Reservacion> actividades = FXCollections.observableArrayList();
+        ObservableList<Actividad> actividades = FXCollections.observableArrayList();
         actividades = FXCollections.observableArrayList(historialReservaciones);
         colMatActividad.setCellValueFactory(new PropertyValueFactory<>("matricula"));
         colFechaAct.setCellValueFactory(new PropertyValueFactory<>("fecha"));
