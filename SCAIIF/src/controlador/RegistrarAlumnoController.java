@@ -62,6 +62,8 @@ public class RegistrarAlumnoController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -71,7 +73,6 @@ public class RegistrarAlumnoController implements Initializable {
             menuDrawer.setSidePane(box);
             menuDrawer.setDisable(true);
         } catch (IOException ex) {
-            ex.printStackTrace();
         }
         
         menuIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -82,6 +83,9 @@ public class RegistrarAlumnoController implements Initializable {
     }
 
     @FXML
+    /**
+     * Metodo que se encarga de mostrar el ícono del menú cada vez que se sale del mnú
+     */
     public void mostrarIcono() {
         if (!menuDrawer.isShown()) {
             menuIcon.setVisible(true);
@@ -90,6 +94,10 @@ public class RegistrarAlumnoController implements Initializable {
     }
     
     @FXML
+    /**
+     * Método de acción para el botón, se realiza el registro del alumno si no se encuentra
+     * ninguna matrícula igual registrada
+     */
     public void accionBoton () {
         if (comprobarMatricula()) {
             if (agregarAlumno()) {
@@ -103,6 +111,12 @@ public class RegistrarAlumnoController implements Initializable {
         
     }
     
+    /**
+     * Recupera la información de los campos de texto para crear un objeto Alumno y posteriormente
+     * registrarlo en la base de datos
+     * @return Devuelve la variable resultado que puede ser verdadera en caso de que todo funcione 
+     * correctamente o falso en caso de que ocurra algún error y no se registre al alumno.
+     */
     private boolean agregarAlumno () {
         boolean resultado = true;
         SqlSession conn = null;
@@ -129,6 +143,10 @@ public class RegistrarAlumnoController implements Initializable {
         return resultado;
     }
     
+    /**
+     * Recupera el valor del checkBox Lengua indígena, y devuelve un valor según su estado.
+     * @return En caso de que esté marcado devuelve true, de lo contrario, devuelve false.
+     */
     private boolean determinarLengua () {
         boolean resultado = false;
         if (checkLenguaIndigena.isSelected()) {
@@ -137,6 +155,10 @@ public class RegistrarAlumnoController implements Initializable {
         return resultado;
     }
     
+    /**
+     * Recupera el texto del campo Apellido materno, y devuelve un valor según su contenido.
+     * @return El contenido del campo en caso de que lo tenga o null si este está vacio.
+     */
     private String determinarApMaterno () {
         String apMaterno = tfApellidoMaterno.getText();
         if (apMaterno.length() == 0 && apMaterno == null){
@@ -146,6 +168,11 @@ public class RegistrarAlumnoController implements Initializable {
     }
     
     @FXML
+    /**
+     * Comprueba que los campos obligatorios (matricula, nombre, apellido paterno y correo) no se 
+     * encuentre vacios para posteriormente activar el botón. Cuando uno de estos campos se 
+     * encuentra vacio, desactiva el botón.
+     */
     private void activarBoton () {
         String matricula = tfMatricula.getText();
         String nombre = tfNombre.getText();
@@ -161,6 +188,12 @@ public class RegistrarAlumnoController implements Initializable {
         }
     }
     
+    /**
+     * Concecta con la base de datos para comprobar que la matrícula que se intenta utilizar no esté
+     * ocupara previamente
+     * @return Devuelve true en caso de que la matrícula esté disponible y false si ya ha sido 
+     * utilizada previamente.
+     */
     private boolean comprobarMatricula () {
         boolean resultado = false;
         SqlSession conn = null;
