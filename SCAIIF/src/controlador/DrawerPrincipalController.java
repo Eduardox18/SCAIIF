@@ -163,4 +163,17 @@ public class DrawerPrincipalController implements Initializable {
             ioEx.printStackTrace();
         }
     }
+    
+    @FXML
+    public void lanzarAltaAlumno() {
+        try {
+            URL registrarAlumno = getClass().getResource("/vista/RegistrarAlumno.fxml");
+            AnchorPane paneHistorial = FXMLLoader.load(registrarAlumno);
+
+            BorderPane border = LoginController.getPrincipal();
+            border.setCenter(paneHistorial);
+        } catch (IOException ioEx) {
+            ioEx.printStackTrace();
+        }
+    }
 }
