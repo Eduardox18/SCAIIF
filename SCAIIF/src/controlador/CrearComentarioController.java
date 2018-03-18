@@ -16,11 +16,14 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import modelo.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import servicios.pojos.Observacion;
+import vista.Dialogo;
 
 /**
  * FXML Controller class
@@ -62,11 +65,16 @@ public class CrearComentarioController implements Initializable {
      * operación
      */
     public void funcionBoton () {
+        Dialogo dialogo = null;
         if(guardarObservacion()){
-            System.out.println("Todo bien");
+            dialogo = new Dialogo(Alert.AlertType.INFORMATION, 
+                        "EL comentario se ha registrado correctamente", "Éxito", ButtonType.OK);
+                dialogo.show();
             cerrarVentana();
         } else {
-            System.out.println("Algo salió mal");
+            dialogo = new Dialogo(Alert.AlertType.ERROR, 
+                        "", "Error", ButtonType.OK);
+                dialogo.show();
         }
     }
     
@@ -120,7 +128,23 @@ public class CrearComentarioController implements Initializable {
      * Cierra la ventana actual cuando se cancela la operación o una vez que se haya concluido y 
      * retorna a la ventana Comentario
      */
-    public void cerrarVentana () {
+    public void botonCerrarVentana () {
+        Dialogo dialogo = new Dialogo(Alert.AlertType.CONFIRMATION, 
+                "¿Está seguro de que desea descartar el comentario?", "Confirmación", 
+                ButtonType.OK, ButtonType.CANCEL);
+        
+        dialogo.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                cerrarVentana();
+            }
+        });
+    }
+    
+    /***
+     * Cierra la ventana actual cuando se cancela la operación o una vez que se haya concluido y 
+     * retorna a la ventana Comentario
+     */
+    private void cerrarVentana () {
         try {
             URL comentarioAlumno = getClass().getResource("/vista/Comentario.fxml");
             AnchorPane paneComentario = FXMLLoader.load(comentarioAlumno);

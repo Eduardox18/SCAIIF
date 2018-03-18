@@ -18,7 +18,7 @@
             <JFXTextArea fx:id="taComentario" labelFloat="true" onKeyReleased="#comprobarCampos" prefWidth="592.0" promptText="Comentario" unFocusColor="BLACK" />
             <HBox alignment="BOTTOM_CENTER" prefHeight="98.0" prefWidth="322.0">
                <children>
-                  <JFXButton cancelButton="true" onAction="#cerrarVentana" prefHeight="52.0" prefWidth="142.0" ripplerFill="#55f8ff" style="-fx-background-color: #0f9d58;" text="Cancelar" textFill="WHITE">
+                  <JFXButton cancelButton="true" onAction="#botonCerrarVentana" prefHeight="52.0" prefWidth="142.0" ripplerFill="#55f8ff" style="-fx-background-color: #0f9d58;" text="Cancelar" textFill="WHITE">
                      <font>
                         <Font size="25.0" />
                      </font>
