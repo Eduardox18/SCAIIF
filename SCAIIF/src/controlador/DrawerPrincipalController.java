@@ -176,4 +176,21 @@ public class DrawerPrincipalController implements Initializable {
             ioEx.printStackTrace();
         }
     }
+    
+    /**
+     * Método que abre la ventana para registrar la calificación de un alumno en base
+     * al curso inscrito.
+     */
+    @FXML
+    public void lanzarRegistroCalificaciones() {
+        try {
+            URL registrarCalificacion = getClass().getResource("/vista/RegistrarCalificaciones.fxml");
+            AnchorPane paneCalificaciones = FXMLLoader.load(registrarCalificacion);
+
+            BorderPane border = LoginController.getPrincipal();
+            border.setCenter(paneCalificaciones);
+        } catch (IOException ioEx) {
+            ioEx.printStackTrace();
+        }
+    }
 }

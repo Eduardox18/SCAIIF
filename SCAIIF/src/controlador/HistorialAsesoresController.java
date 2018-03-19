@@ -1,5 +1,6 @@
 package controlador;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextField;
@@ -22,7 +23,6 @@ import modelo.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import servicios.pojos.Actividad;
 import servicios.pojos.Induccion;
-import servicios.pojos.Reservacion;
 import servicios.pojos.Usuario;
 
 /**
@@ -37,21 +37,23 @@ public class HistorialAsesoresController implements Initializable {
     @FXML
     JFXDrawer menuDrawer = new JFXDrawer();
     @FXML
-    JFXTextField campoNombre = new JFXTextField();
+    JFXTextField campoNombre;
     @FXML
-    JFXTextField campoNoPersonal = new JFXTextField();
+    private JFXTextField campoNoPersonal;
     @FXML
-    TableView tablaInduccion = new TableView();
+    private JFXButton botonBuscar;
     @FXML
-    TableColumn colMatricula = new TableColumn();
+    TableView tablaInduccion;
     @FXML
-    TableColumn colFecha = new TableColumn();
+    TableColumn colMatricula;
     @FXML
-    TableView tablaActividades = new TableView();
+    TableColumn colFecha;
     @FXML
-    TableColumn colMatActividad = new TableColumn();
+    TableView tablaActividades;
     @FXML
-    TableColumn colFechaAct = new TableColumn();
+    TableColumn colMatActividad;
+    @FXML
+    TableColumn colFechaAct;
     
     /**
      * Initializes the controller class.
@@ -99,6 +101,13 @@ public class HistorialAsesoresController implements Initializable {
     
     private void recuperarNombreAsesor () {
         int noPersonal = Integer.parseInt(campoNoPersonal.getText());
+        
+        if (noPersonal != 0) {
+            botonBuscar.setDisable(false);
+        } else {
+            botonBuscar.setDisable(true);
+        }
+        
         Usuario nombreAsesor = null;
         SqlSession conn = null;
         try {
@@ -137,14 +146,12 @@ public class HistorialAsesoresController implements Initializable {
             }
         }
         
-        ObservableList<Induccion> actividadesIntro = FXCollections.observableArrayList();
-        actividadesIntro = FXCollections.observableArrayList(historialAsesores);
+        ObservableList<Induccion> actividadesIntro = FXCollections.observableArrayList(historialAsesores);
         colMatricula.setCellValueFactory(new PropertyValueFactory<>("matricula"));
         colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         tablaInduccion.setItems(actividadesIntro);
         
-        ObservableList<Actividad> actividades = FXCollections.observableArrayList();
-        actividades = FXCollections.observableArrayList(historialReservaciones);
+        ObservableList<Actividad> actividades = FXCollections.observableArrayList(historialReservaciones);
         colMatActividad.setCellValueFactory(new PropertyValueFactory<>("matricula"));
         colFechaAct.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         tablaActividades.setItems(actividades);        
