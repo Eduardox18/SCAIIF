@@ -148,6 +148,21 @@ public class DrawerPrincipalController implements Initializable {
     }
 
     /**
+     * Abre la ventana de registro de asistencia a reservación/actividad.
+     */
+    @FXML
+    public void lanzarRegistroAsistencia() {
+        try {
+            URL listasAsistencia = getClass().getResource("/vista/RegistrodeAsistencia.fxml");
+            AnchorPane paneLista = FXMLLoader.load(listasAsistencia);
+
+            BorderPane border = LoginController.getPrincipal();
+            border.setCenter(paneLista);
+        } catch (IOException ioEx) {
+            ioEx.printStackTrace();
+        }
+    }
+    /**
      * Método que abre la ventana para consultar el historial de los asesores (Actividades que han
      * impartido y actividades que impartirán)
      */

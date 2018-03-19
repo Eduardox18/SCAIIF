@@ -14,6 +14,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -24,6 +26,7 @@ import org.apache.ibatis.session.SqlSession;
 import servicios.pojos.Actividad;
 import servicios.pojos.Induccion;
 import servicios.pojos.Usuario;
+import vista.Dialogo;
 
 /**
  * FXML Controller class
@@ -31,7 +34,7 @@ import servicios.pojos.Usuario;
  * @author Hernández González Esmeralda Yamileth
  */
 public class HistorialAsesoresController implements Initializable {
-    
+
     @FXML
     JFXHamburger menuIcon = new JFXHamburger();
     @FXML
@@ -51,10 +54,10 @@ public class HistorialAsesoresController implements Initializable {
     @FXML
     TableView tablaActividades;
     @FXML
-    TableColumn colMatActividad;
+    TableColumn colNombre;
     @FXML
     TableColumn colFechaAct;
-    
+
     /**
      * Initializes the controller class.
      */
@@ -72,13 +75,11 @@ public class HistorialAsesoresController implements Initializable {
             menuDrawer.setDisable(false);
             menuIcon.setVisible(false);
         });
-        
-        
-        
+        botonBuscar.setDisable(true);
     }
-    
+
     /**
-     * Método que hace visible e invisible el menú drawer. 
+     * Método que hace visible e invisible el menú drawer.
      */
     @FXML
     public void mostrarIcono() {
@@ -87,73 +88,96 @@ public class HistorialAsesoresController implements Initializable {
             menuDrawer.setDisable(true);
         }
     }
-    
+
     /**
-     * Llamada al método consultar Actividades asignada al botón buscar, así como
-     * la recuperación del nombre del asesor que coincide con el noPersonal
-     * ingresado por el Coordinador. 
+     * Comprueba el tamaño y contenido del noPersonal.
      */
     @FXML
-    private void consultarHistorialAsesores () {
-        recuperarNombreAsesor();
-        consultarActividades();
-    }
-    
-    private void recuperarNombreAsesor () {
+    private void comprobarNoPersonal() {
         int noPersonal = Integer.parseInt(campoNoPersonal.getText());
-        
         if (noPersonal != 0) {
             botonBuscar.setDisable(false);
         } else {
             botonBuscar.setDisable(true);
         }
-        
+    }
+
+    /**
+     * Llamada al método consultar Actividades asignada al botón buscar, así como la recuperación
+     * del nombre del asesor que coincide con el noPersonal ingresado por el Coordinador.
+     */
+    @FXML
+    private void consultarHistorialAsesores() {
+        recuperarNombreAsesor();
+        consultarActividades();
+    }
+
+    /**
+     * Recupera el nombre del Asesor del que se está consultado la información.
+     */
+    private void recuperarNombreAsesor() {
+        int noPersonal = Integer.parseInt(campoNoPersonal.getText());
+        Dialogo dialogo = null;
         Usuario nombreAsesor = null;
         SqlSession conn = null;
         try {
             conn = MyBatisUtils.getSession();
             nombreAsesor = conn.selectOne("Usuario.getNombreUsuario", noPersonal);
         } catch (IOException ex) {
-            System.out.println("Error al Nombre");
+            dialogo = new Dialogo(Alert.AlertType.ERROR,
+                "Error al recuperar el nombre del Asesor", "Error", ButtonType.OK);
         } finally {
             if (conn != null) {
                 conn.close();
             }
         }
-        campoNombre.setText(nombreAsesor.getNombre() + " " + nombreAsesor.getApPaterno() +" " + nombreAsesor.getApMaterno());
+        campoNombre.setText(nombreAsesor.getNombre() + " " + nombreAsesor.getApPaterno() + " " + nombreAsesor.getApMaterno());
     }
-    
-    
+
     /**
-     * Método que realiza la búsqueda en la base de datos de las matrículas
-     * y fechas de las asesorías introductorias impartidas por el asesor ingresado
-     * por el coordinador, así como de las actividaes impartidas o que impartirá.
+     * Método que realiza la búsqueda en la base de datos de las matrículas y fechas de las
+     * asesorías introductorias impartidas por el asesor ingresado por el coordinador, así como de
+     * las actividaes impartidas o que impartirá.
      */
-    private void consultarActividades () {
+    private void consultarActividades() {
         List<Induccion> historialAsesores = new ArrayList<>();
         List<Actividad> historialReservaciones = new ArrayList<>();
         int noPersonal = Integer.parseInt(campoNoPersonal.getText());
+        Dialogo dialogo = null;
         SqlSession conn = null;
         try {
             conn = MyBatisUtils.getSession();
             historialAsesores = conn.selectList("Induccion.getHistorial", noPersonal);
             historialReservaciones = conn.selectList("Actividad.getActividades", noPersonal);
         } catch (IOException ex) {
-            System.out.println("Error al recuperar Actividades");
+            dialogo = new Dialogo(Alert.AlertType.ERROR,
+                "Error al recuperar actividades", "Error", ButtonType.OK);
         } finally {
             if (conn != null) {
                 conn.close();
             }
         }
-        
+
         ObservableList<Induccion> actividadesIntro = FXCollections.observableArrayList(historialAsesores);
         colMatricula.setCellValueFactory(new PropertyValueFactory<>("matricula"));
         colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         tablaInduccion.setItems(actividadesIntro);
-        
+
         ObservableList<Actividad> actividades = FXCollections.observableArrayList(historialReservaciones);
-        colMatActividad.setCellValueFactory(new PropertyValueFactory<>("matricula"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colFechaAct.setCellValueFactory(new PropertyValueFactory<>("fecha"));
-        tablaActividades.setItems(actividades);        
-    }  
+        tablaActividades.setItems(actividades);
+    }
+
+    /**
+     * Limpia todos los campos.
+     */
+    public void limpiarCampos() {
+        campoNombre.setText("");
+        campoNoPersonal.setText("");
+        colMatricula.setText("");
+        colFecha.setText("");
+        colNombre.setText("");
+        colFechaAct.setText("");
+    }
 }

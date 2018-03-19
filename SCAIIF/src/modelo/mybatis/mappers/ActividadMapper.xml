@@ -10,9 +10,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="getActividades" parameterType="int" resultType="servicios.pojos.Actividad">
-        SELECT matricula,Reservacion.fecha FROM Actividad INNER JOIN Reservacion ON
+        SELECT nombre, Reservacion.fecha FROM Actividad INNER JOIN Reservacion ON
         Actividad.noActividad = Reservacion.noActividad
         WHERE noPersonal = #{noPersonal};
+    </select>
+    
+    <select id="getnoActividad" resultType="servicios.pojos.Actividad">
+        SELECT noActividad FROM Actividad;
     </select>
     
     

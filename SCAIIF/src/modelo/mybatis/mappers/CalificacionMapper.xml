@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="Calificación">
     
-    <update id="actualizarCalificacion" parameterType="servicios.pojos.Calificacion">
+    <update id="actualizarCalificacion" parameterType="map">
         UPDATE Calificacion SET calificacion = #{calificacion}
-        WHERE matricula = #{matricula} and nrc = #{nrc};
+        WHERE matricula = #{matricula};
     </update>
 </mapper>

@@ -13,52 +13,53 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.RegistrarCalificacionesController">
-   <children>
-      <ImageView fitHeight="65.0" fitWidth="79.0" layoutX="78.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@recursos/user.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="labelAsesor" layoutX="90.0" layoutY="87.0" text="Asesor" />
-      <Label layoutX="26.0" layoutY="147.0" text="Matricula del Alumno:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <JFXTextField fx:id="TFMatricula" layoutX="178.0" layoutY="145.0" prefHeight="25.0" prefWidth="171.0" unFocusColor="#0b6b04" />
-      <Label layoutX="23.0" layoutY="214.0" text="Seleccionar Curso:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <JFXComboBox fx:id="CBCurso" layoutX="178.0" layoutY="211.0" prefHeight="25.0" prefWidth="166.0" unFocusColor="#0b6b04" />
-      <JFXDatePicker defaultColor="#0b6b04" layoutX="417.0" layoutY="145.0" prefHeight="25.0" prefWidth="227.0" />
-      <Label layoutX="26.0" layoutY="297.0" prefHeight="25.0" prefWidth="52.0" text="Módulo:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <JFXComboBox fx:id="CBModulo" layoutX="96.0" layoutY="297.0" unFocusColor="#0b6b04" />
-      <Label layoutX="239.0" layoutY="302.0" prefHeight="20.0" prefWidth="52.0" text="Sección:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <JFXComboBox fx:id="CBSeccion" layoutX="309.0" layoutY="300.0" unFocusColor="#0b6b04" />
-      <Label layoutX="401.0" layoutY="303.0" text="Calificación:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <JFXTextField fx:id="TFCalificacion" layoutX="495.0" layoutY="300.0" prefHeight="25.0" prefWidth="149.0" unFocusColor="#0b6b04" />
-      <JFXButton fx:id="BTGuardar" layoutX="231.0" layoutY="432.0" prefHeight="38.0" prefWidth="93.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Guardar" textFill="WHITE" />
-      <JFXButton fx:id="BTCancelar" layoutX="372.0" layoutY="432.0" prefHeight="38.0" prefWidth="85.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Cancelar" textFill="WHITE" />
-      <Label layoutX="160.0" layoutY="34.0" text="Registro de Calificaciones">
-         <font>
-            <Font name="Book Antiqua" size="36.0" />
-         </font>
-      </Label>
-      <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" onMouseClicked="#mostrarIcono" prefHeight="500.0" prefWidth="700.0" />
-      <JFXHamburger fx:id="menuIcon" layoutX="15.0" layoutY="15.0" />
-   </children>
+    <children>
+        <ImageView fitHeight="65.0" fitWidth="79.0" layoutX="78.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@recursos/user.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="labelAsesor" layoutX="90.0" layoutY="87.0" text="Asesor" />
+        <Label layoutX="26.0" layoutY="147.0" text="Matricula del Alumno:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <JFXTextField fx:id="TFMatricula" layoutX="178.0" layoutY="145.0" prefHeight="25.0" prefWidth="171.0" unFocusColor="#0b6b04" onKeyReleased="#buscarDatosAlumno"/>
+        <Label layoutX="23.0" layoutY="214.0" text="Seleccionar Curso:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <JFXComboBox fx:id="CBCurso" layoutX="178.0" layoutY="211.0" prefHeight="25.0" prefWidth="166.0" unFocusColor="#0b6b04" />
+        <JFXDatePicker defaultColor="#0b6b04" layoutX="415.0" layoutY="212.0" prefHeight="25.0" prefWidth="227.0" />
+        <Label layoutX="26.0" layoutY="297.0" prefHeight="25.0" prefWidth="52.0" text="Módulo:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <JFXComboBox fx:id="CBModulo" layoutX="96.0" layoutY="297.0" unFocusColor="#0b6b04" />
+        <Label layoutX="198.0" layoutY="302.0" prefHeight="20.0" prefWidth="93.0" text="Conversación:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <JFXComboBox fx:id="CBConv" layoutX="309.0" layoutY="300.0" unFocusColor="#0b6b04" />
+        <Label layoutX="401.0" layoutY="303.0" text="Calificación:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <JFXTextField fx:id="TFCalificacion" layoutX="495.0" layoutY="300.0" prefHeight="25.0" prefWidth="149.0" unFocusColor="#0b6b04" onKeyReleased="#habilitarBotones"/>
+        <JFXButton fx:id="BTGuardar" layoutX="231.0" layoutY="432.0" prefHeight="38.0" prefWidth="93.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Guardar" textFill="WHITE" onAction="#comprobarRegistro" />
+        <JFXButton fx:id="BTCancelar" layoutX="372.0" layoutY="432.0" prefHeight="38.0" prefWidth="85.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Cancelar" textFill="WHITE" />
+        <Label layoutX="160.0" layoutY="34.0" text="Registro de Calificaciones">
+            <font>
+                <Font name="Book Antiqua" size="36.0" />
+            </font>
+        </Label>
+        <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" onMouseClicked="#mostrarIcono" prefHeight="500.0" prefWidth="700.0" />
+        <JFXHamburger fx:id="menuIcon" layoutX="15.0" layoutY="15.0" />
+        <JFXButton fx:id="BTBuscar" layoutX="359.0" layoutY="145.0" prefHeight="20.0" prefWidth="85.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Buscar" textFill="WHITE" />
+    </children>
 </AnchorPane>

@@ -12,4 +12,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE noActividad = #{noActividad};
     </select>
     
+    <select id="getFechas" resultType="servicios.pojos.Reservacion">
+        SELECT fecha FROM Reservacion;
+    </select>
+    
+    <update id="actualizarAsistencia" parameterType="map">
+        UPDATE Reservacion SET asistencia = #{asistencia}
+        WHERE matricula = #{matricula} and noActividad= #{noActividad} and fecha=#{fecha};
+    </update>
+    
 </mapper>

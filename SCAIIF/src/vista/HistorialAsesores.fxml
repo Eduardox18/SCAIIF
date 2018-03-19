@@ -25,7 +25,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="campoNoPersonal" alignment="CENTER" layoutX="283.0" layoutY="45.0" prefHeight="25.0" prefWidth="200.0" unFocusColor="#037523">
+      <JFXTextField fx:id="campoNoPersonal" alignment="CENTER" layoutX="283.0" layoutY="45.0" onKeyReleased="#comprobarNoPersonal" prefHeight="25.0" prefWidth="200.0" unFocusColor="#037523">
          <font>
             <Font size="13.0" />
          </font></JFXTextField>
@@ -42,7 +42,7 @@
       </TableView>
       <TableView fx:id="tablaActividades" layoutX="47.0" layoutY="321.0" prefHeight="109.0" prefWidth="602.0">
         <columns>
-          <TableColumn fx:id="colMatActividad" editable="false" prefWidth="304.0" text="Matrícula" />
+          <TableColumn fx:id="colNombre" editable="false" prefWidth="304.0" text="Nombre Actividad" />
           <TableColumn fx:id="colFechaAct" editable="false" minWidth="0.0" prefWidth="297.0" text="Fecha" />
         </columns>
       </TableView>

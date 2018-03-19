@@ -77,4 +77,11 @@ public class Alumno {
         this.lenguaIndigena = lenguaIndigena;
     }
 
+    @Override
+    public String toString() {
+        return matricula;
+    }
+    
+    
+
 }

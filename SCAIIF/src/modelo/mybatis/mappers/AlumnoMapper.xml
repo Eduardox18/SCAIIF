@@ -10,6 +10,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         nombre LIKE CONCAT(#{matricula},'%');
     </select>
     
+        <select id="getReservacionAlumnos" parameterType="servicios.pojos.Reservacion" resultType="servicios.pojos.Alumno">
+        SELECT reservacion.matricula, nombre, apPaterno, apMaterno
+        FROM alumno 
+        INNER JOIN reservacion ON alumno.matricula = reservacion.matricula
+        WHERE reservacion.fecha = #{fecha} and reservacion.noActividad = #{noActividad};
+    </select>
+    
     <insert id="agregarAlumno" parameterType="servicios.pojos.Alumno">
         INSERT INTO Alumno (matricula, nombre, apPaterno, apMaterno, correo, 
         lenguaIndigena) VALUES (#{matricula}, #{nombre}, #{apPaterno}, 
