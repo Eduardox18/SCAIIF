@@ -21,5 +21,5 @@ public class Dialogo extends Alert{
         this.setTitle(titulo); 
         this.setResizable(false); 
         this.initStyle(StageStyle.UNDECORATED);
-    } 
+    }
 }

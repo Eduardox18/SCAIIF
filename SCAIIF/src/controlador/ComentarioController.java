@@ -116,7 +116,7 @@ public class ComentarioController implements Initializable {
             conn = MyBatisUtils.getSession();
             alumnos = conn.selectList("Alumno.getAlumnos", matricula);
         } catch(IOException ioEx) {
-            System.out.println("marrano");
+            System.out.println("Error");
         } finally {
             if (conn != null) {
                 conn.close();

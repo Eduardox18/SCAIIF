@@ -89,4 +89,9 @@ public class Actividad {
     public void setNoPersonal(int noPersonal) {
         this.noPersonal = noPersonal;
     }
+    
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }
