@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="Calificación">
     
-    <insert id="insertarCalificacion" parameterType="double" timeout="10">
-        INSERT INTO calificacion (calificacion) 
-        VALUES (#{calificacion})
-    </insert>
+    <update id="actualizarCalificacion" parameterType="servicios.pojos.Calificacion">
+        UPDATE Calificacion SET calificacion = #{calificacion}
+        WHERE matricula = #{matricula} and nrc = #{nrc};
+    </update>
 </mapper>
