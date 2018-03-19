@@ -18,13 +18,18 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import modelo.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
-import static org.eclipse.persistence.jpa.jpql.JPAVersion.value;
 import servicios.pojos.Actividad;
-import servicios.pojos.Reservacion;
+import servicios.pojos.ListaAsistencia;
+import vista.Dialogo;
 
 /**
  * FXML Controller class
@@ -34,13 +39,25 @@ import servicios.pojos.Reservacion;
 public class ListasDeAsistenciaController implements Initializable {
 
     @FXML
-    private JFXComboBox<String> comboActividades;
+    private JFXComboBox<Actividad> comboActividades;
         
     @FXML
     private JFXHamburger menuIcon;
 
     @FXML
     private JFXDrawer menuDrawer;
+    
+    @FXML
+    private TableColumn colNombre;
+    
+    @FXML
+    private TableColumn colMatricula;
+    
+    @FXML
+    private TableColumn colAsistencia;
+    
+    @FXML
+    private TableView tablaLista;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -58,9 +75,16 @@ public class ListasDeAsistenciaController implements Initializable {
         });
         
         llenarComboBox();
-        llenarTabla();
     }    
     
+    @FXML
+    public void mostrarVentanaImprimir() {
+        Dialogo dialogo = null;
+        dialogo = new Dialogo(Alert.AlertType.INFORMATION, 
+                    "Se está imprimiendo la lista...", "Imprimiendo", 
+                    ButtonType.OK);
+                dialogo.show();
+    }
     @FXML
     public void mostrarIcono() {
         if (!menuDrawer.isShown()) {
@@ -70,6 +94,7 @@ public class ListasDeAsistenciaController implements Initializable {
     }
     
     private void llenarComboBox() {
+        Dialogo dialogo = null;
         List<Actividad> actividadesProximas = new ArrayList<>();
         SqlSession conn = null;
         LoginController logIn = new LoginController();
@@ -79,43 +104,48 @@ public class ListasDeAsistenciaController implements Initializable {
             actividadesProximas = conn.selectList("Actividad.recuperarActividadesAsesor", 
                     noPersonal);
         } catch (IOException ioEx) {
-            ioEx.printStackTrace();
+            //Diálogo
+            dialogo = new Dialogo(Alert.AlertType.ERROR, 
+                    "No hay conexión con la base de datos", "Error", 
+                    ButtonType.OK);
+                dialogo.show();
         } finally {
             if (conn != null) {
                 conn.close();
             }
-        }
+        }  
         
-        List<String> nombreActividades = new ArrayList<>();
-        for (Actividad actividad : actividadesProximas) {
-            nombreActividades.add(actividad.getNombre());
-        }
-        
-        ObservableList<String> actividadesObservable = FXCollections.observableArrayList();
-        actividadesObservable = FXCollections.observableArrayList(nombreActividades);
+        ObservableList<Actividad> actividadesObservable = FXCollections.observableArrayList();
+        actividadesObservable = FXCollections.observableArrayList(actividadesProximas);
         comboActividades.setItems(actividadesObservable);
     }
     
     @FXML
     public void llenarTabla() {
-        List<Reservacion> listaAlumnosReservacion = new ArrayList<>();
+        Dialogo dialogo;
+        List<ListaAsistencia> listaAlumnosReservacion = new ArrayList<>();
         SqlSession conn = null;
-        int noActividad = 1;
+        int noActividad = comboActividades.getSelectionModel().getSelectedItem().getNoActividad();
         try {
             conn = MyBatisUtils.getSession();
             listaAlumnosReservacion = conn.selectList("Reservacion.alumnosDeActividad", 
                     noActividad);
         } catch (IOException ioEx) {
-            ioEx.printStackTrace();
+            dialogo = new Dialogo(Alert.AlertType.ERROR, 
+                    "No hay conexión con la base de datos", "Error", 
+                    ButtonType.OK);
+                dialogo.show();
         } finally {
             if (conn != null) {
                 conn.close();
             }
         }
         
-        for (Reservacion reser: listaAlumnosReservacion) {
-            System.out.println(reser);
-        }
+        ObservableList<ListaAsistencia> listaObservable = FXCollections.observableArrayList();
+        listaObservable = FXCollections.observableArrayList(listaAlumnosReservacion);
+        colMatricula.setCellValueFactory(new PropertyValueFactory("matricula"));
+        colNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
+        tablaLista.setItems(listaObservable);
     }
     
 }

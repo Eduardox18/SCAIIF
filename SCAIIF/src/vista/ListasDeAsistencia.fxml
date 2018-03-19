@@ -12,18 +12,18 @@
 
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ListasDeAsistenciaController">
    <children>
-      <JFXComboBox fx:id="comboActividades" layoutX="351.0" layoutY="40.0" prefHeight="27.0" prefWidth="250.0" promptText="Actividades" />
+      <JFXComboBox fx:id="comboActividades" layoutX="351.0" layoutY="40.0" onAction="#llenarTabla" prefHeight="27.0" prefWidth="250.0" promptText="Actividades" />
       <Label layoutX="121.0" layoutY="48.0" text="Actividades por impartir:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <JFXButton layoutX="303.0" layoutY="460.0" prefHeight="27.0" prefWidth="105.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Imprimir" textFill="WHITE" />
-      <TableView layoutX="29.0" layoutY="100.0" prefHeight="347.0" prefWidth="646.0">
+      <JFXButton layoutX="303.0" layoutY="460.0" onAction="#mostrarVentanaImprimir" prefHeight="27.0" prefWidth="105.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Imprimir" textFill="WHITE" />
+      <TableView fx:id="tablaLista" layoutX="29.0" layoutY="100.0" prefHeight="347.0" prefWidth="646.0">
         <columns>
-            <TableColumn prefWidth="139.97925186157227" text="Matrícula" />
-          <TableColumn prefWidth="424.020751953125" text="Alumno" />
-          <TableColumn prefWidth="84.63543701171875" text="Asistencia" />
+            <TableColumn fx:id="colMatricula" prefWidth="139.97925186157227" text="Matrícula" />
+          <TableColumn fx:id="colNombre" prefWidth="424.020751953125" text="Alumno" />
+          <TableColumn fx:id="colAsistencia" prefWidth="84.63543701171875" text="Asistencia" />
         </columns>
       </TableView>
       <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" onMouseClicked="#mostrarIcono" prefHeight="500.0" prefWidth="700.0" />

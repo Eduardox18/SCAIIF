@@ -96,7 +96,6 @@ public class LoginController extends Application {
             conn = MyBatisUtils.getSession();
             ingresado = conn.selectList("Usuario.getUsuario", parametros);
         } catch (Exception ioEx) {
-            ioEx.printStackTrace();
             System.out.println("Servidor no disponible, intente más tarde");
         } finally {
             if (conn != null) {
@@ -123,7 +122,7 @@ public class LoginController extends Application {
                 stagePrincipal.setScene(sceneDos);
                 stagePrincipal.show();
             } catch (IOException ioEx) {
-                ioEx.printStackTrace();
+                System.out.println("Servidor no disponible, intente más tarde");
             }
         } else {
             System.out.println("Los datos ingresados son incorrectos, intente de nuevo");
