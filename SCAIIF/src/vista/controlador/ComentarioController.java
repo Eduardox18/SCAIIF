@@ -1,10 +1,4 @@
-package controlador;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package vista.controlador;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
@@ -12,7 +6,6 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -27,8 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import modelo.mybatis.MyBatisUtils;
-import org.apache.ibatis.session.SqlSession;
+import modelo.dao.ObservacionDAO;
 import servicios.pojos.Alumno;
 
 /**
@@ -37,31 +29,31 @@ import servicios.pojos.Alumno;
  * @author andres
  */
 public class ComentarioController implements Initializable {
-    
+
     @FXML
     JFXButton botonRegistrar = new JFXButton();
-    
+
     @FXML
     JFXTextField campoMatricula = new JFXTextField();
-    
+
     @FXML
     TableView tablaALumnos = new TableView();
-    
+
     @FXML
     JFXHamburger menuIcon = new JFXHamburger();
-    
+
     @FXML
     JFXDrawer menuDrawer = new JFXDrawer();
-    
+
     @FXML
     TableColumn colNombre = new TableColumn();
-    
+
     @FXML
     TableColumn colMatricula = new TableColumn();
-    
+
     @FXML
     TableColumn colEmail = new TableColumn();
-    
+
     /**
      * Initializes the controller class.
      */
@@ -79,21 +71,22 @@ public class ComentarioController implements Initializable {
             menuDrawer.setDisable(false);
             menuIcon.setVisible(false);
         });
-        
+
         campoMatricula.textProperty().addListener((observable, oldValue, newValue) -> {
             llenarTabla(newValue);
         });
-        
+
         botonRegistrar.setDisable(true);
         tablaALumnos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             botonRegistrar.setDisable(false);
-}       );
-        
+        });
+
         llenarTabla("");
-    } 
-    
+    }
+
     @FXML
-    /***
+    /**
+     * *
      * Metodo que se encarga de mostrar el ícono del menú cada vez que se sale del mnú
      */
     public void mostrarIcono() {
@@ -102,46 +95,42 @@ public class ComentarioController implements Initializable {
             menuDrawer.setDisable(true);
         }
     }
-    
-    /***
+
+    /**
+     * *
      * Recupera los alumnos de la base de datos y mostrarlos en la tabla.
-     * @param nombreAlumno El nombre o matrícula del alumno que se busca, en caso de estar vacio,
-     * el método buscará a todos los alumnos.
+     *
+     * @param nombreAlumno El nombre o matrícula del alumno que se busca, en caso de estar vacio, el
+     * método buscará a todos los alumnos.
      */
     private void llenarTabla(String nombreAlumno) {
-        List<Alumno> alumnos = new ArrayList<>();
-        SqlSession conn = null;
-        String matricula = campoMatricula.getText();
+        ObservacionDAO observacionDao = new ObservacionDAO();
+        List<Alumno> alumnos = null;
         try {
-            conn = MyBatisUtils.getSession();
-            alumnos = conn.selectList("Alumno.getAlumnos", matricula);
-        } catch(IOException ioEx) {
-            System.out.println("Error");
-        } finally {
-            if (conn != null) {
-                conn.close();
-            }
+            alumnos = observacionDao.recuperarAlumnos(campoMatricula.getText());
+            ObservableList<Alumno> alumnosObservable = FXCollections.observableArrayList();
+            alumnosObservable = FXCollections.observableArrayList(alumnos);
+
+            colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            colMatricula.setCellValueFactory(new PropertyValueFactory<>("matricula"));
+            colEmail.setCellValueFactory(new PropertyValueFactory<>("correo"));
+            tablaALumnos.setItems(alumnosObservable);
+        } catch (Exception ex) {
+            //Diálogo error
         }
-        
-        ObservableList<Alumno> alumnosObservable = FXCollections.observableArrayList();
-        alumnosObservable = FXCollections.observableArrayList(alumnos);
-        
-        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        colMatricula.setCellValueFactory(new PropertyValueFactory<>("matricula"));
-        colEmail.setCellValueFactory(new PropertyValueFactory<>("correo"));
-        tablaALumnos.setItems(alumnosObservable);
     }
-    
+
     @FXML
-    /***
+    /**
+     * *
      * Crea la ventana CrearComentario desde donde se añade el comentario al alumno.
      */
-    private void lanzarEditorComentario (){
+    private void lanzarEditorComentario() {
         Alumno alumnoRecuperado = (Alumno) tablaALumnos.getSelectionModel().getSelectedItem();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/CrearComentario.fxml"));
             AnchorPane paneLista = loader.load();
-            
+
             CrearComentarioController controller = loader.<CrearComentarioController>getController();
             controller.infoVentana(alumnoRecuperado.getMatricula());
 

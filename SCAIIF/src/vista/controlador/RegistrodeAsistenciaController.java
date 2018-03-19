@@ -1,4 +1,4 @@
-package controlador;
+package vista.controlador;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -20,7 +20,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;

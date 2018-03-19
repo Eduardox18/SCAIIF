@@ -1,4 +1,4 @@
-package controlador;
+package vista.controlador;
 
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;

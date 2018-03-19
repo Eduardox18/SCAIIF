@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ListasDeAsistenciaController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.ListasDeAsistenciaController">
    <children>
       <JFXComboBox fx:id="comboActividades" layoutX="351.0" layoutY="40.0" onAction="#llenarTabla" prefHeight="27.0" prefWidth="250.0" promptText="Actividades" />
       <Label layoutX="121.0" layoutY="48.0" text="Actividades por impartir:">

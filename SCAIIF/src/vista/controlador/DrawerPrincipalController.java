@@ -1,4 +1,4 @@
-package controlador;
+package vista.controlador;
 
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
