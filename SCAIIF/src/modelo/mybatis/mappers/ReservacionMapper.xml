@@ -5,4 +5,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="Reservacion">
     
+    <select id="alumnosDeActividad" parameterType="int" resultType="servicios.pojos.Reservacion">
+        SELECT noActividad, alumno.matricula, nombre, apPaterno, apMaterno 
+        FROM reservacion 
+        INNER JOIN alumno ON alumno.matricula = reservacion.matricula 
+        WHERE noActividad = #{noActividad};
+    </select>
+    
 </mapper>

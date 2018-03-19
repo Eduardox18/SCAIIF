@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="Actividad">
     
     <select id="recuperarActividadesAsesor" parameterType="int" resultType="servicios.pojos.Actividad">
-        SELECT nombre FROM actividad WHERE noPersonal = #{noPersonal};
+        SELECT noActividad, nombre FROM actividad WHERE noPersonal = #{noPersonal};
     </select>
     
     <select id="getActividades" parameterType="int" resultType="servicios.pojos.Actividad">

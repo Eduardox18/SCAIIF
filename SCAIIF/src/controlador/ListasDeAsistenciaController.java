@@ -24,6 +24,7 @@ import modelo.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import static org.eclipse.persistence.jpa.jpql.JPAVersion.value;
 import servicios.pojos.Actividad;
+import servicios.pojos.Reservacion;
 
 /**
  * FXML Controller class
@@ -57,6 +58,7 @@ public class ListasDeAsistenciaController implements Initializable {
         });
         
         llenarComboBox();
+        llenarTabla();
     }    
     
     @FXML
@@ -92,7 +94,28 @@ public class ListasDeAsistenciaController implements Initializable {
         ObservableList<String> actividadesObservable = FXCollections.observableArrayList();
         actividadesObservable = FXCollections.observableArrayList(nombreActividades);
         comboActividades.setItems(actividadesObservable);
+    }
+    
+    @FXML
+    public void llenarTabla() {
+        List<Reservacion> listaAlumnosReservacion = new ArrayList<>();
+        SqlSession conn = null;
+        int noActividad = 1;
+        try {
+            conn = MyBatisUtils.getSession();
+            listaAlumnosReservacion = conn.selectList("Reservacion.alumnosDeActividad", 
+                    noActividad);
+        } catch (IOException ioEx) {
+            ioEx.printStackTrace();
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
         
+        for (Reservacion reser: listaAlumnosReservacion) {
+            System.out.println(reser);
+        }
     }
     
 }

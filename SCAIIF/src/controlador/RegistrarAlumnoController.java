@@ -20,11 +20,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import modelo.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import servicios.pojos.Alumno;
+import vista.Dialogo;
 
 /**
  * FXML Controller class
@@ -99,14 +102,24 @@ public class RegistrarAlumnoController implements Initializable {
      * ninguna matrícula igual registrada
      */
     public void accionBoton () {
+        Dialogo dialogo = null;
         if (comprobarMatricula()) {
             if (agregarAlumno()) {
-                System.out.println("Todo salió bien");
+                dialogo = new Dialogo(Alert.AlertType.INFORMATION, 
+                        "EL usuario se ha registrado correctamente", "Éxito", ButtonType.OK);
+                dialogo.show();
+                btnRegistrar.setDisable(true);
+                limpiarCampos();
             } else {
-                System.out.println("Algo salió mal");
+                dialogo = new Dialogo(Alert.AlertType.ERROR, 
+                        "Ha ocurrido un error al guardar el usuario", "Error", ButtonType.OK);
+                dialogo.show();
             }
         } else {
-            System.out.println("La matriucla ya existe");
+            dialogo = new Dialogo(Alert.AlertType.WARNING, 
+                    "La matrícula que trata de ingresar ya existe", "Matrícula repetida", 
+                    ButtonType.OK);
+                dialogo.show();
         }
         
     }
@@ -215,5 +228,17 @@ public class RegistrarAlumnoController implements Initializable {
         }
         
         return resultado;
+    }
+    
+    /**
+     * Limpia todos los campos y desmarca el checkbox 
+     */
+    public void limpiarCampos() {
+        tfMatricula.setText("");
+        tfNombre.setText("");
+        tfApellidoMaterno.setText("");
+        tfApellidoPaterno.setText("");
+        tfCorreoElectronico.setText("");
+        checkLenguaIndigena.setSelected(false);
     }
 }
