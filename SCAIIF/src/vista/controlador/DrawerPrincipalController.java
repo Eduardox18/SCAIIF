@@ -130,7 +130,7 @@ public class DrawerPrincipalController implements Initializable {
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneComentario);
         } catch (IOException ioEx) {
-            ioEx.printStackTrace();
+            //Diálogo error
         }
     }
 
@@ -143,7 +143,7 @@ public class DrawerPrincipalController implements Initializable {
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneLista);
         } catch (IOException ioEx) {
-            ioEx.printStackTrace();
+            //Diálogo error
         }
     }
 
@@ -159,7 +159,7 @@ public class DrawerPrincipalController implements Initializable {
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneLista);
         } catch (IOException ioEx) {
-            ioEx.printStackTrace();
+            //Diálogo error
         }
     }
     /**
@@ -175,7 +175,7 @@ public class DrawerPrincipalController implements Initializable {
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneHistorial);
         } catch (IOException ioEx) {
-            ioEx.printStackTrace();
+            //Diálogo error
         }
     }
     
@@ -188,7 +188,7 @@ public class DrawerPrincipalController implements Initializable {
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneHistorial);
         } catch (IOException ioEx) {
-            ioEx.printStackTrace();
+            //Diálogo error
         }
     }
     
@@ -205,7 +205,7 @@ public class DrawerPrincipalController implements Initializable {
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneCalificaciones);
         } catch (IOException ioEx) {
-            ioEx.printStackTrace();
+            //Diálogo error
         }
     }
 }

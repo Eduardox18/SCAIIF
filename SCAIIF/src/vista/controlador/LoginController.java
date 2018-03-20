@@ -17,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import modelo.Cifrado;
+import modelo.dao.UsuarioDAO;
 import modelo.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import servicios.pojos.Usuario;
@@ -26,7 +27,7 @@ import servicios.pojos.Usuario;
  * @author Ángel Eduardo Domínguez Delgado
  */
 public class LoginController extends Application {
-    
+
     private static int cargoLog = 0;
     private static int noPersonalLog = 0;
     private static BorderPane root = new BorderPane();
@@ -43,34 +44,34 @@ public class LoginController extends Application {
 
     @FXML
     private JFXButton botonIngresar;
-    
+
     public static BorderPane getPrincipal() {
         return panePrincipal;
     }
-    
+
     public static int returnCargo() {
         return cargoLog;
     }
-    
+
     public static int returnNoPersonalLog() {
         return noPersonalLog;
     }
-    
+
     @Override
     public void start(Stage primaryStage) {
-        
+
         AnchorPane paneLogin = null;
-        
+
         URL login = getClass().getResource("/vista/Login.fxml");
         try {
             paneLogin = FXMLLoader.load(login);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        
+
         root.setCenter(paneLogin);
-        
-        Scene scene = new Scene(root,600, 400);
+
+        Scene scene = new Scene(root, 600, 400);
         primaryStage.setTitle("SCAIIF");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -88,52 +89,45 @@ public class LoginController extends Application {
     @FXML
     public void ingresarSistema() {
         Cifrado cifrar = new Cifrado();
-        List<Usuario> ingresado = new ArrayList<Usuario>();
-        SqlSession conn = null;
+        Usuario ingresado = new Usuario();
         try {
-            Map<String, Object> parametros = new HashMap<String, Object>();
-            parametros.put("noPersonal", campoUsuario.getText());
-            conn = MyBatisUtils.getSession();
-            ingresado = conn.selectList("Usuario.getUsuario", parametros);
-        } catch (Exception ioEx) {
-            System.out.println("Servidor no disponible, intente más tarde");
-        } finally {
-            if (conn != null) {
-                conn.close();
-            }
+            ingresado = UsuarioDAO.recuperarUsuario(Integer.parseInt(campoUsuario.getText()));
+        } catch (Exception ex) {
+            System.out.println("Número de personal no válido");
         }
 
-        if (ingresado.isEmpty()) {
-            System.out.println("El usuario ingresado no existe");
-        } else if (ingresado.get(0).getPassword().equals(
-                cifrar.cifrarCadena(campoContrasenia.getText()))) {
-            try {
-                cargoLog = ingresado.get(0).getIdCargo();
-                noPersonalLog = ingresado.get(0).getNoPersonal();
+        try {
+            if (ingresado == null) {
+                System.out.println("El usuario ingresado no existe");
+            } else if (ingresado.getPassword().equals(
+                    cifrar.cifrarCadena(campoContrasenia.getText()))) {
+                cargoLog = ingresado.getIdCargo();
+                noPersonalLog = ingresado.getNoPersonal();
                 Stage stagePrincipal = new Stage();
                 URL panePrincipalURL = getClass().getResource(("/vista/Principal.fxml"));
                 AnchorPane paneInicial = FXMLLoader.load(panePrincipalURL);
-                
+
                 Stage stage = (Stage) botonIngresar.getScene().getWindow();
                 stage.close();
-                
+
                 panePrincipal.setCenter(paneInicial);
                 Scene sceneDos = new Scene(panePrincipal, 700, 500);
                 stagePrincipal.setScene(sceneDos);
                 stagePrincipal.show();
-            } catch (IOException ioEx) {
-                System.out.println("Servidor no disponible, intente más tarde");
+            } else {
+                System.out.println("Los datos ingresados son incorrectos, intente de nuevo");
             }
-        } else {
-            System.out.println("Los datos ingresados son incorrectos, intente de nuevo");
+        } catch (IOException ioEx) {
+            System.out.println("Servidor no disponible, intente más tarde");
         }
+
     }
 
     @FXML
     void salirSistema() {
         System.exit(0);
     }
-    
+
     public static void main(String[] args) {
         launch(args);
     }

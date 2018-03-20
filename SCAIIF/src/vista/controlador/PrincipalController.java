@@ -30,7 +30,7 @@ public class PrincipalController implements Initializable {
             VBox box = FXMLLoader.load(getClass().getResource("/vista/DrawerPrincipal.fxml"));
             menuDrawer.setSidePane(box);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            //Diálogo error
         }
         menuIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
             menuDrawer.open();

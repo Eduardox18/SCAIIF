@@ -104,10 +104,9 @@ public class ComentarioController implements Initializable {
      * método buscará a todos los alumnos.
      */
     private void llenarTabla(String nombreAlumno) {
-        ObservacionDAO observacionDao = new ObservacionDAO();
         List<Alumno> alumnos = null;
         try {
-            alumnos = observacionDao.recuperarAlumnos(campoMatricula.getText());
+            alumnos = ObservacionDAO.recuperarAlumnos(campoMatricula.getText());
             ObservableList<Alumno> alumnosObservable = FXCollections.observableArrayList();
             alumnosObservable = FXCollections.observableArrayList(alumnos);
 
