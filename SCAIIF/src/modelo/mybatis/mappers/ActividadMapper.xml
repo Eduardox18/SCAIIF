@@ -5,12 +5,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="Actividad">
     
-    <select id="recuperarActividadesAsesor" parameterType="int" resultType="servicios.pojos.Actividad">
-        SELECT noActividad, nombre FROM actividad WHERE noPersonal = #{noPersonal};
+    <select id="recuperarActividadesAsesor" 
+            parameterType="servicios.pojos.Actividad" 
+            resultType="servicios.pojos.Actividad">
+        SELECT noActividad, nombre FROM actividad 
+        WHERE noPersonal = #{noPersonal} AND fecha >= #{fecha};
     </select>
     
-    <select id="getActividades" parameterType="int" resultType="servicios.pojos.Actividad">
-        SELECT nombre, Reservacion.fecha FROM Actividad INNER JOIN Reservacion ON
+    <select id="getActividades" parameterType="int" 
+            resultType="servicios.pojos.Actividad">
+        SELECT nombre, Reservacion.fecha FROM Actividad 
+        INNER JOIN Reservacion ON 
         Actividad.noActividad = Reservacion.noActividad
         WHERE noPersonal = #{noPersonal};
     </select>

@@ -1,15 +1,16 @@
 package vista.controlador;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -29,7 +30,7 @@ import servicios.pojos.ListaAsistencia;
 import vista.Dialogo;
 
 /**
- * FXML Controller class
+ * Controlador de la Vista ListaDeAsistencia
  *
  * @author lalo
  */
@@ -56,6 +57,15 @@ public class ListasDeAsistenciaController implements Initializable {
     @FXML
     private TableView tablaLista;
 
+    @FXML
+    private JFXButton botonImprimir;
+
+    /**
+     * Inicializador de la clase
+     *
+     * @param url
+     * @param rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -74,15 +84,20 @@ public class ListasDeAsistenciaController implements Initializable {
         llenarComboBox();
     }
 
+    /**
+     * Método que muestra el diálogo para imprimir una lista de asistencia
+     */
     @FXML
     public void mostrarVentanaImprimir() {
-        Dialogo dialogo = null;
-        dialogo = new Dialogo(Alert.AlertType.INFORMATION,
+        Dialogo dialogo = new Dialogo(Alert.AlertType.INFORMATION,
                 "Se está imprimiendo la lista...", "Imprimiendo",
                 ButtonType.OK);
         dialogo.show();
     }
 
+    /**
+     * Método que muestra el ícono del menú en la ventana
+     */
     @FXML
     public void mostrarIcono() {
         if (!menuDrawer.isShown()) {
@@ -91,20 +106,29 @@ public class ListasDeAsistenciaController implements Initializable {
         }
     }
 
+    /**
+     * Método encargado de llenar el comboBox de Actividades con las Actividades pendientes del
+     * asesor
+     */
     private void llenarComboBox() {
         List<Actividad> actividadesProximas = new ArrayList<>();
 
         try {
             actividadesProximas = ActividadDAO.recuperarActividadesAsesor(
-                    LoginController.returnNoPersonalLog());
-            ObservableList<Actividad> actividadesObservable = FXCollections.observableArrayList();
-            actividadesObservable = FXCollections.observableArrayList(actividadesProximas);
+                    LoginController.returnNoPersonalLog(), Date.valueOf(LocalDate.now()));
+            ObservableList<Actividad> actividadesObservable
+                    = FXCollections.observableArrayList(actividadesProximas);
             comboActividades.setItems(actividadesObservable);
         } catch (Exception ex) {
-            //Diálogo Error
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
         }
     }
 
+    /**
+     * Método encargado de llenar la tabla con los alumnos inscritos a la actividad seleccionada.
+     */
     @FXML
     public void llenarTabla() {
         List<ListaAsistencia> listaAlumnosReservacion = new ArrayList<>();
@@ -112,13 +136,21 @@ public class ListasDeAsistenciaController implements Initializable {
         try {
             listaAlumnosReservacion = ReservacionDAO.recuperarAlumnosDeActividad(
                     comboActividades.getSelectionModel().getSelectedItem().getNoActividad());
-            ObservableList<ListaAsistencia> listaObservable = FXCollections.observableArrayList();
-            listaObservable = FXCollections.observableArrayList(listaAlumnosReservacion);
+
+            if (!listaAlumnosReservacion.isEmpty()) {
+                botonImprimir.setDisable(false);
+            } else {
+                botonImprimir.setDisable(true);
+            }
+            ObservableList<ListaAsistencia> listaObservable
+                    = FXCollections.observableArrayList(listaAlumnosReservacion);
             colMatricula.setCellValueFactory(new PropertyValueFactory("matricula"));
             colNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
             tablaLista.setItems(listaObservable);
         } catch (Exception ex) {
-            Logger.getLogger(ListasDeAsistenciaController.class.getName()).log(Level.SEVERE, null, ex);
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
         }
     }
 

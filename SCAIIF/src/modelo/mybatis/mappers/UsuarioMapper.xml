@@ -4,7 +4,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Usuario">
-    <select id="getUsuario" parameterType="int" resultType="servicios.pojos.Usuario">
+    <select id="getUsuario" parameterType="int" 
+            resultType="servicios.pojos.Usuario">
         SELECT * FROM usuario WHERE noPersonal = #{noPersonal};
     </select>
     
