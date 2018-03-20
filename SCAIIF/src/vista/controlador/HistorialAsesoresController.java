@@ -1,4 +1,4 @@
-package controlador;
+package vista.controlador;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
@@ -21,8 +21,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import modelo.mybatis.MyBatisUtils;
-import org.apache.ibatis.session.SqlSession;
+import modelo.dao.ActividadDAO;
+import modelo.dao.InduccionDAO;
+import modelo.dao.UsuarioDAO;
 import servicios.pojos.Actividad;
 import servicios.pojos.Induccion;
 import servicios.pojos.Usuario;
@@ -116,22 +117,14 @@ public class HistorialAsesoresController implements Initializable {
      * Recupera el nombre del Asesor del que se está consultado la información.
      */
     private void recuperarNombreAsesor() {
-        int noPersonal = Integer.parseInt(campoNoPersonal.getText());
-        Dialogo dialogo = null;
-        Usuario nombreAsesor = null;
-        SqlSession conn = null;
+        Usuario nombreAsesor;
         try {
-            conn = MyBatisUtils.getSession();
-            nombreAsesor = conn.selectOne("Usuario.getNombreUsuario", noPersonal);
-        } catch (IOException ex) {
-            dialogo = new Dialogo(Alert.AlertType.ERROR,
-                "Error al recuperar el nombre del Asesor", "Error", ButtonType.OK);
-        } finally {
-            if (conn != null) {
-                conn.close();
-            }
+            nombreAsesor = UsuarioDAO.recuperarAsesor(Integer.parseInt(campoNoPersonal.getText()));
+            campoNombre.setText(nombreAsesor.getNombre() + " " + nombreAsesor.getApPaterno() + " "
+                    + nombreAsesor.getApMaterno());
+        } catch (Exception ex) {
+            //Diálogo Error
         }
-        campoNombre.setText(nombreAsesor.getNombre() + " " + nombreAsesor.getApPaterno() + " " + nombreAsesor.getApMaterno());
     }
 
     /**
@@ -142,31 +135,21 @@ public class HistorialAsesoresController implements Initializable {
     private void consultarActividades() {
         List<Induccion> historialAsesores = new ArrayList<>();
         List<Actividad> historialReservaciones = new ArrayList<>();
-        int noPersonal = Integer.parseInt(campoNoPersonal.getText());
-        Dialogo dialogo = null;
-        SqlSession conn = null;
         try {
-            conn = MyBatisUtils.getSession();
-            historialAsesores = conn.selectList("Induccion.getHistorial", noPersonal);
-            historialReservaciones = conn.selectList("Actividad.getActividades", noPersonal);
-        } catch (IOException ex) {
-            dialogo = new Dialogo(Alert.AlertType.ERROR,
-                "Error al recuperar actividades", "Error", ButtonType.OK);
-        } finally {
-            if (conn != null) {
-                conn.close();
-            }
+            historialAsesores = InduccionDAO.recuperarHistorialAsesores(Integer.parseInt(campoNoPersonal.getText()));
+            historialReservaciones = ActividadDAO.recuperarHistorial(Integer.parseInt(campoNoPersonal.getText()));
+            ObservableList<Induccion> actividadesIntro = FXCollections.observableArrayList(historialAsesores);
+            colMatricula.setCellValueFactory(new PropertyValueFactory<>("matricula"));
+            colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+            tablaInduccion.setItems(actividadesIntro);
+
+            ObservableList<Actividad> actividades = FXCollections.observableArrayList(historialReservaciones);
+            colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            colFechaAct.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+            tablaActividades.setItems(actividades);
+        } catch (Exception ex) {
+            //Diálogo error
         }
-
-        ObservableList<Induccion> actividadesIntro = FXCollections.observableArrayList(historialAsesores);
-        colMatricula.setCellValueFactory(new PropertyValueFactory<>("matricula"));
-        colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
-        tablaInduccion.setItems(actividadesIntro);
-
-        ObservableList<Actividad> actividades = FXCollections.observableArrayList(historialReservaciones);
-        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        colFechaAct.setCellValueFactory(new PropertyValueFactory<>("fecha"));
-        tablaActividades.setItems(actividades);
     }
 
     /**

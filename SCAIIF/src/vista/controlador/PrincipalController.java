@@ -1,4 +1,4 @@
-package controlador;
+package vista.controlador;
 
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -30,7 +30,7 @@ public class PrincipalController implements Initializable {
             VBox box = FXMLLoader.load(getClass().getResource("/vista/DrawerPrincipal.fxml"));
             menuDrawer.setSidePane(box);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            //Diálogo error
         }
         menuIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
             menuDrawer.open();
