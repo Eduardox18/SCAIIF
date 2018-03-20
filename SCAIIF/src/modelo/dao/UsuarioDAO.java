@@ -34,7 +34,7 @@ public class UsuarioDAO {
         SqlSession conn = null;
         try {
             conn = MyBatisUtils.getSession();
-            ingresado = conn.selectOne("noPersonal", noPersonal);
+            ingresado = conn.selectOne("Usuario.getUsuario", noPersonal);
         } finally {
             if (conn != null) {
                 conn.close();
