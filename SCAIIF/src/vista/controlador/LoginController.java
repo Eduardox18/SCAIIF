@@ -5,22 +5,19 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import modelo.Cifrado;
 import modelo.dao.UsuarioDAO;
-import modelo.mybatis.MyBatisUtils;
-import org.apache.ibatis.session.SqlSession;
 import servicios.pojos.Usuario;
+import vista.Dialogo;
 
 /**
  *
@@ -88,17 +85,22 @@ public class LoginController extends Application {
 
     @FXML
     public void ingresarSistema() {
+        Dialogo dialogo = null;
         Cifrado cifrar = new Cifrado();
         Usuario ingresado = new Usuario();
         try {
             ingresado = UsuarioDAO.recuperarUsuario(Integer.parseInt(campoUsuario.getText()));
         } catch (Exception ex) {
-            System.out.println("Número de personal no válido");
+            dialogo = new Dialogo(Alert.AlertType.INFORMATION, "Número de personal no válido", 
+                        "Número de personal", ButtonType.OK);
+            dialogo.show();
         }
 
         try {
             if (ingresado == null) {
-                System.out.println("El usuario ingresado no existe");
+                dialogo = new Dialogo(Alert.AlertType.INFORMATION, "El usuario ingresado no existe", 
+                        "Usuario no existe", ButtonType.OK);
+                dialogo.show();
             } else if (ingresado.getPassword().equals(
                     cifrar.cifrarCadena(campoContrasenia.getText()))) {
                 cargoLog = ingresado.getIdCargo();
@@ -115,10 +117,15 @@ public class LoginController extends Application {
                 stagePrincipal.setScene(sceneDos);
                 stagePrincipal.show();
             } else {
-                System.out.println("Los datos ingresados son incorrectos, intente de nuevo");
+                dialogo = new Dialogo(Alert.AlertType.INFORMATION,
+                        "Los datos ingresados son incorrectos, intente de nuevo",
+                        "Datos incorrectos", ButtonType.OK);
+                dialogo.show();
             }
         } catch (IOException ioEx) {
-            System.out.println("Servidor no disponible, intente más tarde");
+            dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
         }
 
     }

@@ -1,10 +1,5 @@
 package modelo.dao;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import modelo.Cifrado;
 import modelo.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import servicios.pojos.Usuario;
