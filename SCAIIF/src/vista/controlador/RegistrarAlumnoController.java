@@ -9,18 +9,13 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import modelo.mybatis.MyBatisUtils;
-import org.apache.ibatis.session.SqlSession;
+import modelo.dao.AlumnoDAO;
 import servicios.pojos.Alumno;
 import vista.Dialogo;
 
@@ -98,14 +93,22 @@ public class RegistrarAlumnoController implements Initializable {
      */
     public void accionBoton () {
         Dialogo dialogo = null;
-        if (comprobarMatricula()) {
-            if (agregarAlumno()) {
+        if (AlumnoDAO.comprobarMatricula(tfMatricula.getText())) {
+            Alumno alumno = new Alumno();
+            alumno.setMatricula(tfMatricula.getText());
+            alumno.setNombre(tfNombre.getText());
+            alumno.setApPaterno(tfApellidoPaterno.getText());
+            alumno.setApMaterno(determinarApMaterno());
+            alumno.setCorreo(tfCorreoElectronico.getText());
+            alumno.setLenguaIndigena(determinarLengua());
+            try {
+                AlumnoDAO.agregarAlumno(alumno);
                 dialogo = new Dialogo(Alert.AlertType.INFORMATION, 
                         "EL usuario se ha registrado correctamente", "Éxito", ButtonType.OK);
                 dialogo.show();
                 btnRegistrar.setDisable(true);
                 limpiarCampos();
-            } else {
+            } catch (Exception ex) {
                 dialogo = new Dialogo(Alert.AlertType.ERROR, 
                         "Ha ocurrido un error al guardar el usuario", "Error", ButtonType.OK);
                 dialogo.show();
@@ -114,41 +117,8 @@ public class RegistrarAlumnoController implements Initializable {
             dialogo = new Dialogo(Alert.AlertType.WARNING, 
                     "La matrícula que trata de ingresar ya existe", "Matrícula repetida", 
                     ButtonType.OK);
-                dialogo.show();
+            dialogo.show();
         }
-        
-    }
-    
-    /**
-     * Recupera la información de los campos de texto para crear un objeto Alumno y posteriormente
-     * registrarlo en la base de datos
-     * @return Devuelve la variable resultado que puede ser verdadera en caso de que todo funcione 
-     * correctamente o falso en caso de que ocurra algún error y no se registre al alumno.
-     */
-    private boolean agregarAlumno () {
-        boolean resultado = true;
-        SqlSession conn = null;
-        Alumno alumno = new Alumno();
-        alumno.setMatricula(tfMatricula.getText());
-        alumno.setNombre(tfNombre.getText());
-        alumno.setApPaterno(tfApellidoPaterno.getText());
-        alumno.setApMaterno(determinarApMaterno());
-        alumno.setCorreo(tfCorreoElectronico.getText());
-        alumno.setLenguaIndigena(determinarLengua());
-        
-        try {
-            conn = MyBatisUtils.getSession();
-            conn.insert("Alumno.agregarAlumno", alumno);
-            conn.commit();
-        } catch (IOException ex) {
-            Logger.getLogger(RegistrarAlumnoController.class.getName()).log(Level.SEVERE, null, ex);
-            resultado = false;
-        } finally {
-            if (conn != null) {
-                conn.close();
-            }
-        }
-        return resultado;
     }
     
     /**
@@ -194,35 +164,6 @@ public class RegistrarAlumnoController implements Initializable {
         } else {
             btnRegistrar.setDisable(true);
         }
-    }
-    
-    /**
-     * Concecta con la base de datos para comprobar que la matrícula que se intenta utilizar no esté
-     * ocupara previamente
-     * @return Devuelve true en caso de que la matrícula esté disponible y false si ya ha sido 
-     * utilizada previamente.
-     */
-    private boolean comprobarMatricula () {
-        boolean resultado = false;
-        SqlSession conn = null;
-        List<Alumno> listaAlumnos = new ArrayList<>();
-        
-        try {
-            conn = MyBatisUtils.getSession();
-            listaAlumnos = conn.selectList("Alumno.getAlumnos", tfMatricula.getText());
-        } catch (IOException ex) {
-            Logger.getLogger(RegistrarAlumnoController.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if (conn != null) {
-                conn.close();
-            }
-        }
-        
-        if(listaAlumnos.isEmpty()){
-            resultado = true;
-        }
-        
-        return resultado;
     }
     
     /**
