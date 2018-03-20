@@ -20,7 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import modelo.dao.ObservacionDAO;
+import modelo.dao.AlumnoDAO;
 import servicios.pojos.Alumno;
 
 /**
@@ -106,7 +106,7 @@ public class ComentarioController implements Initializable {
     private void llenarTabla(String nombreAlumno) {
         List<Alumno> alumnos = null;
         try {
-            alumnos = ObservacionDAO.recuperarAlumnos(campoMatricula.getText());
+            alumnos = AlumnoDAO.recuperarAlumnos(campoMatricula.getText());
             ObservableList<Alumno> alumnosObservable = FXCollections.observableArrayList();
             alumnosObservable = FXCollections.observableArrayList(alumnos);
 
