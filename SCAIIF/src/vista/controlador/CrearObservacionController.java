@@ -22,7 +22,7 @@ import vista.Dialogo;
  *
  * @author andres
  */
-public class CrearComentarioController implements Initializable {
+public class CrearObservacionController implements Initializable {
 
     private String matricula;
 
@@ -116,7 +116,7 @@ public class CrearComentarioController implements Initializable {
      */
     private void cerrarVentana() {
         try {
-            URL comentarioAlumno = getClass().getResource("/vista/Comentario.fxml");
+            URL comentarioAlumno = getClass().getResource("/vista/Observacion.fxml");
             AnchorPane paneComentario = FXMLLoader.load(comentarioAlumno);
 
             BorderPane border = LoginController.getPrincipal();
