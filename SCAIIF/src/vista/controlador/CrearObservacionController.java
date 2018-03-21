@@ -91,11 +91,13 @@ public class CrearObservacionController implements Initializable {
         try {
             ObservacionDAO.guardarObservacion(observacion);
             dialogo = new Dialogo(Alert.AlertType.INFORMATION,
-                    "El comentario se ha registrado correctamente", "Éxito", ButtonType.OK);
+                    "La observación se ha registrado correctamente", "Éxito", ButtonType.OK);
             dialogo.show();
             cerrarVentana();
         } catch (Exception ex) {
-            //Diálogo Error
+            dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Ha ocurrido un error al registrar la observación", "Éxito", ButtonType.OK);
+            dialogo.show();
         }
     }
 
@@ -122,7 +124,7 @@ public class CrearObservacionController implements Initializable {
      */
     public void botonCerrarVentana() {
         Dialogo dialogo = new Dialogo(Alert.AlertType.CONFIRMATION,
-                "¿Está seguro de que desea descartar el comentario?", "Confirmación",
+                "¿Está seguro de que desea descartar la observación?", "Confirmación",
                 ButtonType.OK, ButtonType.CANCEL);
 
         dialogo.showAndWait().ifPresent(response -> {
