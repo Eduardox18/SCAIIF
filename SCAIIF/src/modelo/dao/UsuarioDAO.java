@@ -24,6 +24,12 @@ public class UsuarioDAO {
         return nombreAsesor;
     }
 
+    /**
+     * Método que recupera los datos de un usuario a partir de su número de personal.
+     * @param noPersonal Número de personal del usuario a recuperar
+     * @return Regresa un objeto Usuario
+     * @throws Exception 
+     */
     public static Usuario recuperarUsuario(int noPersonal) throws Exception {
         Usuario ingresado = new Usuario();
         SqlSession conn = null;

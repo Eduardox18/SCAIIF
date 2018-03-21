@@ -14,6 +14,12 @@ import servicios.pojos.Reservacion;
  */
 public class ReservacionDAO {
 
+    /**
+     * Método que permite recuperar los alumnos que reservaron para una actividad específica
+     * @param noActividad Número de actividad a consultar
+     * @return Regresa la lista de alumnos que resevaron
+     * @throws Exception 
+     */
     public static List<ListaAsistencia> recuperarAlumnosDeActividad(int noActividad)
         throws Exception {
         List<ListaAsistencia> listaAlumnosReservacion = new ArrayList<>();

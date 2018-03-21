@@ -1,10 +1,7 @@
 package modelo.dao;
 
-import java.util.ArrayList;
-import java.util.List;
 import modelo.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
-import servicios.pojos.Alumno;
 import servicios.pojos.Observacion;
 
 /**
