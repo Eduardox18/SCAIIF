@@ -51,7 +51,7 @@ public class ActividadDAOTest {
         System.out.println("Test del método recuperarHistorial()");
         int noPersonal = 18109;
         String expNombre = "Conversacion Inglés I 1";
-        String expFecha = "2018-03-02";
+        Date expFecha = Date.valueOf("2018-03-02");
         List<Actividad> result = ActividadDAO.recuperarHistorial(noPersonal);
         
         assertEquals(expNombre, result.get(0).getNombre());
@@ -81,5 +81,19 @@ public class ActividadDAOTest {
         System.out.println("Éxito de igualdad de nombre de la actividad");
         assertThat(resultListaActividad.get(0), instanceOf(Actividad.class));
         System.out.println("Éxito de igualdad de clase retornada");
+    }
+    
+    /**
+     * Test of recuperarNoActividad method, of class ActividadDAO.
+     */
+    @Test
+    public void testRecuperarNoActividad () throws Exception {
+        System.out.println("Test del método recuperarNoActividad()");
+        int expNoActividad = 1;
+        
+        List<Actividad> resultActividades = ActividadDAO.recuperarNoActividad();
+        
+        assertEquals(expNoActividad, resultActividades.get(0).getNoActividad());
+        System.out.println("Éxito de igualdad de noActividades.");
     }
 }

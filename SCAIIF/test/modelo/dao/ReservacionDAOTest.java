@@ -5,6 +5,7 @@
  */
 package modelo.dao;
 
+import java.sql.Date;
 import java.util.List;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import org.junit.After;
@@ -13,29 +14,37 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import servicios.pojos.Calificacion;
 import servicios.pojos.ListaAsistencia;
+import servicios.pojos.Reservacion;
 
 /**
  *
  * @author lalo
  */
 public class ReservacionDAOTest {
-    
+
+    private Reservacion reservacion;
+
     public ReservacionDAOTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
+        reservacion = new Reservacion();
+        reservacion.setMatricula("");
+        reservacion.setFecha(Date.valueOf("2018-03-02"));
+        reservacion.setAsistencia(true);
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -49,7 +58,7 @@ public class ReservacionDAOTest {
         int noActividad = 2;
         String expNombre = "Domínguez González Ricardo";
         List<ListaAsistencia> result = ReservacionDAO.recuperarAlumnosDeActividad(noActividad);
-        
+
         assertEquals(expNombre, result.get(0).getNombre());
         System.out.println("Éxito de igualdad de nombre del alumno");
         assertEquals(noActividad, result.get(0).getNoActividad());
@@ -58,5 +67,31 @@ public class ReservacionDAOTest {
         System.out.println("Éxito de igualdad de clase retornada");
         assertEquals(result, result);
     }
-    
+
+    /**
+     * Test of recuperarFechas method, of class ReservacionDAO.
+     */
+    @Test
+    public void testRecuperarFechas() throws Exception {
+        System.out.println("Test del método recuperarFechas()");
+        Date expFecha = Date.valueOf("2018-03-02");
+        List<Reservacion> result = ReservacionDAO.recuperarFechas();
+
+        assertEquals(expFecha, result.get(0).getFecha());
+        System.out.println("Éxito de igualdad de fechas.");
+    }
+
+    /**
+     * Test of registrarAsistencia method, of class ReservacionDAO.
+     */
+    @Test
+    public void testRegistrarAsistencia() throws Exception {
+        System.out.println("Test del método registrarAsistencia()");
+        Reservacion asistenciaNula = null;
+        boolean resultNull = ReservacionDAO.registrarAsistencia(asistenciaNula);
+        boolean resultTrue = ReservacionDAO.registrarAsistencia(reservacion);
+        assertFalse(resultNull);
+        assertTrue(resultTrue);
+    }
+
 }
