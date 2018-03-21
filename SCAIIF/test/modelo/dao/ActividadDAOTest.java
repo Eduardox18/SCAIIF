@@ -72,10 +72,10 @@ public class ActividadDAOTest {
                  noPersonal, fecha);
         
         assertEquals(expNoActividad, resultListaActividad.get(0).getNoActividad());
-        System.out.println("Éxito de coincidencia del número de la actividad");
+        System.out.println("Éxito de igualdad del número de la actividad");
         assertEquals(expNombreActividad, resultListaActividad.get(0).getNombre());
-        System.out.println("Éxito de coincidencia de nombre de la actividad");
+        System.out.println("Éxito de igualdad de nombre de la actividad");
         assertThat(resultListaActividad.get(0), instanceOf(Actividad.class));
-        System.out.println("Éxito de coincidencia de clase retornada");
+        System.out.println("Éxito de igualdad de clase retornada");
     }
 }
