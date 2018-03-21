@@ -46,7 +46,7 @@
           <TableColumn fx:id="colFechaAct" editable="false" minWidth="0.0" prefWidth="297.0" text="Fecha" />
         </columns>
       </TableView>
-      <JFXButton fx:id="botonImprimir" layoutX="306.0" layoutY="441.0" prefHeight="39.0" prefWidth="84.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Imprimir" textFill="WHITE" />
+      <JFXButton fx:id="botonImprimir" onAction="#mostrarVentanaImprimir" layoutX="306.0" layoutY="441.0" prefHeight="39.0" prefWidth="84.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Imprimir" textFill="WHITE" />
       <JFXTextField fx:id="campoNombre" layoutX="283.0" layoutY="83.0" prefHeight="25.0" prefWidth="246.0" />
       <JFXButton fx:id="botonBuscar" layoutX="492.0" layoutY="46.0" onAction="#consultarHistorialAsesores" prefHeight="25.0" prefWidth="77.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Buscar" textFill="WHITE" />
       <Label layoutX="272.0" layoutY="130.0" text="Asesorías Introductorias">
