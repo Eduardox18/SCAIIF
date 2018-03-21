@@ -13,6 +13,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -22,6 +24,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import modelo.dao.AlumnoDAO;
 import servicios.pojos.Alumno;
+import vista.Dialogo;
 
 /**
  * FXML Controller class
@@ -121,7 +124,7 @@ public class ObservacionController implements Initializable {
 
     @FXML
     /**
-     * *
+     * 
      * Crea la ventana CrearComentario desde donde se añade el comentario al alumno.
      */
     private void lanzarEditorComentario() {
@@ -135,8 +138,10 @@ public class ObservacionController implements Initializable {
 
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneLista);
-        } catch (IOException ioEx) {
-            ioEx.printStackTrace();
+        } catch (Exception ex) {
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR, "No se ha seleccionado a ningún alumno", 
+                    "Error", ButtonType.OK);
+            dialogo.show();
         }
     }
 }
