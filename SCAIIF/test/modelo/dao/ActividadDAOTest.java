@@ -6,7 +6,9 @@
 package modelo.dao;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -42,6 +44,7 @@ public class ActividadDAOTest {
 
     /**
      * Test of recuperarHistorial method, of class ActividadDAO.
+    */
      
     @Test
     public void testRecuperarHistorial() throws Exception {
@@ -54,20 +57,25 @@ public class ActividadDAOTest {
         fail("The test case is a prototype.");
     }
 
-* */
     /**
      * Test of recuperarActividadesAsesor method, of class ActividadDAO.
      */
     @Test
     public void testRecuperarActividadesAsesor() throws Exception {
-        System.out.println("recuperarActividadesAsesor");
-        int noPersonal = 0;
-        Date fecha = null;
-        List<Actividad> expResult = null;
-        List<Actividad> result = ActividadDAO.recuperarActividadesAsesor(noPersonal, fecha);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("Test del método recuperarActividadesAsesor()");
+        int noPersonal = 18109;
+        String expNombreActividad = "Conversación Francés I 1";
+        int expNoActividad = 2;
+        Date fecha = Date.valueOf(LocalDate.now());
+        
+        List<Actividad> resultListaActividad = ActividadDAO.recuperarActividadesAsesor(
+                 noPersonal, fecha);
+        
+        assertEquals(expNoActividad, resultListaActividad.get(0).getNoActividad());
+        System.out.println("Éxito de coincidencia del número de la actividad");
+        assertEquals(expNombreActividad, resultListaActividad.get(0).getNombre());
+        System.out.println("Éxito de coincidencia de nombre de la actividad");
+        assertThat(resultListaActividad.get(0), instanceOf(Actividad.class));
+        System.out.println("Éxito de coincidencia de clase retornada");
     }
-    
 }
