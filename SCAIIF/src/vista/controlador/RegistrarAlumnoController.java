@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -147,7 +149,17 @@ public class RegistrarAlumnoController implements Initializable {
      */
     public void accionBoton () {
         Dialogo dialogo = null;
-        if (AlumnoDAO.comprobarMatricula(tfMatricula.getText())) {
+        
+        boolean matriculaValida;
+        try {
+            matriculaValida = AlumnoDAO.comprobarMatricula(tfMatricula.getText());
+        } catch (Exception ex) {
+            dialogo = new Dialogo(Alert.AlertType.ERROR, 
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
+            return;
+        }
+        if (matriculaValida) {
             Alumno alumno = new Alumno();
             alumno.setMatricula(tfMatricula.getText());
             alumno.setNombre(tfNombre.getText());
@@ -164,9 +176,8 @@ public class RegistrarAlumnoController implements Initializable {
                 limpiarCampos();
             } catch (Exception ex) {
                 dialogo = new Dialogo(Alert.AlertType.ERROR, 
-                        "Ha ocurrido un error al guardar el usuario", "Error", ButtonType.OK);
+                        "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
                 dialogo.show();
-                ex.printStackTrace();
             }
         } else {
             dialogo = new Dialogo(Alert.AlertType.WARNING, 

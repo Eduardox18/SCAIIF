@@ -24,8 +24,9 @@ public class AlumnoDAO {
      * @param matricula Es la matrícula que se desea comprobar
      * @return Devuelve true en caso de que la matrícula esté disponible y false si ya ha sido
      * utilizada previamente.
+     * @throws java.lang.Exception
      */
-    public static boolean comprobarMatricula(String matricula) {
+    public static boolean comprobarMatricula(String matricula) throws Exception{
         boolean resultado = false;
         SqlSession conn = null;
         List<Alumno> listaAlumnos = new ArrayList<>();
@@ -33,8 +34,6 @@ public class AlumnoDAO {
         try {
             conn = MyBatisUtils.getSession();
             listaAlumnos = conn.selectList("Alumno.getAlumnos", matricula);
-        } catch (IOException ex) {
-            Logger.getLogger(RegistrarAlumnoController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (conn != null) {
                 conn.close();
@@ -52,8 +51,10 @@ public class AlumnoDAO {
      * Recupera la información de los campos de texto para crear un objeto Alumno y posteriormente
      * registrarlo en la base de datos
      *
+     * @param alumno Objeto alumno con los datos necesarios
      * @return Devuelve la variable resultado que puede ser verdadera en caso de que todo funcione
      * correctamente o falso en caso de que ocurra algún error y no se registre al alumno.
+     * @throws java.lang.Exception
      */
     public static boolean agregarAlumno (Alumno alumno) throws Exception{
         if (alumno == null){

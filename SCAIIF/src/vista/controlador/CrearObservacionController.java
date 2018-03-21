@@ -96,7 +96,7 @@ public class CrearObservacionController implements Initializable {
             cerrarVentana();
         } catch (Exception ex) {
             dialogo = new Dialogo(Alert.AlertType.ERROR,
-                    "Ha ocurrido un error al registrar la observación", "Éxito", ButtonType.OK);
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
         }
     }
