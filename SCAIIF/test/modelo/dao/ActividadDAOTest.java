@@ -48,7 +48,7 @@ public class ActividadDAOTest {
      
     @Test
     public void testRecuperarHistorial() throws Exception {
-        System.out.println("recuperarHistorial");
+        System.out.println("Test del método recuperarHistorial()");
         int noPersonal = 18109;
         String expNombre = "Conversacion Inglés I 1";
         String expFecha = "2018-03-02";
