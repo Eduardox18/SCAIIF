@@ -15,9 +15,10 @@ import servicios.pojos.Actividad;
 public class ActividadDAO {
 
     /**
-     * 
-     * @param noPersonal
-     * @return
+     * Recupera el historial de actividades que realizará o realizó el Asesor
+     * con el identificador de noPersonal determinado. 
+     * @param noPersonal identificador del Asesor.
+     * @return lista de las actividades realizadas y por realizar del Asesor.
      * @throws Exception 
      */
     public static List<Actividad> recuperarHistorial(int noPersonal) throws Exception {

@@ -10,6 +10,13 @@ import servicios.pojos.Usuario;
  */
 public class UsuarioDAO {
 
+    /**
+     * Recupera el nombre completo del asesor del que el Coordinador 
+     * requiere consultar las actividades.
+     * @param noPersonal identificador del asesor.
+     * @return objeto usuario con el nombre completo del Asesor. 
+     * @throws Exception 
+     */
     public static Usuario recuperarAsesor(int noPersonal) throws Exception {
         Usuario nombreAsesor = null;
         SqlSession conn = null;
