@@ -40,7 +40,7 @@ public class ModuloDAOTest {
     }
 
     /**
-     * Test of recuperarHistorial method, of class ModuloDAO.
+     * Test of recuperarModulos method, of class ModuloDAO.
      */
     @Test
     public void testRecuperarModulos() throws Exception {

@@ -5,11 +5,13 @@
  */
 package modelo.dao;
 
+import java.sql.Date;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import servicios.pojos.Alumno;
+import servicios.pojos.Reservacion;
 
 /**
  *
@@ -77,6 +79,35 @@ public class AlumnoDAOTest {
         List<Alumno> resultValido = AlumnoDAO.recuperarAlumnos(alumnoDos.getMatricula());
         assertTrue(result.isEmpty());
         assertFalse(resultValido.isEmpty());
+    }
+    
+    /**
+     * Test of recuperarLista method, of class AlumnoDAO.
+     */
+    @Test
+    public void testRecuperarLista() throws Exception {
+        System.out.println("Test del método recuperarLista()");
+        Reservacion reservacion = new Reservacion();
+        reservacion.setFecha(Date.valueOf("2018-03-02"));
+        reservacion.setNoActividad(1);
+        
+        String expMatricula = "S15011601";
+        String expNombre = "Ricardo";
+        String expApellidoP = "Domínguez";
+        String expApellidoM = "González";
+        
+        List<Alumno> resultLista = AlumnoDAO.recuperarLista(reservacion);
+        
+        assertEquals(expMatricula, resultLista.get(0).getMatricula());
+        System.out.println("Éxito de igualdad de matriculas.");
+        assertEquals(expNombre, resultLista.get(0).getNombre());
+        System.out.println("Éxito de igualdad de Nombres.");
+        assertEquals(expApellidoP, resultLista.get(0).getApPaterno());
+        System.out.println("Éxito de igualdad de apellidos paternos.");
+        assertEquals(expApellidoM, resultLista.get(0).getApMaterno());
+        System.out.println("Éxito de igualdad de apellidos maternos.");
+        
+        
     }
     
 }

@@ -40,7 +40,7 @@ public class ConversacionDAOTest {
     }
 
     /**
-     * Test of recuperarHistorial method, of class ConversacionDAO.
+     * Test of recuperarConversaciones method, of class ConversacionDAO.
      */
     @Test
     public void testRecuperarConversaciones() throws Exception {

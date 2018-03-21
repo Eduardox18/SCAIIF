@@ -5,6 +5,7 @@
  */
 package modelo.dao;
 
+import java.sql.Date;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -47,7 +48,7 @@ public class InduccionDAOTest {
         System.out.println("Test del método consultarActividades()");
         int noPersonal = 18109;
         String expMatricula = "S15011601";
-        String expFecha = "2018-03-19";
+        Date expFecha = Date.valueOf("2018-03-19");
 
         List<Induccion> resultListaInduccion = InduccionDAO.recuperarHistorialAsesores(noPersonal);
 
