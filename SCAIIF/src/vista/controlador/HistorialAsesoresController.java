@@ -123,7 +123,10 @@ public class HistorialAsesoresController implements Initializable {
             campoNombre.setText(nombreAsesor.getNombre() + " " + nombreAsesor.getApPaterno() + " "
                 + nombreAsesor.getApMaterno());
         } catch (Exception ex) {
-            //Diálogo Error
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                "El noPersonal que ingresó no corresponde a un Usuario.", "Error",
+                ButtonType.OK);
+            dialogo.show();
         }
     }
 
