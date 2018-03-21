@@ -121,7 +121,7 @@ public class HistorialAsesoresController implements Initializable {
         try {
             nombreAsesor = UsuarioDAO.recuperarAsesor(Integer.parseInt(campoNoPersonal.getText()));
             campoNombre.setText(nombreAsesor.getNombre() + " " + nombreAsesor.getApPaterno() + " "
-                    + nombreAsesor.getApMaterno());
+                + nombreAsesor.getApMaterno());
         } catch (Exception ex) {
             //Diálogo Error
         }
@@ -150,6 +150,17 @@ public class HistorialAsesoresController implements Initializable {
         } catch (Exception ex) {
             //Diálogo error
         }
+    }
+
+    /**
+     * Método que muestra el diálogo para imprimir una lista de asistencia
+     */
+    @FXML
+    public void mostrarVentanaImprimir() {
+        Dialogo dialogo = new Dialogo(Alert.AlertType.INFORMATION,
+            "Se está imprimiendo la lista...", "Imprimiendo",
+            ButtonType.OK);
+        dialogo.show();
     }
 
     /**

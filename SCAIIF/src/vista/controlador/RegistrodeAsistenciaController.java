@@ -25,6 +25,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import modelo.dao.ActividadDAO;
+import modelo.dao.AlumnoDAO;
+import modelo.dao.ReservacionDAO;
 import modelo.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import servicios.pojos.Actividad;
@@ -99,39 +102,29 @@ public class RegistrodeAsistenciaController implements Initializable {
      * Recupera de la base de datos las fechas y noActividad de las reservaciones registradas.
      */
     private void llenarComboBox() {
-        List<Reservacion> fechas = new ArrayList();
-        List<Actividad> noActividad = new ArrayList();
+        List<Reservacion> fechas = null;
+        List<Actividad> noActividad = null;
         Dialogo dialogo = null;
-        SqlSession conn = null;
-
         try {
-            conn = MyBatisUtils.getSession();
-            fechas = conn.selectList("Reservacion.getFechas");
-            noActividad = conn.selectList("Actividad.getnoActividad");
+            fechas = ReservacionDAO.recuperarFechas();
+            List<Date> fechaReservacion = new ArrayList<>();
+            for (Reservacion reservacion : fechas) {
+                fechaReservacion.add(reservacion.getFecha());
+            }
+            ObservableList<Date> fechasObservable = FXCollections.observableArrayList(fechaReservacion);
+            comboFecha.setItems(fechasObservable);
+
+            noActividad = ActividadDAO.recuperarNoActividad();
+            List<Integer> noActividades = new ArrayList<>();
+            for (Actividad actividad : noActividad) {
+                noActividades.add(actividad.getNoActividad());
+            }
+            ObservableList<Integer> noActividadObservable = FXCollections.observableArrayList(noActividades);
+            comboActividad.setItems(noActividadObservable);
         } catch (IOException ex) {
             dialogo = new Dialogo(Alert.AlertType.ERROR,
                 "Error al recuperar información.", "Error", ButtonType.OK);
-        } finally {
-            if (conn != null) {
-                conn.close();
-            }
         }
-
-        List<Date> fechaReservacion = new ArrayList<>();
-        for (Reservacion reservacion : fechas) {
-            fechaReservacion.add(reservacion.getFecha());
-        }
-
-        List<Integer> noActividades = new ArrayList<>();
-        for (Actividad actividad : noActividad) {
-            noActividades.add(actividad.getNoActividad());
-        }
-
-        ObservableList<Date> fechasObservable = FXCollections.observableArrayList(fechaReservacion);
-        comboFecha.setItems(fechasObservable);
-
-        ObservableList<Integer> noActividadObservable = FXCollections.observableArrayList(noActividades);
-        comboActividad.setItems(noActividadObservable);
     }
 
     /**
@@ -146,29 +139,20 @@ public class RegistrodeAsistenciaController implements Initializable {
         Reservacion reservacion = new Reservacion();
         reservacion.setFecha(fecha);
         reservacion.setNoActividad(noActividad);
-        SqlSession conn = null;
 
         try {
-            //HashMap<String,Object> reservs = new HashMap<>();
-            conn = MyBatisUtils.getSession();
-
-            reservaciones = conn.selectList("Alumno.getReservacionAlumnos", reservacion);
+            reservaciones = AlumnoDAO.recuperarLista(reservacion);
+            ObservableList<Alumno> alumnosReservados = FXCollections.observableArrayList(reservaciones);
+            colMatricula.setCellValueFactory(new PropertyValueFactory<>("matricula"));
+            colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            colApPaterno.setCellValueFactory(new PropertyValueFactory<>("apPaterno"));
+            colApMaterno.setCellValueFactory(new PropertyValueFactory<>("apMaterno"));
+            tablaAlumnos.setItems(alumnosReservados);
+            botonCancelar.setDisable(false);
         } catch (IOException ex) {
             dialogo = new Dialogo(Alert.AlertType.ERROR,
                 "Error al recuperar actividades", "Error", ButtonType.OK);
-        } finally {
-            if (conn != null) {
-                conn.close();
-            }
         }
-
-        ObservableList<Alumno> alumnosReservados = FXCollections.observableArrayList(reservaciones);
-        colMatricula.setCellValueFactory(new PropertyValueFactory<>("matricula"));
-        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        colApPaterno.setCellValueFactory(new PropertyValueFactory<>("apPaterno"));
-        colApMaterno.setCellValueFactory(new PropertyValueFactory<>("apMaterno"));
-        tablaAlumnos.setItems(alumnosReservados);
-        botonCancelar.setDisable(false);
     }
 
     /**
@@ -176,50 +160,26 @@ public class RegistrodeAsistenciaController implements Initializable {
      */
     @FXML
     private void comprobarRegistroAsistencia() {
+        String matricula = tablaAlumnos.getSelectionModel().getSelectedItem().toString();
+        int noActividad = comboActividad.getValue();
+        Date fecha = comboFecha.getValue();
+        Reservacion reservacion = new Reservacion();
+        reservacion.setMatricula(matricula);
+        reservacion.setNoActividad(noActividad);
+        reservacion.setFecha(fecha);
+        reservacion.setAsistencia(true);
         Dialogo dialogo = null;
-        if (registrarAsistencia()) {
+        try {
+            ReservacionDAO.registrarAsistencia(reservacion);
             dialogo = new Dialogo(Alert.AlertType.INFORMATION,
                 "Asistencia registradas correctamente.", "Éxito", ButtonType.OK);
             dialogo.show();
             botonCancelar.setDisable(true);
             limpiarCampos();
-        } else {
+        } catch (IOException ex) {
             dialogo = new Dialogo(Alert.AlertType.ERROR,
                 "Error al registrar asistencias.", "Error", ButtonType.OK);
         }
-    }
-
-    /**
-     * Realiza el registro de las asistencias de los alumnos.
-     *
-     * @return verdadero si se registraron, falso si no.
-     */
-    private boolean registrarAsistencia() {
-        boolean realizado = true;
-        SqlSession conn = null;
-        String matricula = tablaAlumnos.getSelectionModel().getSelectedItem().toString();
-        int noActividad = comboActividad.getValue();
-        Date fecha = comboFecha.getValue();
-        int asistencia = 1;
-        try {
-            HashMap<String, Object> asistenciaAlumno = new HashMap<>();
-            conn = MyBatisUtils.getSession();
-            asistenciaAlumno.put("matricula", matricula);
-            asistenciaAlumno.put("noActividad", noActividad);
-            asistenciaAlumno.put("fecha", fecha);
-            asistenciaAlumno.put("asistencia", asistencia);
-            conn.update("Reservacion.actualizarAsistencia", asistenciaAlumno);
-            conn.commit();
-        } catch (IOException ex) {
-            Logger.getLogger(RegistrodeAsistenciaController.class.getName()).log(Level.SEVERE, null, ex);
-            realizado = false;
-        } finally {
-            if (conn != null) {
-                conn.close();
-            }
-        }
-
-        return realizado;
     }
 
     /**

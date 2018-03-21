@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT fecha FROM Reservacion;
     </select>
     
-    <update id="actualizarAsistencia" parameterType="map">
+    <update id="actualizarAsistencia" parameterType="servicios.pojos.Reservacion">
         UPDATE Reservacion SET asistencia = #{asistencia}
         WHERE matricula = #{matricula} and noActividad= #{noActividad} and fecha=#{fecha};
     </update>
