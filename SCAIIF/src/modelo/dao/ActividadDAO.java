@@ -14,6 +14,12 @@ import servicios.pojos.Actividad;
  */
 public class ActividadDAO {
 
+    /**
+     * 
+     * @param noPersonal
+     * @return
+     * @throws Exception 
+     */
     public static List<Actividad> recuperarHistorial(int noPersonal) throws Exception {
         SqlSession conn = null;
         List<Actividad> historialReservaciones = new ArrayList<>();
@@ -28,6 +34,13 @@ public class ActividadDAO {
         return historialReservaciones;
     }
 
+    /**
+     * Método que permite recuperar las actividades asociadas a un asesor
+     * @param noPersonal Número de personal del asesor
+     * @param fecha Fecha actual
+     * @return Regresa una lista de actividades
+     * @throws Exception 
+     */
     public static List<Actividad> recuperarActividadesAsesor(int noPersonal, Date fecha)
         throws Exception {
         List<Actividad> actividadesProximas = new ArrayList<>();

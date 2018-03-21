@@ -54,6 +54,10 @@ public class LoginController extends Application {
         return noPersonalLog;
     }
 
+    /**
+     * Método que inicia la aplicación con la pantalla de Login
+     * @param primaryStage 
+     */
     @Override
     public void start(Stage primaryStage) {
 
@@ -74,6 +78,10 @@ public class LoginController extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Método que activa el botón de registrar con base de los campos de ingreso de usuario y 
+     * contraseña
+     */
     @FXML
     public void activarBotonIngresar() {
         if (campoUsuario.getText().length() != 0 & campoContrasenia.getText().length() != 0) {
@@ -83,6 +91,10 @@ public class LoginController extends Application {
         }
     }
 
+    /**
+     * Método principal para ingresar al sistema, recupera un usuario si existe ese número de 
+     * personal y compara las contraseñas para verificar si puede ingresar o no
+     */
     @FXML
     public void ingresarSistema() {
         Dialogo dialogo = null;
@@ -130,11 +142,18 @@ public class LoginController extends Application {
 
     }
 
+    /**
+     * Método que permite cerrar la aplicación
+     */
     @FXML
     void salirSistema() {
         System.exit(0);
     }
 
+    /**
+     * Método main para lanzar la ventana inicial (Login)
+     * @param args 
+     */
     public static void main(String[] args) {
         launch(args);
     }
