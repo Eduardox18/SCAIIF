@@ -53,6 +53,10 @@ public class AlumnoDAO {
      * correctamente o falso en caso de que ocurra algún error y no se registre al alumno.
      */
     public static boolean agregarAlumno (Alumno alumno) throws Exception{
+        if (alumno == null){
+            return false;
+        }
+        
         boolean resultado = false;
         SqlSession conn = null;
         
