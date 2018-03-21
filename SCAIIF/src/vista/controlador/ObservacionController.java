@@ -28,7 +28,7 @@ import servicios.pojos.Alumno;
  *
  * @author andres
  */
-public class ComentarioController implements Initializable {
+public class ObservacionController implements Initializable {
 
     @FXML
     JFXButton botonRegistrar = new JFXButton();
@@ -127,10 +127,10 @@ public class ComentarioController implements Initializable {
     private void lanzarEditorComentario() {
         Alumno alumnoRecuperado = (Alumno) tablaALumnos.getSelectionModel().getSelectedItem();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/CrearComentario.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/CrearObservacion.fxml"));
             AnchorPane paneLista = loader.load();
 
-            CrearComentarioController controller = loader.<CrearComentarioController>getController();
+            CrearObservacionController controller = loader.<CrearObservacionController>getController();
             controller.infoVentana(alumnoRecuperado.getMatricula());
 
             BorderPane border = LoginController.getPrincipal();
