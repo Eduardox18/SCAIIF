@@ -7,6 +7,8 @@ package modelo.dao;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -49,11 +51,16 @@ public class AlumnoDAOTest {
     public void testComprobarMatricula() {
         System.out.println("Prueba del método comprobarMatricula");
         boolean expResultFallo = false;
-        boolean resultFallo = AlumnoDAO.comprobarMatricula(alumnoDos.getMatricula());
         boolean expResultExito = true;
-        boolean resultExito = AlumnoDAO.comprobarMatricula(alumnoUno.getMatricula());
-        assertEquals(expResultFallo, resultFallo);
-        assertEquals(expResultExito, resultExito);
+        try {
+            boolean resultFallo = AlumnoDAO.comprobarMatricula(alumnoDos.getMatricula());
+            boolean resultExito = AlumnoDAO.comprobarMatricula(alumnoUno.getMatricula());
+            assertEquals(expResultFallo, resultFallo);
+            assertEquals(expResultExito, resultExito);
+        } catch (Exception ex) {
+            fail("Ocurrió un error en la base de datos");
+        }
+        
     }
 
     /**

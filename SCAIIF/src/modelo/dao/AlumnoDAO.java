@@ -3,13 +3,10 @@ package modelo.dao;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modelo.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import servicios.pojos.Alumno;
 import servicios.pojos.Reservacion;
-import vista.controlador.RegistrarAlumnoController;
 
 /**
  *
