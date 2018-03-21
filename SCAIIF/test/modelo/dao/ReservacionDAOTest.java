@@ -6,6 +6,7 @@
 package modelo.dao;
 
 import java.util.List;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -44,13 +45,18 @@ public class ReservacionDAOTest {
      */
     @Test
     public void testRecuperarAlumnosDeActividad() throws Exception {
-        System.out.println("recuperarAlumnosDeActividad");
-        int noActividad = 0;
-        List<ListaAsistencia> expResult = null;
+        System.out.println("Test del método recuperarAlumnosDeActividad()");
+        int noActividad = 2;
+        String expNombre = "Domínguez González Ricardo";
         List<ListaAsistencia> result = ReservacionDAO.recuperarAlumnosDeActividad(noActividad);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        assertEquals(expNombre, result.get(0).getNombre());
+        System.out.println("Éxito de igualdad de nombre del alumno");
+        assertEquals(noActividad, result.get(0).getNoActividad());
+        System.out.println("Éxito de igualdad de número de actividad");
+        assertThat(result.get(0), instanceOf(ListaAsistencia.class));
+        System.out.println("Éxito de igualdad de clase retornada");
+        assertEquals(result, result);
     }
     
 }

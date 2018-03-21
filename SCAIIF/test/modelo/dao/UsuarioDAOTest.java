@@ -64,10 +64,10 @@ public class UsuarioDAOTest {
         Usuario result = UsuarioDAO.recuperarUsuario(expNoPersonal);
         
         assertEquals(expNoPersonal, result.getNoPersonal());
-        System.out.println("Éxito de coincidencia de número de personal");
+        System.out.println("Éxito de igualdad de número de personal");
         assertEquals(expIdCargo, result.getIdCargo());
-        System.out.println("Éxito de coincidencia de ID de cargo");
+        System.out.println("Éxito de igualdad de ID de cargo");
         assertThat(result, instanceOf(Usuario.class));
-        System.out.println("Éxito de coincidencia de clase retornada");
+        System.out.println("Éxito de igualdad de clase retornada");
     }
 }
