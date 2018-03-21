@@ -134,6 +134,7 @@ public class RegistrodeAsistenciaController implements Initializable {
         Reservacion reservacion = new Reservacion();
         reservacion.setFecha(fecha);
         reservacion.setNoActividad(noActividad);
+        reservacion.setAsistencia(false);
 
         try {
             reservaciones = AlumnoDAO.recuperarLista(reservacion);

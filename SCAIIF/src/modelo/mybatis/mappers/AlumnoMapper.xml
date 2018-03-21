@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT reservacion.matricula, nombre, apPaterno, apMaterno
         FROM alumno 
         INNER JOIN reservacion ON alumno.matricula = reservacion.matricula
-        WHERE reservacion.fecha = #{fecha} and reservacion.noActividad = #{noActividad};
+        WHERE reservacion.fecha = #{fecha} and reservacion.noActividad = #{noActividad} and reservacion.asistencia = #{asistencia};
     </select>
     
     <insert id="agregarAlumno" parameterType="servicios.pojos.Alumno">
