@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
@@ -73,6 +75,58 @@ public class RegistrarAlumnoController implements Initializable {
             menuDrawer.setDisable(false);
             menuIcon.setVisible(false);
         });
+        
+        
+        tfNombre.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, 
+                    String oldValue, String newValue) {
+                if(tfNombre.getText().length() >= 45){
+                    tfNombre.setText(tfNombre.getText().substring(0, 45));
+                }
+            }
+        });
+        
+        tfApellidoPaterno.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, 
+                    String newValue) {
+                if(tfApellidoPaterno.getText().length() >= 45){
+                    tfApellidoPaterno.setText(tfApellidoPaterno.getText().substring(0, 45));
+                }
+            }
+        });
+        
+        tfApellidoMaterno.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, 
+                    String oldValue, String newValue) {
+                if(tfApellidoMaterno.getText().length() >= 45){
+                    tfApellidoMaterno.setText(tfApellidoMaterno.getText().substring(0, 45));
+                }
+            }
+        });
+        
+        tfCorreoElectronico.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, 
+                    String oldValue, String newValue) {
+                if(tfCorreoElectronico.getText().length() >= 45){
+                    tfCorreoElectronico.setText(tfCorreoElectronico.getText().substring(0, 45));
+                }
+            }
+        });
+        
+        tfMatricula.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, 
+                    String oldValue, String newValue) {
+                if(tfMatricula.getText().length() >= 9){
+                    tfMatricula.setText(tfMatricula.getText().substring(0, 9));
+                }
+            }
+            
+        });
     }
 
     @FXML
@@ -104,7 +158,7 @@ public class RegistrarAlumnoController implements Initializable {
             try {
                 AlumnoDAO.agregarAlumno(alumno);
                 dialogo = new Dialogo(Alert.AlertType.INFORMATION, 
-                        "EL usuario se ha registrado correctamente", "Éxito", ButtonType.OK);
+                        "El alumno se ha registrado correctamente", "Éxito", ButtonType.OK);
                 dialogo.show();
                 btnRegistrar.setDisable(true);
                 limpiarCampos();
@@ -112,6 +166,7 @@ public class RegistrarAlumnoController implements Initializable {
                 dialogo = new Dialogo(Alert.AlertType.ERROR, 
                         "Ha ocurrido un error al guardar el usuario", "Error", ButtonType.OK);
                 dialogo.show();
+                ex.printStackTrace();
             }
         } else {
             dialogo = new Dialogo(Alert.AlertType.WARNING, 
