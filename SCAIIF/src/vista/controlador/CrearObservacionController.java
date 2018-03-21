@@ -6,6 +6,8 @@ import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -40,7 +42,28 @@ public class CrearObservacionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
+        tfAsunto.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, 
+                    String oldValue, String newValue) {
+                if(tfAsunto.getText().length() >= 45){
+                    tfAsunto.setText(tfAsunto.getText().substring(0, 45));
+                }
+            }
+            
+        });
+        
+        taComentario.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, 
+                    String newValue) {
+                if(taComentario.getText().length() >= 150){
+                    taComentario.setText(taComentario.getText().substring(0, 150));
+                }
+            }
+            
+        });
     }
 
     /**
@@ -84,7 +107,7 @@ public class CrearObservacionController implements Initializable {
     private void comprobarCampos() {
         String comentario = taComentario.getText();
         String asunto = tfAsunto.getText();
-        if (asunto != null && asunto.length() > 0 && comentario != null && comentario.length() > 0) {
+        if (asunto != null && asunto.length() > 0 && comentario != null && comentario.length() > 0){
             btnAceptar.setDisable(false);
         } else {
             btnAceptar.setDisable(true);
