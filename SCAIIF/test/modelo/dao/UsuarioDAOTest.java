@@ -5,6 +5,7 @@
  */
 package modelo.dao;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -48,8 +49,8 @@ public class UsuarioDAOTest {
         Usuario expResult = null;
         Usuario result = UsuarioDAO.recuperarAsesor(noPersonal);
         assertEquals(expResult, result);
+        fail("The test case is a prototype");
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -57,13 +58,16 @@ public class UsuarioDAOTest {
      */
     @Test
     public void testRecuperarUsuario() throws Exception {
-        System.out.println("recuperarUsuario");
-        int noPersonal = 0;
-        Usuario expResult = null;
-        Usuario result = UsuarioDAO.recuperarUsuario(noPersonal);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("Test del método recuperarUsuario()");
+        int expNoPersonal = 18109;
+        int expIdCargo = 2;
+        Usuario result = UsuarioDAO.recuperarUsuario(expNoPersonal);
+        
+        assertEquals(expNoPersonal, result.getNoPersonal());
+        System.out.println("Éxito de coincidencia de número de personal");
+        assertEquals(expIdCargo, result.getIdCargo());
+        System.out.println("Éxito de coincidencia de ID de cargo");
+        assertThat(result, instanceOf(Usuario.class));
+        System.out.println("Éxito de coincidencia de clase retornada");
     }
-    
 }
