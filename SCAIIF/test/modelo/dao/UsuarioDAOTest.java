@@ -44,13 +44,20 @@ public class UsuarioDAOTest {
      */
     @Test
     public void testRecuperarAsesor() throws Exception {
-        System.out.println("recuperarAsesor");
-        int noPersonal = 0;
-        Usuario expResult = null;
+        System.out.println("Test del método recuperarNombreAsesor()");
+        int noPersonal = 18109;
+        int noPersonalFallo = 12345;
+        String expResult = "Ángel Eduardo Domínguez Delgado";
+        String exResultFallo = "El noPersonal que ingresó no corresponde a un Usuario.";
+        
         Usuario result = UsuarioDAO.recuperarAsesor(noPersonal);
-        assertEquals(expResult, result);
-        fail("The test case is a prototype");
-        // TODO review the generated test code and remove the default call to fail.
+        assertEquals(expResult, result.getNombre() + result.getApPaterno() + result.getApMaterno());
+        System.out.println("Éxito de igualdad de nombres.");
+        
+        Usuario resultFallo = UsuarioDAO.recuperarAsesor(noPersonalFallo);
+        assertEquals(exResultFallo, resultFallo);
+        System.out.println("Éxito de igualdad de mensajes de fallo.");
+        
     }
 
     /**

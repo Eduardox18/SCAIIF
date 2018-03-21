@@ -49,12 +49,16 @@ public class ActividadDAOTest {
     @Test
     public void testRecuperarHistorial() throws Exception {
         System.out.println("recuperarHistorial");
-        int noPersonal = 0;
-        List<Actividad> expResult = null;
+        int noPersonal = 18109;
+        String expNombre = "Conversacion Inglés I 1";
+        String expFecha = "2018-03-02";
         List<Actividad> result = ActividadDAO.recuperarHistorial(noPersonal);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        assertEquals(expNombre, result.get(0).getNombre());
+        System.out.println("Éxito de igualdad de nombres.");
+        assertEquals(expFecha, result.get(0).getFecha());
+        System.out.println("Éxito de igualdad de fechas.");
+        
     }
 
     /**
