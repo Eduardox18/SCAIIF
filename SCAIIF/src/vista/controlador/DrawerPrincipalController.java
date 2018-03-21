@@ -8,8 +8,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import vista.Dialogo;
 
 /**
  * FXML Controller class
@@ -130,7 +133,9 @@ public class DrawerPrincipalController implements Initializable {
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneComentario);
         } catch (IOException ioEx) {
-            //Diálogo error
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
         }
     }
 
@@ -143,7 +148,9 @@ public class DrawerPrincipalController implements Initializable {
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneLista);
         } catch (IOException ioEx) {
-            //Diálogo error
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
         }
     }
 
@@ -159,7 +166,9 @@ public class DrawerPrincipalController implements Initializable {
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneLista);
         } catch (IOException ioEx) {
-            //Diálogo error
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
         }
     }
     /**
@@ -175,7 +184,9 @@ public class DrawerPrincipalController implements Initializable {
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneHistorial);
         } catch (IOException ioEx) {
-            //Diálogo error
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
         }
     }
     
@@ -188,7 +199,9 @@ public class DrawerPrincipalController implements Initializable {
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneHistorial);
         } catch (IOException ioEx) {
-            //Diálogo error
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
         }
     }
     
@@ -205,7 +218,9 @@ public class DrawerPrincipalController implements Initializable {
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneCalificaciones);
         } catch (IOException ioEx) {
-            //Diálogo error
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
         }
     }
 }
