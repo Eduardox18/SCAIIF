@@ -171,7 +171,8 @@ public class RegistrodeAsistenciaController implements Initializable {
                 "Asistencia registradas correctamente.", "Éxito", ButtonType.OK);
             dialogo.show();
             botonCancelar.setDisable(true);
-            limpiarCampos();
+            recuperarLista();
+            
         } catch (IOException ex) {
             dialogo = new Dialogo(Alert.AlertType.ERROR,
                 "Error al registrar asistencias.", "Error", ButtonType.OK);
