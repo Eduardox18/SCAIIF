@@ -54,7 +54,7 @@ public class RegistrarAlumnoController implements Initializable {
     
     @FXML
     JFXButton btnRegistrar = new JFXButton();
-
+    
     /**
      * Initializes the controller class.
      * @param url
@@ -76,13 +76,12 @@ public class RegistrarAlumnoController implements Initializable {
             menuIcon.setVisible(false);
         });
         
-        
         tfNombre.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, 
                     String oldValue, String newValue) {
-                if(tfNombre.getText().length() >= 45){
-                    tfNombre.setText(tfNombre.getText().substring(0, 45));
+                if(newValue.matches("[0-9]")){
+                    tfNombre.setText(oldValue);
                 }
             }
         });
@@ -158,26 +157,42 @@ public class RegistrarAlumnoController implements Initializable {
             return;
         }
         if (matriculaValida) {
-            Alumno alumno = new Alumno();
-            alumno.setMatricula(tfMatricula.getText());
-            alumno.setNombre(tfNombre.getText());
-            alumno.setApPaterno(tfApellidoPaterno.getText());
-            alumno.setApMaterno(determinarApMaterno());
-            alumno.setCorreo(tfCorreoElectronico.getText());
-            alumno.setLenguaIndigena(determinarLengua());
-            try {
-                AlumnoDAO.agregarAlumno(alumno);
-                dialogo = new Dialogo(Alert.AlertType.INFORMATION, 
-                        "El alumno se ha registrado correctamente", "Éxito", ButtonType.OK);
-                dialogo.show();
-                btnRegistrar.setDisable(true);
-                limpiarCampos();
-            } catch (Exception ex) {
-                dialogo = new Dialogo(Alert.AlertType.ERROR, 
-                        "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            if(validarCampos(tfNombre.getText()) && validarCampos(tfApellidoMaterno.getText()) 
+                    && validarCampos(tfApellidoPaterno.getText())) {
+                if(validarCorreo(tfCorreoElectronico.getText())){
+                    Alumno alumno = new Alumno();
+                    alumno.setMatricula(tfMatricula.getText());
+                    alumno.setNombre(tfNombre.getText());
+                    alumno.setApPaterno(tfApellidoPaterno.getText());
+                    alumno.setApMaterno(determinarApMaterno());
+                    alumno.setCorreo(tfCorreoElectronico.getText());
+                    alumno.setLenguaIndigena(determinarLengua());
+                    try {
+                        AlumnoDAO.agregarAlumno(alumno);
+                        dialogo = new Dialogo(Alert.AlertType.INFORMATION, 
+                                "El alumno se ha registrado correctamente", "Éxito", ButtonType.OK);
+                        dialogo.show();
+                        btnRegistrar.setDisable(true);
+                        limpiarCampos();
+                    } catch (Exception ex) {
+                        dialogo = new Dialogo(Alert.AlertType.ERROR, 
+                                "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+                        dialogo.show();
+                    }
+                
+                } else {
+                    dialogo = new Dialogo(Alert.AlertType.WARNING, 
+                        "La dirección de correo no es válida", "Dirección de correo inválida", 
+                        ButtonType.OK);
+                    dialogo.show();
+                }
+            } else {
+                dialogo = new Dialogo(Alert.AlertType.WARNING, 
+                    "Por favor verifique que no haya caracteres inválidos", "Texto inválido", 
+                    ButtonType.OK);
                 dialogo.show();
             }
-        } else {
+         } else {
             dialogo = new Dialogo(Alert.AlertType.WARNING, 
                     "La matrícula que trata de ingresar ya existe", "Matrícula repetida", 
                     ButtonType.OK);
@@ -241,4 +256,31 @@ public class RegistrarAlumnoController implements Initializable {
         tfCorreoElectronico.setText("");
         checkLenguaIndigena.setSelected(false);
     }
+    
+    /**
+     * Valida que no se tengan caracteres inválidos en el texto
+     * @param texto El texto que se desea evaluar
+     * @return True en caso de que el texto no contenga carcteres inválidos y false si los contiene
+     */
+    public boolean validarCampos(String texto){
+        boolean resultado = false;
+        if(texto.matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+") || texto.equals("")){
+            resultado = true;
+        }
+        return resultado;
+    }
+    
+    /**
+     * Valida que sea una dirección de correo válida
+     * @param correo La dirección de correo a evaluar
+     * @return True si se tarta de una dirección válida, de lo contrario retorna false
+     */
+    public boolean validarCorreo(String correo) {
+        boolean resultado = false;
+        if(correo.matches("\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b")){
+            resultado = true;
+        }
+        return resultado;
+    }
+    
 }

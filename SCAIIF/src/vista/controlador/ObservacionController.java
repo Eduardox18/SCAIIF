@@ -118,7 +118,9 @@ public class ObservacionController implements Initializable {
             colEmail.setCellValueFactory(new PropertyValueFactory<>("correo"));
             tablaALumnos.setItems(alumnosObservable);
         } catch (Exception ex) {
-            //Diálogo error
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR, 
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
         }
     }
 
