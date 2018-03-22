@@ -56,7 +56,8 @@ public class LoginController extends Application {
 
     /**
      * Método que inicia la aplicación con la pantalla de Login
-     * @param primaryStage 
+     *
+     * @param primaryStage
      */
     @Override
     public void start(Stage primaryStage) {
@@ -67,7 +68,7 @@ public class LoginController extends Application {
         try {
             paneLogin = FXMLLoader.load(login);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("Error");
         }
 
         root.setCenter(paneLogin);
@@ -79,7 +80,7 @@ public class LoginController extends Application {
     }
 
     /**
-     * Método que activa el botón de registrar con base de los campos de ingreso de usuario y 
+     * Método que activa el botón de registrar con base de los campos de ingreso de usuario y
      * contraseña
      */
     @FXML
@@ -92,7 +93,7 @@ public class LoginController extends Application {
     }
 
     /**
-     * Método principal para ingresar al sistema, recupera un usuario si existe ese número de 
+     * Método principal para ingresar al sistema, recupera un usuario si existe ese número de
      * personal y compara las contraseñas para verificar si puede ingresar o no
      */
     @FXML
@@ -100,61 +101,67 @@ public class LoginController extends Application {
         Dialogo dialogo = null;
         Cifrado cifrar = new Cifrado();
         Usuario ingresado = new Usuario();
+        boolean flagContinuar = false;
+
         try {
             ingresado = UsuarioDAO.recuperarUsuario(Integer.parseInt(campoUsuario.getText()));
+            flagContinuar = true;
         } catch (Exception ex) {
-            dialogo = new Dialogo(Alert.AlertType.INFORMATION, "Número de personal no válido", 
-                        "Número de personal", ButtonType.OK);
+            dialogo = new Dialogo(Alert.AlertType.INFORMATION, "Número de personal no válido",
+                    "Número de personal", ButtonType.OK);
             dialogo.show();
         }
 
-        try {
-            if (ingresado == null) {
-                dialogo = new Dialogo(Alert.AlertType.INFORMATION, "El usuario ingresado no existe", 
-                        "Usuario no existe", ButtonType.OK);
-                dialogo.show();
-            } else if (ingresado.getPassword().equals(
-                    cifrar.cifrarCadena(campoContrasenia.getText()))) {
-                cargoLog = ingresado.getIdCargo();
-                noPersonalLog = ingresado.getNoPersonal();
-                Stage stagePrincipal = new Stage();
-                URL panePrincipalURL = getClass().getResource(("/vista/Principal.fxml"));
-                AnchorPane paneInicial = FXMLLoader.load(panePrincipalURL);
+        if (flagContinuar) {
+            try {
+                if (ingresado == null) {
+                    dialogo = new Dialogo(Alert.AlertType.INFORMATION, "El usuario ingresado no existe",
+                            "Usuario no existe", ButtonType.OK);
+                    dialogo.show();
+                } else if (ingresado.getPassword().equals(
+                        cifrar.cifrarCadena(campoContrasenia.getText()))) {
+                    cargoLog = ingresado.getIdCargo();
+                    noPersonalLog = ingresado.getNoPersonal();
+                    Stage stagePrincipal = new Stage();
+                    URL panePrincipalURL = getClass().getResource(("/vista/Principal.fxml"));
+                    AnchorPane paneInicial = FXMLLoader.load(panePrincipalURL);
 
-                Stage stage = (Stage) botonIngresar.getScene().getWindow();
-                stage.close();
+                    Stage stage = (Stage) botonIngresar.getScene().getWindow();
+                    stage.close();
 
-                panePrincipal.setCenter(paneInicial);
-                Scene sceneDos = new Scene(panePrincipal, 700, 500);
-                stagePrincipal.setScene(sceneDos);
-                stagePrincipal.show();
-            } else {
-                dialogo = new Dialogo(Alert.AlertType.INFORMATION,
-                        "Los datos ingresados son incorrectos, intente de nuevo",
-                        "Datos incorrectos", ButtonType.OK);
+                    panePrincipal.setCenter(paneInicial);
+                    Scene sceneDos = new Scene(panePrincipal, 700, 500);
+                    stagePrincipal.setScene(sceneDos);
+                    stagePrincipal.show();
+                } else {
+                    dialogo = new Dialogo(Alert.AlertType.INFORMATION,
+                            "Los datos ingresados son incorrectos, intente de nuevo",
+                            "Datos incorrectos", ButtonType.OK);
+                    dialogo.show();
+                }
+            } catch (Exception ex) {
+                dialogo = new Dialogo(Alert.AlertType.ERROR,
+                        "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
                 dialogo.show();
             }
-        } catch (IOException ioEx) {
-            dialogo = new Dialogo(Alert.AlertType.ERROR,
-                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
-            dialogo.show();
+
+        }
+    }
+
+
+        /**
+         * Método que permite cerrar la aplicación
+         */
+        @FXML
+        void salirSistema () {
+            System.exit(0);
         }
 
+        /**
+         * Método main para lanzar la ventana inicial (Login)
+         * @param args
+         */
+        public static void main (String[]args){
+            launch(args);
+        }
     }
-
-    /**
-     * Método que permite cerrar la aplicación
-     */
-    @FXML
-    void salirSistema() {
-        System.exit(0);
-    }
-
-    /**
-     * Método main para lanzar la ventana inicial (Login)
-     * @param args 
-     */
-    public static void main(String[] args) {
-        launch(args);
-    }
-}
