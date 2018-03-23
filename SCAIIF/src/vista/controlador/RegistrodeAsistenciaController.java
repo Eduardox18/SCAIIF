@@ -82,7 +82,6 @@ public class RegistrodeAsistenciaController implements Initializable {
         botonCancelar.setDisable(true);
         botonAsistencia.setDisable(true);
         llenarComboBox();
-
     }
 
     /**
@@ -172,7 +171,7 @@ public class RegistrodeAsistenciaController implements Initializable {
      */
     @FXML
     private void seleccionarRegistro() {
-        if (tablaAlumnos.getSelectionModel().getSelectedCells() != null) {
+        if (tablaAlumnos.getSelectionModel().getSelectedItem() != null) {
             botonCancelar.setDisable(false);
             botonAsistencia.setDisable(false);
         } else {

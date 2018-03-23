@@ -22,7 +22,7 @@
         <Label layoutX="128.0" layoutY="80.0" text="Asesor" />
         <JFXComboBox fx:id="comboFecha" focusColor="#082f8a" labelFloat="true" layoutX="235.0" layoutY="47.0" prefHeight="25.0" prefWidth="207.0" promptText="Seleccionar fecha" unFocusColor="#082f8a" />
         <JFXComboBox fx:id="comboActividad" focusColor="#082f8a" labelFloat="true" layoutX="476.0" layoutY="47.0" onAction="#recuperarLista" prefHeight="25.0" prefWidth="131.0" promptText="no. Actividad" unFocusColor="#082f8a" />
-        <TableView fx:id="tablaAlumnos" layoutX="71.0" layoutY="117.0" onDragDetected="#seleccionarRegistro" onSort="#seleccionarRegistro" prefHeight="293.0" prefWidth="535.0">
+        <TableView fx:id="tablaAlumnos" layoutX="71.0" layoutY="117.0" onMouseClicked="#seleccionarRegistro" prefHeight="293.0" prefWidth="535.0">
             <columns>
                 <TableColumn fx:id="colMatricula" prefWidth="84.0" text="Matricula" />
                 <TableColumn fx:id="colNombre" prefWidth="133.0" text="Nombre" />

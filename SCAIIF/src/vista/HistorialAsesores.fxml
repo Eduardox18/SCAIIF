@@ -25,7 +25,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="campoNoPersonal" alignment="TOP_LEFT" labelFloat="true" layoutX="283.0" layoutY="45.0" onKeyReleased="#comprobarNoPersonal" prefHeight="25.0" prefWidth="200.0" promptText="No Personal" unFocusColor="#037523">
+      <JFXTextField fx:id="campoNoPersonal" alignment="TOP_LEFT" labelFloat="true" layoutX="283.0" layoutY="45.0" onKeyReleased="#comprobarNoPersonal" prefHeight="29.0" prefWidth="246.0" promptText="No Personal" unFocusColor="#037523">
          <font>
             <Font size="13.0" />
          </font></JFXTextField>
@@ -47,8 +47,8 @@
         </columns>
       </TableView>
       <JFXButton fx:id="botonImprimir" layoutX="306.0" layoutY="441.0" onAction="#mostrarVentanaImprimir" prefHeight="39.0" prefWidth="91.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Imprimir" textFill="WHITE" />
-      <JFXTextField fx:id="campoNombre" layoutX="283.0" layoutY="83.0" prefHeight="25.0" prefWidth="246.0" />
-      <JFXButton fx:id="botonBuscar" layoutX="492.0" layoutY="46.0" onAction="#consultarHistorialAsesores" prefHeight="29.0" prefWidth="91.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Buscar" textFill="WHITE" />
+      <JFXTextField fx:id="campoNombre" editable="false" layoutX="283.0" layoutY="83.0" prefHeight="25.0" prefWidth="246.0" />
+      <JFXButton fx:id="botonBuscar" layoutX="540.0" layoutY="46.0" onAction="#consultarHistorialAsesores" prefHeight="29.0" prefWidth="91.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Buscar" textFill="WHITE" />
       <Label layoutX="272.0" layoutY="130.0" text="Asesorías Introductorias">
          <font>
             <Font name="Book Antiqua Bold" size="14.0" />

@@ -178,22 +178,32 @@ public class RegistrarCalificacionesController implements Initializable {
 
         try {
             double alumnoCalificacion = Double.parseDouble(TFCalificacion.getText());
-            Calificacion calificacion = new Calificacion();
-            calificacion.setMatricula(matricula);
-            try {
-                CalificacionDAO.registrarCalificacion(calificacion);
-                dialogo = new Dialogo(Alert.AlertType.INFORMATION,
-                    "Calificación registrada correctamente.", "Éxito", ButtonType.OK);
+            if (alumnoCalificacion > 0 && alumnoCalificacion <= 10) {
+                Calificacion calificacion = new Calificacion();
+                calificacion.setMatricula(matricula);
+                try {
+                    CalificacionDAO.registrarCalificacion(calificacion);
+                    dialogo = new Dialogo(Alert.AlertType.INFORMATION,
+                        "Calificación registrada correctamente.", "Éxito", ButtonType.OK);
+                    dialogo.show();
+                    BTGuardar.setDisable(true);
+                    BTCancelar.setDisable(true);
+                    limpiarCampos();
+
+                } catch (Exception ex) {
+                    dialogo = new Dialogo(Alert.AlertType.ERROR,
+                        "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+                    dialogo.show();
+                }
+                calificacion.setCalificacion(alumnoCalificacion);
+            } else {
+                dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Ingresa una calificación mayor a 0 y menor a 10.", "Error", ButtonType.OK);
                 dialogo.show();
+                TFCalificacion.setText("");
                 BTGuardar.setDisable(true);
                 BTCancelar.setDisable(true);
-                limpiarCampos();
-            } catch (Exception ex) {
-                dialogo = new Dialogo(Alert.AlertType.ERROR,
-                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
-                dialogo.show();
             }
-            calificacion.setCalificacion(alumnoCalificacion);
         } catch (NumberFormatException ex) {
             dialogo = new Dialogo(Alert.AlertType.ERROR,
                 "Ingresa solo números.", "Error", ButtonType.OK);

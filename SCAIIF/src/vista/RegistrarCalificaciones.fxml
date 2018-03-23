@@ -24,25 +24,25 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <JFXTextField fx:id="TFMatricula" labelFloat="true" layoutX="178.0" layoutY="145.0" onKeyReleased="#buscarDatosAlumno" prefHeight="25.0" prefWidth="171.0" promptText="Matricula" unFocusColor="#0b6b04" />
+        <JFXTextField fx:id="TFMatricula" labelFloat="true" layoutX="178.0" layoutY="145.0" onKeyReleased="#buscarDatosAlumno" prefHeight="25.0" prefWidth="221.0" promptText="Matricula" unFocusColor="#0b6b04" />
         <Label layoutX="23.0" layoutY="214.0" text="Seleccionar Curso:">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <JFXComboBox fx:id="CBCurso" onAction="#habilitarBotones" labelFloat="true" layoutX="178.0" layoutY="211.0" prefHeight="25.0" prefWidth="221.0" promptText="Curso" unFocusColor="#0b6b04" />
-        <Label layoutX="473.0" layoutY="212.0" prefHeight="25.0" prefWidth="52.0" text="Módulo:">
+        <JFXComboBox fx:id="CBCurso" labelFloat="true" layoutX="178.0" layoutY="211.0" onAction="#habilitarBotones" prefHeight="25.0" prefWidth="221.0" promptText="Curso" unFocusColor="#0b6b04" />
+        <Label layoutX="461.0" layoutY="212.0" prefHeight="25.0" prefWidth="85.0" text="Módulo:">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <JFXComboBox fx:id="CBModulo" onAction="#habilitarBotones" layoutX="557.0" layoutY="211.0" unFocusColor="#0b6b04" />
-        <Label layoutX="23.0" layoutY="303.0" prefHeight="20.0" prefWidth="93.0" text="Conversación:">
+        <JFXComboBox fx:id="CBModulo" layoutX="565.0" layoutY="211.0" onAction="#habilitarBotones" prefHeight="25.0" prefWidth="65.0" unFocusColor="#0b6b04" />
+        <Label layoutX="23.0" layoutY="303.0" prefHeight="20.0" prefWidth="113.0" text="Conversación:">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <JFXComboBox fx:id="CBConv" layoutX="115.0" layoutY="300.0" prefHeight="25.0" prefWidth="65.0" unFocusColor="#0b6b04" onAction="#habilitarBotones" />
+        <JFXComboBox fx:id="CBConv" layoutX="135.0" layoutY="300.0" onAction="#habilitarBotones" prefHeight="25.0" prefWidth="73.0" unFocusColor="#0b6b04" />
         <Label layoutX="241.0" layoutY="303.0" text="Calificación:">
             <font>
                 <Font size="14.0" />
@@ -50,7 +50,7 @@
         </Label>
         <JFXTextField fx:id="TFCalificacion" labelFloat="true" layoutX="327.0" layoutY="300.0" onKeyReleased="#habilitarBotones" prefHeight="25.0" prefWidth="230.0" promptText="Calificación" unFocusColor="#0b6b04" />
         <JFXButton fx:id="BTGuardar" layoutX="231.0" layoutY="432.0" onAction="#comprobarRegistro" prefHeight="38.0" prefWidth="93.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Guardar" textFill="WHITE" />
-        <JFXButton fx:id="BTCancelar" onAction="#botonCerrarVentana" layoutX="372.0" layoutY="432.0" prefHeight="38.0" prefWidth="85.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Cancelar" textFill="WHITE" />
+        <JFXButton fx:id="BTCancelar" layoutX="372.0" layoutY="432.0" onAction="#botonCerrarVentana" prefHeight="38.0" prefWidth="85.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Cancelar" textFill="WHITE" />
         <Label layoutX="160.0" layoutY="34.0" text="Registro de Calificaciones">
             <font>
                 <Font name="Book Antiqua" size="36.0" />
@@ -58,6 +58,6 @@
         </Label>
         <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" onMouseClicked="#mostrarIcono" prefHeight="500.0" prefWidth="700.0" />
         <JFXHamburger fx:id="menuIcon" layoutX="15.0" layoutY="15.0" />
-        <JFXButton fx:id="BTBuscar" layoutX="359.0" layoutY="132.0" prefHeight="38.0" prefWidth="85.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Buscar" textFill="WHITE" />
+        <JFXButton fx:id="BTBuscar" layoutX="430.0" layoutY="132.0" prefHeight="38.0" prefWidth="93.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Buscar" textFill="WHITE" />
     </children>
 </AnchorPane>
