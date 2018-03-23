@@ -12,8 +12,8 @@ import java.util.logging.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import servicios.pojos.Alumno;
-import servicios.pojos.Reservacion;
+import modelo.pojos.Alumno;
+import modelo.pojos.Reservacion;
 
 /**
  *

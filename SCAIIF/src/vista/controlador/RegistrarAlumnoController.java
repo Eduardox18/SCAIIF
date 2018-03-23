@@ -18,7 +18,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import modelo.dao.AlumnoDAO;
-import servicios.pojos.Alumno;
+import modelo.pojos.Alumno;
 import vista.Dialogo;
 
 /**

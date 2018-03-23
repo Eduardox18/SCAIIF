@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
-import servicios.pojos.Actividad;
+import modelo.pojos.Actividad;
 
 /**
  *

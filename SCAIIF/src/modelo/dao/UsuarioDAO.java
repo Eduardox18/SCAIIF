@@ -2,7 +2,7 @@ package modelo.dao;
 
 import modelo.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
-import servicios.pojos.Usuario;
+import modelo.pojos.Usuario;
 
 /**
  *

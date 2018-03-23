@@ -5,11 +5,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="Usuario">
     <select id="getUsuario" parameterType="int" 
-            resultType="servicios.pojos.Usuario">
+            resultType="modelo.pojos.Usuario">
         SELECT * FROM usuario WHERE noPersonal = #{noPersonal};
     </select>
     
-    <select id="getNombreUsuario" parameterType="int" resultType="servicios.pojos.Usuario">
+    <select id="getNombreUsuario" parameterType="int" resultType="modelo.pojos.Usuario">
         SELECT nombre, apPaterno, apMaterno FROM usuario WHERE noPersonal = #{noPersonal};
     </select>
 </mapper>

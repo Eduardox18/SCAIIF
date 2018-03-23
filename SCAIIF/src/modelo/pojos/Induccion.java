@@ -1,4 +1,4 @@
-package servicios.pojos;
+package modelo.pojos;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

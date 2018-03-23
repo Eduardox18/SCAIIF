@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
-import servicios.pojos.Alumno;
-import servicios.pojos.Reservacion;
+import modelo.pojos.Alumno;
+import modelo.pojos.Reservacion;
 
 /**
  *

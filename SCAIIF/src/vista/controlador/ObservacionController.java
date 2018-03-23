@@ -23,7 +23,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import modelo.dao.AlumnoDAO;
-import servicios.pojos.Alumno;
+import modelo.pojos.Alumno;
 import vista.Dialogo;
 
 /**

@@ -1,4 +1,4 @@
-package servicios.pojos;
+package modelo.pojos;
 
 import java.sql.Time;
 import java.text.SimpleDateFormat;

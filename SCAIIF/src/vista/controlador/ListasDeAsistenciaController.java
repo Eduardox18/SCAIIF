@@ -25,8 +25,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import modelo.dao.ActividadDAO;
 import modelo.dao.ReservacionDAO;
-import servicios.pojos.Actividad;
-import servicios.pojos.ListaAsistencia;
+import modelo.pojos.Actividad;
+import modelo.pojos.ListaAsistencia;
 import vista.Dialogo;
 
 /**

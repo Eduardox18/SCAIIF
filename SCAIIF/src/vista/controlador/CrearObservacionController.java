@@ -16,7 +16,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import modelo.dao.ObservacionDAO;
-import servicios.pojos.Observacion;
+import modelo.pojos.Observacion;
 import vista.Dialogo;
 
 /**
