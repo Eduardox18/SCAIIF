@@ -1,5 +1,6 @@
 package servicios.pojos;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -66,8 +67,10 @@ public class Induccion {
         this.primeraAsesoria = primeraAsesoria;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public String getFecha() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaTexto = formatter.format(fecha);
+        return fechaTexto;
     }
 
     public void setFecha(Date fecha) {

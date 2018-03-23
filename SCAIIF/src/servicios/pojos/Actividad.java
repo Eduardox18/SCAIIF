@@ -1,6 +1,7 @@
 package servicios.pojos;
 
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -17,7 +18,8 @@ public class Actividad {
     private int cupo;
     private int noPersonal;
 
-    public Actividad() {}
+    public Actividad() {
+    }
 
     public Actividad(int noActividad, String nombre, Time horaInicio, Time horaFin, Date fecha, int cupo, int noPersonal) {
         this.noActividad = noActividad;
@@ -61,8 +63,10 @@ public class Actividad {
         this.horaFin = horaFin;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public String getFecha() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaTexto = formatter.format(fecha);
+        return fechaTexto;
     }
 
     public void setFecha(Date fecha) {
@@ -76,15 +80,15 @@ public class Actividad {
     public void setCupo(int cupo) {
         this.cupo = cupo;
     }
-    
+
     public int getNoPersonal() {
         return noPersonal;
     }
-    
+
     public void setNoPersonal(int noPersonal) {
         this.noPersonal = noPersonal;
     }
-    
+
     @Override
     public String toString() {
         return nombre;

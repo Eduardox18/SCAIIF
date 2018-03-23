@@ -177,5 +177,6 @@ public class HistorialAsesoresController implements Initializable {
             "Se está imprimiendo la lista...", "Imprimiendo",
             ButtonType.OK);
         dialogo.show();
+        botonImprimir.setDisable(true);
     }
 }
