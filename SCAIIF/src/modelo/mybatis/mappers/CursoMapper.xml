@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Curso">
-    <select id="getCursos" parameterType="String" resultType="servicios.pojos.Curso">
+    <select id="getCursos" parameterType="String" resultType="modelo.pojos.Curso">
         SELECT nombreCurso FROM Curso INNER JOIN Calificacion ON
         Curso.nrc = Calificacion.nrc WHERE matricula = #{matricula};
     </select>

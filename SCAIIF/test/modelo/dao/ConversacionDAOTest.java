@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import servicios.pojos.Conversacion;
+import modelo.pojos.Conversacion;
 
 /**
  *

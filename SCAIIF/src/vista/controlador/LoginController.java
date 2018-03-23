@@ -16,7 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import modelo.Cifrado;
 import modelo.dao.UsuarioDAO;
-import servicios.pojos.Usuario;
+import modelo.pojos.Usuario;
 import vista.Dialogo;
 
 /**

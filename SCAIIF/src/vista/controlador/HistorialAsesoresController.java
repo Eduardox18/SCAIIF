@@ -24,9 +24,9 @@ import javafx.scene.layout.VBox;
 import modelo.dao.ActividadDAO;
 import modelo.dao.InduccionDAO;
 import modelo.dao.UsuarioDAO;
-import servicios.pojos.Actividad;
-import servicios.pojos.Induccion;
-import servicios.pojos.Usuario;
+import modelo.pojos.Actividad;
+import modelo.pojos.Induccion;
+import modelo.pojos.Usuario;
 import vista.Dialogo;
 
 /**

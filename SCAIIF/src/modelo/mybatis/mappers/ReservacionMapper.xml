@@ -5,18 +5,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="Reservacion">
     
-    <select id="alumnosDeActividad" parameterType="int" resultType="servicios.pojos.ListaAsistencia">
+    <select id="alumnosDeActividad" parameterType="int" resultType="modelo.pojos.ListaAsistencia">
         SELECT noActividad, alumno.matricula, nombre, apPaterno, apMaterno 
         FROM reservacion 
         INNER JOIN alumno ON alumno.matricula = reservacion.matricula 
         WHERE noActividad = #{noActividad};
     </select>
     
-    <select id="getFechas" resultType="servicios.pojos.Reservacion">
+    <select id="getFechas" resultType="modelo.pojos.Reservacion">
         SELECT fecha FROM Reservacion;
     </select>
     
-    <update id="actualizarAsistencia" parameterType="servicios.pojos.Reservacion">
+    <update id="actualizarAsistencia" parameterType="modelo.pojos.Reservacion">
         UPDATE Reservacion SET asistencia = #{asistencia}
         WHERE matricula = #{matricula} and noActividad= #{noActividad} and fecha=#{fecha};
     </update>

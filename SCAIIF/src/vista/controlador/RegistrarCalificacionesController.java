@@ -23,10 +23,10 @@ import modelo.dao.CalificacionDAO;
 import modelo.dao.ConversacionDAO;
 import modelo.dao.CursoDAO;
 import modelo.dao.ModuloDAO;
-import servicios.pojos.Calificacion;
-import servicios.pojos.Conversacion;
-import servicios.pojos.Curso;
-import servicios.pojos.Modulo;
+import modelo.pojos.Calificacion;
+import modelo.pojos.Conversacion;
+import modelo.pojos.Curso;
+import modelo.pojos.Modulo;
 import vista.Dialogo;
 
 /**

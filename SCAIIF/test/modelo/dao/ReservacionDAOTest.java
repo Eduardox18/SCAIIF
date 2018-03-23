@@ -14,9 +14,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import servicios.pojos.Calificacion;
-import servicios.pojos.ListaAsistencia;
-import servicios.pojos.Reservacion;
+import modelo.pojos.Calificacion;
+import modelo.pojos.ListaAsistencia;
+import modelo.pojos.Reservacion;
 
 /**
  *

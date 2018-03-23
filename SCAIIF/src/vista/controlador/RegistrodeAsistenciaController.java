@@ -27,9 +27,9 @@ import javafx.scene.layout.VBox;
 import modelo.dao.ActividadDAO;
 import modelo.dao.AlumnoDAO;
 import modelo.dao.ReservacionDAO;
-import servicios.pojos.Actividad;
-import servicios.pojos.Alumno;
-import servicios.pojos.Reservacion;
+import modelo.pojos.Actividad;
+import modelo.pojos.Alumno;
+import modelo.pojos.Reservacion;
 import vista.Dialogo;
 
 /**
@@ -124,6 +124,7 @@ public class RegistrodeAsistenciaController implements Initializable {
         } catch (IOException ex) {
             dialogo = new Dialogo(Alert.AlertType.ERROR,
                 "Error al recuperar información.", "Error", ButtonType.OK);
+            dialogo.show();
         }
     }
 
@@ -142,6 +143,7 @@ public class RegistrodeAsistenciaController implements Initializable {
         } catch (ParseException ex) {
             dialogo = new Dialogo(Alert.AlertType.ERROR,
                 "Error al recuperar actividades", "Error", ButtonType.OK);
+            dialogo.show();
         }
 
         List<Alumno> reservaciones = new ArrayList<>();
@@ -161,6 +163,7 @@ public class RegistrodeAsistenciaController implements Initializable {
         } catch (IOException ex) {
             dialogo = new Dialogo(Alert.AlertType.ERROR,
                 "Error al recuperar actividades", "Error", ButtonType.OK);
+            dialogo.show();
         }
     }
 
@@ -194,6 +197,7 @@ public class RegistrodeAsistenciaController implements Initializable {
         } catch (ParseException ex) {
             dialogo = new Dialogo(Alert.AlertType.ERROR,
                 "Error al recuperar actividades", "Error", ButtonType.OK);
+            dialogo.show();
         }
         Reservacion reservacion = new Reservacion();
         reservacion.setMatricula(matricula);
@@ -203,7 +207,7 @@ public class RegistrodeAsistenciaController implements Initializable {
         try {
             ReservacionDAO.registrarAsistencia(reservacion);
             dialogo = new Dialogo(Alert.AlertType.INFORMATION,
-                "Asistencia registradas correctamente.", "Éxito", ButtonType.OK);
+                "Asistencia registrada correctamente.", "Éxito", ButtonType.OK);
             dialogo.show();
             botonCancelar.setDisable(true);
             botonAsistencia.setDisable(true);
@@ -213,6 +217,7 @@ public class RegistrodeAsistenciaController implements Initializable {
         } catch (IOException ex) {
             dialogo = new Dialogo(Alert.AlertType.ERROR,
                 "Error al registrar asistencias.", "Error", ButtonType.OK);
+            dialogo.show();
         }
     }
 
