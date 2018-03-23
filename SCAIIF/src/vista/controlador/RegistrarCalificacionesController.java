@@ -107,20 +107,22 @@ public class RegistrarCalificacionesController implements Initializable {
      */
     @FXML
     private void habilitarBotones() {
+        String matricula = TFMatricula.getText();
         String calificacion = TFCalificacion.getText();
+        Integer conv = CBConv.getSelectionModel().getSelectedItem();
+        Integer modulo = CBModulo.getSelectionModel().getSelectedItem();
+        String cursos = CBCurso.getSelectionModel().getSelectedItem();
         Dialogo dialogo = null;
-        if (calificacion != null) {
+
+        if (matricula != null && matricula.length() > 0
+            && cursos != null && cursos.length() > 0
+            && conv != null && modulo != null
+            && calificacion != null && calificacion.length() > 0) {
             BTGuardar.setDisable(false);
             BTCancelar.setDisable(false);
-            if (BTCancelar.isPressed()) {
-                BTGuardar.setDisable(true);
-                dialogo = new Dialogo(Alert.AlertType.CONFIRMATION,
-                    "¿Seguro que desea Cancelar?", "Cancelación", ButtonType.OK, ButtonType.CANCEL);
-                limpiarCampos();
-            }
         } else {
-            BTGuardar.setDisable(false);
-            BTCancelar.setDisable(false);
+            BTGuardar.setDisable(true);
+            BTCancelar.setDisable(true);
         }
     }
 
@@ -160,7 +162,8 @@ public class RegistrarCalificacionesController implements Initializable {
             CBModulo.setItems(modulosObservable);
         } catch (Exception ex) {
             dialogo = new Dialogo(Alert.AlertType.ERROR,
-                "Error al recuperar información.", "Error", ButtonType.OK);
+                "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
         }
     }
 
@@ -170,23 +173,32 @@ public class RegistrarCalificacionesController implements Initializable {
      */
     @FXML
     private void comprobarRegistro() {
-        String matricula = TFMatricula.getText();
-        double alumnoCalificacion = Double.parseDouble(TFCalificacion.getText());
-        Calificacion calificacion = new Calificacion();
-        calificacion.setCalificacion(alumnoCalificacion);
-        calificacion.setMatricula(matricula);
         Dialogo dialogo = null;
+        String matricula = TFMatricula.getText();
+
         try {
-            CalificacionDAO.registrarCalificacion(calificacion);
-            dialogo = new Dialogo(Alert.AlertType.INFORMATION,
-                "Calificación registrada correctamente.", "Éxito", ButtonType.OK);
-            dialogo.show();
-            BTGuardar.setDisable(true);
-            BTCancelar.setDisable(true);
-            limpiarCampos();
-        } catch (Exception ex) {
+            double alumnoCalificacion = Double.parseDouble(TFCalificacion.getText());
+            Calificacion calificacion = new Calificacion();
+            calificacion.setMatricula(matricula);
+            try {
+                CalificacionDAO.registrarCalificacion(calificacion);
+                dialogo = new Dialogo(Alert.AlertType.INFORMATION,
+                    "Calificación registrada correctamente.", "Éxito", ButtonType.OK);
+                dialogo.show();
+                BTGuardar.setDisable(true);
+                BTCancelar.setDisable(true);
+                limpiarCampos();
+            } catch (Exception ex) {
+                dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+                dialogo.show();
+            }
+            calificacion.setCalificacion(alumnoCalificacion);
+        } catch (NumberFormatException ex) {
             dialogo = new Dialogo(Alert.AlertType.ERROR,
-                "Error al registrar calificación", "Error", ButtonType.OK);
+                "Ingresa solo números.", "Error", ButtonType.OK);
+            dialogo.show();
+            TFCalificacion.setText("");
         }
     }
 
@@ -196,9 +208,27 @@ public class RegistrarCalificacionesController implements Initializable {
     public void limpiarCampos() {
         TFMatricula.setText("");
         CBCurso.setValue("");
-        CBModulo.setPromptText("");
-        CBConv.setPromptText("");
+        CBModulo.setValue(0);
+        CBConv.setValue(0);
         TFCalificacion.setText("");
+    }
+
+    /**
+     *
+     * Cierra la ventana actual cuando se cancela la operación o una vez que se haya concluido y
+     * limpia los campos de búsqueda.
+     */
+    @FXML
+    public void botonCerrarVentana() {
+        Dialogo dialogo = new Dialogo(Alert.AlertType.CONFIRMATION,
+            "¿Está seguro de que desea cancelar el registro de calificación?", "Confirmación",
+            ButtonType.OK, ButtonType.CANCEL);
+
+        dialogo.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                limpiarCampos();
+            }
+        });
     }
 
 }

@@ -6,10 +6,14 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -51,7 +55,7 @@ public class RegistrodeAsistenciaController implements Initializable {
     @FXML
     private TableColumn colApMaterno;
     @FXML
-    private JFXComboBox<Date> comboFecha;
+    private JFXComboBox<String> comboFecha;
     @FXML
     private JFXComboBox<Integer> comboActividad;
     @FXML
@@ -78,6 +82,7 @@ public class RegistrodeAsistenciaController implements Initializable {
         });
 
         botonCancelar.setDisable(true);
+        botonAsistencia.setDisable(true);
         llenarComboBox();
 
     }
@@ -102,11 +107,13 @@ public class RegistrodeAsistenciaController implements Initializable {
         Dialogo dialogo = null;
         try {
             fechas = ReservacionDAO.recuperarFechas();
-            List<Date> fechaReservacion = new ArrayList<>();
+            List<String> fechaReservacion = new ArrayList<>();
             for (Reservacion reservacion : fechas) {
-                fechaReservacion.add(reservacion.getFecha());
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                String fechaTexto = formatter.format(reservacion.getFecha());
+                fechaReservacion.add(fechaTexto);
             }
-            ObservableList<Date> fechasObservable = FXCollections.observableArrayList(fechaReservacion);
+            ObservableList<String> fechasObservable = FXCollections.observableArrayList(fechaReservacion);
             comboFecha.setItems(fechasObservable);
 
             noActividad = ActividadDAO.recuperarNoActividad();
@@ -127,12 +134,21 @@ public class RegistrodeAsistenciaController implements Initializable {
      */
     @FXML
     public void recuperarLista() {
-        int noActividad = comboActividad.getValue();
-        Date fecha = comboFecha.getValue();
         Dialogo dialogo = null;
+        int noActividad = comboActividad.getValue();
+        Date fechaDate = null;
+        String fecha = comboFecha.getValue();
+        SimpleDateFormat fechaFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            fechaDate = fechaFormat.parse(fecha);
+        } catch (ParseException ex) {
+            dialogo = new Dialogo(Alert.AlertType.ERROR,
+                "Error al recuperar actividades", "Error", ButtonType.OK);
+        }
+
         List<Alumno> reservaciones = new ArrayList<>();
         Reservacion reservacion = new Reservacion();
-        reservacion.setFecha(fecha);
+        reservacion.setFecha(fechaDate);
         reservacion.setNoActividad(noActividad);
         reservacion.setAsistencia(false);
 
@@ -144,10 +160,23 @@ public class RegistrodeAsistenciaController implements Initializable {
             colApPaterno.setCellValueFactory(new PropertyValueFactory<>("apPaterno"));
             colApMaterno.setCellValueFactory(new PropertyValueFactory<>("apMaterno"));
             tablaAlumnos.setItems(alumnosReservados);
-            botonCancelar.setDisable(false);
         } catch (IOException ex) {
             dialogo = new Dialogo(Alert.AlertType.ERROR,
                 "Error al recuperar actividades", "Error", ButtonType.OK);
+        }
+    }
+
+    /**
+     * Comprueba que se encuentre seleccionado un alumno antes de registrar su asistencia.
+     */
+    @FXML
+    private void seleccionarRegistro() {
+        if (tablaAlumnos.getSelectionModel().getSelectedCells() != null) {
+            botonCancelar.setDisable(false);
+            botonAsistencia.setDisable(false);
+        } else {
+            botonCancelar.setDisable(false);
+            botonAsistencia.setDisable(false);
         }
     }
 
@@ -156,23 +185,33 @@ public class RegistrodeAsistenciaController implements Initializable {
      */
     @FXML
     private void comprobarRegistroAsistencia() {
+        Dialogo dialogo = null;
         String matricula = tablaAlumnos.getSelectionModel().getSelectedItem().toString();
         int noActividad = comboActividad.getValue();
-        Date fecha = comboFecha.getValue();
+        Date fechaDate = null;
+        String fecha = comboFecha.getValue();
+        SimpleDateFormat fechaFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            fechaDate = fechaFormat.parse(fecha);
+        } catch (ParseException ex) {
+            dialogo = new Dialogo(Alert.AlertType.ERROR,
+                "Error al recuperar actividades", "Error", ButtonType.OK);
+        }
         Reservacion reservacion = new Reservacion();
         reservacion.setMatricula(matricula);
         reservacion.setNoActividad(noActividad);
-        reservacion.setFecha(fecha);
+        reservacion.setFecha(fechaDate);
         reservacion.setAsistencia(true);
-        Dialogo dialogo = null;
         try {
             ReservacionDAO.registrarAsistencia(reservacion);
             dialogo = new Dialogo(Alert.AlertType.INFORMATION,
                 "Asistencia registradas correctamente.", "Éxito", ButtonType.OK);
             dialogo.show();
             botonCancelar.setDisable(true);
+            botonAsistencia.setDisable(true);
             recuperarLista();
-            
+            limpiarCampos();
+
         } catch (IOException ex) {
             dialogo = new Dialogo(Alert.AlertType.ERROR,
                 "Error al registrar asistencias.", "Error", ButtonType.OK);
@@ -183,13 +222,28 @@ public class RegistrodeAsistenciaController implements Initializable {
      * Limpia los campos.
      */
     public void limpiarCampos() {
-        colNombre.setText("");
-        colMatricula.setText("");
-        colApPaterno.setText("");
-        colApMaterno.setText("");
-        comboFecha.setPromptText("");
-        comboActividad.setPromptText("");
+        comboFecha.setValue("");
+        comboActividad.setValue(0);
+    }
 
+    /**
+     *
+     * Cierra la ventana actual cuando se cancela la operación o una vez que se haya concluido y
+     * limpia los campos de búsqueda.
+     */
+    @FXML
+    public void botonCerrarVentana() {
+        Dialogo dialogo = new Dialogo(Alert.AlertType.CONFIRMATION,
+            "¿Seguro que desea cancelar el registro de asistencia?", "Confirmación",
+            ButtonType.OK, ButtonType.CANCEL);
+
+        dialogo.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                limpiarCampos();
+                botonCancelar.setDisable(true);
+                botonAsistencia.setDisable(true);
+            }
+        });
     }
 
 }
