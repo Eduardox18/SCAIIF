@@ -47,6 +47,8 @@ public class HistorialAsesoresController implements Initializable {
     @FXML
     private JFXButton botonBuscar;
     @FXML
+    private JFXButton botonImprimir;
+    @FXML
     TableView tablaInduccion;
     @FXML
     TableColumn colMatricula;
@@ -77,6 +79,7 @@ public class HistorialAsesoresController implements Initializable {
             menuIcon.setVisible(false);
         });
         botonBuscar.setDisable(true);
+        botonImprimir.setDisable(true);
     }
 
     /**
@@ -95,11 +98,18 @@ public class HistorialAsesoresController implements Initializable {
      */
     @FXML
     private void comprobarNoPersonal() {
-        int noPersonal = Integer.parseInt(campoNoPersonal.getText());
-        if (noPersonal != 0) {
-            botonBuscar.setDisable(false);
-        } else {
-            botonBuscar.setDisable(true);
+        try {
+            int noPersonal = Integer.parseInt(campoNoPersonal.getText());
+            if (noPersonal != 0) {
+                botonBuscar.setDisable(false);
+            } else {
+                botonBuscar.setDisable(true);
+            }
+        } catch (NumberFormatException ex) {
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                "Ingresa solo números.", "Error", ButtonType.OK);
+            dialogo.show();
+            campoNoPersonal.setText("");
         }
     }
 
@@ -111,6 +121,7 @@ public class HistorialAsesoresController implements Initializable {
     private void consultarHistorialAsesores() {
         recuperarNombreAsesor();
         consultarActividades();
+        botonImprimir.setDisable(false);
     }
 
     /**
@@ -151,7 +162,9 @@ public class HistorialAsesoresController implements Initializable {
             colFechaAct.setCellValueFactory(new PropertyValueFactory<>("fecha"));
             tablaActividades.setItems(actividades);
         } catch (Exception ex) {
-            //Diálogo error
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
         }
     }
 
@@ -164,17 +177,5 @@ public class HistorialAsesoresController implements Initializable {
             "Se está imprimiendo la lista...", "Imprimiendo",
             ButtonType.OK);
         dialogo.show();
-    }
-
-    /**
-     * Limpia todos los campos.
-     */
-    public void limpiarCampos() {
-        campoNombre.setText("");
-        campoNoPersonal.setText("");
-        colMatricula.setText("");
-        colFecha.setText("");
-        colNombre.setText("");
-        colFechaAct.setText("");
     }
 }
