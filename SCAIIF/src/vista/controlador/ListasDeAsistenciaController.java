@@ -118,9 +118,6 @@ public class ListasDeAsistenciaController implements Initializable {
                     LoginController.returnNoPersonalLog(), Date.valueOf(LocalDate.now()));
             ObservableList<Actividad> actividadesObservable
                     = FXCollections.observableArrayList(actividadesProximas);
-            for (Actividad actividadesProxima : actividadesProximas) {
-                System.out.println(actividadesProxima);
-            }
             comboActividades.setItems(actividadesObservable);
         } catch (Exception ex) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
