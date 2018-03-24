@@ -1,7 +1,7 @@
 package modelo.pojos;
 
+
 import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -63,10 +63,8 @@ public class Actividad {
         this.horaFin = horaFin;
     }
 
-    public String getFecha() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String fechaTexto = formatter.format(fecha);
-        return fechaTexto;
+    public Date getFecha() {
+        return fecha;
     }
 
     public void setFecha(Date fecha) {
