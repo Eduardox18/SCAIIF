@@ -29,31 +29,31 @@ import vista.Dialogo;
 public class RegistrarAlumnoController implements Initializable {
     
     @FXML
-    JFXTextField tfMatricula = new JFXTextField();
+    JFXTextField tfMatricula;
     
     @FXML
-    JFXTextField tfNombre = new JFXTextField();
+    JFXTextField tfNombre;
     
     @FXML
-    JFXTextField tfApellidoPaterno = new JFXTextField();
+    JFXTextField tfApellidoPaterno;
     
     @FXML
-    JFXTextField tfApellidoMaterno = new JFXTextField();
+    JFXTextField tfApellidoMaterno;
     
     @FXML
-    JFXTextField tfCorreoElectronico = new JFXTextField();
+    JFXTextField tfCorreoElectronico;
     
     @FXML
-    JFXCheckBox checkLenguaIndigena = new JFXCheckBox();
+    JFXCheckBox checkLenguaIndigena;
     
     @FXML
-    JFXDrawer menuDrawer = new JFXDrawer();
+    JFXDrawer menuDrawer;
     
     @FXML
-    JFXHamburger menuIcon = new JFXHamburger();
+    JFXHamburger menuIcon;
     
     @FXML
-    JFXButton btnRegistrar = new JFXButton();
+    JFXButton btnRegistrar;
     
     /**
      * Initializes the controller class.

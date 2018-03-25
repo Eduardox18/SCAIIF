@@ -34,28 +34,28 @@ import vista.Dialogo;
 public class ObservacionController implements Initializable {
 
     @FXML
-    JFXButton botonRegistrar = new JFXButton();
+    JFXButton botonRegistrar;
 
     @FXML
-    JFXTextField campoMatricula = new JFXTextField();
+    JFXTextField campoMatricula;
 
     @FXML
-    TableView tablaALumnos = new TableView();
+    TableView tablaALumnos;
 
     @FXML
-    JFXHamburger menuIcon = new JFXHamburger();
+    JFXHamburger menuIcon;
 
     @FXML
-    JFXDrawer menuDrawer = new JFXDrawer();
+    JFXDrawer menuDrawer;
 
     @FXML
-    TableColumn colNombre = new TableColumn();
+    TableColumn colNombre;
 
     @FXML
-    TableColumn colMatricula = new TableColumn();
+    TableColumn colMatricula;
 
     @FXML
-    TableColumn colEmail = new TableColumn();
+    TableColumn colEmail;
 
     /**
      * Initializes the controller class.
@@ -107,12 +107,10 @@ public class ObservacionController implements Initializable {
      * método buscará a todos los alumnos.
      */
     private void llenarTabla(String nombreAlumno) {
-        List<Alumno> alumnos = null;
+        ObservableList<Alumno> alumnosObservable = null;
         try {
-            alumnos = AlumnoDAO.recuperarAlumnos(campoMatricula.getText());
-            ObservableList<Alumno> alumnosObservable = FXCollections.observableArrayList();
-            alumnosObservable = FXCollections.observableArrayList(alumnos);
-
+            alumnosObservable = FXCollections.observableArrayList(AlumnoDAO.recuperarAlumnos(
+                    campoMatricula.getText()));
             colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
             colMatricula.setCellValueFactory(new PropertyValueFactory<>("matricula"));
             colEmail.setCellValueFactory(new PropertyValueFactory<>("correo"));

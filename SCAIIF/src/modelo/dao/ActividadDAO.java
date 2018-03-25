@@ -78,4 +78,23 @@ public class ActividadDAO {
         }
         return noActividad;
     }
+    
+    /**
+     * Recupera una lista de las actividades pendientes
+     * @return List que contiene las actividades pendientes que no se encuentren canceladas
+     * @throws IOException 
+     */
+    public static List<Actividad> recuperarActividadesPendientes() throws IOException {
+        List<Actividad> actividadesPendientes = new ArrayList<>();
+        SqlSession conn = null;
+        try {
+            conn = MyBatisUtils.getSession();
+            actividadesPendientes = conn.selectList("Actividad.getActividadesPendientes");
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return actividadesPendientes;
+    }
 }
