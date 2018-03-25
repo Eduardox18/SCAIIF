@@ -29,16 +29,18 @@ public class CrearObservacionController implements Initializable {
     private String matricula;
 
     @FXML
-    JFXTextField tfAsunto = new JFXTextField();
+    JFXTextField tfAsunto;
 
     @FXML
-    JFXTextArea taComentario = new JFXTextArea();
+    JFXTextArea taComentario;
 
     @FXML
-    JFXButton btnAceptar = new JFXButton();
+    JFXButton btnAceptar;
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

@@ -223,4 +223,19 @@ public class DrawerPrincipalController implements Initializable {
             dialogo.show();
         }
     }
+    
+    @FXML
+    public void lanzarCancelarActividad() {
+        try {
+            URL comentarioAlumno = getClass().getResource("/vista/CancelarActividad.fxml");
+            AnchorPane paneComentario = FXMLLoader.load(comentarioAlumno);
+
+            BorderPane border = LoginController.getPrincipal();
+            border.setCenter(paneComentario);
+        } catch (IOException ioEx) {
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
+        }
+    }
 }

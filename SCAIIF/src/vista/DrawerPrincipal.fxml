@@ -44,10 +44,10 @@
                   <VBox alignment="TOP_CENTER" prefHeight="212.0" prefWidth="383.0" style="-fx-background-color: #FFFFFF;">
                      <children>
                         <JFXButton fx:id="reservarActividadButton" prefHeight="27.0" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Reservar" textFill="WHITE" />
-                        <JFXButton fx:id="cancelarActividadButton" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Cancelar" textFill="WHITE" />
+                        <JFXButton fx:id="cancelarActividadButton" onAction="#lanzarCancelarActividad" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Cancelar" textFill="WHITE" />
                         <JFXButton fx:id="consultarPorImpartirButton" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Consultar actividad por impartir" textFill="WHITE" />
                         <JFXButton fx:id="consultarListaAsistenciaButton" onAction="#lanzarListaAsistencia" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Consultar lista de asistencia" textFill="WHITE" />
-                        <JFXButton fx:id="registrarAsistenciaButton" prefWidth="724.0" onAction="#lanzarRegistroAsistencia" style="-fx-background-color: #082F8A;" text="Registrar asistencia" textFill="WHITE" />
+                        <JFXButton fx:id="registrarAsistenciaButton" onAction="#lanzarRegistroAsistencia" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Registrar asistencia" textFill="WHITE" />
                         <JFXButton fx:id="crearCalendarioActButton" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Crea calendario" textFill="WHITE" />
                         <JFXButton fx:id="consultarCalendarioActButton" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Consultar calendario" textFill="WHITE" />
                         <JFXButton fx:id="proximasActividadesButton" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Próximas actividades" textFill="WHITE" />

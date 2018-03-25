@@ -24,5 +24,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT noActividad FROM Actividad;
     </select>
     
-    
+    <select id="getActividadesPendientes" resultType="modelo.pojos.Actividad">
+        SELECT noActividad, actividad.nombre, horaInicio, horaFin, fecha, 
+        usuario.nombre FROM actividad INNER JOIN usuario ON actividad.noPersonal 
+        = usuario.noPersonal;
+    </select>
+     
 </mapper>
