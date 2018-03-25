@@ -11,8 +11,6 @@ import com.jfoenix.controls.JFXHamburger;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,8 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import modelo.dao.ActividadDAO;
-import modelo.pojos.Actividad;
-import modelo.pojos.Alumno;
+import modelo.pojos.ActividadAsesor;
 import vista.Dialogo;
 
 /**
@@ -99,14 +96,14 @@ public class CancelarActividadController implements Initializable {
     } 
     
     private void llenarTabla() {
-        ObservableList<Actividad> actividadesPendientes = null;
+        ObservableList<ActividadAsesor> actividadesPendientes = null;
         try {
             actividadesPendientes = FXCollections.observableArrayList(
                     ActividadDAO.recuperarActividadesPendientes());
             colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
             colHoraInicio.setCellValueFactory(new PropertyValueFactory<>("horaInicio"));
             colHoraFin.setCellValueFactory(new PropertyValueFactory<>("horaFin"));
-            colAsesor.setCellValueFactory(new PropertyValueFactory<>("asesor"));
+            colAsesor.setCellValueFactory(new PropertyValueFactory<>("nombreAsesor"));
             colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
             tablaActividades.setItems(actividadesPendientes);
         } catch (Exception ex) {
