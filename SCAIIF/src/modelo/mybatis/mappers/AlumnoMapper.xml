@@ -22,4 +22,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         lenguaIndigena) VALUES (#{matricula}, #{nombre}, #{apPaterno}, 
         #{apMaterno}, #{correo}, #{lenguaIndigena});
     </insert>
+    
+    <select id="obtenerCorreos" parameterType="int" resultType="string">
+        SELECT alumno.correo from reservacion INNER JOIN actividad ON 
+        actividad.noActividad = reservacion.noActividad INNER JOIN alumno 
+        ON alumno.matricula = reservacion.matricula WHERE 
+        actividad.noActividad = #{noActividad};
+    </select>
 </mapper>

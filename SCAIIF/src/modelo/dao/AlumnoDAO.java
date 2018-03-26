@@ -108,4 +108,24 @@ public class AlumnoDAO {
         }
         return reservAlumnos;
     }
+    
+    /**
+     * Recupera el correo electrónico de los alumnos que se encuentren inscritos en x actividad
+     * @param noActividad El número de la actividad 
+     * @return Lista de los correos de alumnos
+     * @throws IOException se lanza en caso de que ocurra algún error al recuperar los correos
+     */
+    public static List<String> recuperarCorreos(Integer noActividad) throws IOException {
+        List<String> correoAlumnos = new ArrayList<>();
+        SqlSession conn = null;
+        try {
+            conn = MyBatisUtils.getSession();
+            correoAlumnos = conn.selectList("Alumno.obtenerCorreos", noActividad);
+        } finally {
+            if(conn != null) {
+                conn.close();
+            }
+        }
+        return correoAlumnos;
+    }
 }
