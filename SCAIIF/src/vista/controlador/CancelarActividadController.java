@@ -10,9 +10,8 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,12 +21,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.StageStyle;
 import modelo.dao.ActividadDAO;
-import modelo.pojos.Actividad;
-import modelo.pojos.Alumno;
+import modelo.pojos.ActividadAsesor;
 import vista.Dialogo;
 
 /**
@@ -38,7 +38,7 @@ import vista.Dialogo;
 public class CancelarActividadController implements Initializable {
     
     @FXML
-    private TableView tablaActividades;
+    private TableView<ActividadAsesor> tablaActividades;
 
     @FXML
     private TableColumn colNombre;
@@ -83,6 +83,10 @@ public class CancelarActividadController implements Initializable {
             menuDrawer.setDisable(false);
             menuIcon.setVisible(false);
         });
+        
+        tablaActividades.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            btnCancelar.setDisable(false);
+        });
         llenarTabla();
     }
     
@@ -98,15 +102,47 @@ public class CancelarActividadController implements Initializable {
         }
     } 
     
+    @FXML
+    public void lanzarConfirmación() {
+        Dialogo dialogo = null;
+        String motivo = null;
+        TextInputDialog asuntoCan = new TextInputDialog();
+        asuntoCan.setTitle("Confirmar cancelación");
+        asuntoCan.setHeaderText(null);
+        asuntoCan.setContentText("Ingresar motivo de la cancelación:");
+        asuntoCan.initStyle(StageStyle.UNDECORATED);
+        
+        Optional<String> resultado = asuntoCan.showAndWait();
+        if (resultado.isPresent()){
+            motivo = resultado.get();
+            Integer noActividad = 
+                    tablaActividades.getSelectionModel().getSelectedItem().getNoActividad();
+            try {
+                if (ActividadDAO.cancelarActividad(noActividad)) {
+                    dialogo = new Dialogo(Alert.AlertType.INFORMATION, 
+                        "La actividad ha sido cancelada y los alumnos han sido avisados", 
+                         "Éxito", ButtonType.OK);
+                    dialogo.show();
+                    llenarTabla();
+                }
+            } catch(Exception ex) {
+                dialogo = new Dialogo(Alert.AlertType.ERROR, 
+                        "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+                dialogo.show();
+            }
+            
+        }
+    }
+    
     private void llenarTabla() {
-        ObservableList<Actividad> actividadesPendientes = null;
+        ObservableList<ActividadAsesor> actividadesPendientes = null;
         try {
             actividadesPendientes = FXCollections.observableArrayList(
                     ActividadDAO.recuperarActividadesPendientes());
             colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
             colHoraInicio.setCellValueFactory(new PropertyValueFactory<>("horaInicio"));
             colHoraFin.setCellValueFactory(new PropertyValueFactory<>("horaFin"));
-            colAsesor.setCellValueFactory(new PropertyValueFactory<>("asesor"));
+            colAsesor.setCellValueFactory(new PropertyValueFactory<>("nombreAsesor"));
             colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
             tablaActividades.setItems(actividadesPendientes);
         } catch (Exception ex) {

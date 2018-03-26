@@ -24,10 +24,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT noActividad FROM Actividad;
     </select>
     
-    <select id="getActividadesPendientes" resultType="modelo.pojos.Actividad">
+    <select id="getActividadesPendientes" 
+            resultType="modelo.pojos.ActividadAsesor">
         SELECT noActividad, actividad.nombre, horaInicio, horaFin, fecha, 
-        usuario.nombre FROM actividad INNER JOIN usuario ON actividad.noPersonal 
-        = usuario.noPersonal;
+        usuario.nombre AS nombreAsesor, usuario.apPaterno AS apellidoPAsesor, 
+        usuario.apMaterno AS apellidoMAsesor FROM actividad INNER JOIN usuario 
+        ON actividad.noPersonal = usuario.noPersonal;
     </select>
+    
+    <update id="cancelarActividad" parameterType="int">
+        UPDATE actividad set estado = "CANCELADA" where noActividad = 
+        #{noActividad};
+    </update>
      
 </mapper>

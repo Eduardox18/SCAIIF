@@ -7,6 +7,7 @@ import java.util.List;
 import modelo.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import modelo.pojos.Actividad;
+import modelo.pojos.ActividadAsesor;
 
 /**
  *
@@ -84,8 +85,8 @@ public class ActividadDAO {
      * @return List que contiene las actividades pendientes que no se encuentren canceladas
      * @throws IOException 
      */
-    public static List<Actividad> recuperarActividadesPendientes() throws IOException {
-        List<Actividad> actividadesPendientes = new ArrayList<>();
+    public static List<ActividadAsesor> recuperarActividadesPendientes() throws IOException {
+        List<ActividadAsesor> actividadesPendientes = new ArrayList<>();
         SqlSession conn = null;
         try {
             conn = MyBatisUtils.getSession();
@@ -96,5 +97,22 @@ public class ActividadDAO {
             }
         }
         return actividadesPendientes;
+    }
+    
+    public static boolean cancelarActividad (Integer noActividad) throws Exception{
+        boolean resultado = false;
+        SqlSession conn = null;
+        
+        try{
+            conn = MyBatisUtils.getSession();
+            conn.update("Actividad.cancelarActividad", noActividad);
+            conn.commit();
+            resultado = true;
+        } finally {
+            if(conn != null) {
+                conn.close();
+            }
+        }
+        return resultado;
     }
 }
