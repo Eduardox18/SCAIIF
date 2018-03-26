@@ -3,6 +3,7 @@ package modelo.dao;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import modelo.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -99,13 +100,16 @@ public class ActividadDAO {
         return actividadesPendientes;
     }
     
-    public static boolean cancelarActividad (Integer noActividad) throws Exception{
+    public static boolean cancelarActividad (Integer noActividad, String estado) throws IOException{
         boolean resultado = false;
         SqlSession conn = null;
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("noActividad", noActividad);
+        params.put("estado", estado);
         
         try{
             conn = MyBatisUtils.getSession();
-            conn.update("Actividad.cancelarActividad", noActividad);
+            conn.update("Actividad.cambiarEstado", params);
             conn.commit();
             resultado = true;
         } finally {

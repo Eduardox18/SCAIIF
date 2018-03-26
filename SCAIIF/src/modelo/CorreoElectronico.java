@@ -15,10 +15,10 @@ import javax.mail.internet.*;
  */
 public class CorreoElectronico {
     
-    private static final String EMISOR = null;
-    private static final String CONTRASENA = null;
+    private static final String EMISOR = "sistemascaiif@gmail.com";
+    private static final String CONTRASENA = "An6248322";
     
-    public static boolean enviarCorreo(String[] destinatarios, String asunto, String motivo) {
+    public static boolean enviarCorreo(List<String> destinatarios, String asunto, String motivo) throws MessagingException{
         boolean resultado = true;
 
         try {
@@ -46,9 +46,9 @@ public class CorreoElectronico {
             message.setText(motivo);
             
             Transport.send(message);
-        } catch (Exception ex) {
-            resultado = false;
-        } 
+        } finally {
+            
+        }
         
         return resultado;
     }

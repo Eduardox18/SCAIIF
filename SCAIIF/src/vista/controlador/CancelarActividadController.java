@@ -10,8 +10,11 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,7 +29,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.StageStyle;
+import javax.mail.MessagingException;
+import modelo.CorreoElectronico;
 import modelo.dao.ActividadDAO;
+import modelo.dao.AlumnoDAO;
 import modelo.pojos.ActividadAsesor;
 import vista.Dialogo;
 
@@ -105,7 +111,6 @@ public class CancelarActividadController implements Initializable {
     @FXML
     public void lanzarConfirmación() {
         Dialogo dialogo = null;
-        String motivo = null;
         TextInputDialog asuntoCan = new TextInputDialog();
         asuntoCan.setTitle("Confirmar cancelación");
         asuntoCan.setHeaderText(null);
@@ -114,23 +119,37 @@ public class CancelarActividadController implements Initializable {
         
         Optional<String> resultado = asuntoCan.showAndWait();
         if (resultado.isPresent()){
-            motivo = resultado.get();
+            String motivo = resultado.get();
+            String asunto = "Cancelación de actividad " + 
+                    tablaActividades.getSelectionModel().getSelectedItem().getNombre();
             Integer noActividad = 
                     tablaActividades.getSelectionModel().getSelectedItem().getNoActividad();
+            
             try {
-                if (ActividadDAO.cancelarActividad(noActividad)) {
+                if (ActividadDAO.cancelarActividad(noActividad, "CANCELADA")) {
                     dialogo = new Dialogo(Alert.AlertType.INFORMATION, 
                         "La actividad ha sido cancelada y los alumnos han sido avisados", 
                          "Éxito", ButtonType.OK);
+                    List<String> correos  = AlumnoDAO.recuperarCorreos(noActividad);
+                    CorreoElectronico.enviarCorreo(correos, asunto, motivo);
                     dialogo.show();
                     llenarTabla();
                 }
-            } catch(Exception ex) {
+            } catch(IOException ex) {
                 dialogo = new Dialogo(Alert.AlertType.ERROR, 
                         "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
                 dialogo.show();
+            } catch (MessagingException ex) {
+                try {
+                    ActividadDAO.cancelarActividad(noActividad, "PNDIENTE");
+                } catch (IOException ex1) {
+                    Logger.getLogger(CancelarActividadController.class.getName()).log(Level.SEVERE, null, ex1);
+                }
+                dialogo = new Dialogo(Alert.AlertType.ERROR, 
+                        "Ha ocurrido un error al enviar los correos electrónicos, "
+                                + "la actividad no se ha cancelado", "Error", ButtonType.OK);
+                dialogo.show();
             }
-            
         }
     }
     
