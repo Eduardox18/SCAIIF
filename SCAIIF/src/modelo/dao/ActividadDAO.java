@@ -98,4 +98,21 @@ public class ActividadDAO {
         }
         return actividadesPendientes;
     }
+    
+    public static boolean cancelarActividad (Integer noActividad) throws Exception{
+        boolean resultado = false;
+        SqlSession conn = null;
+        
+        try{
+            conn = MyBatisUtils.getSession();
+            conn.update("Actividad.cancelarActividad", noActividad);
+            conn.commit();
+            resultado = true;
+        } finally {
+            if(conn != null) {
+                conn.close();
+            }
+        }
+        return resultado;
+    }
 }

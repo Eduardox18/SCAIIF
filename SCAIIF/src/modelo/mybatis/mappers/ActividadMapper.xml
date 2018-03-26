@@ -31,5 +31,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         usuario.apMaterno AS apellidoMAsesor FROM actividad INNER JOIN usuario 
         ON actividad.noPersonal = usuario.noPersonal;
     </select>
+    
+    <update id="cancelarActividad" parameterType="int">
+        UPDATE actividad set estado = "CANCELADA" where noActividad = 
+        #{noActividad};
+    </update>
      
 </mapper>

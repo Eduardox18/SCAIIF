@@ -192,7 +192,7 @@ public class RegistrarAlumnoController implements Initializable {
                     ButtonType.OK);
                 dialogo.show();
             }
-         } else {
+        } else {
             dialogo = new Dialogo(Alert.AlertType.WARNING, 
                     "La matrícula que trata de ingresar ya existe", "Matrícula repetida", 
                     ButtonType.OK);

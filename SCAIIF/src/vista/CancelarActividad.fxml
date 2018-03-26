@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.CancelarActividadController">
    <children>
-      <TableView fx:id="tablaActividades" layoutX="55.0" layoutY="52.0" prefHeight="371.0" prefWidth="594.0" AnchorPane.bottomAnchor="77.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="52.0">
+      <TableView fx:id="tablaActividades" layoutX="16.0" layoutY="64.0" prefHeight="359.0" prefWidth="667.0" AnchorPane.bottomAnchor="77.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="64.0">
         <columns>
           <TableColumn fx:id="colNombre" prefWidth="144.0" text="Nombre" />
             <TableColumn fx:id="colAsesor" prefWidth="204.0" text="Asesor" />
@@ -19,7 +19,7 @@
             <TableColumn fx:id="colFecha" prefWidth="99.0" text="Fecha" />
         </columns>
       </TableView>
-      <JFXButton fx:id="btnCancelar" defaultButton="true" disable="true" layoutX="211.0" layoutY="432.0" prefHeight="52.0" prefWidth="299.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Cancelar actividad" textFill="WHITE" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="211.0" AnchorPane.rightAnchor="190.0">
+      <JFXButton fx:id="btnCancelar" defaultButton="true" disable="true" layoutX="211.0" layoutY="432.0" onAction="#lanzarConfirmación" prefHeight="52.0" prefWidth="299.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Cancelar actividad" textFill="WHITE" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="211.0" AnchorPane.rightAnchor="190.0">
          <font>
             <Font size="25.0" />
          </font>
