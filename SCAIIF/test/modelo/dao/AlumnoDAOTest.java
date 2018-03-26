@@ -7,8 +7,6 @@ package modelo.dao;
 
 import java.sql.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -115,6 +113,26 @@ public class AlumnoDAOTest {
         System.out.println("Éxito de igualdad de apellidos maternos.");
         
         
+    }
+
+    /**
+     * Prueba que las listas obtenidas nunca sean null y comprueba que en una actividad que contiene
+     * alumnos la lista tenga por lo menos un correo electrónico, y en una actividad donde no hay
+     * alumnos, sea una lista vacía, pero no nula.
+     * @throws java.lang.Exception
+     */
+    @Test
+    public void testRecuperarCorreos() throws Exception {
+        System.out.println("Prueba del método recuperarCorreos");
+        Integer noActividadLlena = 1;
+        Integer noActividadVacia = 4;
+        List<String> result = AlumnoDAO.recuperarCorreos(noActividadLlena);
+        List<String> result2 = AlumnoDAO.recuperarCorreos(noActividadVacia);
+        
+        assertFalse(result.isEmpty());
+        assertTrue(result2.isEmpty());
+        assertNotNull("ERROR, La lista es null", result);
+        assertNotNull("ERROR, La lista es null", result2);
     }
     
 }

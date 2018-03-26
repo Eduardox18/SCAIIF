@@ -16,6 +16,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import modelo.pojos.Actividad;
+import modelo.pojos.ActividadAsesor;
 
 /**
  *
@@ -95,5 +96,31 @@ public class ActividadDAOTest {
         
         assertEquals(expNoActividad, resultActividades.get(0).getNoActividad());
         System.out.println("Éxito de igualdad de noActividades.");
+    }
+
+    /**
+     * Comprueba que la lista no se encuentre vacia (hay actividades pendientes) y que en ninguna 
+     * circunstancia la lista que se devuelve sea null
+     * @throws java.lang.Exception
+     */
+    @Test
+    public void testRecuperarActividadesPendientes() throws Exception {
+        System.out.println(" prueba del método recuperarActividadesPendientes");
+        List<ActividadAsesor> result = ActividadDAO.recuperarActividadesPendientes();
+        assertNotNull("La lista se encuentra vacia. ERROR", result);
+        assertFalse(result.isEmpty());
+    }
+
+    /**
+     * Comprueba que la actividad sea cancelada correctamente
+     */
+    @Test
+    public void testCancelarActividad() throws Exception {
+        System.out.println("prueba del método cancelarActividad");
+        Integer noActividad = 2;
+        String estado = "CANCELADA";
+        boolean result = ActividadDAO.cancelarActividad(noActividad, estado);
+        assertTrue(result);
+        ActividadDAO.cancelarActividad(noActividad, "PENDIENTE");
     }
 }
