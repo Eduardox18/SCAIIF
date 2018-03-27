@@ -100,10 +100,10 @@ public class ActividadDAO {
         return actividadesPendientes;
     }
     
-    public static boolean cancelarActividad (Integer noActividad, String estado) throws IOException{
+    public static boolean cancelarActividad (Integer noActividad, Integer estado) throws IOException{
         boolean resultado = false;
         SqlSession conn = null;
-        HashMap<String, Object> params = new HashMap<>();
+        HashMap<String, Integer> params = new HashMap<>();
         params.put("noActividad", noActividad);
         params.put("estado", estado);
         

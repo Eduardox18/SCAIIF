@@ -29,12 +29,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT noActividad, actividad.nombre, horaInicio, horaFin, fecha, 
         usuario.nombre AS nombreAsesor, usuario.apPaterno AS apellidoPAsesor, 
         usuario.apMaterno AS apellidoMAsesor FROM actividad INNER JOIN usuario 
-        ON actividad.noPersonal = usuario.noPersonal WHERE actividad.estado = 
-        "PENDIENTE";
+        ON actividad.noPersonal = usuario.noPersonal WHERE actividad.idEstado = 
+        0;
     </select>
     
     <update id="cambiarEstado" parameterType="map">
-        UPDATE actividad set estado = #{estado} where noActividad = 
+        UPDATE actividad set idEstado = #{estado} where noActividad = 
         #{noActividad};
     </update>
      

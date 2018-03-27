@@ -118,9 +118,9 @@ public class ActividadDAOTest {
     public void testCancelarActividad() throws Exception {
         System.out.println("prueba del método cancelarActividad");
         Integer noActividad = 2;
-        String estado = "CANCELADA";
+        Integer estado = 2;
         boolean result = ActividadDAO.cancelarActividad(noActividad, estado);
         assertTrue(result);
-        ActividadDAO.cancelarActividad(noActividad, "PENDIENTE");
+        ActividadDAO.cancelarActividad(noActividad, 0);
     }
 }
