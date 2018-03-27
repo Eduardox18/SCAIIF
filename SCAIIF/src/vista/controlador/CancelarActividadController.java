@@ -119,14 +119,16 @@ public class CancelarActividadController implements Initializable {
         
         Optional<String> resultado = asuntoCan.showAndWait();
         if (resultado.isPresent()){
-            String motivo = resultado.get();
+            String motivo = "La actividad " + 
+                    tablaActividades.getSelectionModel().getSelectedItem().getNombre() + 
+                    "ha sido cancelada por el siguiente motivo " + resultado.get();
             String asunto = "Cancelación de actividad " + 
                     tablaActividades.getSelectionModel().getSelectedItem().getNombre();
             Integer noActividad = 
                     tablaActividades.getSelectionModel().getSelectedItem().getNoActividad();
             
             try {
-                if (ActividadDAO.cancelarActividad(noActividad, "CANCELADA")) {
+                if (ActividadDAO.cancelarActividad(noActividad, 2)) {
                     dialogo = new Dialogo(Alert.AlertType.INFORMATION, 
                         "La actividad ha sido cancelada y los alumnos han sido avisados", 
                          "Éxito", ButtonType.OK);
@@ -141,7 +143,7 @@ public class CancelarActividadController implements Initializable {
                 dialogo.show();
             } catch (MessagingException ex) {
                 try {
-                    ActividadDAO.cancelarActividad(noActividad, "PNDIENTE");
+                    ActividadDAO.cancelarActividad(noActividad, 0);
                 } catch (IOException ex1) {
                     Logger.getLogger(CancelarActividadController.class.getName()).log(Level.SEVERE, null, ex1);
                 }
