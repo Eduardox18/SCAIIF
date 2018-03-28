@@ -6,6 +6,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="Aviso">
     <insert id="guardarAviso" parameterType="modelo.pojos.Aviso">
         INSERT INTO aviso (asunto, mensaje, fechaCreacion, fechaLimite) VALUES 
-        (#{Asunto}, #{Mensaje}, #{fechaCreación}, #{fechaLimite});
+        (#{asunto}, #{mensaje}, #{fechaCreacion}, #{fechaLimite});
     </insert>
 </mapper>

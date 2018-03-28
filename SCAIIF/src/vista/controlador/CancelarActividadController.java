@@ -110,7 +110,6 @@ public class CancelarActividadController implements Initializable {
     
     @FXML
     public void lanzarConfirmación() {
-        Dialogo dialogo = null;
         TextInputDialog asuntoCan = new TextInputDialog();
         asuntoCan.setTitle("Confirmar cancelación");
         asuntoCan.setHeaderText(null);
@@ -119,39 +118,40 @@ public class CancelarActividadController implements Initializable {
         
         Optional<String> resultado = asuntoCan.showAndWait();
         if (resultado.isPresent()){
-            String motivo = "La actividad " + 
-                    tablaActividades.getSelectionModel().getSelectedItem().getNombre() + 
-                    " ha sido cancelada por el siguiente motivo: " + resultado.get();
-            String asunto = "Cancelación de actividad " + 
-                    tablaActividades.getSelectionModel().getSelectedItem().getNombre();
-            Integer noActividad = 
-                    tablaActividades.getSelectionModel().getSelectedItem().getNoActividad();
+            cancelarActividad(tablaActividades.getSelectionModel().getSelectedItem().getNombre(), 
+                    resultado.get(), 
+                    tablaActividades.getSelectionModel().getSelectedItem().getNoActividad());
+        }
+    }
+    
+    private void cancelarActividad(String nombre, String motivo, Integer noActividad) {
+        Dialogo dialogo = null;
+        motivo = "La actividad " + nombre + " ha sido cancelada por el siguiente motivo: " + motivo;
+        String asunto = "Cancelación de actividad " + nombre;
             
-            try {
-                if (ActividadDAO.actualizarEstado(noActividad, 2)) {
-                    dialogo = new Dialogo(Alert.AlertType.INFORMATION, 
-                        "La actividad ha sido cancelada y los alumnos han sido avisados", 
-                         "Éxito", ButtonType.OK);
-                    List<String> correos  = AlumnoDAO.recuperarCorreos(noActividad);
-                    CorreoElectronico.enviarCorreo(correos, asunto, motivo);
-                    dialogo.show();
-                    llenarTabla();
-                }
-            } catch(IOException ex) {
-                dialogo = new Dialogo(Alert.AlertType.ERROR, 
-                        "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+        try {
+            if (ActividadDAO.actualizarEstado(noActividad, 2)) {
+                dialogo = new Dialogo(Alert.AlertType.INFORMATION, 
+                    "La actividad ha sido cancelada y los alumnos han sido avisados", 
+                     "Éxito", ButtonType.OK);
+                List<String> correos  = AlumnoDAO.recuperarCorreos(noActividad);
+                CorreoElectronico.enviarCorreo(correos, asunto, motivo);
                 dialogo.show();
-            } catch (MessagingException ex) {
-                try {
-                    ActividadDAO.actualizarEstado(noActividad, 0);
-                } catch (IOException ex1) {
-                    Logger.getLogger(CancelarActividadController.class.getName()).log(Level.SEVERE, null, ex1);
-                }
-                dialogo = new Dialogo(Alert.AlertType.ERROR, 
-                        "Ha ocurrido un error al enviar los correos electrónicos, "
-                                + "la actividad no se ha cancelado", "Error al notificar", ButtonType.OK);
-                dialogo.show();
+                llenarTabla();
             }
+        } catch(IOException ex) {
+            dialogo = new Dialogo(Alert.AlertType.ERROR, 
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
+        } catch (MessagingException ex) {
+            try {
+                ActividadDAO.actualizarEstado(noActividad, 0);
+            } catch (IOException ex1) {
+            }
+            dialogo = new Dialogo(Alert.AlertType.ERROR, 
+                    "Ha ocurrido un error al enviar los correos electrónicos, "
+                            + "la actividad no se ha cancelado", "Error al notificar", ButtonType.OK);
+            dialogo.show();
         }
     }
     

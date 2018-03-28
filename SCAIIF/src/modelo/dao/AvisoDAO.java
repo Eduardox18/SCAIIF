@@ -1,10 +1,5 @@
 package modelo.dao;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
-import javafx.util.converter.LocalDateTimeStringConverter;
 import modelo.mybatis.MyBatisUtils;
 import modelo.pojos.Aviso;
 import org.apache.ibatis.session.SqlSession;
@@ -15,21 +10,25 @@ import org.apache.ibatis.session.SqlSession;
  */
 public class AvisoDAO {
     
-    public static boolean guardarAviso(Aviso aviso) throws Exception{
-        boolean resultado = false;
+    /**
+     * Guarda un aviso en la base de datos
+     * @param aviso El objeto aviso que contiene los datos que se desean guardar
+     * @throws Exception 
+     */
+    public static void guardarAviso(Aviso aviso) throws Exception{
         SqlSession conn = null;
         
-        try{
-            conn = MyBatisUtils.getSession();
-            conn.insert("Aviso.guardarAviso", aviso);
-            conn.commit();
-            resultado = true;
-        } finally {
-            if(conn != null){
-                conn.close();
+        if (aviso != null){
+            try{
+                conn = MyBatisUtils.getSession();
+                conn.insert("Aviso.guardarAviso", aviso);
+                conn.commit();
+            } finally {
+                if(conn != null){
+                    conn.close();
+                }
             }
         }
-        return resultado;
     }
     
 }

@@ -100,6 +100,13 @@ public class ActividadDAO {
         return actividadesPendientes;
     }
     
+    /**
+     * Actualiza el estado de una actividad
+     * @param noActividad La actividad a la que se desea actualizar el estado
+     * @param estado Número que representa el estado que tendrá la actividad
+     * @return 
+     * @throws IOException 
+     */
     public static boolean actualizarEstado (Integer noActividad, Integer estado) throws IOException{
         boolean resultado = false;
         SqlSession conn = null;
