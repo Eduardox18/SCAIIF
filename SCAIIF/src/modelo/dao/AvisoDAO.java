@@ -15,7 +15,8 @@ public class AvisoDAO {
      * @param aviso El objeto aviso que contiene los datos que se desean guardar
      * @throws Exception 
      */
-    public static void guardarAviso(Aviso aviso) throws Exception{
+    public static boolean guardarAviso(Aviso aviso) throws Exception{
+        boolean resul = false;
         SqlSession conn = null;
         
         if (aviso != null){
@@ -23,12 +24,14 @@ public class AvisoDAO {
                 conn = MyBatisUtils.getSession();
                 conn.insert("Aviso.guardarAviso", aviso);
                 conn.commit();
+                resul = true;
             } finally {
                 if(conn != null){
                     conn.close();
                 }
             }
         }
+        return resul;
     }
     
 }
