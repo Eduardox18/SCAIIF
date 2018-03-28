@@ -29,13 +29,13 @@ public class CrearObservacionController implements Initializable {
     private String matricula;
 
     @FXML
-    JFXTextField tfAsunto;
+    private JFXTextField tfAsunto;
 
     @FXML
-    JFXTextArea taComentario;
+    private JFXTextArea taComentario;
 
     @FXML
-    JFXButton btnAceptar;
+    private JFXButton btnAceptar;
 
     /**
      * Initializes the controller class.

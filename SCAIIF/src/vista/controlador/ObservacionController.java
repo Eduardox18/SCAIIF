@@ -33,28 +33,28 @@ import vista.Dialogo;
 public class ObservacionController implements Initializable {
 
     @FXML
-    JFXButton botonRegistrar;
+    private JFXButton botonRegistrar;
 
     @FXML
-    JFXTextField campoMatricula;
+    private JFXTextField campoMatricula;
 
     @FXML
-    TableView tablaALumnos;
+    private TableView tablaALumnos;
 
     @FXML
-    JFXHamburger menuIcon;
+    private JFXHamburger menuIcon;
 
     @FXML
-    JFXDrawer menuDrawer;
+    private JFXDrawer menuDrawer;
 
     @FXML
-    TableColumn colNombre;
+    private TableColumn colNombre;
 
     @FXML
-    TableColumn colMatricula;
+    private TableColumn colMatricula;
 
     @FXML
-    TableColumn colEmail;
+    private TableColumn colEmail;
 
     /**
      * Initializes the controller class.
