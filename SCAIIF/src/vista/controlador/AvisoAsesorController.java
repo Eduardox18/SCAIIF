@@ -90,4 +90,9 @@ public class AvisoAsesorController implements Initializable {
         }
     }
     
+    @FXML
+    private void botonAccion() {
+        System.out.println("Prueba");
+    }
+    
 }
