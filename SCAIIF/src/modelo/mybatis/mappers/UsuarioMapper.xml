@@ -4,6 +4,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Usuario">
+
+    <select id="getTodosUsuarios" resultType="modelo.pojos.Usuario">
+        SELECT nombre, apPaterno, apMaterno FROM usuario;
+    </select>
+
     <select id="getUsuario" parameterType="int" 
             resultType="modelo.pojos.Usuario">
         SELECT * FROM usuario WHERE noPersonal = #{noPersonal};
