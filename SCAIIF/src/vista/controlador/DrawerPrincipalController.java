@@ -119,11 +119,18 @@ public class DrawerPrincipalController implements Initializable {
         }
     }
 
+    /**
+     * Cierra la aplicación
+     * @param event
+     */
     @FXML
     void salirSistema(ActionEvent event) {
         System.exit(0);
     }
 
+    /**
+     * Abre la ventana de comentario para alumno
+     */
     @FXML
     public void lanzarComentarioAlumno() {
         try {
@@ -139,6 +146,9 @@ public class DrawerPrincipalController implements Initializable {
         }
     }
 
+    /**
+     * Abre la ventana de lista de asistencia
+     */
     @FXML
     public void lanzarListaAsistencia() {
         try {
@@ -150,6 +160,23 @@ public class DrawerPrincipalController implements Initializable {
         } catch (IOException ioEx) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
+        }
+    }
+
+    /**
+     * Abre la ventana de registro de inducción
+     */
+    @FXML
+    public void lanzarRegistroInduccion() {
+        try {
+            URL registroInduccion = getClass().getResource("/vista/RegistrarInduccion.fxml");
+            AnchorPane paneInduccion = FXMLLoader.load(registroInduccion);
+            BorderPane border = LoginController.getPrincipal();
+            border.setCenter(paneInduccion);
+        } catch (IOException ioEx) {
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde, ", "Error", ButtonType.OK);
             dialogo.show();
         }
     }
@@ -172,7 +199,7 @@ public class DrawerPrincipalController implements Initializable {
         }
     }
     /**
-     * Método que abre la ventana para consultar el historial de los asesores (Actividades que han
+     * Abre la ventana para consultar el historial de los asesores (Actividades que han
      * impartido y actividades que impartirán)
      */
     @FXML
@@ -189,7 +216,10 @@ public class DrawerPrincipalController implements Initializable {
             dialogo.show();
         }
     }
-    
+
+    /**
+     * Abre la ventana de alta alumno
+     */
     @FXML
     public void lanzarAltaAlumno() {
         try {
@@ -206,7 +236,7 @@ public class DrawerPrincipalController implements Initializable {
     }
     
     /**
-     * Método que abre la ventana para registrar la calificación de un alumno en base
+     * Abre la ventana para registrar la calificación de un alumno en base
      * al curso inscrito.
      */
     @FXML
@@ -223,7 +253,10 @@ public class DrawerPrincipalController implements Initializable {
             dialogo.show();
         }
     }
-    
+
+    /**
+     * Abre la ventana de cancelar actividad
+     */
     @FXML
     public void lanzarCancelarActividad() {
         try {
@@ -238,7 +271,10 @@ public class DrawerPrincipalController implements Initializable {
             dialogo.show();
         }
     }
-    
+
+    /**
+     * Abre la ventana de aviso para asesores
+     */
     @FXML
     public void lanzarAvisoAsesor() {
         try {

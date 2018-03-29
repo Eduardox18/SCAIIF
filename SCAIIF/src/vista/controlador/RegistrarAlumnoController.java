@@ -68,6 +68,9 @@ public class RegistrarAlumnoController implements Initializable {
             menuDrawer.setSidePane(box);
             menuDrawer.setDisable(true);
         } catch (IOException ex) {
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
         }
         
         menuIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
