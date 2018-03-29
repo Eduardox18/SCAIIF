@@ -55,7 +55,7 @@ public class LoginController extends Application {
     }
 
     /**
-     * Método que inicia la aplicación con la pantalla de Login
+     * Inicia la aplicación con la pantalla de Login
      *
      * @param primaryStage
      */
@@ -80,7 +80,7 @@ public class LoginController extends Application {
     }
 
     /**
-     * Método que activa el botón de registrar con base de los campos de ingreso de usuario y
+     * Activa el botón de registrar con base de los campos de ingreso de usuario y
      * contraseña
      */
     @FXML
@@ -93,7 +93,7 @@ public class LoginController extends Application {
     }
 
     /**
-     * Método principal para ingresar al sistema, recupera un usuario si existe ese número de
+     * Permite ingresar al sistema, recupera un usuario si existe ese número de
      * personal y compara las contraseñas para verificar si puede ingresar o no
      */
     @FXML
@@ -150,7 +150,7 @@ public class LoginController extends Application {
 
 
         /**
-         * Método que permite cerrar la aplicación
+         * Cierra la aplicación
          */
         @FXML
         void salirSistema () {
@@ -158,7 +158,7 @@ public class LoginController extends Application {
         }
 
         /**
-         * Método main para lanzar la ventana inicial (Login)
+         * Lanza la ventana inicial (Login)
          * @param args
          */
         public static void main (String[]args){

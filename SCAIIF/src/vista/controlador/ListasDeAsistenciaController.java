@@ -73,7 +73,9 @@ public class ListasDeAsistenciaController implements Initializable {
             menuDrawer.setSidePane(box);
             menuDrawer.setDisable(true);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
         }
         menuIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
             menuDrawer.open();
@@ -85,7 +87,7 @@ public class ListasDeAsistenciaController implements Initializable {
     }
 
     /**
-     * Método que muestra el diálogo para imprimir una lista de asistencia
+     * Muestra el diálogo para imprimir una lista de asistencia
      */
     @FXML
     public void mostrarVentanaImprimir() {
@@ -96,7 +98,7 @@ public class ListasDeAsistenciaController implements Initializable {
     }
 
     /**
-     * Método que muestra el ícono del menú en la ventana
+     * Muestra el ícono del menú en la ventana
      */
     @FXML
     public void mostrarIcono() {
@@ -107,7 +109,7 @@ public class ListasDeAsistenciaController implements Initializable {
     }
 
     /**
-     * Método encargado de llenar el comboBox de Actividades con las Actividades pendientes del
+     * Llena el comboBox de Actividades con las Actividades pendientes del
      * asesor
      */
     private void llenarComboBox() {
@@ -127,7 +129,7 @@ public class ListasDeAsistenciaController implements Initializable {
     }
 
     /**
-     * Método encargado de llenar la tabla con los alumnos inscritos a la actividad seleccionada.
+     * Llena la tabla con los alumnos inscritos a la actividad seleccionada.
      */
     @FXML
     public void llenarTabla() {

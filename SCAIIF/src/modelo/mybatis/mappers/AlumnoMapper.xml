@@ -4,6 +4,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Alumno">
+
+    <select id="getAlumno" parameterType="String" resultType="modelo.pojos.Alumno">
+        SELECT * FROM Alumno WHERE matricula = #{matricula}
+    </select>
+
     <select id="getAlumnos" parameterType="String" 
             resultType="modelo.pojos.Alumno">
         SELECT * FROM Alumno WHERE matricula LIKE CONCAT(#{matricula},'%') OR 

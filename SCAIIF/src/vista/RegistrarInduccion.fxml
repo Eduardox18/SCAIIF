@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.RegistrarInduccionController">
+   <children>
+      <JFXTextField fx:id="campoMatricula" focusColor="#082f8a" labelFloat="true" layoutX="31.0" layoutY="62.0" prefHeight="27.0" prefWidth="260.0" promptText="Matrícula" AnchorPane.leftAnchor="31.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXComboBox fx:id="comboCursos" focusColor="#082f8a" labelFloat="true" layoutX="31.0" layoutY="232.0" prefWidth="260.0" promptText="Curso" AnchorPane.leftAnchor="31.0" />
+      <JFXComboBox fx:id="comboAsesores" focusColor="#082f8a" layoutX="31.0" layoutY="394.0" prefWidth="260.0" promptText="Asesor" AnchorPane.leftAnchor="31.0" />
+      <JFXDatePicker fx:id="asesoriaDP" defaultColor="#082f8a" layoutX="31.0" layoutY="307.0" prefWidth="260.0" promptText="Primera asesoría" AnchorPane.leftAnchor="31.0" />
+      <JFXDatePicker fx:id="induccionDP" defaultColor="#0f9d58" layoutX="352.0" layoutY="308.0" prefWidth="260.0" promptText="Curso de inducción" />
+      <JFXButton fx:id="botonRegistrar" layoutX="310.0" layoutY="457.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Registrar" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <Label fx:id="labelNombre" layoutX="184.0" layoutY="131.0" prefHeight="19.0" prefWidth="486.0" text="Nombre">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="31.0" layoutY="188.0" text="Información de inducción" AnchorPane.leftAnchor="31.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="31.0" layoutY="131.0" text="Nombre de alumno:" AnchorPane.leftAnchor="31.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="botonBuscar" layoutX="312.0" layoutY="62.0" ripplerFill="#15ff00" style="-fx-background-color: #0f9d58;" text="Buscar" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="195.0" layoutY="14.0" text="Registro de Inducción de alumno">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" prefHeight="500.0" prefWidth="700.0" />
+      <JFXHamburger fx:id="menuIcon">
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+      </JFXHamburger>
+   </children>
+</AnchorPane>
