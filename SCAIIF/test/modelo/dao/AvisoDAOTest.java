@@ -30,7 +30,7 @@ public class AvisoDAOTest {
         aviso.setAsunto("Asunto de prueba");
         aviso.setMensaje("mensaje de prueba");
         aviso.setFechaCreacion(Date.valueOf(LocalDate.now()));
-        aviso.setFechaLimite(Date.valueOf(LocalDate.of(2018, Month.MARCH, 25)));
+        aviso.setFechaLimite(Date.valueOf(LocalDate.now().plusDays(2)));
     }
 
     /**

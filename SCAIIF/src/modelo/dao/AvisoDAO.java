@@ -13,6 +13,8 @@ public class AvisoDAO {
     /**
      * Guarda un aviso en la base de datos
      * @param aviso El objeto aviso que contiene los datos que se desean guardar
+     * @return True en caso de que sea guardado correctamente, false en caso de que ocurra algún
+     * error a la hora de guardarlo1
      * @throws Exception 
      */
     public static boolean guardarAviso(Aviso aviso) throws Exception{

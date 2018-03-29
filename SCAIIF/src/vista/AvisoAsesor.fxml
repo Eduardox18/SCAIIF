@@ -14,8 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="vista.controlador.AvisoAsesorController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.AvisoAsesorController">
    <children>
       <VBox alignment="CENTER" prefHeight="500.0" prefWidth="700.0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -25,7 +24,7 @@
                <children>
                   <Label prefHeight="17.0" prefWidth="149.0" text="Fecha límite del aviso:" />
                   <Pane prefHeight="200.0" HBox.hgrow="ALWAYS" />
-                  <JFXDatePicker fx:id="fechaLimite" defaultColor="#082f8a" onAction="#comprobarCampos" prefHeight="27.0" prefWidth="269.0" />
+                  <JFXDatePicker fx:id="fechaLimite" defaultColor="#082f8a" editable="false" onAction="#comprobarCampos" prefHeight="27.0" prefWidth="269.0" />
                </children>
             </HBox>
             <JFXButton fx:id="botonPublicar" defaultButton="true" disable="true" onAction="#botonAccion" prefHeight="52.0" prefWidth="142.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Publicar" textFill="WHITE">

@@ -131,15 +131,36 @@ public class AvisoAsesorController implements Initializable {
      * Muestra un diálogo de confirmación antes de guardar el aviso
      */
     private void botonAccion() {
-        Dialogo dialogo = new Dialogo(Alert.AlertType.CONFIRMATION, 
+        Dialogo dialogoConf = new Dialogo(Alert.AlertType.CONFIRMATION, 
                 "¿Está seguro de que desea publicar el aviso?", "Confirmar publicación", 
                 ButtonType.OK, ButtonType.CANCEL);
+       
+        if(validarFecha(fechaLimite.getValue())){
+            dialogoConf.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    guardarAviso();
+                }
+            });
+        } else {
+            Dialogo dialogo = new Dialogo(Alert.AlertType.WARNING, 
+                    "Ingrese una fecha posterior a la actual, para poder continuar", 
+                    "Fecha incorrecta", ButtonType.OK);
+            dialogo.show();
+        }
         
-        dialogo.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                guardarAviso();
-            }
-        });
+    }
+    
+    /**
+     * Comprueba que la fecha ingresada sea posterior a la fecha actual
+     * @param fecha La fecha que se desea comprobar
+     * @return True en caso de que sea posterior, false en caso de que sea la misma fehca o anteiror
+     */
+    private boolean validarFecha(LocalDate fecha) {
+        boolean resul = false;
+        if(fecha.isAfter(LocalDate.now())){
+            resul = true;
+        }
+        return resul;
     }
     
 }
