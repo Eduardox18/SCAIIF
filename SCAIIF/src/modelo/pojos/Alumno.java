@@ -12,16 +12,19 @@ public class Alumno {
     private String apMaterno;
     private String correo;
     private boolean lenguaIndigena;
+    private Integer vigente;
 
     public Alumno() {}
 
-    public Alumno(String matricula, String nombre, String apPaterno, String apMaterno, String correo, boolean lenguaIndigena) {
+    public Alumno(String matricula, String nombre, String apPaterno, String apMaterno, 
+            String correo, boolean lenguaIndigena, Integer vigente) {
         this.matricula = matricula;
         this.nombre = nombre;
         this.apPaterno = apPaterno;
         this.apMaterno = apMaterno;
         this.correo = correo;
         this.lenguaIndigena = lenguaIndigena;
+        this.vigente = vigente;
     }
 
     public String getMatricula() {
@@ -70,6 +73,14 @@ public class Alumno {
 
     public void setLenguaIndigena(boolean lenguaIndigena) {
         this.lenguaIndigena = lenguaIndigena;
+    }
+
+    public Integer getVigente() {
+        return vigente;
+    }
+
+    public void setVigente(Integer vigente) {
+        this.vigente = vigente;
     }
 
     @Override
