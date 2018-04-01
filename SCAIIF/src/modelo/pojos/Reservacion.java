@@ -9,15 +9,15 @@ import java.util.Date;
  */
 public class Reservacion {
     
-    private int noReservacion;
-    private int noActividad;
+    private Integer noReservacion;
+    private Integer noActividad;
     private String matricula;
     private Date fecha;
     private boolean asistencia;
 
     public Reservacion() {}
 
-    public Reservacion(int noReservacion, int noActividad, String matricula, Date fecha, boolean asistencia) {
+    public Reservacion(Integer noReservacion, Integer noActividad, String matricula, Date fecha, boolean asistencia) {
         this.noReservacion = noReservacion;
         this.noActividad = noActividad;
         this.matricula = matricula;
@@ -25,19 +25,19 @@ public class Reservacion {
         this.asistencia = asistencia;
     }
 
-    public int getNoReservacion() {
+    public Integer getNoReservacion() {
         return noReservacion;
     }
 
-    public void setNoReservacion(int noReservacion) {
+    public void setNoReservacion(Integer noReservacion) {
         this.noReservacion = noReservacion;
     }
 
-    public int getNoActividad() {
+    public Integer getNoActividad() {
         return noActividad;
     }
 
-    public void setNoActividad(int noActividad) {
+    public void setNoActividad(Integer noActividad) {
         this.noActividad = noActividad;
     }
 

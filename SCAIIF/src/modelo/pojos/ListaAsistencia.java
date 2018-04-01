@@ -6,7 +6,7 @@ package modelo.pojos;
  */
 public class ListaAsistencia {
     
-    private int noActividad;
+    private Integer noActividad;
     private String matricula;
     private String nombre;
     private String apPaterno;
@@ -15,7 +15,7 @@ public class ListaAsistencia {
     public ListaAsistencia() {
     }
 
-    public ListaAsistencia(int noActividad, String matricula, String nombre, String apPaterno, String apMaterno) {
+    public ListaAsistencia(Integer noActividad, String matricula, String nombre, String apPaterno, String apMaterno) {
         this.noActividad = noActividad;
         this.matricula = matricula;
         this.nombre = nombre;
@@ -23,11 +23,11 @@ public class ListaAsistencia {
         this.apMaterno = apMaterno;
     }
 
-    public int getNoActividad() {
+    public Integer getNoActividad() {
         return noActividad;
     }
 
-    public void setNoActividad(int noActividad) {
+    public void setNoActividad(Integer noActividad) {
         this.noActividad = noActividad;
     }
 

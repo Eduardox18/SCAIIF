@@ -6,23 +6,23 @@ package modelo.pojos;
  */
 public class Calificacion {
 
-    private int nrc;
+    private Integer nrc;
     private String matricula;
     private double calificacion;
 
     public Calificacion() {}
 
-    public Calificacion(int nrc, String matricula, double calificacion) {
+    public Calificacion(Integer nrc, String matricula, double calificacion) {
         this.nrc = nrc;
         this.matricula = matricula;
         this.calificacion = calificacion;
     }
 
-    public int getNrc() {
+    public Integer getNrc() {
         return nrc;
     }
 
-    public void setNrc(int nrc) {
+    public void setNrc(Integer nrc) {
         this.nrc = nrc;
     }
 

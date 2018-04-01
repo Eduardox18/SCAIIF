@@ -6,25 +6,25 @@ package modelo.pojos;
  */
 public class Curso {
 
-    private int nrc;
+    private Integer nrc;
     private String nombreCurso;
-    private int noCreditos;
-    private int noPersonal;
+    private Integer noCreditos;
+    private Integer noPersonal;
 
     public Curso() {}
 
-    public Curso(int nrc, String nombreCurso, int noCreditos, int noPersonal) {
+    public Curso(Integer nrc, String nombreCurso, Integer noCreditos, Integer noPersonal) {
         this.nrc = nrc;
         this.nombreCurso = nombreCurso;
         this.noCreditos = noCreditos;
         this.noPersonal = noPersonal;
     }
 
-    public int getNrc() {
+    public Integer getNrc() {
         return nrc;
     }
 
-    public void setNrc(int nrc) {
+    public void setNrc(Integer nrc) {
         this.nrc = nrc;
     }
 
@@ -36,19 +36,19 @@ public class Curso {
         this.nombreCurso = nombreCurso;
     }
 
-    public int getNoCreditos() {
+    public Integer getNoCreditos() {
         return noCreditos;
     }
 
-    public void setNoCreditos(int noCreditos) {
+    public void setNoCreditos(Integer noCreditos) {
         this.noCreditos = noCreditos;
     }
 
-    public int getNoPersonal() {
+    public Integer getNoPersonal() {
         return noPersonal;
     }
 
-    public void setNoPersonal(int noPersonal) {
+    public void setNoPersonal(Integer noPersonal) {
         this.noPersonal = noPersonal;
     }
 

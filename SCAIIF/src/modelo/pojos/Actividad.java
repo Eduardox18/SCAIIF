@@ -10,18 +10,18 @@ import java.util.Date;
  */
 public class Actividad {
 
-    private int noActividad;
+    private Integer noActividad;
     private String nombre;
     private Time horaInicio;
     private Time horaFin;
     private Date fecha;
-    private int cupo;
-    private int noPersonal;
+    private Integer cupo;
+    private Integer noPersonal;
 
     public Actividad() {
     }
 
-    public Actividad(int noActividad, String nombre, Time horaInicio, Time horaFin, Date fecha, int cupo, int noPersonal) {
+    public Actividad(Integer noActividad, String nombre, Time horaInicio, Time horaFin, Date fecha, Integer cupo, Integer noPersonal) {
         this.noActividad = noActividad;
         this.nombre = nombre;
         this.horaInicio = horaInicio;
@@ -31,11 +31,11 @@ public class Actividad {
         this.noPersonal = noPersonal;
     }
 
-    public int getNoActividad() {
+    public Integer getNoActividad() {
         return noActividad;
     }
 
-    public void setNoActividad(int noActividad) {
+    public void setNoActividad(Integer noActividad) {
         this.noActividad = noActividad;
     }
 
@@ -71,19 +71,19 @@ public class Actividad {
         this.fecha = fecha;
     }
 
-    public int getCupo() {
+    public Integer getCupo() {
         return cupo;
     }
 
-    public void setCupo(int cupo) {
+    public void setCupo(Integer cupo) {
         this.cupo = cupo;
     }
 
-    public int getNoPersonal() {
+    public Integer getNoPersonal() {
         return noPersonal;
     }
 
-    public void setNoPersonal(int noPersonal) {
+    public void setNoPersonal(Integer noPersonal) {
         this.noPersonal = noPersonal;
     }
 

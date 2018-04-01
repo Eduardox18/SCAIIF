@@ -6,17 +6,17 @@ package modelo.pojos;
  */
 public class Usuario {
     
-    private int noPersonal;
+    private Integer noPersonal;
     private String nombre;
     private String apPaterno;
     private String apMaterno;
     private String correo;
     private String password;
-    private int idCargo;
+    private Integer idCargo;
 
     public Usuario() {}
 
-    public Usuario(int noPersonal, String nombre, String apPaterno, String apMaterno, String correo, String password, int idCargo) {
+    public Usuario(Integer noPersonal, String nombre, String apPaterno, String apMaterno, String correo, String password, Integer idCargo) {
         this.noPersonal = noPersonal;
         this.nombre = nombre;
         this.apPaterno = apPaterno;
@@ -26,11 +26,11 @@ public class Usuario {
         this.idCargo = idCargo;
     }
 
-    public int getNoPersonal() {
+    public Integer getNoPersonal() {
         return noPersonal;
     }
 
-    public void setNoPersonal(int noPersonal) {
+    public void setNoPersonal(Integer noPersonal) {
         this.noPersonal = noPersonal;
     }
 
@@ -74,11 +74,11 @@ public class Usuario {
         this.password = password;
     }
 
-    public int getIdCargo() {
+    public Integer getIdCargo() {
         return idCargo;
     }
 
-    public void setIdCargo(int idCargo) {
+    public void setIdCargo(Integer idCargo) {
         this.idCargo = idCargo;
     }
     
