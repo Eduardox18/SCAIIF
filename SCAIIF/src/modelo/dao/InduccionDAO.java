@@ -12,6 +12,12 @@ import modelo.pojos.Induccion;
  */
 public class InduccionDAO {
 
+    /**
+     * Recupera el historial de un asesor
+     * @param noPersonal
+     * @return
+     * @throws Exception
+     */
     public static List<Induccion> recuperarHistorialAsesores(int noPersonal) throws Exception {
         SqlSession conn = null;
         List<Induccion> historialAsesores = new ArrayList<>();
@@ -26,6 +32,12 @@ public class InduccionDAO {
         return historialAsesores;
     }
 
+    /**
+     * Registra una nueva inducción en la base de datos
+     * @param induccion
+     * @return
+     * @throws Exception
+     */
     public static boolean registrarInduccion(Induccion induccion) throws Exception {
         SqlSession conn = null;
         boolean exito = false;
@@ -40,5 +52,30 @@ public class InduccionDAO {
             }
         }
         return exito;
+    }
+
+    /**
+     * Comprueba si un alumno ya tiene una inducción registrada en un curso.
+     * @param induccion
+     * @return
+     * @throws Exception
+     */
+    public static boolean comprobarInduccion(Induccion induccion) throws Exception {
+        Induccion induccionComprobar;
+        SqlSession conn = null;
+        boolean existe = false;
+
+        try {
+            conn = MyBatisUtils.getSession();
+            induccionComprobar = conn.selectOne("Induccion.getInduccion", induccion);
+            if (induccionComprobar != null) {
+                existe = true;
+            }
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return existe;
     }
 }

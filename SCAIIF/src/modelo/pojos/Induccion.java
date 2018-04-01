@@ -1,6 +1,6 @@
 package modelo.pojos;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Induccion {
     private Integer idInduccion;
@@ -13,8 +13,7 @@ public class Induccion {
     public Induccion() {
     }
 
-    public Induccion(Integer idInduccion, String matricula, Integer nrc, Date cursoInduccion, Date primeraAsesoria, Integer noPersonal) {
-        this.idInduccion = idInduccion;
+    public Induccion(String matricula, Integer nrc, Date cursoInduccion, Date primeraAsesoria, Integer noPersonal) {
         this.matricula = matricula;
         this.nrc = nrc;
         this.cursoInduccion = cursoInduccion;

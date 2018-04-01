@@ -8,6 +8,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT matricula FROM Induccion WHERE noPersonal = #{noPersonal};
     </select>
 
+    <select id="getInduccion" parameterType="modelo.pojos.Induccion" resultType="modelo.pojos.Induccion">
+        SELECT * FROM induccion WHERE matricula = #{matricula} AND nrc = #{nrc};
+    </select>
+
     <insert id="registrarInduccion" parameterType="modelo.pojos.Induccion">
         INSERT INTO induccion(matricula, nrc, cursoInduccion, primeraAsesoria, noPersonal) VALUES
         (#{matricula}, #{nrc}, #{cursoInduccion}, #{primeraAsesoria}, #{noPersonal});

@@ -14,15 +14,18 @@ import java.net.URL;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import modelo.dao.AlumnoDAO;
 import modelo.dao.CursoDAO;
+import modelo.dao.InduccionDAO;
 import modelo.dao.UsuarioDAO;
 import modelo.pojos.Alumno;
 import modelo.pojos.Curso;
+import modelo.pojos.Induccion;
 import modelo.pojos.Usuario;
 import vista.Dialogo;
 
@@ -59,6 +62,8 @@ public class RegistrarInduccionController implements Initializable{
     @FXML
     private JFXDrawer menuDrawer;
 
+    private String matriculaActual;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -78,7 +83,7 @@ public class RegistrarInduccionController implements Initializable{
     }
 
     /**
-     * Método que muestra el ícono del menú en la ventana
+     * Muestra el ícono del menú en la ventana
      */
     @FXML
     public void mostrarIcono() {
@@ -88,6 +93,9 @@ public class RegistrarInduccionController implements Initializable{
         }
     }
 
+    /**
+     * Habilita el botón de buscar matrícula si es una cadena de tamaño válido
+     */
     @FXML
     public void habilitarBuscar() {
         if (campoMatricula.getText().length() == 9) {
@@ -97,6 +105,9 @@ public class RegistrarInduccionController implements Initializable{
         }
     }
 
+    /**
+     * Busca al alumno y guarda su información. También imprime su nombre en pantalla
+     */
     @FXML
     public void buscarAlumno() {
         Alumno alumno = new Alumno();
@@ -104,10 +115,11 @@ public class RegistrarInduccionController implements Initializable{
             alumno = AlumnoDAO.verificarMatricula(campoMatricula.getText());
             if (alumno != null) {
                 labelNombre.setText(alumno.getNombre() + " " + alumno.getApPaterno() + " " + alumno.getApMaterno());
+                matriculaActual = campoMatricula.getText();
                 llenarComboCursos();
                 llenarComboAsesores();
             } else {
-                Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                Dialogo dialogo = new Dialogo(Alert.AlertType.WARNING,
                         "Matrícula no registrada", "Matrícula no válida", ButtonType.OK);
                 dialogo.show();
             }
@@ -118,11 +130,14 @@ public class RegistrarInduccionController implements Initializable{
         }
     }
 
+    /**
+     * Llena el comboBox de cursos con los cursos del alumno
+     */
     public void llenarComboCursos() {
         List<Curso> cursosAlumno;
 
         try {
-            cursosAlumno = CursoDAO.recuperarCursos(campoMatricula.getText());
+            cursosAlumno = CursoDAO.recuperarCursos(matriculaActual);
             ObservableList<Curso> cursosObservable = FXCollections.observableArrayList(cursosAlumno);
             comboCursos.setItems(cursosObservable);
         } catch (Exception ex) {
@@ -133,6 +148,9 @@ public class RegistrarInduccionController implements Initializable{
         }
     }
 
+    /**
+     * Llena el combo de asesores con los asesores del sistema
+     */
     public void llenarComboAsesores() {
         List<Usuario> asesores;
 
@@ -148,6 +166,9 @@ public class RegistrarInduccionController implements Initializable{
         }
     }
 
+    /**
+     * Habilita el botón de registrar si los componentes tienen selección.
+     */
     @FXML
     public void habilitarRegistrar() {
         if (!comboAsesores.getSelectionModel().isEmpty() && !comboCursos.getSelectionModel().isEmpty()
@@ -155,6 +176,43 @@ public class RegistrarInduccionController implements Initializable{
             botonRegistrar.setDisable(false);
         } else {
             botonRegistrar.setDisable(true);
+        }
+    }
+
+    /**
+     * Registra la inducción de un alumno
+     */
+    @FXML
+    public void registrarInduccion() {
+        boolean existe;
+        boolean exito;
+
+        Induccion induccion = new Induccion(matriculaActual,
+                comboCursos.getSelectionModel().getSelectedItem().getNrc(),
+                Date.valueOf(induccionDP.getValue()),
+                Date.valueOf(asesoriaDP.getValue()),
+                comboAsesores.getSelectionModel().getSelectedItem().getNoPersonal());
+
+        try {
+            existe = InduccionDAO.comprobarInduccion(induccion);
+            if (!existe) {
+                exito = InduccionDAO.registrarInduccion(induccion);
+                if (exito) {
+                    Dialogo dialogo = new Dialogo(Alert.AlertType.INFORMATION,
+                            "Información guardada con éxito", "Éxito",
+                            ButtonType.OK);
+                    dialogo.show();
+                }
+            } else {
+                Dialogo dialogo = new Dialogo(Alert.AlertType.WARNING,
+                        "Ya existe un registro de ese alumno en ese curso", "Registro existente",
+                        ButtonType.OK);
+                dialogo.show();
+            }
+        } catch (Exception ex) {
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
         }
     }
 }
