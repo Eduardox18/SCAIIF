@@ -6,21 +6,21 @@ package modelo.pojos;
  */
 public class Cargo {
 
-    private int idCargo;
+    private Integer idCargo;
     private String cargo;
 
     public Cargo() {}
 
-    public Cargo(int idCargo, String cargo) {
+    public Cargo(Integer idCargo, String cargo) {
         this.idCargo = idCargo;
         this.cargo = cargo;
     }
 
-    public int getIdCargo() {
+    public Integer getIdCargo() {
         return idCargo;
     }
 
-    public void setIdCargo(int idCargo) {
+    public void setIdCargo(Integer idCargo) {
         this.idCargo = idCargo;
     }
 

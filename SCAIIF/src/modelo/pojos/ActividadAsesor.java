@@ -14,7 +14,7 @@ import java.sql.Date;
  */
 public class ActividadAsesor {
     
-    private int noActividad;
+    private Integer noActividad;
     private String nombre;
     private Time horaInicio;
     private Time horaFin;
@@ -26,7 +26,7 @@ public class ActividadAsesor {
     public ActividadAsesor() {
     }
 
-    public ActividadAsesor(int noActividad, String nombre, Time horaInicio, Time horaFin, 
+    public ActividadAsesor(Integer noActividad, String nombre, Time horaInicio, Time horaFin,
             Date fecha, String nombreAsesor) {
         this.noActividad = noActividad;
         this.nombre = nombre;
@@ -36,11 +36,11 @@ public class ActividadAsesor {
         this.nombreAsesor = nombreAsesor;
     }
 
-    public int getNoActividad() {
+    public Integer getNoActividad() {
         return noActividad;
     }
 
-    public void setNoActividad(int noActividad) {
+    public void setNoActividad(Integer noActividad) {
         this.noActividad = noActividad;
     }
 

@@ -1,30 +1,33 @@
 package modelo.pojos;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- *
- * @author Esmeralda
- */
 public class Induccion {
+    private Integer idInduccion;
     private String matricula;
-    private int nrc;
-    private int idInduccion;
-    private boolean cursoInduccion;
-    private boolean primeraAsesoria;
-    private Date fecha;
-
-    public Induccion(String matricula, int nrc, int idInduccion, boolean cursoInduccion, boolean primeraAsesoria, Date fecha) {
-        this.matricula = matricula;
-        this.nrc = nrc;
-        this.idInduccion = idInduccion;
-        this.cursoInduccion = cursoInduccion;
-        this.primeraAsesoria = primeraAsesoria;
-        this.fecha = fecha;
-    }
+    private Integer nrc;
+    private Date cursoInduccion;
+    private Date primeraAsesoria;
+    private Integer noPersonal;
 
     public Induccion() {
+    }
+
+    public Induccion(Integer idInduccion, String matricula, Integer nrc, Date cursoInduccion, Date primeraAsesoria, Integer noPersonal) {
+        this.idInduccion = idInduccion;
+        this.matricula = matricula;
+        this.nrc = nrc;
+        this.cursoInduccion = cursoInduccion;
+        this.primeraAsesoria = primeraAsesoria;
+        this.noPersonal = noPersonal;
+    }
+
+    public Integer getIdInduccion() {
+        return idInduccion;
+    }
+
+    public void setIdInduccion(Integer idInduccion) {
+        this.idInduccion = idInduccion;
     }
 
     public String getMatricula() {
@@ -35,49 +38,35 @@ public class Induccion {
         this.matricula = matricula;
     }
 
-    public int getNrc() {
+    public Integer getNrc() {
         return nrc;
     }
 
-    public void setNrc(int nrc) {
+    public void setNrc(Integer nrc) {
         this.nrc = nrc;
     }
 
-    public int getIdInduccion() {
-        return idInduccion;
-    }
-
-    public void setIdInduccion(int idInduccion) {
-        this.idInduccion = idInduccion;
-    }
-
-    public boolean isCursoInduccion() {
+    public Date getCursoInduccion() {
         return cursoInduccion;
     }
 
-    public void setCursoInduccion(boolean cursoInduccion) {
+    public void setCursoInduccion(Date cursoInduccion) {
         this.cursoInduccion = cursoInduccion;
     }
 
-    public boolean isPrimeraAsesoria() {
+    public Date getPrimeraAsesoria() {
         return primeraAsesoria;
     }
 
-    public void setPrimeraAsesoria(boolean primeraAsesoria) {
+    public void setPrimeraAsesoria(Date primeraAsesoria) {
         this.primeraAsesoria = primeraAsesoria;
     }
 
-    public String getFecha() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String fechaTexto = formatter.format(fecha);
-        return fechaTexto;
+    public Integer getNoPersonal() {
+        return noPersonal;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setNoPersonal(Integer noPersonal) {
+        this.noPersonal = noPersonal;
     }
-    
-    
-    
-    
 }
