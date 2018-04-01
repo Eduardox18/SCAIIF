@@ -66,6 +66,7 @@ public class ActividadDAO {
     /**
      * Recupera el nombre de cada noActividad registrado en la base de datos.
      * @return 
+     * @throws java.io.IOException 
      */
     public static List<Actividad> recuperarNoActividad() throws IOException {
         List<Actividad> noActividad = new ArrayList();
@@ -87,16 +88,11 @@ public class ActividadDAO {
      * @throws IOException 
      */
     public static List<ActividadAsesor> recuperarActividadesPendientes() throws IOException {
-        List<ActividadAsesor> actividadesPendientes = new ArrayList<>();
-        SqlSession conn = null;
-        try {
-            conn = MyBatisUtils.getSession();
+        List<ActividadAsesor> actividadesPendientes;
+        try(SqlSession conn = MyBatisUtils.getSession()){
             actividadesPendientes = conn.selectList("Actividad.getActividadesPendientes");
-        } finally {
-            if (conn != null) {
-                conn.close();
-            }
-        }
+        } 
+        
         return actividadesPendientes;
     }
     
@@ -109,21 +105,31 @@ public class ActividadDAO {
      */
     public static boolean actualizarEstado (Integer noActividad, Integer estado) throws IOException{
         boolean resultado = false;
-        SqlSession conn = null;
         HashMap<String, Integer> params = new HashMap<>();
         params.put("noActividad", noActividad);
         params.put("estado", estado);
         
-        try{
-            conn = MyBatisUtils.getSession();
+        try(SqlSession conn = MyBatisUtils.getSession()){
             conn.update("Actividad.cambiarEstado", params);
             conn.commit();
             resultado = true;
-        } finally {
-            if(conn != null) {
-                conn.close();
-            }
-        }
+        } 
         return resultado;
     }
+    
+    /**
+     * Devuelve las actividades en las que no se haya inscrito un alumno determinado
+     * @param matricula La matrícula del alumno
+     * @return Lista con las actividades disponibles
+     * @throws Exception 
+     */
+    public static List<ActividadAsesor> recuperarActividadesDisponibles(String matricula) throws Exception {
+        List <ActividadAsesor> listaActividades;
+        
+        try(SqlSession conn = MyBatisUtils.getSession()){
+            listaActividades = conn.selectList("Actividad.actividadesDisponibles", matricula);
+        }
+        
+        return listaActividades;
+    } 
 }

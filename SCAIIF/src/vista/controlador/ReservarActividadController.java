@@ -25,6 +25,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import modelo.dao.AlumnoDAO;
 import modelo.pojos.Alumno;
@@ -44,7 +46,7 @@ public class ReservarActividadController implements Initializable {
     private JFXTextField campoMatricula;
 
     @FXML
-    private TableView tablaALumnos;
+    private TableView<Alumno> tablaALumnos;
 
     @FXML
     private JFXHamburger menuIcon;
@@ -91,6 +93,14 @@ public class ReservarActividadController implements Initializable {
             }
         });
         
+        botonContinuar.setDisable(true);
+        
+        tablaALumnos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if(newSelection != null){
+                botonContinuar.setDisable(false);
+            }
+        });
+        
         llenarTabla();
     }
 
@@ -117,6 +127,26 @@ public class ReservarActividadController implements Initializable {
             tablaALumnos.setItems(alumnosObservable);
         } catch (Exception ex) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR, 
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
+        }
+    }
+    
+    
+    @FXML
+    private void continuarAccion() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/ReservarParaAlumno.fxml"));
+            AnchorPane pane = loader.load();
+
+            ReservarParaAlumnoController controller = loader.<ReservarParaAlumnoController>getController();
+            controller.infoVentana(tablaALumnos.getSelectionModel().getSelectedItem());
+
+            BorderPane border = LoginController.getPrincipal();
+            border.setCenter(pane);
+        } catch (IOException ioEx) {
+            ioEx.printStackTrace();
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
         }

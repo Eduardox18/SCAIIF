@@ -108,7 +108,7 @@ public class ObservacionController implements Initializable {
      * método buscará a todos los alumnos.
      */
     private void llenarTabla() {
-        ObservableList<Alumno> alumnosObservable = null;
+        ObservableList<Alumno> alumnosObservable;
         try {
             alumnosObservable = FXCollections.observableArrayList(AlumnoDAO.recuperarAlumnos(
                     campoMatricula.getText()));

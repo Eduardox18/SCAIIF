@@ -37,5 +37,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         UPDATE actividad set idEstado = #{estado} where noActividad = 
         #{noActividad};
     </update>
+    
+    <select id="actividadesDisponibles" 
+            resultType="modelo.pojos.ActividadAsesor" parameterType="string">
+        SELECT actividad.nombre, horaInicio, horaFin, fecha, usuario.nombre 
+        AS nombreAsesor FROM actividad INNER JOIN usuario ON 
+        actividad.noPersonal = usuario.noPersonal WHERE noActividad NOT IN 
+        (SELECT noActividad FROM reservacion WHERE matricula = #{matricula});
+    </select>
      
 </mapper>
