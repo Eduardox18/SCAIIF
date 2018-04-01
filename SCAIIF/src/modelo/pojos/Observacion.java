@@ -6,15 +6,15 @@ package modelo.pojos;
  */
 public class Observacion {
     
-    private int idObservacion;
+    private Integer idObservacion;
     private String matricula;
-    private int noPersonal;
+    private Integer noPersonal;
     private String asunto;
     private String comentario;
     
     public Observacion() {}
 
-    public Observacion(int idObservacion, String matricula, int noPersonal, String asunto, String comentario) {
+    public Observacion(Integer idObservacion, String matricula, Integer noPersonal, String asunto, String comentario) {
         this.idObservacion = idObservacion;
         this.matricula = matricula;
         this.noPersonal = noPersonal;
@@ -22,11 +22,11 @@ public class Observacion {
         this.comentario = comentario;
     }
 
-    public int getIdObservacion() {
+    public Integer getIdObservacion() {
         return idObservacion;
     }
 
-    public void setIdObservacion(int idObservacion) {
+    public void setIdObservacion(Integer idObservacion) {
         this.idObservacion = idObservacion;
     }
 
@@ -38,11 +38,11 @@ public class Observacion {
         this.matricula = matricula;
     }
 
-    public int getNoPersonal() {
+    public Integer getNoPersonal() {
         return noPersonal;
     }
 
-    public void setNoPersonal(int noPersonal) {
+    public void setNoPersonal(Integer noPersonal) {
         this.noPersonal = noPersonal;
     }
 
