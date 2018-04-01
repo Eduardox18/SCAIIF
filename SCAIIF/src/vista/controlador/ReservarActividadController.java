@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package vista.controlador;
 
 import com.jfoenix.controls.JFXButton;
@@ -7,6 +12,8 @@ import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,8 +25,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import modelo.dao.AlumnoDAO;
 import modelo.pojos.Alumno;
@@ -30,11 +35,11 @@ import vista.Dialogo;
  *
  * @author andres
  */
-public class ObservacionController implements Initializable {
-
+public class ReservarActividadController implements Initializable {
+    
     @FXML
-    private JFXButton botonRegistrar;
-
+    private JFXButton botonContinuar;
+    
     @FXML
     private JFXTextField campoMatricula;
 
@@ -55,9 +60,12 @@ public class ObservacionController implements Initializable {
 
     @FXML
     private TableColumn colEmail;
+    
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -75,23 +83,21 @@ public class ObservacionController implements Initializable {
             menuDrawer.setDisable(false);
             menuIcon.setVisible(false);
         });
-
-        campoMatricula.textProperty().addListener((observable, oldValue, newValue) -> {
-            llenarTabla();
+        
+        campoMatricula.textProperty().addListener(new ChangeListener<String>(){
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                llenarTabla();
+            }
         });
-
-        botonRegistrar.setDisable(true);
-        tablaALumnos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            botonRegistrar.setDisable(false);
-        });
-
+        
         llenarTabla();
     }
 
     @FXML
     /**
      * *
-     * Metodo que se encarga de mostrar el ícono del menú cada vez que se sale del mnú
+     * Metodo que se encarga de mostrar el ícono del menú cada vez que se sale del menú
      */
     public void mostrarIcono() {
         if (!menuDrawer.isShown()) {
@@ -99,14 +105,7 @@ public class ObservacionController implements Initializable {
             menuDrawer.setDisable(true);
         }
     }
-
-    /**
-     * *
-     * Recupera los alumnos de la base de datos y mostrarlos en la tabla.
-     *
-     * @param nombreAlumno El nombre o matrícula del alumno que se busca, en caso de estar vacio, el
-     * método buscará a todos los alumnos.
-     */
+    
     private void llenarTabla() {
         ObservableList<Alumno> alumnosObservable = null;
         try {
@@ -122,27 +121,5 @@ public class ObservacionController implements Initializable {
             dialogo.show();
         }
     }
-
-    @FXML
-    /**
-     * 
-     * Crea la ventana CrearComentario desde donde se añade el comentario al alumno.
-     */
-    private void lanzarEditorComentario() {
-        Alumno alumnoRecuperado = (Alumno) tablaALumnos.getSelectionModel().getSelectedItem();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/CrearObservacion.fxml"));
-            AnchorPane paneLista = loader.load();
-
-            CrearObservacionController controller = loader.<CrearObservacionController>getController();
-            controller.infoVentana(alumnoRecuperado.getMatricula());
-
-            BorderPane border = LoginController.getPrincipal();
-            border.setCenter(paneLista);
-        } catch (Exception ex) {
-            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR, "No se ha seleccionado a ningún alumno", 
-                    "Error", ButtonType.OK);
-            dialogo.show();
-        }
-    }
+    
 }
