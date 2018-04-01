@@ -16,7 +16,7 @@ public class AlumnoDAO {
 
     /**
      * Concecta con la base de datos para comprobar que la matrícula que se intenta utilizar no esté
-     * ocupara previamente
+     * ocupada previamente
      *
      * @param matricula Es la matrícula que se desea comprobar
      * @return Devuelve true en caso de que la matrícula esté disponible y false si ya ha sido
@@ -127,5 +127,25 @@ public class AlumnoDAO {
             }
         }
         return correoAlumnos;
+    }
+
+    /**
+     * Recupera la información de un alumno a partir de su matrícula
+     * @param matricula
+     * @return
+     * @throws IOException
+     */
+    public static Alumno verificarMatricula(String matricula) throws IOException {
+        Alumno alumno = new Alumno();
+        SqlSession conn = null;
+        try {
+            conn = MyBatisUtils.getSession();
+            alumno = conn.selectOne("Alumno.getAlumno", matricula);
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return alumno;
     }
 }

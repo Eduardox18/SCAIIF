@@ -7,6 +7,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="getCursos" parameterType="String" resultType="modelo.pojos.Curso">
         SELECT nombreCurso FROM curso INNER JOIN calificacion ON
-        curso.nrc = calificacion.nrc WHERE calificacion.matricula = #{matricula};
+        curso.nrc = calificacion.nrc WHERE matricula = #{matricula};
     </select>
 </mapper>

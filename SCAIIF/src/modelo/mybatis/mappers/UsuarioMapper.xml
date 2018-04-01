@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="Usuario">
 
-    <select id="getTodosUsuarios" resultType="modelo.pojos.Usuario">
-        SELECT nombre, apPaterno, apMaterno FROM usuario;
+    <select id="getAsesores" resultType="modelo.pojos.Usuario">
+        SELECT * FROM usuario WHERE idCargo = 2;
     </select>
 
     <select id="getUsuario" parameterType="int" 

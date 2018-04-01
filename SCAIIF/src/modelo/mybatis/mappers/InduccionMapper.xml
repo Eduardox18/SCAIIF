@@ -7,4 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getHistorial" parameterType="int" resultType="modelo.pojos.Induccion">
         SELECT matricula FROM Induccion WHERE noPersonal = #{noPersonal};
     </select>
+
+    <insert id="registrarInduccion" parameterType="modelo.pojos.Induccion">
+        INSERT INTO induccion(matricula, nrc, cursoInduccion, primeraAsesoria, noPersonal) VALUES
+        (#{matricula}, #{nrc}, #{cursoInduccion}, #{primeraAsesoria}, #{noPersonal});
+    </insert>
 </mapper>

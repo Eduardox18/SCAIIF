@@ -52,4 +52,8 @@ public class Curso {
         this.noPersonal = noPersonal;
     }
 
+    @Override
+    public String toString() {
+        return nombreCurso;
+    }
 }
