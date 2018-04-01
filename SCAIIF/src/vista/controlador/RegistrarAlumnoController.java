@@ -170,6 +170,7 @@ public class RegistrarAlumnoController implements Initializable {
                     alumno.setApMaterno(determinarApMaterno());
                     alumno.setCorreo(tfCorreoElectronico.getText());
                     alumno.setLenguaIndigena(determinarLengua());
+                    alumno.setVigente(1);
                     try {
                         AlumnoDAO.agregarAlumno(alumno);
                         dialogo = new Dialogo(Alert.AlertType.INFORMATION, 

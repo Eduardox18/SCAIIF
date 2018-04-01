@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="258.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.DrawerPrincipalController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="258.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.DrawerPrincipalController">
    <children>
       <ImageView fitHeight="128.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -43,7 +43,7 @@
                <content>
                   <VBox alignment="TOP_CENTER" prefHeight="212.0" prefWidth="383.0" style="-fx-background-color: #FFFFFF;">
                      <children>
-                        <JFXButton fx:id="reservarActividadButton" prefHeight="27.0" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Reservar" textFill="WHITE" />
+                        <JFXButton fx:id="reservarActividadButton" onAction="#lanzarReservarActividad" prefHeight="27.0" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Reservar" textFill="WHITE" />
                         <JFXButton fx:id="cancelarActividadButton" onAction="#lanzarCancelarActividad" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Cancelar" textFill="WHITE" />
                         <JFXButton fx:id="consultarPorImpartirButton" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Consultar actividad por impartir" textFill="WHITE" />
                         <JFXButton fx:id="consultarListaAsistenciaButton" onAction="#lanzarListaAsistencia" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Consultar lista de asistencia" textFill="WHITE" />

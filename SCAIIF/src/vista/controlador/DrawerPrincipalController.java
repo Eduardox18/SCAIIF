@@ -86,6 +86,7 @@ public class DrawerPrincipalController implements Initializable {
                 registrarObservacionButton.setDisable(true);
                 registrarCalificacionButton.setDisable(true);
                 consultarPorImpartirButton.setDisable(true);
+                reservarActividadButton.setDisable(true);
                 consultarListaAsistenciaButton.setDisable(true);
                 registrarAsistenciaButton.setDisable(true);
                 break;
@@ -106,7 +107,6 @@ public class DrawerPrincipalController implements Initializable {
                 registrarCalificacionButton.setDisable(true);
                 registrarAvisoButton.setDisable(true);
                 consultarActividadAsesorButton.setDisable(true);
-                reservarActividadButton.setDisable(true);
                 cancelarActividadButton.setDisable(true);
                 consultarPorImpartirButton.setDisable(true);
                 consultarListaAsistenciaButton.setDisable(true);
@@ -283,6 +283,22 @@ public class DrawerPrincipalController implements Initializable {
 
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneAviso);
+        } catch (IOException ioEx) {
+            ioEx.printStackTrace();
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
+        }
+    }
+    
+    @FXML
+    public void lanzarReservarActividad() {
+        try {
+            URL reservarAct = getClass().getResource("/vista/ReservarActividad.fxml");
+            AnchorPane paneReservar = FXMLLoader.load(reservarAct);
+
+            BorderPane border = LoginController.getPrincipal();
+            border.setCenter(paneReservar);
         } catch (IOException ioEx) {
             ioEx.printStackTrace();
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
