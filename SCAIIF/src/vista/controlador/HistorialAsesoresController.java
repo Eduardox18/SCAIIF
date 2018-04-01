@@ -53,8 +53,6 @@ public class HistorialAsesoresController implements Initializable {
     @FXML
     TableColumn colMatricula;
     @FXML
-    TableColumn colFecha;
-    @FXML
     TableView tablaActividades;
     @FXML
     TableColumn colNombre;
@@ -156,7 +154,6 @@ public class HistorialAsesoresController implements Initializable {
             historialReservaciones = ActividadDAO.recuperarHistorial(Integer.parseInt(campoNoPersonal.getText()));
             ObservableList<Induccion> actividadesIntro = FXCollections.observableArrayList(historialAsesores);
             colMatricula.setCellValueFactory(new PropertyValueFactory<>("matricula"));
-            colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
             tablaInduccion.setItems(actividadesIntro);
 
             ObservableList<Actividad> actividades = FXCollections.observableArrayList(historialReservaciones);
@@ -164,6 +161,7 @@ public class HistorialAsesoresController implements Initializable {
             colFechaAct.setCellValueFactory(new PropertyValueFactory<>("fecha"));
             tablaActividades.setItems(actividades);
         } catch (Exception ex) {
+            ex.printStackTrace();
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                 "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
