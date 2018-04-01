@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.HistorialAsesoresController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.HistorialAsesoresController">
    <children>
       <ImageView fitHeight="65.0" fitWidth="79.0" layoutX="76.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -36,8 +36,7 @@
       </Label>
       <TableView fx:id="tablaInduccion" layoutX="46.0" layoutY="158.0" prefHeight="125.0" prefWidth="602.0">
         <columns>
-          <TableColumn fx:id="colMatricula" prefWidth="303.0" text="Matrícula" />
-          <TableColumn fx:id="colFecha" prefWidth="298.0" text="Fecha" />
+          <TableColumn fx:id="colMatricula" prefWidth="600.0" text="Matrícula" />
         </columns>
       </TableView>
       <TableView fx:id="tablaActividades" layoutX="47.0" layoutY="321.0" prefHeight="109.0" prefWidth="602.0">

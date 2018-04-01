@@ -48,8 +48,8 @@
                   <Font size="15.0" />
                </font>
             </JFXPasswordField>
-            <JFXButton fx:id="botonSalir" buttonType="RAISED" cancelButton="true" layoutX="293.0" layoutY="14.0" onAction="#salirSistema" prefHeight="4.0" prefWidth="76.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Salir" textFill="WHITE" />
-            <JFXButton fx:id="botonIngresar" buttonType="RAISED" disable="true" layoutX="126.0" layoutY="318.0" onAction="#ingresarSistema" prefHeight="36.0" prefWidth="129.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Ingresar" textFill="WHITE" />
+            <JFXButton fx:id="botonSalir" buttonType="RAISED" layoutX="293.0" layoutY="14.0" onAction="#salirSistema" prefHeight="4.0" prefWidth="76.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Salir" textFill="WHITE" />
+            <JFXButton fx:id="botonIngresar" buttonType="RAISED" defaultButton="true" disable="true" layoutX="126.0" layoutY="318.0" onAction="#ingresarSistema" prefHeight="36.0" prefWidth="129.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Ingresar" textFill="WHITE" />
             <ImageView fitHeight="49.0" fitWidth="45.0" layoutX="74.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@recursos/img_326343.png" />
