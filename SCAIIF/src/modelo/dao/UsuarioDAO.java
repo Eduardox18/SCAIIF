@@ -4,6 +4,8 @@ import modelo.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import modelo.pojos.Usuario;
 
+import java.util.List;
+
 /**
  *
  * @author lalo
@@ -49,5 +51,20 @@ public class UsuarioDAO {
             }
         }
         return ingresado;
+    }
+
+    public static List<Usuario> recuperarAsesores() throws Exception {
+        List<Usuario> asesores;
+        SqlSession conn = null;
+
+        try {
+            conn = MyBatisUtils.getSession();
+            asesores = conn.selectList("Usuario.getAsesores");
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return asesores;
     }
 }

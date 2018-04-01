@@ -25,4 +25,20 @@ public class InduccionDAO {
         }
         return historialAsesores;
     }
+
+    public static boolean registrarInduccion(Induccion induccion) throws Exception {
+        SqlSession conn = null;
+        boolean exito = false;
+        try {
+            conn = MyBatisUtils.getSession();
+            conn.insert("Induccion.registrarInduccion", induccion);
+            conn.commit();
+            exito = true;
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return exito;
+    }
 }

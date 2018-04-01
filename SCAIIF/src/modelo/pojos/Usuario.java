@@ -81,6 +81,16 @@ public class Usuario {
     public void setIdCargo(Integer idCargo) {
         this.idCargo = idCargo;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        String nombreCompleto;
+        if (this.apMaterno == null) {
+            nombreCompleto = this.apPaterno + " " + this.nombre;
+        } else {
+            nombreCompleto = this.apPaterno + " " + this.apMaterno + " " + this.nombre;
+        }
+
+        return nombreCompleto;
+    }
 }

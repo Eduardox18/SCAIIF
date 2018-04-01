@@ -161,7 +161,6 @@ public class HistorialAsesoresController implements Initializable {
             colFechaAct.setCellValueFactory(new PropertyValueFactory<>("fecha"));
             tablaActividades.setItems(actividades);
         } catch (Exception ex) {
-            ex.printStackTrace();
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                 "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
