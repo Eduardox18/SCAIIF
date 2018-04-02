@@ -20,8 +20,8 @@
       </JFXTextField>
       <JFXComboBox fx:id="comboCursos" focusColor="#082f8a" labelFloat="true" layoutX="31.0" layoutY="232.0" onAction="#habilitarRegistrar" prefWidth="260.0" promptText="Curso" AnchorPane.leftAnchor="31.0" />
       <JFXComboBox fx:id="comboAsesores" focusColor="#082f8a" layoutX="31.0" layoutY="394.0" onAction="#habilitarRegistrar" prefWidth="260.0" promptText="Asesor" AnchorPane.leftAnchor="31.0" />
-      <JFXDatePicker fx:id="asesoriaDP" defaultColor="#082f8a" layoutX="31.0" layoutY="307.0" onKeyPressed="#habilitarRegistrar" onMouseClicked="#habilitarRegistrar" prefWidth="260.0" promptText="Primera asesoría" AnchorPane.leftAnchor="31.0" />
-      <JFXDatePicker fx:id="induccionDP" defaultColor="#0f9d58" layoutX="352.0" layoutY="308.0" onKeyPressed="#habilitarRegistrar" onMouseClicked="#habilitarRegistrar" prefWidth="260.0" promptText="Curso de inducción" />
+      <JFXDatePicker fx:id="asesoriaDP" defaultColor="#082f8a" editable="false" layoutX="31.0" layoutY="307.0" onKeyPressed="#habilitarRegistrar" onMouseClicked="#habilitarRegistrar" prefWidth="260.0" promptText="Primera asesoría" AnchorPane.leftAnchor="31.0" />
+      <JFXDatePicker fx:id="induccionDP" defaultColor="#0f9d58" editable="false" layoutX="352.0" layoutY="308.0" onKeyPressed="#habilitarRegistrar" onMouseClicked="#habilitarRegistrar" prefWidth="260.0" promptText="Curso de inducción" />
       <JFXButton fx:id="botonRegistrar" disable="true" layoutX="310.0" layoutY="457.0" onAction="#registrarInduccion" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Registrar" textFill="WHITE">
          <font>
             <Font size="15.0" />
