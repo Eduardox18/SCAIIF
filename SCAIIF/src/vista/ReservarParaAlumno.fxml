@@ -21,8 +21,8 @@
          <children>
             <GridPane prefHeight="96.0" prefWidth="640.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="316.0" minWidth="10.0" prefWidth="152.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="513.0" minWidth="10.0" prefWidth="488.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -30,20 +30,38 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Matrícula:" />
-                  <Label text="Nombre:" GridPane.rowIndex="1" />
-                  <Label text="Correo electrónico:" GridPane.rowIndex="2" />
-                  <Label fx:id="labelMatricula" text="Label" GridPane.columnIndex="1" />
-                  <Label fx:id="labelNombre" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label fx:id="labelMail" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="Matrícula:">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label text="Nombre:" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label text="Correo electrónico:" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label fx:id="labelMatricula" text="Label" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label fx:id="labelNombre" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label fx:id="labelMail" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
                </children>
             </GridPane>
-            <Separator prefWidth="200.0">
+            <Separator prefHeight="9.0" prefWidth="640.0">
                <padding>
-                  <Insets bottom="30.0" />
+                  <Insets bottom="10.0" />
                </padding>
             </Separator>
-            <TableView fx:id="tablaActividades" prefHeight="200.0" prefWidth="200.0">
+            <TableView fx:id="tablaActividades" prefHeight="231.0" prefWidth="640.0">
               <columns>
                 <TableColumn fx:id="colNombre" prefWidth="75.0" text="Nombre" />
                 <TableColumn fx:id="colFecha" prefWidth="101.0" text="Fecha" />
@@ -55,17 +73,17 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <HBox prefHeight="44.0" prefWidth="640.0" VBox.vgrow="NEVER">
+            <HBox prefHeight="44.0" prefWidth="640.0">
                <children>
                   <JFXButton fx:id="botonCancelar" onAction="#accionRegresar" prefHeight="52.0" prefWidth="176.0" ripplerFill="#55f8ff" style="-fx-background-color: #0f9d58;" text="Cancelar" textFill="WHITE">
                      <font>
-                        <Font size="25.0" />
+                        <Font size="20.0" />
                      </font>
                   </JFXButton>
                   <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                   <JFXButton fx:id="botonReservar" prefHeight="52.0" prefWidth="179.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Reservar" textFill="WHITE">
                      <font>
-                        <Font size="25.0" />
+                        <Font size="20.0" />
                      </font>
                   </JFXButton>
                </children>
