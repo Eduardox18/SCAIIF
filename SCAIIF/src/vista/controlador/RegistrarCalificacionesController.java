@@ -184,6 +184,7 @@ public class RegistrarCalificacionesController implements Initializable {
             if (alumnoCalificacion > 0 && alumnoCalificacion <= 10) {
                 Calificacion calificacion = new Calificacion();
                 calificacion.setMatricula(matricula);
+                calificacion.setCalificacion(alumnoCalificacion);
                 try {
                     CalificacionDAO.registrarCalificacion(calificacion);
                     dialogo = new Dialogo(Alert.AlertType.INFORMATION,
@@ -198,7 +199,7 @@ public class RegistrarCalificacionesController implements Initializable {
                         "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
                     dialogo.show();
                 }
-                calificacion.setCalificacion(alumnoCalificacion);
+                
             } else {
                 dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Ingresa una calificación mayor a 0 y menor a 10.", "Error", ButtonType.OK);
