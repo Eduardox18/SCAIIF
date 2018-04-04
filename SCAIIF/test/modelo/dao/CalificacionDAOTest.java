@@ -30,7 +30,7 @@ public class CalificacionDAOTest {
     }
 
     /**
-     * Test of registrarCalificacion method, of class CalificacionDAO.
+     * Test of registrarCalificacion method, of class CalificacionModuloDAO.
      */
     @Test
     public void testRegistrarCalificacion() throws Exception {
