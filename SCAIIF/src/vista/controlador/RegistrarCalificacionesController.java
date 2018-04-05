@@ -19,11 +19,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import modelo.dao.CalificacionDAO;
+import modelo.dao.CalificacionModuloDAO;
 import modelo.dao.ConversacionDAO;
 import modelo.dao.CursoDAO;
 import modelo.dao.ModuloDAO;
-import modelo.pojos.Calificacion;
+import modelo.pojos.CalificacionModulo;
 import modelo.pojos.Conversacion;
 import modelo.pojos.Curso;
 import modelo.pojos.Modulo;
@@ -182,10 +182,11 @@ public class RegistrarCalificacionesController implements Initializable {
         try {
             double alumnoCalificacion = Double.parseDouble(TFCalificacion.getText());
             if (alumnoCalificacion > 0 && alumnoCalificacion <= 10) {
-                Calificacion calificacion = new Calificacion();
+                CalificacionModulo calificacion = new CalificacionModulo();
                 calificacion.setMatricula(matricula);
+                calificacion.setCalificacion(alumnoCalificacion);
                 try {
-                    CalificacionDAO.registrarCalificacion(calificacion);
+                    CalificacionModuloDAO.registrarCalificacion(calificacion);
                     dialogo = new Dialogo(Alert.AlertType.INFORMATION,
                         "Calificación registrada correctamente.", "Éxito", ButtonType.OK);
                     dialogo.show();
@@ -198,7 +199,7 @@ public class RegistrarCalificacionesController implements Initializable {
                         "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
                     dialogo.show();
                 }
-                calificacion.setCalificacion(alumnoCalificacion);
+                
             } else {
                 dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Ingresa una calificación mayor a 0 y menor a 10.", "Error", ButtonType.OK);

@@ -3,9 +3,9 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="Calificación">
+<mapper namespace="CalificacionModulo">
 
-    <update id="actualizarCalificacion" parameterType="modelo.pojos.Calificacion">
+    <update id="actualizarCalificacion" parameterType="modelo.pojos.CalificacionModulo">
         UPDATE Calificacion SET calificacion = #{calificacion}
         WHERE matricula = #{matricula};
     </update>
