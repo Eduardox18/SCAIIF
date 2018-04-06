@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.SeleccionDeCursoController">
+   <children>
+      <Label layoutX="249.0" layoutY="22.0" text="Selección de curso">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="comboPeriodo" focusColor="#082f8a" labelFloat="true" layoutX="237.0" layoutY="89.0" prefHeight="27.0" prefWidth="249.0" promptText="Periodo" unFocusColor="#0f9d58" />
+      <TableView fx:id="tablaCursos" layoutX="32.0" layoutY="167.0" prefHeight="251.0" prefWidth="644.0">
+        <columns>
+          <TableColumn prefWidth="116.13456726074219" text="NRC" />
+          <TableColumn prefWidth="525.9999847412109" text="Curso" />
+        </columns>
+      </TableView>
+      <JFXButton fx:id="botonContinuar" disable="true" layoutX="306.0" layoutY="443.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Continuar" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" prefHeight="500.0" prefWidth="700.0" />
+      <JFXHamburger fx:id="menuIcon">
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+      </JFXHamburger>
+   </children>
+</AnchorPane>

@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="258.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.DrawerPrincipalController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="258.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.DrawerPrincipalController">
    <children>
       <ImageView fitHeight="128.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -59,7 +59,7 @@
                <content>
                   <VBox alignment="TOP_CENTER" prefHeight="209.0" prefWidth="392.0" style="-fx-background-color: #FFFFFF;">
                      <children>
-                        <JFXButton fx:id="registrarCalendarioCursoButton" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Registrar calendario" textFill="WHITE" />
+                        <JFXButton fx:id="registrarCalendarioCursoButton" onAction="#lanzarCrearCalendarioCurso" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Registrar calendario" textFill="WHITE" />
                         <JFXButton fx:id="consultarCalendarioCursoButton" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Consultar calendario" textFill="WHITE" />
                      </children>
                   </VBox>
