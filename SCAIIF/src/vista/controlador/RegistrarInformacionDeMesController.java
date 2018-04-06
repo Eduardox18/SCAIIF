@@ -3,9 +3,13 @@ package vista.controlador;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Spinner;
 
-public class RegistrarInformacionDeMesController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class RegistrarInformacionDeMesController implements Initializable {
 
     @FXML
     private JFXComboBox<?> comboMes;
@@ -30,5 +34,8 @@ public class RegistrarInformacionDeMesController {
 
     @FXML
     private JFXButton guardarButton;
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {}
 
 }

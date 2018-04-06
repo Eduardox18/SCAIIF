@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.RegistroDiasFestivos">
+<AnchorPane prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.RegistroDiasFestivosController">
    <children>
       <TableView fx:id="festivosTable" layoutX="16.0" layoutY="25.0" prefHeight="196.0" prefWidth="469.0">
         <columns>

@@ -284,13 +284,15 @@ public class DrawerPrincipalController implements Initializable {
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneAviso);
         } catch (IOException ioEx) {
-            ioEx.printStackTrace();
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
         }
     }
-    
+
+    /**
+     * Abre la ventana de reservar actividad
+     */
     @FXML
     public void lanzarReservarActividad() {
         try {
@@ -299,6 +301,24 @@ public class DrawerPrincipalController implements Initializable {
 
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneReservar);
+        } catch (IOException ioEx) {
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
+        }
+    }
+
+    /**
+     * Abre la ventana para crear el calendario de un curso
+     */
+    @FXML
+    public void lanzarCrearCalendarioCurso() {
+        try {
+            URL crearCalendario = getClass().getResource("/vista/SeleccionDeCurso.fxml");
+            AnchorPane paneCalendario = FXMLLoader.load(crearCalendario);
+
+            BorderPane border = LoginController.getPrincipal();
+            border.setCenter(paneCalendario);
         } catch (IOException ioEx) {
             ioEx.printStackTrace();
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,

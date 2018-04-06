@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.ResumenCalendarioCurso">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.ResumenCalendarioCursoController">
    <children>
       <Label fx:id="labelCurso" alignment="CENTER" layoutX="30.0" layoutY="17.0" prefHeight="29.0" prefWidth="648.0" text="*Información de Curso*" textAlignment="CENTER">
          <font>
@@ -42,7 +41,7 @@
          </font>
       </JFXButton>
       <Separator layoutY="349.0" prefHeight="17.0" prefWidth="700.0" />
-      <JFXButton fx:id="guardarButton" layoutX="320.0" layoutY="292.0" ripplerFill="#15ff00" style="-fx-background-color: #0f9d58;" text="Guardar" textFill="WHITE">
+      <JFXButton fx:id="guardarButton" disable="true" layoutX="320.0" layoutY="292.0" ripplerFill="#15ff00" style="-fx-background-color: #0f9d58;" text="Guardar" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -57,8 +56,8 @@
             <Font size="15.0" />
          </font>
       </JFXButton>
-      <JFXDrawer defaultDrawerSize="230.0" prefHeight="500.0" prefWidth="700.0" />
-      <JFXHamburger>
+      <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" prefHeight="500.0" prefWidth="700.0" />
+      <JFXHamburger fx:id="menuIcon">
          <padding>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </padding>
