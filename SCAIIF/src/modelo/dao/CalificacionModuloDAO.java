@@ -1,7 +1,10 @@
 package modelo.dao;
 
+import java.util.ArrayList;
+import java.util.List;
 import modelo.mybatis.MyBatisUtils;
 import modelo.pojos.CalificacionModulo;
+import modelo.pojos.Modulo;
 import org.apache.ibatis.session.SqlSession;
 
 /**
@@ -21,7 +24,7 @@ public class CalificacionModuloDAO {
         SqlSession conn = null;
         try {
             conn = MyBatisUtils.getSession();
-            conn.insert("Calificación.actualizarCalificacion", calificacion);
+            conn.insert("CalificacionModulo.actualizarCalificacion", calificacion);
             conn.commit();
             resultado = true;
         } finally {
@@ -31,5 +34,4 @@ public class CalificacionModuloDAO {
         }
         return resultado;
     }
-
 }
