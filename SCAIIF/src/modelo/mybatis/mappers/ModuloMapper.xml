@@ -4,7 +4,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Modulo">
-    <select id="getModulo" resultType="modelo.pojos.Modulo">
-        SELECT noModulo FROM Modulo;
+    <select id="getModulo" parameterType="String" resultType="modelo.pojos.Modulo">
+        SELECT modulo.idModulo FROM Modulo INNER JOIN calificacionModulo ON
+        modulo.idModulo = calificacionModulo.idModulo WHERE matricula = #{matricula};
     </select>
 </mapper>
