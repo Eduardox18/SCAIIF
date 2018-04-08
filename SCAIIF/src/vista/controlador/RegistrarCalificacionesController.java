@@ -17,13 +17,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import modelo.dao.CalificacionDAO;
+import modelo.dao.CalificacionModuloDAO;
 import modelo.dao.ConversacionDAO;
 import modelo.dao.CursoDAO;
 import modelo.dao.ModuloDAO;
-import modelo.pojos.Calificacion;
+import modelo.pojos.CalificacionModulo;
 import modelo.pojos.Conversacion;
 import modelo.pojos.Curso;
 import modelo.pojos.Modulo;
@@ -53,6 +54,8 @@ public class RegistrarCalificacionesController implements Initializable {
     @FXML
     private JFXButton BTBuscar;
     @FXML
+    private Label lbl_calificacion;
+    @FXML
     JFXHamburger menuIcon = new JFXHamburger();
     @FXML
     JFXDrawer menuDrawer = new JFXDrawer();
@@ -65,7 +68,7 @@ public class RegistrarCalificacionesController implements Initializable {
             menuDrawer.setDisable(true);
         } catch (IOException ex) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
-                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+                "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
         }
         menuIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -156,10 +159,10 @@ public class RegistrarCalificacionesController implements Initializable {
             ObservableList<Integer> conversacionesObservable = FXCollections.observableArrayList(noConv);
             CBConv.setItems(conversacionesObservable);
 
-            modulos = ModuloDAO.recuperarModulos();
+            modulos = ModuloDAO.recuperarModulos(matricula);
             List<Integer> noModulo = new ArrayList<>();
             for (Modulo modulo : modulos) {
-                noModulo.add(modulo.getNoModulo());
+                noModulo.add(modulo.getIdModulo());
             }
             ObservableList<Integer> modulosObservable = FXCollections.observableArrayList(noModulo);
             CBModulo.setItems(modulosObservable);
@@ -181,31 +184,66 @@ public class RegistrarCalificacionesController implements Initializable {
 
         try {
             double alumnoCalificacion = Double.parseDouble(TFCalificacion.getText());
-            if (alumnoCalificacion > 0 && alumnoCalificacion <= 10) {
-                Calificacion calificacion = new Calificacion();
-                calificacion.setMatricula(matricula);
-                try {
-                    CalificacionDAO.registrarCalificacion(calificacion);
-                    dialogo = new Dialogo(Alert.AlertType.INFORMATION,
-                        "Calificación registrada correctamente.", "Éxito", ButtonType.OK);
+            Integer idModulo = CBModulo.getSelectionModel().getSelectedItem();
+
+            if (idModulo == 3) {
+                if (alumnoCalificacion > 0 && alumnoCalificacion <= 10) {
+                    CalificacionModulo calificacion = new CalificacionModulo();
+                    calificacion.setMatricula(matricula);
+                    calificacion.setIdModulo(idModulo);
+                    calificacion.setCalificacion(alumnoCalificacion);
+                    try {
+                        CalificacionModuloDAO.registrarCalificacion(calificacion);
+                        dialogo = new Dialogo(Alert.AlertType.INFORMATION,
+                            "Calificación registrada correctamente.", "Éxito", ButtonType.OK);
+                        dialogo.show();
+                        lbl_calificacion.setText(String.valueOf(alumnoCalificacion));
+                        BTGuardar.setDisable(true);
+                        BTCancelar.setDisable(true);
+                    } catch (Exception ex) {
+                        dialogo = new Dialogo(Alert.AlertType.ERROR,
+                            "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+                        dialogo.show();
+                    }
+
+                } else {
+                    dialogo = new Dialogo(Alert.AlertType.ERROR,
+                        "Ingresa una calificación mayor a 0 y menor a 10.", "Error", ButtonType.OK);
                     dialogo.show();
+                    TFCalificacion.setText("");
                     BTGuardar.setDisable(true);
                     BTCancelar.setDisable(true);
-                    limpiarCampos();
-
-                } catch (Exception ex) {
-                    dialogo = new Dialogo(Alert.AlertType.ERROR,
-                        "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
-                    dialogo.show();
                 }
-                calificacion.setCalificacion(alumnoCalificacion);
             } else {
-                dialogo = new Dialogo(Alert.AlertType.ERROR,
-                    "Ingresa una calificación mayor a 0 y menor a 10.", "Error", ButtonType.OK);
-                dialogo.show();
-                TFCalificacion.setText("");
-                BTGuardar.setDisable(true);
-                BTCancelar.setDisable(true);
+                if (alumnoCalificacion > 0 && alumnoCalificacion <= 10) {
+                    CalificacionModulo calificacion = new CalificacionModulo();
+                    calificacion.setMatricula(matricula);
+                    calificacion.setIdModulo(idModulo);
+                    calificacion.setCalificacion(alumnoCalificacion);
+                    try {
+                        CalificacionModuloDAO.registrarCalificacion(calificacion);
+                        dialogo = new Dialogo(Alert.AlertType.INFORMATION,
+                            "Calificación registrada correctamente.", "Éxito", ButtonType.OK);
+                        dialogo.show();
+                        BTGuardar.setDisable(true);
+                        BTCancelar.setDisable(true);
+                        limpiarCampos();
+
+                    } catch (Exception ex) {
+                        dialogo = new Dialogo(Alert.AlertType.ERROR,
+                            "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+                        dialogo.show();
+                    }
+
+                } else {
+                    dialogo = new Dialogo(Alert.AlertType.ERROR,
+                        "Ingresa una calificación mayor a 0 y menor a 10.", "Error", ButtonType.OK);
+                    dialogo.show();
+                    TFCalificacion.setText("");
+                    BTGuardar.setDisable(true);
+                    BTCancelar.setDisable(true);
+                }
+
             }
         } catch (NumberFormatException ex) {
             dialogo = new Dialogo(Alert.AlertType.ERROR,
@@ -243,5 +281,4 @@ public class RegistrarCalificacionesController implements Initializable {
             }
         });
     }
-
 }

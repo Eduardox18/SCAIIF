@@ -4,4 +4,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Calendario">
+    <select id="getCalendarioByNRC" parameterType="int" resultType="modelo.pojos.Calendario">
+        SELECT * FROM calendario WHERE nrc = #{nrc};
+    </select>
+
+    <insert id="actualizarCalendario" parameterType="modelo.pojos.Calendario">
+        UPDATE calendario SET fechaLimiteExamen = #{fechaLimiteExamen},
+        inicioVacaciones = #{inicioVacaciones},
+        finVacaciones = #{finVacaciones} WHERE idCalendario = #{idCalendario};
+    </insert>
 </mapper>

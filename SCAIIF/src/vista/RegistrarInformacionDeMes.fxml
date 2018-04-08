@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="409.0" prefWidth="394.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.RegistrarInformacionDeMesController">
+   <children>
+      <Label layoutX="85.0" layoutY="14.0" text="Información de mes">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="comboMes" labelFloat="true" layoutX="45.0" layoutY="63.0" prefHeight="27.0" prefWidth="160.0" promptText="Mes" />
+      <JFXComboBox fx:id="comboModulo" labelFloat="true" layoutX="148.0" layoutY="226.0" prefWidth="70.0" promptText="Módulo" />
+      <JFXComboBox fx:id="comboSeccion" labelFloat="true" layoutX="45.0" layoutY="226.0" prefHeight="27.0" prefWidth="70.0" promptText="Sección" />
+      <JFXComboBox fx:id="comboConversacion" layoutX="250.0" layoutY="226.0" prefHeight="27.0" prefWidth="105.0" promptText="Conversación" />
+      <JFXComboBox fx:id="comboMaterial" layoutX="39.0" layoutY="290.0" prefHeight="27.0" prefWidth="316.0" promptText="Material a registrar" />
+      <Spinner fx:id="spinnerInicio" layoutX="130.0" layoutY="120.0" prefHeight="27.0" prefWidth="60.0" />
+      <Spinner fx:id="spinnerFin" layoutX="130.0" layoutY="170.0" prefHeight="27.0" prefWidth="60.0" />
+      <JFXButton fx:id="guardarButton" disable="true" layoutX="160.0" layoutY="352.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Guardar" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="45.0" layoutY="125.0" text="Día inicio:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="45.0" layoutY="174.0" text="Día fin:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

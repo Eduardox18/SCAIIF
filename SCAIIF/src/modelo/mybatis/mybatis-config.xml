@@ -24,13 +24,22 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <mapper resource="modelo/mybatis/mappers/AlumnoMapper.xml"/>
         <mapper resource="modelo/mybatis/mappers/AvisoMapper.xml"/>
         <mapper resource="modelo/mybatis/mappers/CalendarioMapper.xml"/>
-        <mapper resource="modelo/mybatis/mappers/CalificacionMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/CalificacionModuloMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/CargoMapper.xml"/>
         <mapper resource="modelo/mybatis/mappers/ConversacionMapper.xml"/>
         <mapper resource="modelo/mybatis/mappers/CursoMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/DiaFestivoMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/EstadoMapper.xml"/>
         <mapper resource="modelo/mybatis/mappers/InduccionMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/InscripcionMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/MaterialReportarMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/MesMapper.xml"/>
         <mapper resource="modelo/mybatis/mappers/ModuloMapper.xml"/>
         <mapper resource="modelo/mybatis/mappers/ObservacionMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/PeriodoMapper.xml"/>
         <mapper resource="modelo/mybatis/mappers/ReservacionMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/ResumenMesMapper.xml"/>
+        <mapper resource="modelo/mybatis/mappers/SeccionMapper.xml"/>
         <mapper resource="modelo/mybatis/mappers/UsuarioMapper.xml"/>
     </mappers>
 </configuration>

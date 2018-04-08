@@ -33,4 +33,24 @@ public class CursoDAO {
         return cursos;
     }
 
+    /**
+     * Recupera los cursos de un periodo
+     * @param idPeriodo Identificador del periodo
+     * @return lista de cursos
+     * @throws Exception
+     */
+    public static List<Curso> recuperarCursosDePeriodo(int idPeriodo) throws Exception {
+        List<Curso> cursos;
+        SqlSession conn = null;
+        try {
+            conn = MyBatisUtils.getSession();
+            cursos = conn.selectList("Curso.getCursosbyPeriodo", idPeriodo);
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return cursos;
+    }
+
 }
