@@ -19,7 +19,7 @@ public class DiaFestivoDAO {
         SqlSession conn = null;
         try {
             conn = MyBatisUtils.getSession();
-            diasFestivos = conn.selectList("DiaFestivo.recuperarDiasFestivos");
+            diasFestivos = conn.selectList("DiaFestivo.recuperarDiasFestivos", idCalendario);
         } finally {
             if (conn != null) {
                 conn.close();
@@ -70,5 +70,29 @@ public class DiaFestivoDAO {
             }
         }
         return resultado;
+    }
+
+    /**
+     * Comprueba si existe un día festivo
+     * @param dia Día a consultar
+     * @return Si existe o no el día en la base de datos
+     * @throws Exception
+     */
+    public static boolean comprobarDiaExistente (DiasFestivos dia) throws Exception {
+        DiasFestivos diaConsultado = null;
+        boolean existe = true;
+        SqlSession conn = null;
+        try {
+            conn = MyBatisUtils.getSession();
+            diaConsultado = conn.selectOne("DiaFestivo.comprobarSiExiste", dia);
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        if (diaConsultado == null) {
+            existe = false;
+        }
+        return existe;
     }
 }

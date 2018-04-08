@@ -6,8 +6,8 @@ public class ResumenMes {
 
     private Integer idResumenMes;
     private Integer idCalendario;
-    private Date diaInicio;
-    private Date diaFin;
+    private Integer diaInicio;
+    private Integer diaFin;
     private Integer idMes;
     private Integer idSeccion;
     private Integer noMaterial;
@@ -16,7 +16,7 @@ public class ResumenMes {
 
     public ResumenMes() { }
 
-    public ResumenMes(Integer idResumenMes, Integer idCalendario, Date diaInicio, Date diaFin, Integer idMes, Integer idSeccion, Integer noMaterial, Integer idModulo, Integer idConversacion) {
+    public ResumenMes(Integer idResumenMes, Integer idCalendario, Integer diaInicio, Integer diaFin, Integer idMes, Integer idSeccion, Integer noMaterial, Integer idModulo, Integer idConversacion) {
         this.idResumenMes = idResumenMes;
         this.idCalendario = idCalendario;
         this.diaInicio = diaInicio;
@@ -44,19 +44,19 @@ public class ResumenMes {
         this.idCalendario = idCalendario;
     }
 
-    public Date getDiaInicio() {
+    public Integer getDiaInicio() {
         return diaInicio;
     }
 
-    public void setDiaInicio(Date diaInicio) {
+    public void setDiaInicio(Integer diaInicio) {
         this.diaInicio = diaInicio;
     }
 
-    public Date getDiaFin() {
+    public Integer getDiaFin() {
         return diaFin;
     }
 
-    public void setDiaFin(Date diaFin) {
+    public void setDiaFin(Integer diaFin) {
         this.diaFin = diaFin;
     }
 

@@ -9,9 +9,12 @@
     </select>
 
     <insert id="agregarDiaFestivo" parameterType="modelo.pojos.DiasFestivos">
-        INSERT INTO diasFestivos(diaFestivo, idCalendario) VALUES (#{diaFestivo}, #{idCalendario})
-        WHERE NOT EXISTS (SELECT diaFestivo FROM diasFestivos WHERE idCalendario = #{idCalendario});
+        INSERT INTO diasFestivos(diaFestivo, idCalendario) VALUES (#{diaFestivo}, #{idCalendario});
     </insert>
+
+    <select id="comprobarSiExiste" parameterType="modelo.pojos.DiasFestivos" resultType="modelo.pojos.DiasFestivos">
+        SELECT * FROM diasFestivos WHERE idCalendario = #{idCalendario} AND diaFestivo = #{diaFestivo};
+    </select>
 
     <delete id="borrarDiaFestivo" parameterType="int">
         DELETE FROM diasFestivos WHERE idDiasFestivos = #{idDiasFestivos};

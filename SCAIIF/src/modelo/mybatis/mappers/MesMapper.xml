@@ -5,8 +5,12 @@
 
 <mapper namespace="Mes">
     <select id="mesesCalendarioHechos" parameterType="int" resultType="modelo.pojos.Mes">
-        SELECT mes.idMes, mes FROM mes INNER JOIN resumenMes
-        ON mes.idMes = resumenMes.idMes
-        WHERE resumenMes.idCalendario = #{idCalendario};
+        SELECT * FROM mes WHERE idMes
+        IN (SELECT idMes FROM resumenMes WHERE idCalendario = #{idCalendario});
+    </select>
+
+    <select id="mesesPendientes" parameterType="int" resultType="modelo.pojos.Mes">
+        SELECT * FROM mes WHERE idMes
+        NOT IN (SELECT idMes FROM resumenMes WHERE idCalendario = #{idCalendario});
     </select>
 </mapper>
