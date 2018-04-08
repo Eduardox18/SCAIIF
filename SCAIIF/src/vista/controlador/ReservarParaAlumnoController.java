@@ -6,12 +6,9 @@
 package vista.controlador;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,7 +23,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import modelo.dao.ActividadDAO;
-import modelo.pojos.Actividad;
 import modelo.pojos.ActividadAsesor;
 import modelo.pojos.Alumno;
 import vista.Dialogo;
