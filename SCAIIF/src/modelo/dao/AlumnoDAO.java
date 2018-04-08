@@ -23,7 +23,7 @@ public class AlumnoDAO {
      * utilizada previamente.
      * @throws java.lang.Exception
      */
-    public static boolean comprobarMatricula(String matricula) throws Exception{
+    public static boolean comprobarMatricula(String matricula) throws Exception {
         boolean resultado = false;
         SqlSession conn = null;
         List<Alumno> listaAlumnos = new ArrayList<>();
@@ -53,11 +53,11 @@ public class AlumnoDAO {
      * correctamente o falso en caso de que ocurra algún error y no se registre al alumno.
      * @throws java.lang.Exception
      */
-    public static boolean agregarAlumno (Alumno alumno) throws Exception{
-        if (alumno == null){
+    public static boolean agregarAlumno(Alumno alumno) throws Exception {
+        if (alumno == null) {
             return false;
         }
-        
+
         boolean resultado = false;
         SqlSession conn = null;
 
@@ -89,11 +89,12 @@ public class AlumnoDAO {
     }
 
     /**
-     * Recupera la lista de alumnos que reservaron en una fecha especifica y un
-     * noActividad especifico.
+     * Recupera la lista de alumnos que reservaron en una fecha especifica y un noActividad
+     * especifico.
+     *
      * @param reservacion fecha y noActividad que reservaron.
      * @return lista de nombre de alumno.
-     * @throws IOException 
+     * @throws IOException
      */
     public static List<Alumno> recuperarLista(Reservacion reservacion) throws IOException {
         List<Alumno> reservAlumnos = new ArrayList<>();
@@ -108,10 +109,11 @@ public class AlumnoDAO {
         }
         return reservAlumnos;
     }
-    
+
     /**
      * Recupera el correo electrónico de los alumnos que se encuentren inscritos en x actividad
-     * @param noActividad El número de la actividad 
+     *
+     * @param noActividad El número de la actividad
      * @return Lista de los correos de alumnos
      * @throws IOException se lanza en caso de que ocurra algún error al recuperar los correos
      */
@@ -122,7 +124,7 @@ public class AlumnoDAO {
             conn = MyBatisUtils.getSession();
             correoAlumnos = conn.selectList("Alumno.obtenerCorreos", noActividad);
         } finally {
-            if(conn != null) {
+            if (conn != null) {
                 conn.close();
             }
         }
@@ -131,6 +133,7 @@ public class AlumnoDAO {
 
     /**
      * Recupera la información de un alumno a partir de su matrícula
+     *
      * @param matricula
      * @return
      * @throws IOException
@@ -147,5 +150,26 @@ public class AlumnoDAO {
             }
         }
         return alumno;
+    }
+
+    /**
+     * Recupera el historial de un asesor
+     *
+     * @param noPersonal
+     * @return
+     * @throws Exception
+     */
+    public static List<Alumno> recuperarHistorialAsesores(int noPersonal) throws Exception {
+        SqlSession conn = null;
+        List<Alumno> historialAsesores = new ArrayList<>();
+        try {
+            conn = MyBatisUtils.getSession();
+            historialAsesores = conn.selectList("Alumno.getHistorial", noPersonal);
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return historialAsesores;
     }
 }

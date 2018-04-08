@@ -22,10 +22,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import modelo.dao.ActividadDAO;
-import modelo.dao.InduccionDAO;
+import modelo.dao.AlumnoDAO;
 import modelo.dao.UsuarioDAO;
 import modelo.pojos.Actividad;
-import modelo.pojos.Induccion;
+import modelo.pojos.Alumno;
 import modelo.pojos.Usuario;
 import vista.Dialogo;
 
@@ -53,6 +53,12 @@ public class HistorialAsesoresController implements Initializable {
     @FXML
     TableColumn colMatricula;
     @FXML
+    TableColumn colNombreAlumno;
+    @FXML
+    TableColumn colApPaterno;
+    @FXML
+    TableColumn colApMaterno;
+    @FXML
     TableView tablaActividades;
     @FXML
     TableColumn colNombre;
@@ -70,7 +76,7 @@ public class HistorialAsesoresController implements Initializable {
             menuDrawer.setDisable(true);
         } catch (IOException ex) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
-                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+                "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
         }
         menuIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -147,13 +153,17 @@ public class HistorialAsesoresController implements Initializable {
      * las actividaes impartidas o que impartirá.
      */
     private void consultarActividades() {
-        List<Induccion> historialAsesores = new ArrayList<>();
+        List<Alumno> historialAsesores = new ArrayList<>();
         List<Actividad> historialReservaciones = new ArrayList<>();
         try {
-            historialAsesores = InduccionDAO.recuperarHistorialAsesores(Integer.parseInt(campoNoPersonal.getText()));
+            historialAsesores = AlumnoDAO.recuperarHistorialAsesores(Integer.parseInt(campoNoPersonal.getText()));
             historialReservaciones = ActividadDAO.recuperarHistorial(Integer.parseInt(campoNoPersonal.getText()));
-            ObservableList<Induccion> actividadesIntro = FXCollections.observableArrayList(historialAsesores);
+
+            ObservableList<Alumno> actividadesIntro = FXCollections.observableArrayList(historialAsesores);
             colMatricula.setCellValueFactory(new PropertyValueFactory<>("matricula"));
+            colNombreAlumno.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            colApPaterno.setCellValueFactory(new PropertyValueFactory<>("apPaterno"));
+            colApMaterno.setCellValueFactory(new PropertyValueFactory<>("apMaterno"));
             tablaInduccion.setItems(actividadesIntro);
 
             ObservableList<Actividad> actividades = FXCollections.observableArrayList(historialReservaciones);
@@ -164,6 +174,7 @@ public class HistorialAsesoresController implements Initializable {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                 "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
+            ex.printStackTrace();
         }
     }
 
@@ -175,7 +186,12 @@ public class HistorialAsesoresController implements Initializable {
         Dialogo dialogo = new Dialogo(Alert.AlertType.INFORMATION,
             "Se está imprimiendo la lista...", "Imprimiendo",
             ButtonType.OK);
-        dialogo.show();
-        botonImprimir.setDisable(true);
+        dialogo.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                campoNoPersonal.setText("");
+                botonImprimir.setDisable(true);
+            }
+        });
+        
     }
 }

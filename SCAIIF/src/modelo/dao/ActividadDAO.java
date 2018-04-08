@@ -68,18 +68,18 @@ public class ActividadDAO {
      * @return 
      * @throws java.io.IOException 
      */
-    public static List<Actividad> recuperarNoActividad() throws IOException {
-        List<Actividad> noActividad = new ArrayList();
+    public static List<Actividad> recuperarNombreActividad(String fecha) throws IOException {
+        List<Actividad> nombreActividad = new ArrayList();
         SqlSession conn = null;
         try {
             conn = MyBatisUtils.getSession();
-            noActividad = conn.selectList("Actividad.getnoActividad");
+            nombreActividad = conn.selectList("Actividad.getnoActividad", fecha);
         } finally {
             if (conn != null) {
                 conn.close();
             }
         }
-        return noActividad;
+        return nombreActividad;
     }
     
     /**
