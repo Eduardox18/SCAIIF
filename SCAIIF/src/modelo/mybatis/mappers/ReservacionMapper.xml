@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <update id="actualizarAsistencia" parameterType="modelo.pojos.Reservacion">
         UPDATE Reservacion SET asistencia = #{asistencia}
-        WHERE matricula = #{matricula} and noActividad= #{noActividad} and fecha=#{fecha};
+        WHERE matricula = #{matricula} and fecha=#{fecha} and noActividad = #{noActividad};
     </update>
     
 </mapper>

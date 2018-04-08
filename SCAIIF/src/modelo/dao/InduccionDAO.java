@@ -13,26 +13,6 @@ import modelo.pojos.Induccion;
 public class InduccionDAO {
 
     /**
-     * Recupera el historial de un asesor
-     * @param noPersonal
-     * @return
-     * @throws Exception
-     */
-    public static List<Induccion> recuperarHistorialAsesores(int noPersonal) throws Exception {
-        SqlSession conn = null;
-        List<Induccion> historialAsesores = new ArrayList<>();
-        try {
-            conn = MyBatisUtils.getSession();
-            historialAsesores = conn.selectList("Induccion.getHistorial", noPersonal);
-        } finally {
-            if (conn != null) {
-                conn.close();
-            }
-        }
-        return historialAsesores;
-    }
-
-    /**
      * Registra una nueva inducción en la base de datos
      * @param induccion
      * @return

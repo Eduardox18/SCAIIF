@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.HistorialAsesoresController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.HistorialAsesoresController">
    <children>
       <ImageView fitHeight="65.0" fitWidth="79.0" layoutX="76.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -36,13 +36,16 @@
       </Label>
       <TableView fx:id="tablaInduccion" layoutX="46.0" layoutY="158.0" prefHeight="125.0" prefWidth="602.0">
         <columns>
-          <TableColumn fx:id="colMatricula" prefWidth="600.0" text="Matrícula" />
+          <TableColumn fx:id="colMatricula" prefWidth="114.0" resizable="false" text="Matrícula" />
+            <TableColumn fx:id="colNombreAlumno" prefWidth="188.0" resizable="false" text="Nombre" />
+            <TableColumn fx:id="colApPaterno" prefWidth="156.0" resizable="false" text="Apellido Paterno" />
+            <TableColumn fx:id="colApMaterno" minWidth="5.0" prefWidth="143.0" resizable="false" text="Apellido Materno" />
         </columns>
       </TableView>
       <TableView fx:id="tablaActividades" layoutX="47.0" layoutY="321.0" prefHeight="109.0" prefWidth="602.0">
         <columns>
-          <TableColumn fx:id="colNombre" editable="false" prefWidth="304.0" text="Nombre Actividad" />
-          <TableColumn fx:id="colFechaAct" editable="false" minWidth="0.0" prefWidth="297.0" text="Fecha" />
+          <TableColumn fx:id="colNombre" editable="false" prefWidth="304.0" resizable="false" text="Nombre Actividad" />
+          <TableColumn fx:id="colFechaAct" editable="false" minWidth="0.0" prefWidth="297.0" resizable="false" text="Fecha" />
         </columns>
       </TableView>
       <JFXButton fx:id="botonImprimir" layoutX="306.0" layoutY="441.0" onAction="#mostrarVentanaImprimir" prefHeight="39.0" prefWidth="91.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Imprimir" textFill="WHITE" />
