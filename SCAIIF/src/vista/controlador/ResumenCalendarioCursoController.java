@@ -12,10 +12,19 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import modelo.dao.CalendarioDAO;
+import modelo.dao.MesDAO;
+import modelo.dao.ResumenMesDAO;
+import modelo.pojos.Calendario;
+import modelo.pojos.Curso;
+import modelo.pojos.Mes;
+import modelo.pojos.ResumenMes;
 import vista.Dialogo;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Calendar;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ResumenCalendarioCursoController implements Initializable {
@@ -66,6 +75,8 @@ public class ResumenCalendarioCursoController implements Initializable {
             menuDrawer.setDisable(false);
             menuIcon.setVisible(false);
         });
+
+        completarInformacion();
     }
 
     /**
@@ -76,6 +87,34 @@ public class ResumenCalendarioCursoController implements Initializable {
         if (!menuDrawer.isShown()) {
             menuIcon.setVisible(true);
             menuDrawer.setDisable(true);
+        }
+    }
+
+    public void completarInformacion() {
+        Curso cursoSeleccionado = SeleccionDeCursoController.cursoSeleccionado;
+        labelCurso.setText("Resumen del curso " + cursoSeleccionado.getNombreCurso());
+
+        Calendario calendarioCurso;
+        List<Mes> meses;
+
+        try {
+            calendarioCurso = CalendarioDAO.recuperarCalendario(cursoSeleccionado.getNrc());
+            if (calendarioCurso.getInicioVacaciones() != null) {
+                inicioVacacionesDP.setValue(calendarioCurso.getInicioVacaciones().toLocalDate());
+            }
+            if (calendarioCurso.getFinVacaciones() != null) {
+                finVacacionesDP.setValue(calendarioCurso.getFinVacaciones().toLocalDate());
+            }
+            if (calendarioCurso.getFechaLimiteExamen() != null) {
+                limiteDP.setValue(calendarioCurso.getFechaLimiteExamen().toLocalDate());
+            }
+            meses = MesDAO.consultarMeses(calendarioCurso.getIdCalendario());
+
+            labelMeses.setText("Meses registrados: ");
+        } catch (Exception e) {
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
         }
     }
 
