@@ -141,7 +141,6 @@ public class RegistrarInduccionController implements Initializable{
             ObservableList<Curso> cursosObservable = FXCollections.observableArrayList(cursosAlumno);
             comboCursos.setItems(cursosObservable);
         } catch (Exception ex) {
-            ex.printStackTrace();
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();

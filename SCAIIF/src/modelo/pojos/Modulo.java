@@ -31,8 +31,9 @@ public class Modulo {
     public void setNoModulo(Integer noModulo) {
         this.noModulo = noModulo;
     }
-    
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return String.valueOf(noModulo);
+    }
 }

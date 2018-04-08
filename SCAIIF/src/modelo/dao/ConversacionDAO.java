@@ -19,12 +19,11 @@ public class ConversacionDAO {
      * @throws Exception
      */
     public static List<Conversacion> recuperarConversaciones() throws Exception {
-        List<Conversacion> conversaciones = new ArrayList<>();
+        List<Conversacion> conversaciones;
         SqlSession conn = null;
         try {
             conn = MyBatisUtils.getSession();
-            conversaciones = conn.selectList("Conversacion.getConversacion");
-
+            conversaciones = conn.selectList("Conversacion.getConversaciones");
         } finally {
             if (conn != null) {
                 conn.close();

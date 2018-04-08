@@ -28,4 +28,9 @@ public class Mes {
     public void setMes(String mes) {
         this.mes = mes;
     }
+
+    @Override
+    public String toString() {
+        return mes;
+    }
 }
