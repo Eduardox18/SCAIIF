@@ -44,7 +44,7 @@ public class Periodo {
 
     @Override
     public String toString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("MMMM yyyy", new Locale("es_ES"));
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM yyyy", new Locale("ES"));
         String inicio = sdf.format(fechaInicio);
         String fin = sdf.format(fechaFin);
         String cadenaPeriodo = inicio + " - " + fin;

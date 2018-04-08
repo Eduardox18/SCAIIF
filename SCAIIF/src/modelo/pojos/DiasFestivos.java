@@ -1,6 +1,8 @@
 package modelo.pojos;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class DiasFestivos {
     private Integer idDiasFestivos;
@@ -39,4 +41,5 @@ public class DiasFestivos {
     public void setIdCalendario(Integer idCalendario) {
         this.idCalendario = idCalendario;
     }
+
 }

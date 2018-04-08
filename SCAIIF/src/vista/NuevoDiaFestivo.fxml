@@ -7,8 +7,8 @@
 
 <AnchorPane prefHeight="100.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.NuevoDiaFestivoController">
    <children>
-      <JFXDatePicker fx:id="nuevoFestivoDP" editable="false" layoutX="18.0" layoutY="14.0" prefHeight="27.0" prefWidth="265.0" promptText="Fecha día festivo" />
-      <JFXButton fx:id="guardarButton" disable="true" layoutX="111.0" layoutY="61.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Guardar" textFill="WHITE">
+      <JFXDatePicker fx:id="nuevoFestivoDP" editable="false" layoutX="18.0" layoutY="14.0" onAction="#habilitarGuardar" onMouseClicked="#habilitarGuardar" prefHeight="27.0" prefWidth="265.0" promptText="Fecha día festivo" />
+      <JFXButton fx:id="guardarButton" disable="true" layoutX="111.0" layoutY="61.0" onAction="#agregarDiaFestivo" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Guardar" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>

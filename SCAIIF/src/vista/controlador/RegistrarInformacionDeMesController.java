@@ -144,6 +144,9 @@ public class RegistrarInformacionDeMesController implements Initializable {
         }
     }
 
+    /**
+     * Activa el botón guardar cuando sean válidos los campos
+     */
     @FXML
     public void activarBotonGuardar() {
         if (comboMes.getSelectionModel().getSelectedItem() != null &&
@@ -159,6 +162,9 @@ public class RegistrarInformacionDeMesController implements Initializable {
         }
     }
 
+    /**
+     * Guarda la información de un nuevo mes de un calendario de curso
+     */
     @FXML
     public void guardarInformacion() {
         boolean exito = false;
