@@ -98,11 +98,12 @@ public class CancelarActividadController implements Initializable {
         llenarTabla();
     }
     
-    @FXML
+
     /**
      * *
      * Metodo que se encarga de mostrar el ícono del menú cada vez que se sale del mnú
      */
+    @FXML
     public void mostrarIcono() {
         if (!menuDrawer.isShown()) {
             menuIcon.setVisible(true);

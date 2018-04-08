@@ -18,14 +18,14 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="comboPeriodo" focusColor="#082f8a" labelFloat="true" layoutX="237.0" layoutY="89.0" prefHeight="27.0" prefWidth="249.0" promptText="Periodo" unFocusColor="#0f9d58" />
-      <TableView fx:id="tablaCursos" layoutX="32.0" layoutY="167.0" prefHeight="251.0" prefWidth="644.0">
+      <JFXComboBox fx:id="comboPeriodo" focusColor="#082f8a" layoutX="237.0" layoutY="89.0" onAction="#llenarTabla" onMouseClicked="#activarContinuar" prefHeight="27.0" prefWidth="249.0" promptText="Periodo" unFocusColor="#0f9d58" />
+      <TableView fx:id="tablaCursos" layoutX="32.0" layoutY="167.0" onMouseClicked="#activarContinuar" prefHeight="251.0" prefWidth="644.0">
         <columns>
-          <TableColumn prefWidth="116.13456726074219" text="NRC" />
-          <TableColumn prefWidth="525.9999847412109" text="Curso" />
+          <TableColumn fx:id="colNrc" prefWidth="116.13456726074219" text="NRC" />
+          <TableColumn fx:id="colCurso" prefWidth="525.9999847412109" text="Curso" />
         </columns>
       </TableView>
-      <JFXButton fx:id="botonContinuar" disable="true" layoutX="306.0" layoutY="443.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Continuar" textFill="WHITE">
+      <JFXButton fx:id="botonContinuar" disable="true" layoutX="306.0" layoutY="443.0" onAction="#continuarResumen" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Continuar" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
