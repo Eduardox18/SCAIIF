@@ -45,8 +45,8 @@ public class UsuarioDAOTest {
     @Test
     public void testRecuperarAsesor() throws Exception {
         System.out.println("Test del método recuperarNombreAsesor()");
-        int noPersonal = 18109;
-        int noPersonalFallo = 12345;
+        Integer noPersonal = 18109;
+        Integer noPersonalFallo = 12345;
         String expResult = "Ángel Eduardo Domínguez Delgado";
         String exResultFallo = "El noPersonal que ingresó no corresponde a un Usuario.";
         
@@ -66,8 +66,8 @@ public class UsuarioDAOTest {
     @Test
     public void testRecuperarUsuario() throws Exception {
         System.out.println("Test del método recuperarUsuario()");
-        int expNoPersonal = 18109;
-        int expIdCargo = 2;
+        Integer expNoPersonal = 18109;
+        Integer expIdCargo = 2;
         Usuario result = UsuarioDAO.recuperarUsuario(expNoPersonal);
         
         assertEquals(expNoPersonal, result.getNoPersonal());

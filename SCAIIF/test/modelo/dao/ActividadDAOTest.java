@@ -68,9 +68,9 @@ public class ActividadDAOTest {
     @Test
     public void testRecuperarActividadesAsesor() throws Exception {
         System.out.println("Test del método recuperarActividadesAsesor()");
-        int noPersonal = 18109;
+        Integer noPersonal = 18109;
         String expNombreActividad = "Conversación Francés I 1";
-        int expNoActividad = 2;
+        Integer expNoActividad = 2;
         Date fecha = Date.valueOf(LocalDate.now());
         
         List<Actividad> resultListaActividad = ActividadDAO.recuperarActividadesAsesor(
@@ -84,20 +84,6 @@ public class ActividadDAOTest {
         System.out.println("Éxito de igualdad de clase retornada");
     }
     
-    /**
-     * Test of recuperarNoActividad method, of class ActividadDAO.
-     */
-    @Test
-    public void testRecuperarNoActividad () throws Exception {
-        System.out.println("Test del método recuperarNoActividad()");
-        int expNoActividad = 1;
-        
-        List<Actividad> resultActividades = ActividadDAO.recuperarNoActividad();
-        
-        assertEquals(expNoActividad, resultActividades.get(0).getNoActividad());
-        System.out.println("Éxito de igualdad de noActividades.");
-    }
-
     /**
      * Comprueba que la lista no se encuentre vacia (hay actividades pendientes) y que en ninguna 
      * circunstancia la lista que se devuelve sea null
