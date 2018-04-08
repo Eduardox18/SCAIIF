@@ -4,4 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="DiaFestivo">
+    <select id="recuperarDiasFestivos" parameterType="int" resultType="modelo.pojos.DiasFestivos">
+        SELECT idDiasFestivos, diaFestivo FROM diasFestivos WHERE idCalendario = #{idCalendario};
+    </select>
+
+    <insert id="agregarDiaFestivo" parameterType="modelo.pojos.DiasFestivos">
+        INSERT INTO diasFestivos(diaFestivo, idCalendario) VALUES (#{diaFestivo}, #{idCalendario})
+        WHERE NOT EXISTS (SELECT diaFestivo FROM diasFestivos WHERE idCalendario = #{idCalendario});
+    </insert>
+
+    <delete id="borrarDiaFestivo" parameterType="int">
+        DELETE FROM diasFestivos WHERE idDiasFestivos = #{idDiasFestivos};
+    </delete>
 </mapper>

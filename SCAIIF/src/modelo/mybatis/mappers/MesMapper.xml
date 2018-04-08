@@ -4,4 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Mes">
+    <select id="mesesCalendarioHechos" parameterType="int" resultType="modelo.pojos.Mes">
+        SELECT mes.idMes, mes FROM mes INNER JOIN resumenMes
+        ON mes.idMes = resumenMes.idMes
+        WHERE resumenMes.idCalendario = #{idCalendario};
+    </select>
 </mapper>

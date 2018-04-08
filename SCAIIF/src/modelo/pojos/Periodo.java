@@ -1,6 +1,8 @@
 package modelo.pojos;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class Periodo {
     private Integer idPeriodo;
@@ -38,5 +40,14 @@ public class Periodo {
 
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM yyyy", new Locale("es_ES"));
+        String inicio = sdf.format(fechaInicio);
+        String fin = sdf.format(fechaFin);
+        String cadenaPeriodo = inicio + " - " + fin;
+        return cadenaPeriodo;
     }
 }
