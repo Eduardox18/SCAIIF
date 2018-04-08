@@ -27,9 +27,9 @@
                   <JFXDatePicker fx:id="fechaLimite" defaultColor="#082f8a" editable="false" onAction="#comprobarCampos" prefHeight="27.0" prefWidth="269.0" />
                </children>
             </HBox>
-            <JFXButton fx:id="botonPublicar" defaultButton="true" disable="true" onAction="#botonAccion" prefHeight="52.0" prefWidth="142.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Publicar" textFill="WHITE">
+            <JFXButton fx:id="botonPublicar" defaultButton="true" disable="true" onAction="#botonAccion" prefHeight="34.0" prefWidth="113.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Publicar" textFill="WHITE">
                <font>
-                  <Font size="25.0" />
+                  <Font size="14.0" />
                </font>
             </JFXButton>
          </children>
@@ -37,7 +37,7 @@
             <Insets bottom="50.0" left="70.0" right="70.0" top="50.0" />
          </padding>
       </VBox>
-      <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" onMouseClicked="#mostrarIcono" prefHeight="500.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#mostrarIcono" prefHeight="510.0" prefWidth="710.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <JFXHamburger fx:id="menuIcon">
          <padding>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />

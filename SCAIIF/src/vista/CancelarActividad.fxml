@@ -19,12 +19,12 @@
             <TableColumn fx:id="colFecha" prefWidth="99.0" text="Fecha" />
         </columns>
       </TableView>
-      <JFXButton fx:id="btnCancelar" defaultButton="true" disable="true" layoutX="211.0" layoutY="432.0" onAction="#lanzarConfirmación" prefHeight="52.0" prefWidth="299.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Cancelar actividad" textFill="WHITE" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="211.0" AnchorPane.rightAnchor="190.0">
+      <JFXButton fx:id="btnCancelar" defaultButton="true" disable="true" layoutX="252.0" layoutY="446.0" onAction="#lanzarConfirmación" prefHeight="40.0" prefWidth="195.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Cancelar actividad" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="252.0" AnchorPane.rightAnchor="253.0">
          <font>
-            <Font size="25.0" />
+            <Font size="14.0" />
          </font>
       </JFXButton>
-      <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" onMouseClicked="#mostrarIcono" prefHeight="500.0" prefWidth="700.0" />
+      <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#mostrarIcono" prefHeight="510.0" prefWidth="710.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <JFXHamburger fx:id="menuIcon" layoutX="16.0" layoutY="25.0" />
    </children>
 </AnchorPane>
