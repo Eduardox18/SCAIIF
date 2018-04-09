@@ -4,20 +4,13 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.ListasDeAsistenciaController">
    <children>
-      <JFXComboBox fx:id="comboActividades" layoutX="351.0" layoutY="40.0" onAction="#llenarTabla" prefHeight="27.0" prefWidth="250.0" promptText="Actividades" />
-      <Label layoutX="121.0" layoutY="48.0" text="Actividades por impartir:">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
+      <JFXComboBox fx:id="comboActividades" labelFloat="true" layoutX="211.0" layoutY="48.0" onAction="#llenarTabla" prefHeight="27.0" prefWidth="309.0" promptText="Actividades" />
       <JFXButton fx:id="botonImprimir" disable="true" layoutX="303.0" layoutY="460.0" onAction="#mostrarVentanaImprimir" prefHeight="27.0" prefWidth="105.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Imprimir" textFill="WHITE" />
       <TableView fx:id="tablaLista" layoutX="29.0" layoutY="100.0" prefHeight="347.0" prefWidth="646.0">
         <columns>
@@ -26,7 +19,7 @@
           <TableColumn fx:id="colAsistencia" prefWidth="84.63543701171875" text="Asistencia" />
         </columns>
       </TableView>
-      <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" onMouseClicked="#mostrarIcono" prefHeight="500.0" prefWidth="700.0" />
+      <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" layoutY="-1.0" onMouseClicked="#mostrarIcono" prefHeight="500.0" prefWidth="700.0" />
       <JFXHamburger fx:id="menuIcon" layoutX="17.0" layoutY="16.0" />
    </children>
 </AnchorPane>
