@@ -88,6 +88,19 @@ public class AlumnoDAOTest {
         boolean result = AlumnoDAO.agregarAlumno(prueba);
         assertEquals(expResult, result);
     }
+    
+    /**
+     * Test of bajaAlumno() method, of class AlumnoDAO.
+     */
+    @Test
+    public void testBajaAlumno() throws Exception {
+        System.out.println("Prueba del método BajaAlumno()");
+        Alumno prueba = null;
+        boolean expResult = false;
+        boolean resultado = AlumnoDAO.bajaAlumno(prueba);
+        assertEquals(expResult, resultado);
+        System.out.println("Éxito de baja de alumnos");
+    }
 
     /**
      * Test of recuperarAlumnos method, of class AlumnoDAO.
@@ -161,5 +174,32 @@ public class AlumnoDAOTest {
         Alumno result = AlumnoDAO.verificarMatricula(matricula);
         assertThat(result, instanceOf(Alumno.class));
         System.out.println("Éxito de correspondencia de clase");
+    }
+    
+    /**
+     * Test of recuperarInfoAlumno() method, of class AlumnoDAO.
+     */
+    @Test
+    public void testRecuperarInfoAlumno() throws Exception {
+        System.out.println("Prueba del método recuperarInfoAlumno()");
+        String matricula = "S15011601";
+        Alumno result = AlumnoDAO.recuperarInfoAlumno(matricula);
+        
+        String nombreExp = "Ricardo";
+        String nombreRes = result.getNombre();
+        String apPaternoExp = "Domínguez";
+        String apPaternoRes = result.getApPaterno();
+        String apMaternoExp = "González";
+        String apMaternoRes = result.getApMaterno();
+        String correoExp = "ricardo@gmail.com";
+        String correoRes = result.getCorreo();
+        
+        assertEquals(nombreExp, nombreRes);
+        assertEquals(apPaternoExp, apPaternoRes);
+        assertEquals(apMaternoExp, apMaternoRes);
+        assertEquals(correoExp, correoRes);
+        System.out.println("Éxito de igualdades en nombre completo y correo");
+        
+        
     }
 }
