@@ -40,4 +40,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         Induccion ON alumno.matricula = induccion.matricula
         WHERE induccion.noPersonal = #{noPersonal};
     </select>
+    
+    <update id="bajaAlumno" parameterType="modelo.pojos.Alumno">
+        UPDATE Alumno SET vigente = #{vigente}
+        WHERE matricula = #{matricula};
+    </update>
+    
+    <select id="recuperarInfoAlumno" parameterType="String" resultType="modelo.pojos.Alumno">
+        SELECT nombre, apPaterno, apMaterno, correo FROM Alumno
+        WHERE matricula = #{matricula} AND vigente = 1;  
+    </select>
 </mapper>

@@ -73,7 +73,42 @@ public class AlumnoDAO {
         }
         return resultado;
     }
+    
+    /**
+     * Da de baja un alumno, poniendo su vigencia como false.
+     *
+     * @param matricula matricula del alumno a dar de baja.
+     * @return Devuelve la variable resultado que puede ser verdadera en caso de que todo funcione
+     * correctamente o falso en caso de que ocurra algún error y no se inahibilite el alumno.
+     * @throws java.lang.Exception
+     */
+    public static boolean bajaAlumno(Alumno matricula) throws Exception {
+        if (matricula == null) {
+            return false;
+        }
 
+        boolean resultado = false;
+        SqlSession conn = null;
+
+        try {
+            conn = MyBatisUtils.getSession();
+            conn.insert("Alumno.bajaAlumno", matricula);
+            conn.commit();
+            resultado = true;
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return resultado;
+    }
+
+    /**
+     * Recupera la información de los alumnos a partir de su matrícula.
+     * @param matricula identificador del alumno
+     * @return lista de alumnos.
+     * @throws Exception 
+     */
     public static List<Alumno> recuperarAlumnos(String matricula) throws Exception {
         List<Alumno> alumnos = new ArrayList<>();
         SqlSession conn = null;
@@ -171,5 +206,19 @@ public class AlumnoDAO {
             }
         }
         return historialAsesores;
+    }
+    
+    public static Alumno recuperarInfoAlumno (String matricula) throws Exception {
+        SqlSession conn = null;
+        Alumno alumno = new Alumno();
+        try {
+            conn = MyBatisUtils.getSession();
+            alumno = conn.selectOne("Alumno.recuperarInfoAlumno", matricula);
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return alumno;
     }
 }

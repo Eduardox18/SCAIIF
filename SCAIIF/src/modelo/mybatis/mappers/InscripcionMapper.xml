@@ -4,4 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Inscripcion">
+    <select id="recuperarCalificacionFinal" 
+            parameterType="modelo.pojos.CalificacionModulo" 
+            resultType="modelo.pojos.Inscripcion">
+        SELECT calificacionFinal FROM Inscripcion 
+        WHERE matricula = #{matricula} and nrc = #{nrc};
+    </select>
 </mapper>
