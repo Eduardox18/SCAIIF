@@ -114,7 +114,12 @@ public class RegistrarInduccionController implements Initializable{
         try {
             alumno = AlumnoDAO.verificarMatricula(campoMatricula.getText());
             if (alumno != null) {
-                labelNombre.setText(alumno.getNombre() + " " + alumno.getApPaterno() + " " + alumno.getApMaterno());
+                if (alumno.getApMaterno() != null) {
+                    labelNombre.setText(alumno.getNombre() + " " + alumno.getApPaterno() + " " + alumno.getApMaterno());
+                } else {
+                    labelNombre.setText(alumno.getNombre() + " " + alumno.getApPaterno());
+                }
+                
                 matriculaActual = campoMatricula.getText();
                 llenarComboCursos();
                 llenarComboAsesores();

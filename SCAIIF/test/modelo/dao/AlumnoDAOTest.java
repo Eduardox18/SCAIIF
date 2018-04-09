@@ -12,6 +12,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import modelo.pojos.Alumno;
 import modelo.pojos.Reservacion;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 
 /**
  *
@@ -23,6 +27,14 @@ public class AlumnoDAOTest {
     private Alumno alumnoDos;
     
     public AlumnoDAOTest() {
+    }
+
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
     }
     
     
@@ -40,6 +52,10 @@ public class AlumnoDAOTest {
         alumnoDos.setNombre("Pablo");
         alumnoDos.setApPaterno("Marmol");
         alumnoDos.setCorreo("pablo@gmail.com");
+    }
+
+    @After
+    public void tearDown() throws Exception {
     }
 
     /**
@@ -134,5 +150,16 @@ public class AlumnoDAOTest {
         assertNotNull("ERROR, La lista es null", result);
         assertNotNull("ERROR, La lista es null", result2);
     }
-    
+
+    /**
+     * Test of verificarMatricula method, of class AlumnoDAO.
+     */
+    @Test
+    public void testVerificarMatricula() throws Exception {
+        System.out.println("Test del método verificarMatricula()");
+        String matricula = "S15011624";
+        Alumno result = AlumnoDAO.verificarMatricula(matricula);
+        assertThat(result, instanceOf(Alumno.class));
+        System.out.println("Éxito de correspondencia de clase");
+    }
 }

@@ -14,7 +14,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import modelo.pojos.Calificacion;
 import modelo.pojos.ListaAsistencia;
 import modelo.pojos.Reservacion;
 
@@ -55,7 +54,7 @@ public class ReservacionDAOTest {
     @Test
     public void testRecuperarAlumnosDeActividad() throws Exception {
         System.out.println("Test del método recuperarAlumnosDeActividad()");
-        int noActividad = 2;
+        Integer noActividad = 2;
         String expNombre = "Domínguez González Ricardo";
         List<ListaAsistencia> result = ReservacionDAO.recuperarAlumnosDeActividad(noActividad);
 
