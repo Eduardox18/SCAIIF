@@ -5,6 +5,7 @@
  */
 package modelo.dao;
 
+import java.util.List;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -75,6 +76,17 @@ public class UsuarioDAOTest {
         assertEquals(expIdCargo, result.getIdCargo());
         System.out.println("Éxito de igualdad de ID de cargo");
         assertThat(result, instanceOf(Usuario.class));
+        System.out.println("Éxito de igualdad de clase retornada");
+    }
+
+    /**
+     * Test of recuperarAsesores method, of class UsuarioDAO.
+     */
+    @Test
+    public void testRecuperarAsesores() throws Exception {
+        System.out.println("Test del método recuperarAsesores()");
+        List<Usuario> result = UsuarioDAO.recuperarAsesores();
+        assertThat(result.get(0), instanceOf(Usuario.class));
         System.out.println("Éxito de igualdad de clase retornada");
     }
 }

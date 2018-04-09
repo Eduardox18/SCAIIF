@@ -27,5 +27,4 @@ public class SeccionDAOTest {
         assertThat(result.get(0), instanceOf(Seccion.class));
         System.out.println("Éxito de correspondencia de clase");
     }
-    
 }
