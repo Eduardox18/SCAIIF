@@ -23,10 +23,12 @@ import javafx.scene.layout.VBox;
 import modelo.dao.CalificacionModuloDAO;
 import modelo.dao.ConversacionDAO;
 import modelo.dao.CursoDAO;
+import modelo.dao.InscripcionDAO;
 import modelo.dao.ModuloDAO;
 import modelo.pojos.CalificacionModulo;
 import modelo.pojos.Conversacion;
 import modelo.pojos.Curso;
+import modelo.pojos.Inscripcion;
 import modelo.pojos.Modulo;
 import vista.Dialogo;
 
@@ -173,6 +175,24 @@ public class RegistrarCalificacionesController implements Initializable {
         }
     }
 
+    private int recuperaNrc() {
+        List<Curso> cursos = null;
+        String matricula = TFMatricula.getText();
+        int nrc = 0;
+
+        try {
+            cursos = CursoDAO.recuperarCursos(matricula);
+            List<Integer> nrcCursos = new ArrayList<>();
+            for (Curso curso : cursos) {
+                nrcCursos.add(curso.getNrc());
+            }
+            nrc = nrcCursos.get(CBCurso.getSelectionModel().getSelectedIndex());
+        } catch (Exception ex) {
+
+        }
+        return nrc;
+    }
+
     /**
      * Comprueba si se registro o no la calificación del alumno, mandando una ventana emergente para
      * cualquiera de los casos.
@@ -181,6 +201,8 @@ public class RegistrarCalificacionesController implements Initializable {
     private void comprobarRegistro() {
         Dialogo dialogo = null;
         String matricula = TFMatricula.getText();
+        int nrc = recuperaNrc();
+        Inscripcion calFinal;
 
         try {
             double alumnoCalificacion = Double.parseDouble(TFCalificacion.getText());
@@ -191,13 +213,16 @@ public class RegistrarCalificacionesController implements Initializable {
                     CalificacionModulo calificacion = new CalificacionModulo();
                     calificacion.setMatricula(matricula);
                     calificacion.setIdModulo(idModulo);
+                    calificacion.setNrc(nrc);
                     calificacion.setCalificacion(alumnoCalificacion);
+
                     try {
                         CalificacionModuloDAO.registrarCalificacion(calificacion);
                         dialogo = new Dialogo(Alert.AlertType.INFORMATION,
                             "Calificación registrada correctamente.", "Éxito", ButtonType.OK);
                         dialogo.show();
-                        lbl_calificacion.setText(String.valueOf(alumnoCalificacion));
+                        calFinal = InscripcionDAO.recuperarCalFinal(calificacion);
+                        lbl_calificacion.setText(String.format("%.2f", calFinal.getCalificacionFinal()));
                         BTGuardar.setDisable(true);
                         BTCancelar.setDisable(true);
                     } catch (Exception ex) {
@@ -219,6 +244,7 @@ public class RegistrarCalificacionesController implements Initializable {
                     CalificacionModulo calificacion = new CalificacionModulo();
                     calificacion.setMatricula(matricula);
                     calificacion.setIdModulo(idModulo);
+                    calificacion.setNrc(nrc);
                     calificacion.setCalificacion(alumnoCalificacion);
                     try {
                         CalificacionModuloDAO.registrarCalificacion(calificacion);

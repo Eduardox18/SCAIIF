@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="37.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.BajaAlumnoController">
+    <children>
+        <JFXTextField fx:id="campoMatricula" onKeyReleased="#buscarDatosAlumno" labelFloat="true" layoutX="100.0" layoutY="171.0" prefHeight="25.0" prefWidth="184.0" promptText="Ingresa la matrícula">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </JFXTextField>
+        <Label layoutX="100.0" layoutY="258.0" prefHeight="25.0" prefWidth="145.0" text="Nombre alumno: ">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="69.0" fitWidth="82.0" layoutX="100.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@recursos/user.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="261.0" layoutY="33.0" text="Baja de Alumnos">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="101.0" layoutY="328.0" text="Correo electrónico: ">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+        <Label layoutX="101.0" layoutY="100.0" text="Coordinador" />
+        <Label fx:id="lblNombre" layoutX="246.0" layoutY="261.0" prefHeight="21.0" prefWidth="348.0">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+        <Label fx:id="lblCorreo" layoutX="246.0" layoutY="329.0" prefHeight="21.0" prefWidth="337.0">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+      <JFXButton fx:id="botonBuscar" layoutX="324.0" layoutY="172.0" onAction="#recuperarInformacionAlumno" prefHeight="25.0" prefWidth="67.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Buscar" textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="botonBaja" onAction="#darBajaAlumno" layoutX="236.0" layoutY="435.0" prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: #082F8A;" text="Dar de baja" textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="botonCancelar" onAction="#cancelar" layoutX="391.0" layoutY="436.0" prefHeight="29.0" prefWidth="76.0" style="-fx-background-color: #082F8A;" text="Cancelar" textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXButton>
+        <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" onMouseClicked="#mostrarIcono" prefHeight="500.0" prefWidth="700.0" />
+        <JFXHamburger fx:id="menuIcon" layoutX="16.0" layoutY="15.0" />
+    </children>
+</AnchorPane>
