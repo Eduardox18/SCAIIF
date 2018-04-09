@@ -5,6 +5,7 @@
  */
 package modelo.dao;
 
+import java.util.List;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -45,8 +46,8 @@ public class UsuarioDAOTest {
     @Test
     public void testRecuperarAsesor() throws Exception {
         System.out.println("Test del método recuperarNombreAsesor()");
-        int noPersonal = 18109;
-        int noPersonalFallo = 12345;
+        Integer noPersonal = 18109;
+        Integer noPersonalFallo = 12345;
         String expResult = "Ángel Eduardo Domínguez Delgado";
         String exResultFallo = "El noPersonal que ingresó no corresponde a un Usuario.";
         
@@ -66,8 +67,8 @@ public class UsuarioDAOTest {
     @Test
     public void testRecuperarUsuario() throws Exception {
         System.out.println("Test del método recuperarUsuario()");
-        int expNoPersonal = 18109;
-        int expIdCargo = 2;
+        Integer expNoPersonal = 18109;
+        Integer expIdCargo = 2;
         Usuario result = UsuarioDAO.recuperarUsuario(expNoPersonal);
         
         assertEquals(expNoPersonal, result.getNoPersonal());
@@ -75,6 +76,17 @@ public class UsuarioDAOTest {
         assertEquals(expIdCargo, result.getIdCargo());
         System.out.println("Éxito de igualdad de ID de cargo");
         assertThat(result, instanceOf(Usuario.class));
+        System.out.println("Éxito de igualdad de clase retornada");
+    }
+
+    /**
+     * Test of recuperarAsesores method, of class UsuarioDAO.
+     */
+    @Test
+    public void testRecuperarAsesores() throws Exception {
+        System.out.println("Test del método recuperarAsesores()");
+        List<Usuario> result = UsuarioDAO.recuperarAsesores();
+        assertThat(result.get(0), instanceOf(Usuario.class));
         System.out.println("Éxito de igualdad de clase retornada");
     }
 }

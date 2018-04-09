@@ -30,7 +30,9 @@ public class Conversacion {
     public void setNoConversacion(Integer noConversacion) {
         this.noConversacion = noConversacion;
     }
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return String.valueOf(noConversacion);
+    }
 }

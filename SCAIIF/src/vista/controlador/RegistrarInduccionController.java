@@ -114,7 +114,12 @@ public class RegistrarInduccionController implements Initializable{
         try {
             alumno = AlumnoDAO.verificarMatricula(campoMatricula.getText());
             if (alumno != null) {
-                labelNombre.setText(alumno.getNombre() + " " + alumno.getApPaterno() + " " + alumno.getApMaterno());
+                if (alumno.getApMaterno() != null) {
+                    labelNombre.setText(alumno.getNombre() + " " + alumno.getApPaterno() + " " + alumno.getApMaterno());
+                } else {
+                    labelNombre.setText(alumno.getNombre() + " " + alumno.getApPaterno());
+                }
+                
                 matriculaActual = campoMatricula.getText();
                 llenarComboCursos();
                 llenarComboAsesores();
@@ -141,7 +146,6 @@ public class RegistrarInduccionController implements Initializable{
             ObservableList<Curso> cursosObservable = FXCollections.observableArrayList(cursosAlumno);
             comboCursos.setItems(cursosObservable);
         } catch (Exception ex) {
-            ex.printStackTrace();
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
