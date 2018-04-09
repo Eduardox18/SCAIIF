@@ -21,7 +21,7 @@
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF;">
                      <children>
                         <JFXButton fx:id="altaAlumnoButton" onAction="#lanzarAltaAlumno" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Dar de alta" textFill="WHITE" />
-                        <JFXButton fx:id="bajaAlumnoButton" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Dar de baja" textFill="WHITE" />
+                        <JFXButton fx:id="bajaAlumnoButton" onAction="#lanzarBajaAlumno" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Dar de baja" textFill="WHITE" />
                         <JFXButton fx:id="registrarInduccionButton" onAction="#lanzarRegistroInduccion" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Registrar inducción" textFill="WHITE" />
                         <JFXButton fx:id="registrarObservacionButton" onAction="#lanzarComentarioAlumno" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Registrar observación" textFill="WHITE" />
                         <JFXButton fx:id="registrarCalificacionButton" onAction="#lanzarRegistroCalificaciones" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Registrar calificación" textFill="WHITE" />
