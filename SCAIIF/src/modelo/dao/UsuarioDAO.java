@@ -53,6 +53,11 @@ public class UsuarioDAO {
         return ingresado;
     }
 
+    /**
+     * Recupera todos los asesores registrados
+     * @return
+     * @throws Exception 
+     */
     public static List<Usuario> recuperarAsesores() throws Exception {
         List<Usuario> asesores;
         SqlSession conn = null;

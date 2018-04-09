@@ -31,4 +31,9 @@ public class MaterialReportar {
     public void setNombreMaterial(String nombreMaterial) {
         this.nombreMaterial = nombreMaterial;
     }
+
+    @Override
+    public String toString() {
+        return nombreMaterial;
+    }
 }

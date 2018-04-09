@@ -8,4 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT modulo.idModulo FROM Modulo INNER JOIN calificacionModulo ON
         modulo.idModulo = calificacionModulo.idModulo WHERE matricula = #{matricula};
     </select>
+
+    <select id="getModulos" resultType="modelo.pojos.Modulo">
+        SELECT * FROM modulo;
+    </select>
 </mapper>
