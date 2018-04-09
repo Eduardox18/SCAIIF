@@ -46,8 +46,8 @@ public class InduccionDAOTest {
     public void testRegistrarInduccion() throws Exception {
         System.out.println("Test del método registrarInduccion()");
         Induccion induccion = new Induccion();
-        induccion.setMatricula("S15011605");
-        induccion.setNrc(20208);
+        induccion.setMatricula("S15011607");
+        induccion.setNrc(28208);
         induccion.setCursoInduccion(Date.valueOf("2018-03-20"));
         induccion.setPrimeraAsesoria(Date.valueOf("2018-03-23"));
         induccion.setNoPersonal(18109);
