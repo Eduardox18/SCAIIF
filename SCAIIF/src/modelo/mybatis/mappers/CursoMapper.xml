@@ -13,4 +13,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getCursosbyPeriodo" parameterType="int" resultType="modelo.pojos.Curso">
         SELECT nrc, nombreCurso FROM curso WHERE idPeriodo = #{idPeriodo};
     </select>
+    
+    <select id="recuperarCursosAlumno" parameterType="string" resultType="modelo.pojos.Curso">
+        SELECT curso.nombreCurso, curso.nrc FROM inscripcion INNER JOIN curso ON 
+        inscripcion.nrc = curso.nrc INNER JOIN alumno ON alumno.matricula = 
+        inscripcion.matricula WHERE alumno.matricula = #{matricula};
+    </select>
 </mapper>

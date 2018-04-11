@@ -6,6 +6,7 @@
 package vista.controlador;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,8 +24,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import modelo.dao.ActividadDAO;
+import modelo.dao.CursoDAO;
 import modelo.pojos.ActividadAsesor;
 import modelo.pojos.Alumno;
+import modelo.pojos.Curso;
 import vista.Dialogo;
 
 /**
@@ -67,6 +70,9 @@ public class ReservarParaAlumnoController implements Initializable {
     @FXML
     private JFXButton botonReservar;
     
+    @FXML
+    private JFXComboBox<Curso> comboCurso;
+    
     private Alumno infoAlumno;
 
     /**
@@ -76,7 +82,14 @@ public class ReservarParaAlumnoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        botonReservar.setDisable(true);
         
+        tablaActividades.getSelectionModel().selectedItemProperty().addListener(
+                (obs, oldSelection, newSelection) -> {
+            if(newSelection != null){
+                botonReservar.setDisable(false);
+            }
+        });
     }    
     
     @FXML
@@ -100,13 +113,16 @@ public class ReservarParaAlumnoController implements Initializable {
         labelNombre.setText(infoAlumno.getApPaterno() + " " + infoAlumno.getApMaterno() + " " + 
                 infoAlumno.getNombre());
         labelMail.setText(infoAlumno.getCorreo());
+        llenarCombo();
         llenarTabla();
     }
     
     private void llenarTabla(){
         ObservableList<ActividadAsesor> actividadesObservable;
         try {
-            actividadesObservable = FXCollections.observableArrayList(ActividadDAO.recuperarActividadesDisponibles(infoAlumno.getMatricula()));
+            actividadesObservable = FXCollections.observableArrayList(
+                    ActividadDAO.recuperarActividadesDisponibles(infoAlumno.getMatricula(), 
+                    comboCurso.getSelectionModel().getSelectedItem().getNrc()));
             colNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
             colFecha.setCellValueFactory(new PropertyValueFactory("fecha"));
             colFin.setCellValueFactory(new PropertyValueFactory("horaFin"));
@@ -120,6 +136,20 @@ public class ReservarParaAlumnoController implements Initializable {
             dialogo.show();
         }
         
+    }
+    
+    private void llenarCombo(){
+        ObservableList<Curso> cursoObservable;
+        try {
+            cursoObservable = FXCollections.observableArrayList(
+                    CursoDAO.recuperarCursosAlumno(infoAlumno.getMatricula()));
+            comboCurso.setItems(cursoObservable);
+            comboCurso.getSelectionModel().selectFirst();
+        } catch (Exception ex){
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
+        }
     }
     
 }

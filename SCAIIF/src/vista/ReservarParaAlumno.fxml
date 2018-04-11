@@ -62,7 +62,7 @@
                   <Insets bottom="10.0" />
                </padding>
             </Separator>
-            <JFXComboBox labelFloat="true" prefHeight="27.0" prefWidth="257.0" promptText="Curso" />
+            <JFXComboBox fx:id="comboCurso" labelFloat="true" onAction="#llenarTabla" prefHeight="27.0" prefWidth="257.0" promptText="Curso" />
             <TableView fx:id="tablaActividades" prefHeight="203.0" prefWidth="640.0">
               <columns>
                 <TableColumn fx:id="colNombre" prefWidth="75.0" text="Nombre" />
