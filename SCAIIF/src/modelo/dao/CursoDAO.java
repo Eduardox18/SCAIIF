@@ -52,5 +52,14 @@ public class CursoDAO {
         }
         return cursos;
     }
+    
+    public static List<Curso> recuperarCursosAlumno (String matricula) throws Exception {
+        List<Curso> cursosAlumno;
+        
+        try(SqlSession conn = MyBatisUtils.getSession()){
+            cursosAlumno = conn.selectList("Curso.recuperarCursosAlumno", matricula);
+        }
+        return cursosAlumno;
+    }
 
 }

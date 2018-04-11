@@ -121,6 +121,7 @@ public class DrawerPrincipalController implements Initializable {
 
     /**
      * Cierra la aplicación
+     *
      * @param event
      */
     @FXML
@@ -141,7 +142,7 @@ public class DrawerPrincipalController implements Initializable {
             border.setCenter(paneComentario);
         } catch (IOException ioEx) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
-                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+                "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
         }
     }
@@ -159,7 +160,7 @@ public class DrawerPrincipalController implements Initializable {
             border.setCenter(paneLista);
         } catch (IOException ioEx) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
-                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+                "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
         }
     }
@@ -176,7 +177,7 @@ public class DrawerPrincipalController implements Initializable {
             border.setCenter(paneInduccion);
         } catch (IOException ioEx) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
-                    "Servidor no disponible, intente más tarde, ", "Error", ButtonType.OK);
+                "Servidor no disponible, intente más tarde, ", "Error", ButtonType.OK);
             dialogo.show();
         }
     }
@@ -194,13 +195,14 @@ public class DrawerPrincipalController implements Initializable {
             border.setCenter(paneLista);
         } catch (IOException ioEx) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
-                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+                "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
         }
     }
+
     /**
-     * Abre la ventana para consultar el historial de los asesores (Actividades que han
-     * impartido y actividades que impartirán)
+     * Abre la ventana para consultar el historial de los asesores (Actividades que han impartido y
+     * actividades que impartirán)
      */
     @FXML
     public void abrirHistorialAsesores() {
@@ -212,7 +214,7 @@ public class DrawerPrincipalController implements Initializable {
             border.setCenter(paneHistorial);
         } catch (IOException ioEx) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
-                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+                "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
         }
     }
@@ -230,14 +232,13 @@ public class DrawerPrincipalController implements Initializable {
             border.setCenter(paneHistorial);
         } catch (IOException ioEx) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
-                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+                "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
         }
     }
-    
+
     /**
-     * Abre la ventana para registrar la calificación de un alumno en base
-     * al curso inscrito.
+     * Abre la ventana para registrar la calificación de un alumno en base al curso inscrito.
      */
     @FXML
     public void lanzarRegistroCalificaciones() {
@@ -249,7 +250,7 @@ public class DrawerPrincipalController implements Initializable {
             border.setCenter(paneCalificaciones);
         } catch (IOException ioEx) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
-                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+                "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
         }
     }
@@ -267,7 +268,7 @@ public class DrawerPrincipalController implements Initializable {
             border.setCenter(paneCancelacion);
         } catch (IOException ioEx) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
-                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+                "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
         }
     }
@@ -285,7 +286,7 @@ public class DrawerPrincipalController implements Initializable {
             border.setCenter(paneAviso);
         } catch (IOException ioEx) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
-                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+                "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
         }
     }
@@ -303,7 +304,7 @@ public class DrawerPrincipalController implements Initializable {
             border.setCenter(paneReservar);
         } catch (IOException ioEx) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
-                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+                "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
         }
     }
@@ -322,7 +323,26 @@ public class DrawerPrincipalController implements Initializable {
         } catch (IOException ioEx) {
             ioEx.printStackTrace();
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
-                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+                "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
+        }
+    }
+
+    /**
+     * Abre la ventana para crear el calendario de un curso
+     */
+    @FXML
+    public void lanzarBajaAlumno() {
+        try {
+            URL bajaAlumno = getClass().getResource("/vista/BajaAlumno.fxml");
+            AnchorPane paneBajas = FXMLLoader.load(bajaAlumno);
+
+            BorderPane border = LoginController.getPrincipal();
+            border.setCenter(paneBajas);
+        } catch (IOException ioEx) {
+            ioEx.printStackTrace();
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
         }
     }

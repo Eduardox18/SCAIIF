@@ -51,7 +51,7 @@ public class ActividadDAOTest {
     public void testRecuperarHistorial() throws Exception {
         System.out.println("Test del método recuperarHistorial()");
         int noPersonal = 18109;
-        String expNombre = "Conversacion Inglés I 1";
+        String expNombre = "Conversación Inglés I 1";
         Date expFecha = Date.valueOf("2018-03-02");
         List<Actividad> result = ActividadDAO.recuperarHistorial(noPersonal);
         
@@ -68,9 +68,9 @@ public class ActividadDAOTest {
     @Test
     public void testRecuperarActividadesAsesor() throws Exception {
         System.out.println("Test del método recuperarActividadesAsesor()");
-        int noPersonal = 18109;
-        String expNombreActividad = "Conversación Francés I 1";
-        int expNoActividad = 2;
+        Integer noPersonal = 18109;
+        String expNombreActividad = "Conversación Inglés I 1";
+        Integer expNoActividad = 1;
         Date fecha = Date.valueOf(LocalDate.now());
         
         List<Actividad> resultListaActividad = ActividadDAO.recuperarActividadesAsesor(
@@ -84,20 +84,6 @@ public class ActividadDAOTest {
         System.out.println("Éxito de igualdad de clase retornada");
     }
     
-    /**
-     * Test of recuperarNoActividad method, of class ActividadDAO.
-     */
-    @Test
-    public void testRecuperarNoActividad () throws Exception {
-        System.out.println("Test del método recuperarNoActividad()");
-        int expNoActividad = 1;
-        
-        List<Actividad> resultActividades = ActividadDAO.recuperarNoActividad();
-        
-        assertEquals(expNoActividad, resultActividades.get(0).getNoActividad());
-        System.out.println("Éxito de igualdad de noActividades.");
-    }
-
     /**
      * Comprueba que la lista no se encuentre vacia (hay actividades pendientes) y que en ninguna 
      * circunstancia la lista que se devuelve sea null
@@ -114,7 +100,7 @@ public class ActividadDAOTest {
     /**
      * Comprueba que la actividad sea cancelada correctamente
      */
-    @Test
+    /*@Test
     public void testActualizarEstado() throws Exception {
         System.out.println("prueba del método cancelarActividad");
         Integer noActividad = 2;
@@ -122,5 +108,19 @@ public class ActividadDAOTest {
         boolean result = ActividadDAO.actualizarEstado(noActividad, estado);
         assertTrue(result);
         ActividadDAO.actualizarEstado(noActividad, 0);
+    }
+    
+    /**
+     * Comprueba que se recuperó el nombre de la actividad
+     */
+    @Test
+    public void testRecuperarNombreActividad() throws Exception {
+        System.out.println(" prueba del método recuperarNombreActividad()");
+        String fecha = "2018-03-02";
+        String expResult = "Conversación Inglés I 1";
+        List<Actividad> result = ActividadDAO.recuperarNombreActividad(fecha);
+        String resultado = result.get(0).getNombre();
+        assertEquals(expResult, resultado);
+        System.out.println("Éxito de igualdad de nombres.");  
     }
 }

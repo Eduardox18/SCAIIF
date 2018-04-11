@@ -23,7 +23,7 @@ public class AlumnoDAO {
      * utilizada previamente.
      * @throws java.lang.Exception
      */
-    public static boolean comprobarMatricula(String matricula) throws Exception{
+    public static boolean comprobarMatricula(String matricula) throws Exception {
         boolean resultado = false;
         SqlSession conn = null;
         List<Alumno> listaAlumnos = new ArrayList<>();
@@ -53,11 +53,11 @@ public class AlumnoDAO {
      * correctamente o falso en caso de que ocurra algún error y no se registre al alumno.
      * @throws java.lang.Exception
      */
-    public static boolean agregarAlumno (Alumno alumno) throws Exception{
-        if (alumno == null){
+    public static boolean agregarAlumno(Alumno alumno) throws Exception {
+        if (alumno == null) {
             return false;
         }
-        
+
         boolean resultado = false;
         SqlSession conn = null;
 
@@ -73,7 +73,42 @@ public class AlumnoDAO {
         }
         return resultado;
     }
+    
+    /**
+     * Da de baja un alumno, poniendo su vigencia como false.
+     *
+     * @param matricula matricula del alumno a dar de baja.
+     * @return Devuelve la variable resultado que puede ser verdadera en caso de que todo funcione
+     * correctamente o falso en caso de que ocurra algún error y no se inahibilite el alumno.
+     * @throws java.lang.Exception
+     */
+    public static boolean bajaAlumno(Alumno matricula) throws Exception {
+        if (matricula == null) {
+            return false;
+        }
 
+        boolean resultado = false;
+        SqlSession conn = null;
+
+        try {
+            conn = MyBatisUtils.getSession();
+            conn.insert("Alumno.bajaAlumno", matricula);
+            conn.commit();
+            resultado = true;
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return resultado;
+    }
+
+    /**
+     * Recupera la información de los alumnos a partir de su matrícula.
+     * @param matricula identificador del alumno
+     * @return lista de alumnos.
+     * @throws Exception 
+     */
     public static List<Alumno> recuperarAlumnos(String matricula) throws Exception {
         List<Alumno> alumnos = new ArrayList<>();
         SqlSession conn = null;
@@ -89,11 +124,12 @@ public class AlumnoDAO {
     }
 
     /**
-     * Recupera la lista de alumnos que reservaron en una fecha especifica y un
-     * noActividad especifico.
+     * Recupera la lista de alumnos que reservaron en una fecha especifica y un noActividad
+     * especifico.
+     *
      * @param reservacion fecha y noActividad que reservaron.
      * @return lista de nombre de alumno.
-     * @throws IOException 
+     * @throws IOException
      */
     public static List<Alumno> recuperarLista(Reservacion reservacion) throws IOException {
         List<Alumno> reservAlumnos = new ArrayList<>();
@@ -108,10 +144,11 @@ public class AlumnoDAO {
         }
         return reservAlumnos;
     }
-    
+
     /**
      * Recupera el correo electrónico de los alumnos que se encuentren inscritos en x actividad
-     * @param noActividad El número de la actividad 
+     *
+     * @param noActividad El número de la actividad
      * @return Lista de los correos de alumnos
      * @throws IOException se lanza en caso de que ocurra algún error al recuperar los correos
      */
@@ -122,7 +159,7 @@ public class AlumnoDAO {
             conn = MyBatisUtils.getSession();
             correoAlumnos = conn.selectList("Alumno.obtenerCorreos", noActividad);
         } finally {
-            if(conn != null) {
+            if (conn != null) {
                 conn.close();
             }
         }
@@ -131,6 +168,7 @@ public class AlumnoDAO {
 
     /**
      * Recupera la información de un alumno a partir de su matrícula
+     *
      * @param matricula
      * @return
      * @throws IOException
@@ -141,6 +179,41 @@ public class AlumnoDAO {
         try {
             conn = MyBatisUtils.getSession();
             alumno = conn.selectOne("Alumno.getAlumno", matricula);
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return alumno;
+    }
+
+    /**
+     * Recupera el historial de un asesor
+     *
+     * @param noPersonal
+     * @return
+     * @throws Exception
+     */
+    public static List<Alumno> recuperarHistorialAsesores(int noPersonal) throws Exception {
+        SqlSession conn = null;
+        List<Alumno> historialAsesores = new ArrayList<>();
+        try {
+            conn = MyBatisUtils.getSession();
+            historialAsesores = conn.selectList("Alumno.getHistorial", noPersonal);
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return historialAsesores;
+    }
+    
+    public static Alumno recuperarInfoAlumno (String matricula) throws Exception {
+        SqlSession conn = null;
+        Alumno alumno = new Alumno();
+        try {
+            conn = MyBatisUtils.getSession();
+            alumno = conn.selectOne("Alumno.recuperarInfoAlumno", matricula);
         } finally {
             if (conn != null) {
                 conn.close();

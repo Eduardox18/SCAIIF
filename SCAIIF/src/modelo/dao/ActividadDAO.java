@@ -68,18 +68,18 @@ public class ActividadDAO {
      * @return 
      * @throws java.io.IOException 
      */
-    public static List<Actividad> recuperarNoActividad() throws IOException {
-        List<Actividad> noActividad = new ArrayList();
+    public static List<Actividad> recuperarNombreActividad(String fecha) throws IOException {
+        List<Actividad> nombreActividad = new ArrayList();
         SqlSession conn = null;
         try {
             conn = MyBatisUtils.getSession();
-            noActividad = conn.selectList("Actividad.getnoActividad");
+            nombreActividad = conn.selectList("Actividad.getnoActividad", fecha);
         } finally {
             if (conn != null) {
                 conn.close();
             }
         }
-        return noActividad;
+        return nombreActividad;
     }
     
     /**
@@ -120,14 +120,18 @@ public class ActividadDAO {
     /**
      * Devuelve las actividades en las que no se haya inscrito un alumno determinado
      * @param matricula La matrícula del alumno
+     * @param nrc
      * @return Lista con las actividades disponibles
      * @throws Exception 
      */
-    public static List<ActividadAsesor> recuperarActividadesDisponibles(String matricula) throws Exception {
+    public static List<ActividadAsesor> recuperarActividadesDisponibles(String matricula, Integer nrc) throws Exception {
         List <ActividadAsesor> listaActividades;
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("matricula", matricula);
+        params.put("nrc", nrc);
         
         try(SqlSession conn = MyBatisUtils.getSession()){
-            listaActividades = conn.selectList("Actividad.actividadesDisponibles", matricula);
+            listaActividades = conn.selectList("Actividad.actividadesDisponibles", params);
         }
         
         return listaActividades;

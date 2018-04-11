@@ -30,7 +30,7 @@
             <Font size="15.0" />
          </font>
       </JFXButton>
-      <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" prefHeight="500.0" prefWidth="700.0" />
+      <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" onMouseClicked="#mostrarIcono" prefHeight="500.0" prefWidth="700.0" />
       <JFXHamburger fx:id="menuIcon">
          <padding>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />

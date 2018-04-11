@@ -31,8 +31,11 @@ public class Seccion {
     public void setNoSeccion(Integer noSeccion) {
         this.noSeccion = noSeccion;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return String.valueOf(noSeccion);
+    }
     
     
 }

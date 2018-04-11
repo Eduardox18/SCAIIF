@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         nombre LIKE CONCAT(#{matricula},'%') AND vigente = 1;
     </select>
     
-        <select id="getReservacionAlumnos" parameterType="modelo.pojos.Reservacion" resultType="modelo.pojos.Alumno">
+    <select id="getReservacionAlumnos" parameterType="modelo.pojos.Reservacion" resultType="modelo.pojos.Alumno">
         SELECT reservacion.matricula, nombre, apPaterno, apMaterno
         FROM alumno 
         INNER JOIN reservacion ON alumno.matricula = reservacion.matricula
@@ -33,5 +33,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         actividad.noActividad = reservacion.noActividad INNER JOIN alumno 
         ON alumno.matricula = reservacion.matricula WHERE 
         actividad.noActividad = #{noActividad};
+    </select>
+    
+    <select id="getHistorial" parameterType="int" resultType="modelo.pojos.Alumno">
+        SELECT induccion.matricula, nombre, apPaterno, apMaterno FROM Alumno INNER JOIN
+        Induccion ON alumno.matricula = induccion.matricula
+        WHERE induccion.noPersonal = #{noPersonal};
+    </select>
+    
+    <update id="bajaAlumno" parameterType="modelo.pojos.Alumno">
+        UPDATE Alumno SET vigente = #{vigente}
+        WHERE matricula = #{matricula};
+    </update>
+    
+    <select id="recuperarInfoAlumno" parameterType="String" resultType="modelo.pojos.Alumno">
+        SELECT nombre, apPaterno, apMaterno, correo FROM Alumno
+        WHERE matricula = #{matricula} AND vigente = 1;  
     </select>
 </mapper>
