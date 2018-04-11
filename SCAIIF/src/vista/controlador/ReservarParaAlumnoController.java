@@ -90,7 +90,23 @@ public class ReservarParaAlumnoController implements Initializable {
                 botonReservar.setDisable(false);
             }
         });
-    }    
+        
+        comboCurso.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> {
+            botonReservar.setDisable(true);
+        });
+    }   
+    
+    public void infoVentana(Alumno infoAlumno) {
+        this.infoAlumno = infoAlumno;
+        labelMatricula.setText(infoAlumno.getMatricula());
+        labelNombre.setText(infoAlumno.getApPaterno() + " " + infoAlumno.getApMaterno() + " " + 
+                infoAlumno.getNombre());
+        labelMail.setText(infoAlumno.getCorreo());
+        llenarCombo();
+        System.out.println(comboCurso.getSelectionModel().getSelectedItem().getNrc());
+        llenarTabla();
+    }
     
     @FXML
     private void accionRegresar() {
@@ -107,16 +123,7 @@ public class ReservarParaAlumnoController implements Initializable {
         }
     }
     
-    public void infoVentana(Alumno infoAlumno) {
-        this.infoAlumno = infoAlumno;
-        labelMatricula.setText(infoAlumno.getMatricula());
-        labelNombre.setText(infoAlumno.getApPaterno() + " " + infoAlumno.getApMaterno() + " " + 
-                infoAlumno.getNombre());
-        labelMail.setText(infoAlumno.getCorreo());
-        llenarCombo();
-        llenarTabla();
-    }
-    
+    @FXML
     private void llenarTabla(){
         ObservableList<ActividadAsesor> actividadesObservable;
         try {

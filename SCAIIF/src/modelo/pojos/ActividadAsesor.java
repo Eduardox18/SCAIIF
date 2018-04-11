@@ -20,8 +20,8 @@ public class ActividadAsesor {
     private Time horaFin;
     private Date fecha;
     private String nombreAsesor;
-    private String apellidoPAsesor;
-    private String apellidoMAsesor;
+    private String apPaterno;
+    private String apMaterno;
 
     public ActividadAsesor() {
     }
@@ -78,10 +78,10 @@ public class ActividadAsesor {
     
     public String getNombreAsesor() {
         String nombreCompleto;
-        if (this.apellidoMAsesor == null) {
-            nombreCompleto = this.apellidoPAsesor + " " + this.nombreAsesor;
+        if (this.apMaterno == null) {
+            nombreCompleto = this.apPaterno + " " + this.nombreAsesor;
         } else {
-            nombreCompleto = this.apellidoPAsesor + " " + this.apellidoMAsesor + " " 
+            nombreCompleto = this.apPaterno + " " + this.apMaterno + " " 
                     + this.nombreAsesor;
         }
         
@@ -92,19 +92,19 @@ public class ActividadAsesor {
         this.nombreAsesor = nombreAsesor;
     }
 
-    public String getApellidoPAsesor() {
-        return apellidoPAsesor;
+    public String getApPaterno() {
+        return apPaterno;
     }
 
-    public void setApellidoPAsesor(String apellidoPAsesor) {
-        this.apellidoPAsesor = apellidoPAsesor;
+    public void setApPaterno(String apPaterno) {
+        this.apPaterno = apPaterno;
     }
 
-    public String getApellidoMAsesor() {
-        return apellidoMAsesor;
+    public String getApMaterno() {
+        return apMaterno;
     }
 
-    public void setApellidoMAsesor(String apellidoMAsesor) {
-        this.apellidoMAsesor = apellidoMAsesor;
+    public void setApMaterno(String apMaterno) {
+        this.apMaterno = apMaterno;
     }
 }
