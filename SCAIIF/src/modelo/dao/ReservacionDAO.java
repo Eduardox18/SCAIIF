@@ -1,7 +1,10 @@
 package modelo.dao;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import modelo.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -77,6 +80,22 @@ public class ReservacionDAO {
             if (conn != null) {
                 conn.close();
             }
+        }
+        return resultado;
+    }
+    
+    public static boolean registrarReservación(String matricula, Integer noActividad) throws Exception {
+        boolean resultado = false;
+        Date fCreacion = Date.valueOf(LocalDate.now());
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("matricula", matricula);
+        params.put("noActividad", noActividad);
+        params.put("fecha", fCreacion);
+        
+        try(SqlSession conn = MyBatisUtils.getSession()) {
+            conn.insert("Reservacion.registrarReservacion", params);
+            conn.commit();
+            resultado = true;
         }
         return resultado;
     }
