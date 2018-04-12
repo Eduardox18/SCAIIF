@@ -21,4 +21,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE matricula = #{matricula} and fecha=#{fecha} and noActividad = #{noActividad};
     </update>
     
+    <insert id="registrarReservacion" parameterType="map">
+        INSERT into reservacion (noActividad, matricula, asistencia, fecha) 
+        VALUES (#{noActividad}, #{matricula}, 0, #{fecha});
+    </insert>
+    
 </mapper>

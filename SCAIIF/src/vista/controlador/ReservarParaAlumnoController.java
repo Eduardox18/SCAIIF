@@ -10,6 +10,8 @@ import com.jfoenix.controls.JFXComboBox;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,6 +27,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import modelo.dao.ActividadDAO;
 import modelo.dao.CursoDAO;
+import modelo.dao.ReservacionDAO;
 import modelo.pojos.ActividadAsesor;
 import modelo.pojos.Alumno;
 import modelo.pojos.Curso;
@@ -104,7 +107,6 @@ public class ReservarParaAlumnoController implements Initializable {
                 infoAlumno.getNombre());
         labelMail.setText(infoAlumno.getCorreo());
         llenarCombo();
-        System.out.println(comboCurso.getSelectionModel().getSelectedItem().getNrc());
         llenarTabla();
     }
     
@@ -137,7 +139,6 @@ public class ReservarParaAlumnoController implements Initializable {
             colAsesor.setCellValueFactory(new PropertyValueFactory("nombreAsesor"));
             tablaActividades.setItems(actividadesObservable);
         } catch (Exception ex) {
-            ex.printStackTrace();
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
@@ -154,6 +155,20 @@ public class ReservarParaAlumnoController implements Initializable {
             comboCurso.getSelectionModel().selectFirst();
         } catch (Exception ex){
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
+        }
+    }
+    
+    @FXML
+    private void realizarReservacion() {
+        Integer noActividad = tablaActividades.getSelectionModel().getSelectedItem().getNoActividad();
+        Dialogo dialogo;
+        try {
+            ReservacionDAO.registrarReservación(infoAlumno.getMatricula(), noActividad);
+            llenarTabla();
+        } catch (Exception ex) {
+            dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
         }
