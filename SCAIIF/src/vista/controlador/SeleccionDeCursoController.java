@@ -53,6 +53,7 @@ public class SeleccionDeCursoController implements Initializable{
     private TableColumn colCurso;
 
     static Curso cursoSeleccionado;
+    static Periodo periodoSeleccionado;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -130,6 +131,7 @@ public class SeleccionDeCursoController implements Initializable{
     @FXML
     public void continuarResumen() {
         cursoSeleccionado = tablaCursos.getSelectionModel().getSelectedItem();
+        periodoSeleccionado = comboPeriodo.getSelectionModel().getSelectedItem();
         try {
             URL resumenCalendario = getClass().getResource("/vista/ResumenCalendarioCurso.fxml");
             AnchorPane paneResumen = FXMLLoader.load(resumenCalendario);
