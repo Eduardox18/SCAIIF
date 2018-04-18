@@ -7,6 +7,7 @@ package modelo.dao;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import org.junit.After;
@@ -100,14 +101,14 @@ public class ActividadDAOTest {
     /**
      * Comprueba que la actividad sea cancelada correctamente
      */
-    /*@Test
+    @Test
     public void testActualizarEstado() throws Exception {
         System.out.println("prueba del método cancelarActividad");
         Integer noActividad = 2;
-        Integer estado = 2;
+        Integer estado = 3;
         boolean result = ActividadDAO.actualizarEstado(noActividad, estado);
+        ActividadDAO.actualizarEstado(noActividad, 1);
         assertTrue(result);
-        ActividadDAO.actualizarEstado(noActividad, 0);
     }
     
     /**
@@ -122,5 +123,19 @@ public class ActividadDAOTest {
         String resultado = result.get(0).getNombre();
         assertEquals(expResult, resultado);
         System.out.println("Éxito de igualdad de nombres.");  
+    }
+
+    /**
+     * Test of recuperarActividadesDisponibles method, of class ActividadDAO.
+     */
+    @Test
+    public void testRecuperarActividadesDisponibles() throws Exception {
+        System.out.println("Prueba del recuperarActividadesDisponibles");
+        String matricula = "S15011601";
+        Integer nrc = 28192;
+        List<ActividadAsesor> expResult = new ArrayList<>();
+        List<ActividadAsesor> result = ActividadDAO.recuperarActividadesDisponibles(matricula, nrc);
+        assertFalse(result.isEmpty());
+        // TODO review the generated test code and remove the default call to fail.
     }
 }

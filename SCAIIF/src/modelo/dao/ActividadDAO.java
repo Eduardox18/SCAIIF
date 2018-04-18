@@ -107,7 +107,7 @@ public class ActividadDAO {
         boolean resultado = false;
         HashMap<String, Integer> params = new HashMap<>();
         params.put("noActividad", noActividad);
-        params.put("estado", estado);
+        params.put("idEstado", estado);
         
         try(SqlSession conn = MyBatisUtils.getSession()){
             conn.update("Actividad.cambiarEstado", params);

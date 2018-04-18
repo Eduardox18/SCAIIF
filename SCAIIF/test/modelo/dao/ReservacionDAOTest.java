@@ -92,4 +92,17 @@ public class ReservacionDAOTest {
         assertEquals(expResult, resultado);
     }
 
+    /**
+     * Test of registrarReservación method, of class ReservacionDAO.
+     */
+    @Test
+    public void testRegistrarReservación() throws Exception {
+        System.out.println("Prueba del método registrarReservaci\u00f3n");
+        String matricula = "S15011613";
+        Integer noActividad = 2;
+        boolean expResult = true;
+        boolean result = ReservacionDAO.registrarReservación(matricula, noActividad);
+        assertEquals(expResult, result);
+    }
+
 }

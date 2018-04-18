@@ -13,8 +13,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -133,7 +131,7 @@ public class CancelarActividadController implements Initializable {
         String asunto = "Cancelación de actividad " + nombre;
             
         try {
-            if (ActividadDAO.actualizarEstado(noActividad, 2)) {
+            if (ActividadDAO.actualizarEstado(noActividad, 3)) {
                 dialogo = new Dialogo(Alert.AlertType.INFORMATION, 
                     "La actividad ha sido cancelada y los alumnos han sido avisados", 
                      "Éxito", ButtonType.OK);
