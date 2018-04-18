@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <update id="cambiarEstado" parameterType="map">
-        UPDATE actividad set idEstado = #{estado} where noActividad = 
+        UPDATE actividad set idEstado = #{idEstado} where noActividad = 
         #{noActividad};
     </update>
     
