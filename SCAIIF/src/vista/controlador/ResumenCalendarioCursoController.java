@@ -99,7 +99,7 @@ public class ResumenCalendarioCursoController implements Initializable {
     /**
      * Completa la información actual guardada del curso
      */
-    public void completarInformacion() {
+    private void completarInformacion() {
         Curso cursoSeleccionado = SeleccionDeCursoController.cursoSeleccionado;
         labelCurso.setText("Resumen del curso " + cursoSeleccionado.getNombreCurso());
 
@@ -172,26 +172,33 @@ public class ResumenCalendarioCursoController implements Initializable {
         calendario.setFinVacaciones(Date.valueOf(finVacacionesDP.getValue()));
         calendario.setIdCalendario(idCalendario);
 
-        try {
-            exito = CalendarioDAO.actualizarCalendario(calendario);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
-                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
-            dialogo.show();
-        }
+        if (comprobarFechas()) {
+            try {
+                exito = CalendarioDAO.actualizarCalendario(calendario);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                        "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+                dialogo.show();
+            }
 
-        if (exito) {
-            Dialogo dialogo = new Dialogo(Alert.AlertType.INFORMATION,
-                    "Información del curso guardada con éxito", "Guardado", ButtonType.OK);
-            Optional<ButtonType> result = dialogo.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                completarInformacion();
+            if (exito) {
+                Dialogo dialogo = new Dialogo(Alert.AlertType.INFORMATION,
+                        "Información del curso guardada con éxito", "Guardado", ButtonType.OK);
+                Optional<ButtonType> result = dialogo.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    completarInformacion();
+                }
+            } else {
+                Dialogo dialogo = new Dialogo(Alert.AlertType.WARNING,
+                        "Ocurrió un problema al guardar la información del calendario, vuelta a intentarlo",
+                        "Problema al guardar Calendario", ButtonType.OK);
+                dialogo.show();
             }
         } else {
             Dialogo dialogo = new Dialogo(Alert.AlertType.WARNING,
-                    "Ocurrió un problema al guardar la información del calendario, vuelta a intentarlo",
-                    "Problema al guardar Calendario", ButtonType.OK);
+                    "Una o más fechas no están dentro del periodo", "Fechas inválidas",
+                    ButtonType.OK);
             dialogo.show();
         }
     }
@@ -236,11 +243,31 @@ public class ResumenCalendarioCursoController implements Initializable {
             stageSecundario.showAndWait();
             completarInformacion();
         } catch (IOException ioEx) {
-            ioEx.printStackTrace();
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
         }
+    }
+
+    /**
+     * Verifica si las fechas son válidas (que estén dentro del periodo)
+     * @return
+     */
+    private boolean comprobarFechas() {
+        Date inicio = SeleccionDeCursoController.periodoSeleccionado.getFechaInicio();
+        Date fin = SeleccionDeCursoController.periodoSeleccionado.getFechaFin();
+        Date limite = Date.valueOf(limiteDP.getValue());
+        Date inicioVacaciones = Date.valueOf(inicioVacacionesDP.getValue());
+        Date finVacaciones = Date.valueOf(finVacacionesDP.getValue());
+
+        boolean flag = false;
+
+        if ((limite.after(inicio) && limite.before(fin)) &&
+                (inicioVacaciones.after(inicio) && inicioVacaciones.before(fin)) &&
+                (finVacaciones.after(inicio) && finVacaciones.before(fin))) {
+            flag = true;
+        }
+        return flag;
     }
 }
 

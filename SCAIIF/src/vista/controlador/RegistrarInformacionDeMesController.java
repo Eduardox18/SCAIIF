@@ -14,6 +14,7 @@ import vista.Dialogo;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -68,8 +69,15 @@ public class RegistrarInformacionDeMesController implements Initializable {
         try {
             meses = MesDAO.recuperarMesesPendientes(ResumenCalendarioCursoController.idCalendario);
             ObservableList<Mes> mesesObservable = FXCollections.observableArrayList(meses);
+            if (SeleccionDeCursoController.periodoSeleccionado.getFechaInicio().toLocalDate().getMonthValue() == 02) {
+                mesesObservable = asignarMesesPeriodo(mesesObservable, 1);
+            } else {
+                mesesObservable = asignarMesesPeriodo(mesesObservable, 2);
+            }
+
             comboMes.setItems(mesesObservable);
         } catch (Exception ex) {
+            ex.printStackTrace();
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
@@ -205,6 +213,54 @@ public class RegistrarInformacionDeMesController implements Initializable {
                 stage.close();
             }
         }
+    }
+
+    /**
+     * Elimina los meses que no pertenecen al periodo seleccionado
+     * @param mesesObservable Lista de meses recuperados
+     * @param rango Número del periodo al que pertenecen
+     * @return
+     */
+    public ObservableList<Mes> asignarMesesPeriodo(ObservableList<Mes> mesesObservable, int rango) {
+        for (int i = 0; i < mesesObservable.size(); i++) {
+            if (mesesObservable.get(i).getMes().equals("Enero") && rango == 1) {
+                mesesObservable.remove(i);
+            }
+            if (mesesObservable.get(i).getMes().equals("Febrero") && rango == 2) {
+                mesesObservable.remove(i);
+            }
+            if (mesesObservable.get(i).getMes().equals("Marzo") && rango == 2) {
+                mesesObservable.remove(i);
+            }
+            if (mesesObservable.get(i).getMes().equals("Abril") && rango == 2) {
+                mesesObservable.remove(i);
+            }
+            if (mesesObservable.get(i).getMes().equals("Mayo") && rango == 2) {
+                mesesObservable.remove(i);
+            }
+            if (mesesObservable.get(i).getMes().equals("Junio") && rango == 2) {
+                mesesObservable.remove(i);
+            }
+            if (mesesObservable.get(i).getMes().equals("Julio") && rango == 2) {
+                mesesObservable.remove(i);
+            }
+            if (mesesObservable.get(i).getMes().equals("Agosto") && rango == 1) {
+                mesesObservable.remove(i);
+            }
+            if (mesesObservable.get(i).getMes().equals("Septiembre") && rango == 1) {
+                mesesObservable.remove(i);
+            }
+            if (mesesObservable.get(i).getMes().equals("Octubre") && rango == 1) {
+                mesesObservable.remove(i);
+            }
+            if (mesesObservable.get(i).getMes().equals("Noviembre") && rango == 1) {
+                mesesObservable.remove(i);
+            }
+            if (mesesObservable.get(i).getMes().equals("Diciembre") && rango == 1) {
+                mesesObservable.remove(i);
+            }
+        }
+        return mesesObservable;
     }
 
 }
