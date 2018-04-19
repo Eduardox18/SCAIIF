@@ -3,6 +3,8 @@ package modelo.dao;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import modelo.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import modelo.pojos.Alumno;
@@ -220,5 +222,28 @@ public class AlumnoDAO {
             }
         }
         return alumno;
+    }
+
+    /**
+     * Actualiza la información de un alumno en la base de datos.
+     * @param alumno
+     * @return
+     * @throws Exception
+     */
+    public static boolean actualizarAlumno (Alumno alumno) throws Exception {
+        System.out.println(alumno.getMatricula());
+        SqlSession conn = null;
+        boolean exito = false;
+        try {
+            conn = MyBatisUtils.getSession();
+            conn.update("Alumno.actualizarAlumno", alumno);
+            conn.commit();
+            exito = true;
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return exito;
     }
 }

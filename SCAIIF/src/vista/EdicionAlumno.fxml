@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.EdicionAlumnoController">
+   <children>
+      <Label fx:id="labelMatricula" layoutX="202.0" layoutY="17.0" text="Matrícula: $Matrícula$">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="nombreTF" focusColor="#082f8a" labelFloat="true" layoutX="121.0" layoutY="77.0" onKeyPressed="#habilitarGuardar" onKeyReleased="#habilitarGuardar" prefHeight="27.0" prefWidth="350.0" promptText="Nombre" AnchorPane.leftAnchor="121.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="apPaternoTF" focusColor="#082f8a" labelFloat="true" layoutX="121.0" layoutY="135.0" onKeyPressed="#habilitarGuardar" onKeyReleased="#habilitarGuardar" prefHeight="27.0" prefWidth="350.0" promptText="Apellido paterno" AnchorPane.leftAnchor="121.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="apMaternoTF" focusColor="#082f8a" labelFloat="true" layoutX="121.0" layoutY="191.0" onKeyPressed="#habilitarGuardar" onKeyReleased="#habilitarGuardar" prefWidth="350.0" promptText="Apellido materno" AnchorPane.leftAnchor="121.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="emailTF" focusColor="#082f8a" labelFloat="true" layoutX="121.0" layoutY="242.0" onKeyPressed="#habilitarGuardar" onKeyReleased="#habilitarGuardar" prefWidth="350.0" promptText="Correo electrónico" AnchorPane.leftAnchor="121.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton fx:id="botonGuardar" defaultButton="true" layoutX="261.0" layoutY="352.0" onAction="#actualizarAlumno" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Guardar" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXCheckBox fx:id="lenguaCB" layoutX="230.0" layoutY="299.0" onAction="#habilitarGuardar" text="Lengua indígena">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXCheckBox>
+   </children>
+</AnchorPane>
