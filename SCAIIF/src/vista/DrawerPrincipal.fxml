@@ -50,7 +50,7 @@
                         <JFXButton fx:id="registrarAsistenciaButton" onAction="#lanzarRegistroAsistencia" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Registrar asistencia" textFill="WHITE" />
                         <JFXButton fx:id="crearCalendarioActButton" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Crea calendario" textFill="WHITE" />
                         <JFXButton fx:id="consultarCalendarioActButton" prefWidth="724.0" style="-fx-background-color: #082F8A;" text="Consultar calendario" textFill="WHITE" />
-                        <JFXButton fx:id="proximasActividadesButton" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Próximas actividades" textFill="WHITE" />
+                        <JFXButton fx:id="proximasActividadesButton" onAction="#lanzarActividadesProximas" prefWidth="724.0" style="-fx-background-color: #0F9D58;" text="Próximas actividades" textFill="WHITE" />
                      </children>
                   </VBox>
                </content>
