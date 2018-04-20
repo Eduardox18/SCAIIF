@@ -346,4 +346,23 @@ public class DrawerPrincipalController implements Initializable {
             dialogo.show();
         }
     }
+
+    /**
+     * Abre la ventana para consultar las actividades próximas de un alumno
+     */
+    @FXML
+    public void lanzarActividadesProximas() {
+        try {
+            URL actProximas = getClass().getResource("/vista/ActividadesProximas.fxml");
+            AnchorPane paneProximas = FXMLLoader.load(actProximas);
+
+            BorderPane border = LoginController.getPrincipal();
+            border.setCenter(paneProximas);
+        } catch (IOException ioEx) {
+            ioEx.printStackTrace();
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
+        }
+    }
 }

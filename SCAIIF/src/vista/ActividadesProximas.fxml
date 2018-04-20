@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.ActividadesProximasController">
+   <children>
+      <JFXTextField fx:id="matriculaTF" labelFloat="true" layoutX="135.0" layoutY="69.0" onKeyReleased="#habilitarBuscar" prefHeight="29.0" prefWidth="329.0" promptText="Matrícula del alumno">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton fx:id="botonBuscar" disable="true" layoutX="506.0" layoutY="68.0" onAction="#buscarAlumno" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Buscar" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <Label fx:id="nombreLabel" contentDisplay="TOP" layoutX="38.0" layoutY="125.0" prefHeight="24.0" prefWidth="630.0">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tablaReservaciones" layoutX="12.0" layoutY="167.0" prefHeight="318.0" prefWidth="673.0">
+        <columns>
+            <TableColumn fx:id="fechaActividadCol" prefWidth="117.10191345214844" text="Fecha Actividad" />
+          <TableColumn fx:id="actividadCol" prefWidth="173.72903442382812" text="Actividad" />
+          <TableColumn fx:id="fechaReservacionCol" prefWidth="131.27096557617188" text="Fecha Reservación" />
+            <TableColumn fx:id="cursoCol" prefWidth="133.10137939453125" text="Curso" />
+            <TableColumn fx:id="estadoCol" prefWidth="117.84710693359375" text="Estado" />
+        </columns>
+      </TableView>
+      <Label layoutX="227.0" layoutY="19.0" text="Actividades próximas">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" onMouseClicked="#mostrarIcono" prefHeight="500.0" prefWidth="700.0" />
+      <JFXHamburger fx:id="menuIcon" layoutX="17.0" layoutY="17.0" />
+   </children>
+</AnchorPane>

@@ -16,10 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -84,6 +81,7 @@ public class ListasDeAsistenciaController implements Initializable {
         });
 
         llenarComboBox();
+        tablaLista.setPlaceholder(new Label(""));
     }
 
     /**
@@ -134,6 +132,7 @@ public class ListasDeAsistenciaController implements Initializable {
     @FXML
     public void llenarTabla() {
         List<ListaAsistencia> listaAlumnosReservacion = new ArrayList<>();
+        tablaLista.setPlaceholder(new Label("No hay reservaciones para la actividad"));
 
         try {
             listaAlumnosReservacion = ReservacionDAO.recuperarAlumnosDeActividad(

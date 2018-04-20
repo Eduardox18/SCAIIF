@@ -98,7 +98,6 @@ public class LoginController extends Application {
      */
     @FXML
     public void ingresarSistema() {
-        /*
         Dialogo dialogo = null;
         Cifrado cifrar = new Cifrado();
         Usuario ingresado = new Usuario();
@@ -146,20 +145,6 @@ public class LoginController extends Application {
                 dialogo.show();
             }
 
-        }
-        */
-        try {
-            Stage stageTercero = new Stage();
-            BorderPane paneTercero = new BorderPane();
-            URL paneFestivoURL = getClass().getResource("/vista/EdicionAlumno.fxml");
-            AnchorPane paneFestivo = FXMLLoader.load(paneFestivoURL);
-
-            paneTercero.setCenter(paneFestivo);
-            Scene sceneFestivo = new Scene(paneTercero, 600, 400);
-            stageTercero.setScene(sceneFestivo);
-            stageTercero.showAndWait();
-        } catch (IOException ex) {
-            ex.printStackTrace();
         }
     }
 
