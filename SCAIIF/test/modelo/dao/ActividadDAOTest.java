@@ -5,11 +5,9 @@
  */
 package modelo.dao;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import static org.hamcrest.CoreMatchers.instanceOf;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -53,19 +51,23 @@ public class ActividadDAOTest {
         System.out.println("Test del método recuperarHistorial()");
         int noPersonal = 18109;
         String expNombre = "Conversación Inglés I 1";
-        Date expFecha = Date.valueOf("2018-03-02");
+        String expFecha = "2018-02-28";
         List<Actividad> result = ActividadDAO.recuperarHistorial(noPersonal);
         
         assertEquals(expNombre, result.get(0).getNombre());
         System.out.println("Éxito de igualdad de nombres.");
-        assertEquals(expFecha, result.get(0).getFecha());
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaTexto = formatter.format(result.get(0).getFecha());
+        assertEquals(expFecha, fechaTexto);
         System.out.println("Éxito de igualdad de fechas.");
         
     }
 
     /**
      * Test of recuperarActividadesAsesor method, of class ActividadDAO.
-     */
+     * Prueba solo utilizable si se cumple con que existen actividades
+     * en la fecha actual o posterior.
+     
     @Test
     public void testRecuperarActividadesAsesor() throws Exception {
         System.out.println("Test del método recuperarActividadesAsesor()");
@@ -118,7 +120,7 @@ public class ActividadDAOTest {
     public void testRecuperarNombreActividad() throws Exception {
         System.out.println(" prueba del método recuperarNombreActividad()");
         String fecha = "2018-03-02";
-        String expResult = "Conversación Inglés I 1";
+        String expResult = "Conversación Francés I 1";
         List<Actividad> result = ActividadDAO.recuperarNombreActividad(fecha);
         String resultado = result.get(0).getNombre();
         assertEquals(expResult, resultado);

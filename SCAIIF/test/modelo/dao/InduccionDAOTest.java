@@ -1,11 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo.dao;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.List;
 import modelo.pojos.Induccion;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -16,7 +13,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author lalo
+ * @author esmeralda
  */
 public class InduccionDAOTest {
     
@@ -71,6 +68,30 @@ public class InduccionDAOTest {
         boolean result = InduccionDAO.comprobarInduccion(induccion);
         assertEquals(expResult, result);
         System.out.println("Éxito de existencia de curso de inducción");
+    }
+    
+    /**
+     * Test of recuperarAlumnos method, of class InduccionDAO.
+     * @throws Exception 
+     */
+    @Test
+    public void testRecuperarInfoAlumno() throws Exception {
+        System.out.println("Test del método recuperarInfoAlumno()");
+        String matricula = "S15011601";
+        Integer nrc = 28208;
+        String expFechaAsesoria = "2018-03-19";
+        String expFechaInduccion = "2018-03-19";
+        List<Induccion> result = InduccionDAO.recuperarAlumnos(matricula);
+        
+        assertEquals(nrc, result.get(0).getNrc());
+        System.out.println("Éxito de igualdad de nrc de curso.");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaAs = formatter.format(result.get(0).getPrimeraAsesoria());
+        assertEquals(expFechaAsesoria, fechaAs);
+        System.out.println("Éxito de igualdad de fechas de primera asesoría.");
+        String fechaInd = formatter.format(result.get(0).getCursoInduccion());
+        assertEquals(expFechaInduccion, fechaInd);
+        System.out.println("Éxito de igualdad de fechas de curso de inducción");
     }
     
 }
