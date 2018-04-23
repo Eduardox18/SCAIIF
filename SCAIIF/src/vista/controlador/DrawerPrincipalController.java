@@ -35,6 +35,9 @@ public class DrawerPrincipalController implements Initializable {
 
     @FXML
     private JFXButton registrarCalificacionButton;
+    
+    @FXML
+    private JFXButton consultarAlumnoButton;
 
     @FXML
     private JFXButton registrarAvisoButton;
@@ -89,6 +92,7 @@ public class DrawerPrincipalController implements Initializable {
                 reservarActividadButton.setDisable(true);
                 consultarListaAsistenciaButton.setDisable(true);
                 registrarAsistenciaButton.setDisable(true);
+                consultarAlumnoButton.setDisable(true);
                 break;
             case 2:
                 altaAlumnoButton.setDisable(true);
@@ -113,6 +117,7 @@ public class DrawerPrincipalController implements Initializable {
                 registrarAsistenciaButton.setDisable(true);
                 crearCalendarioActButton.setDisable(true);
                 registrarCalendarioCursoButton.setDisable(true);
+                consultarAlumnoButton.setDisable(true);
                 break;
             default:
                 break;
@@ -358,6 +363,25 @@ public class DrawerPrincipalController implements Initializable {
 
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneProximas);
+        } catch (IOException ioEx) {
+            ioEx.printStackTrace();
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
+        }
+    }
+ 
+    /**
+     * Abre la ventana para consultar la información del alumno
+     */
+    @FXML
+    public void lanzarInformacionAlumno() {
+        try {
+            URL infoAlumno = getClass().getResource("/vista/InformacionAlumno.fxml");
+            AnchorPane paneInfoAlumno = FXMLLoader.load(infoAlumno);
+
+            BorderPane border = LoginController.getPrincipal();
+            border.setCenter(paneInfoAlumno);
         } catch (IOException ioEx) {
             ioEx.printStackTrace();
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
