@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="Alumno">
 
     <select id="getAlumno" parameterType="String" resultType="modelo.pojos.Alumno">
-        SELECT * FROM Alumno WHERE matricula = #{matricula}
+        SELECT * FROM Alumno WHERE matricula = #{matricula};
     </select>
 
     <select id="getAlumnos" parameterType="String" 
