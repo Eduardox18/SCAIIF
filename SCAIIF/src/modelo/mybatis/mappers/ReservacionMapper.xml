@@ -25,5 +25,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         INSERT into reservacion (noActividad, matricula, asistencia, fecha) 
         VALUES (#{noActividad}, #{matricula}, 0, #{fecha});
     </insert>
-    
+
+    <select id="reservaciones" parameterType="String" resultType="modelo.pojos.ActividadProxima">
+        SELECT actividad.fecha AS 'fechaActividad', actividad.nombre AS 'nombreActividad',
+        reservacion.fecha AS 'fechaReservacion', curso.nombreCurso, estado.estado
+        FROM reservacion, alumno, actividad, curso, estado
+        WHERE reservacion.noActividad = actividad.noActividad
+        AND reservacion.matricula = alumno.matricula
+        AND actividad.nrc = curso.nrc
+        AND actividad.idEstado = estado.idEstado
+        AND actividad.fecha > (SELECT CURDATE())
+        AND reservacion.matricula = #{matricula}
+        ORDER BY actividad.fecha;
+    </select>
 </mapper>

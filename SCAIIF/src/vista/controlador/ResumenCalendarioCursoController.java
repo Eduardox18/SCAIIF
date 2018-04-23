@@ -251,7 +251,7 @@ public class ResumenCalendarioCursoController implements Initializable {
 
     /**
      * Verifica si las fechas son válidas (que estén dentro del periodo)
-     * @return
+     * @return true o false. Dependiendo si las fechas son válidas.
      */
     private boolean comprobarFechas() {
         Date inicio = SeleccionDeCursoController.periodoSeleccionado.getFechaInicio();

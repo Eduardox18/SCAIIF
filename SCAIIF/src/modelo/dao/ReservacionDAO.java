@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import modelo.mybatis.MyBatisUtils;
+import modelo.pojos.ActividadProxima;
 import org.apache.ibatis.session.SqlSession;
 import modelo.pojos.ListaAsistencia;
 import modelo.pojos.Reservacion;
@@ -98,5 +99,20 @@ public class ReservacionDAO {
             resultado = true;
         }
         return resultado;
+    }
+
+    /**
+     * Recupera las actividades que reservó un alumno
+     * @param matricula
+     * @return
+     * @throws Exception
+     */
+    public static List<ActividadProxima> recuperarReservaciones (String matricula) throws Exception {
+        List<ActividadProxima> reservaciones = null;
+
+        try(SqlSession conn = MyBatisUtils.getSession()) {
+            reservaciones = conn.selectList("Reservacion.reservaciones", matricula);
+        }
+        return reservaciones;
     }
 }

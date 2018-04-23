@@ -12,4 +12,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         INSERT INTO induccion(matricula, nrc, cursoInduccion, primeraAsesoria, noPersonal) VALUES
         (#{matricula}, #{nrc}, #{cursoInduccion}, #{primeraAsesoria}, #{noPersonal});
     </insert>
+    
+    <select id="getInfo" parameterType="String" resultType="modelo.pojos.Induccion">
+        SELECT * FROM Induccion WHERE matricula = #{matricula};
+    </select>
 </mapper>

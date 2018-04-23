@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="Alumno">
 
     <select id="getAlumno" parameterType="String" resultType="modelo.pojos.Alumno">
-        SELECT * FROM Alumno WHERE matricula = #{matricula}
+        SELECT * FROM Alumno WHERE matricula = #{matricula};
     </select>
 
     <select id="getAlumnos" parameterType="String" 
@@ -53,4 +53,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT nombre, apPaterno, apMaterno, correo FROM Alumno
         WHERE matricula = #{matricula} AND vigente = 1;  
     </select>
+
+    <update id="actualizarAlumno" parameterType="modelo.pojos.Alumno">
+       UPDATE alumno SET nombre = #{nombre}, apPaterno = #{apPaterno}, apMaterno = #{apMaterno},
+       correo = #{correo}, lenguaIndigena = #{lenguaIndigena}
+       WHERE matricula = #{matricula};
+    </update>
 </mapper>
