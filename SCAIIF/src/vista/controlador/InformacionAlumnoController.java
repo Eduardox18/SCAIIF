@@ -18,13 +18,17 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import modelo.dao.AlumnoDAO;
 import modelo.dao.CursoDAO;
 import modelo.dao.InduccionDAO;
@@ -66,7 +70,10 @@ public class InformacionAlumnoController implements Initializable {
     JFXListView list_cursos;
     @FXML
     JFXButton buscarBtn;
+    @FXML
+    JFXButton editarBtn;
 
+    static Alumno alumnoActual;
     /**
      * Initializes the controller class.
      */
@@ -134,6 +141,8 @@ public class InformacionAlumnoController implements Initializable {
         Alumno alumno;
         try {
             alumno = AlumnoDAO.verificarMatricula(txt_matricula.getText());
+            alumnoActual = alumno;
+            editarBtn.setDisable(false);
             txt_nombre.setText(alumno.getNombre());
             txt_apellidos.setText(alumno.getApPaterno() + " " + alumno.getApMaterno());
             txt_correo.setText(alumno.getCorreo());
@@ -148,6 +157,7 @@ public class InformacionAlumnoController implements Initializable {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                 "La matrícula que ingresa no es válida o no existe", "Error",
                 ButtonType.OK);
+            editarBtn.setDisable(true);
             dialogo.show();
             limpiarCampos();
         }
@@ -179,11 +189,13 @@ public class InformacionAlumnoController implements Initializable {
     /**
      * Limpia los campos.
      */
-    public void limpiarCampos() {
+    private void limpiarCampos() {
         txt_matricula.setText("");
         txt_nombre.setText("");
         txt_apellidos.setText("");
         txt_correo.setText("");
+        table_Induccion.setItems(null);
+        list_cursos.setItems(null);
     }
 
     /**
@@ -210,6 +222,28 @@ public class InformacionAlumnoController implements Initializable {
             dialogo.show();
         }
         
+    }
+
+    /**
+     * Abre la ventana de edición de alumno
+     */
+    public void editarInformacionAlumno() {
+        try {
+            Stage stageEdicion = new Stage();
+            BorderPane paneEdicion = new BorderPane();
+            URL paneEdicionURL = getClass().getResource("/vista/EdicionAlumno.fxml");
+            AnchorPane anchorEdicion = FXMLLoader.load(paneEdicionURL);
+
+            paneEdicion.setCenter(anchorEdicion);
+            Scene sceneMes = new Scene(paneEdicion, 600, 400);
+            stageEdicion.setScene(sceneMes);
+            stageEdicion.showAndWait();
+            recuperarInformacionAlumno();
+        } catch (IOException ioEx) {
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
+        }
     }
 
 }

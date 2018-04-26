@@ -117,7 +117,7 @@ public class DrawerPrincipalController implements Initializable {
                 registrarAsistenciaButton.setDisable(true);
                 crearCalendarioActButton.setDisable(true);
                 registrarCalendarioCursoButton.setDisable(true);
-                consultarAlumnoButton.setDisable(true);
+                //consultarAlumnoButton.setDisable(true);
                 break;
             default:
                 break;
