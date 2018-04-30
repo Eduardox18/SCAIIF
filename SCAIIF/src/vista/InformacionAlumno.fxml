@@ -22,7 +22,7 @@
          </image>
       </ImageView>
       <Label layoutX="76.0" layoutY="105.0" text="Asesor" />
-      <JFXTextField fx:id="txt_matricula" labelFloat="true" layoutX="252.0" layoutY="110.0" onKeyReleased="#comprobarMatAlumno" prefHeight="25.0" prefWidth="197.0" promptText="Matrícula del alumno" />
+      <JFXTextField fx:id="campoMatricula" labelFloat="true" layoutX="252.0" layoutY="110.0" onKeyReleased="#comprobarMatAlumno" prefHeight="25.0" prefWidth="197.0" promptText="Matrícula del alumno" />
       <Label layoutX="209.0" layoutY="29.0" text="Información del Alumno(a)">
          <font>
             <Font size="24.0" />
@@ -44,7 +44,7 @@
          </font>
       </Label>
       <JFXCheckBox fx:id="checkLengua" disable="true" layoutX="539.0" layoutY="184.0" pickOnBounds="false" text="Lengua indígena" />
-      <TableView fx:id="table_Induccion" layoutX="67.0" layoutY="250.0" prefHeight="115.0" prefWidth="588.0">
+      <TableView fx:id="tablaInduccion" layoutX="67.0" layoutY="250.0" prefHeight="115.0" prefWidth="588.0">
         <columns>
           <TableColumn fx:id="colNrc" editable="false" prefWidth="211.0" text="NRC" />
           <TableColumn fx:id="colAsesoria" editable="false" minWidth="0.0" prefWidth="197.0" text="Fecha primera Asesoría" />
@@ -56,10 +56,10 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXListView fx:id="list_cursos" layoutX="68.0" layoutY="406.0" prefHeight="59.0" prefWidth="232.0" />
-      <JFXTextField fx:id="txt_nombre" editable="false" layoutX="209.0" layoutY="150.0" prefHeight="25.0" prefWidth="243.0" />
-      <JFXTextField fx:id="txt_apellidos" editable="false" layoutX="210.0" layoutY="177.0" prefHeight="25.0" prefWidth="243.0" />
-      <JFXTextField fx:id="txt_correo" editable="false" layoutX="210.0" layoutY="207.0" prefHeight="25.0" prefWidth="243.0" />
+      <JFXListView fx:id="listaCursos" layoutX="68.0" layoutY="406.0" prefHeight="59.0" prefWidth="232.0" />
+      <JFXTextField fx:id="campoNombre" editable="false" layoutX="209.0" layoutY="150.0" prefHeight="25.0" prefWidth="243.0" />
+      <JFXTextField fx:id="campoApellidos" editable="false" layoutX="210.0" layoutY="177.0" prefHeight="25.0" prefWidth="243.0" />
+      <JFXTextField fx:id="campoCorreo" editable="false" layoutX="210.0" layoutY="207.0" prefHeight="25.0" prefWidth="243.0" />
       <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" onMouseClicked="#mostrarIcono" prefHeight="500.0" prefWidth="700.0" />
       <JFXHamburger fx:id="menuIcon" layoutX="16.0" layoutY="15.0" />
       <JFXButton fx:id="buscarBtn" layoutX="476.0" layoutY="110.0" onAction="#recuperarInformacionAlumno" prefHeight="30.0" prefWidth="85.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Buscar" textFill="WHITE">
