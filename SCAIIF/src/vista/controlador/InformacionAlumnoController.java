@@ -18,13 +18,17 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import modelo.dao.AlumnoDAO;
 import modelo.dao.CursoDAO;
 import modelo.dao.InduccionDAO;
@@ -45,15 +49,15 @@ public class InformacionAlumnoController implements Initializable {
     @FXML
     JFXDrawer menuDrawer = new JFXDrawer();
     @FXML
-    JFXTextField txt_matricula;
+    JFXTextField campoMatricula;
     @FXML
-    JFXTextField txt_nombre;
+    JFXTextField campoNombre;
     @FXML
-    JFXTextField txt_apellidos;
+    JFXTextField campoApellidos;
     @FXML
-    JFXTextField txt_correo;
+    JFXTextField campoCorreo;
     @FXML
-    TableView table_Induccion;
+    TableView tablaInduccion;
     @FXML
     TableColumn colNrc;
     @FXML
@@ -63,10 +67,13 @@ public class InformacionAlumnoController implements Initializable {
     @FXML
     JFXCheckBox checkLengua;
     @FXML
-    JFXListView list_cursos;
+    JFXListView listaCursos;
     @FXML
     JFXButton buscarBtn;
+    @FXML
+    JFXButton editarBtn;
 
+    static Alumno alumnoActual;
     /**
      * Initializes the controller class.
      */
@@ -87,12 +94,12 @@ public class InformacionAlumnoController implements Initializable {
             menuIcon.setVisible(false);
         });
         
-        txt_matricula.textProperty().addListener(new ChangeListener<String>() {
+        campoMatricula.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable,
                 String oldValue, String newValue) {
-                if (txt_matricula.getText().length() >= 9) {
-                    txt_matricula.setText(txt_matricula.getText().substring(0, 9));
+                if (campoMatricula.getText().length() >= 9) {
+                    campoMatricula.setText(campoMatricula.getText().substring(0, 9));
                 }
             }
         });
@@ -117,7 +124,7 @@ public class InformacionAlumnoController implements Initializable {
      */
     @FXML
     private void comprobarMatAlumno() {
-        String matricula = txt_matricula.getText();
+        String matricula = campoMatricula.getText();
         if (matricula != null && matricula.length() == 9) {
             buscarBtn.setDisable(false);
         } else {
@@ -133,10 +140,12 @@ public class InformacionAlumnoController implements Initializable {
     private void recuperarInformacionAlumno() {
         Alumno alumno;
         try {
-            alumno = AlumnoDAO.verificarMatricula(txt_matricula.getText());
-            txt_nombre.setText(alumno.getNombre());
-            txt_apellidos.setText(alumno.getApPaterno() + " " + alumno.getApMaterno());
-            txt_correo.setText(alumno.getCorreo());
+            alumno = AlumnoDAO.verificarMatricula(campoMatricula.getText());
+            alumnoActual = alumno;
+            editarBtn.setDisable(false);
+            campoNombre.setText(alumno.getNombre());
+            campoApellidos.setText(alumno.getApPaterno() + " " + alumno.getApMaterno());
+            campoCorreo.setText(alumno.getCorreo());
             if (alumno.isLenguaIndigena() == true) {
                 checkLengua.setSelected(true);
             } else {
@@ -148,6 +157,7 @@ public class InformacionAlumnoController implements Initializable {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                 "La matrícula que ingresa no es válida o no existe", "Error",
                 ButtonType.OK);
+            editarBtn.setDisable(true);
             dialogo.show();
             limpiarCampos();
         }
@@ -159,7 +169,7 @@ public class InformacionAlumnoController implements Initializable {
      */
     public void llenarTabla() {
         List<Induccion> listaInfoAlumno = new ArrayList<>();
-        String matricula = txt_matricula.getText();
+        String matricula = campoMatricula.getText();
 
         try {
             listaInfoAlumno = InduccionDAO.recuperarAlumnos(matricula);
@@ -168,7 +178,7 @@ public class InformacionAlumnoController implements Initializable {
             colNrc.setCellValueFactory(new PropertyValueFactory("nrc"));
             colAsesoria.setCellValueFactory(new PropertyValueFactory("primeraAsesoria"));
             colInduccion.setCellValueFactory(new PropertyValueFactory("cursoInduccion"));
-            table_Induccion.setItems(listaObservable);
+            tablaInduccion.setItems(listaObservable);
         } catch (Exception ex) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
@@ -179,11 +189,13 @@ public class InformacionAlumnoController implements Initializable {
     /**
      * Limpia los campos.
      */
-    public void limpiarCampos() {
-        txt_matricula.setText("");
-        txt_nombre.setText("");
-        txt_apellidos.setText("");
-        txt_correo.setText("");
+    private void limpiarCampos() {
+        campoMatricula.setText("");
+        campoNombre.setText("");
+        campoApellidos.setText("");
+        campoCorreo.setText("");
+        tablaInduccion.setItems(null);
+        listaCursos.setItems(null);
     }
 
     /**
@@ -192,7 +204,7 @@ public class InformacionAlumnoController implements Initializable {
      */
     private void llenarListaCursos() {
         List<Curso> cursos = new ArrayList<>();
-        String matricula = txt_matricula.getText();
+        String matricula = campoMatricula.getText();
         
         try {
             cursos = CursoDAO.recuperarCursos(matricula);
@@ -203,13 +215,35 @@ public class InformacionAlumnoController implements Initializable {
                 cursosAlumno.add(infoCursos);
             }
             ObservableList<String> cursosObservable = FXCollections.observableArrayList(cursosAlumno);
-            list_cursos.setItems(cursosObservable);
+            listaCursos.setItems(cursosObservable);
         } catch (Exception ex) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
         }
         
+    }
+
+    /**
+     * Abre la ventana de edición de alumno
+     */
+    public void editarInformacionAlumno() {
+        try {
+            Stage stageEdicion = new Stage();
+            BorderPane paneEdicion = new BorderPane();
+            URL paneEdicionURL = getClass().getResource("/vista/EdicionAlumno.fxml");
+            AnchorPane anchorEdicion = FXMLLoader.load(paneEdicionURL);
+
+            paneEdicion.setCenter(anchorEdicion);
+            Scene sceneMes = new Scene(paneEdicion, 600, 400);
+            stageEdicion.setScene(sceneMes);
+            stageEdicion.showAndWait();
+            recuperarInformacionAlumno();
+        } catch (IOException ioEx) {
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
+        }
     }
 
 }

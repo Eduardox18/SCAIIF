@@ -166,6 +166,7 @@ public class ReservarParaAlumnoController implements Initializable {
             ReservacionDAO.registrarReservación(infoAlumno.getMatricula(), noActividad);
             llenarTabla();
         } catch (Exception ex) {
+            ex.printStackTrace();
             dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();

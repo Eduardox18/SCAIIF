@@ -19,14 +19,7 @@ import java.util.ResourceBundle;
 
 public class EdicionAlumnoController implements Initializable {
 
-    /**
-     * Prueba del módulo
-     */
-    Alumno alumnoTest = new Alumno("S15011624", "Ámbar", "Espinosa", null,
-            "ambar@gmail.com", true, 1);
-    /**
-     *
-     */
+    Alumno alumnoConsultado = InformacionAlumnoController.alumnoActual;
 
     @FXML
     private Label labelMatricula;
@@ -51,14 +44,14 @@ public class EdicionAlumnoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        labelMatricula.setText("Matrícula: " + alumnoTest.getMatricula());
-        nombreTF.setText(alumnoTest.getNombre());
-        apPaternoTF.setText(alumnoTest.getApPaterno());
-        if (alumnoTest.getApMaterno() != null) {
-            apMaternoTF.setText(alumnoTest.getApMaterno());
+        labelMatricula.setText("Matrícula: " + alumnoConsultado.getMatricula());
+        nombreTF.setText(alumnoConsultado.getNombre());
+        apPaternoTF.setText(alumnoConsultado.getApPaterno());
+        if (alumnoConsultado.getApMaterno() != null) {
+            apMaternoTF.setText(alumnoConsultado.getApMaterno());
         }
-        emailTF.setText(alumnoTest.getCorreo());
-        if (alumnoTest.isLenguaIndigena()) {
+        emailTF.setText(alumnoConsultado.getCorreo());
+        if (alumnoConsultado.isLenguaIndigena()) {
             lenguaCB.setSelected(true);
         }
     }
@@ -66,7 +59,7 @@ public class EdicionAlumnoController implements Initializable {
     @FXML
     public void actualizarAlumno() {
         Alumno alumno = new Alumno();
-        alumno.setMatricula(alumnoTest.getMatricula());
+        alumno.setMatricula(alumnoConsultado.getMatricula());
         alumno.setNombre(nombreTF.getText());
         alumno.setApPaterno(apPaternoTF.getText());
         if (!apMaternoTF.getText().isEmpty()) {
