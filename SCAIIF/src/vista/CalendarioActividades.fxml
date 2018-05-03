@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="vista.controlador.CalendarioActividadesController">
+   <children>
+      <VBox layoutX="24.0" layoutY="37.0" prefHeight="400.0" prefWidth="600.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TableView prefWidth="553.0">
+              <columns>
+                <TableColumn maxWidth="130.0" minWidth="130.0" prefWidth="130.0" text="Fecha" />
+                <TableColumn maxWidth="1.7976931348623157E308" minWidth="430.0" prefWidth="430.0" text="Nombre" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <JFXComboBox labelFloat="true" prefHeight="27.0" prefWidth="190.0" promptText="Mes" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <JFXComboBox labelFloat="true" prefHeight="27.0" prefWidth="164.0" promptText="Curso" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="15.0" right="15.0" top="45.0" />
+         </padding>
+      </VBox>
+      <JFXDrawer defaultDrawerSize="230.0" prefHeight="400.0" prefWidth="600.0" />
+      <JFXHamburger layoutX="15.0" layoutY="15.0" />
+   </children>
+</AnchorPane>
