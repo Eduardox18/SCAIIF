@@ -95,4 +95,24 @@ public class DiaFestivoDAO {
         }
         return existe;
     }
+
+    /**
+     * Recupera los días festivos de un calendario de curso con base al NRC del curso
+     * @param nrc NRC del curso consultado
+     * @return
+     * @throws Exception
+     */
+    public static List<DiasFestivos> consultarDiasFestivosCurso (Integer nrc) throws Exception {
+        List<DiasFestivos> diasFestivos;
+        SqlSession conn = null;
+        try {
+            conn = MyBatisUtils.getSession();
+            diasFestivos = conn.selectList("DiaFestivo.getDiasFestivosbyNRC", nrc);
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return diasFestivos;
+    }
 }

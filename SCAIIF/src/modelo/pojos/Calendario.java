@@ -1,6 +1,8 @@
 package modelo.pojos;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 /**
  *
@@ -57,6 +59,14 @@ public class Calendario {
 
     public void setFinVacaciones(Date finVacaciones) {
         this.finVacaciones = finVacaciones;
+    }
+
+    public String getVacaciones() {
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd 'de' MMMM 'de' yyyy", new Locale("ES"));
+        String inicio = sdf.format(inicioVacaciones);
+        String fin = sdf.format(finVacaciones);
+        String cadenaVacaciones = inicio + " - " + fin;
+        return cadenaVacaciones;
     }
 
     public Integer getNrc() {

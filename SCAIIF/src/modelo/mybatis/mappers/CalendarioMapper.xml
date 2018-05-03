@@ -13,4 +13,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         inicioVacaciones = #{inicioVacaciones},
         finVacaciones = #{finVacaciones} WHERE idCalendario = #{idCalendario};
     </insert>
+
+    <select id="consultarCalendarioCurso" parameterType="int" resultType="modelo.pojos.ConsultaCalendario">
+        SELECT mes.mes, resumenMes.diaInicio, resumenMes.diaFin, modulo.noModulo, seccion.noSeccion, calendario.fechaLimiteExamen, materialReportar.nombreMaterial, conversacion.noConversacion
+        FROM calendario, mes, modulo, seccion, materialReportar, resumenMes, conversacion
+        WHERE
+        resumenMes.idMes = mes.idMes AND
+        resumenMes.idModulo = modulo.idModulo AND
+        resumenMes.idSeccion = seccion.idSeccion AND
+        resumenMes.noMaterial = materialReportar.noMaterial AND
+        resumenMes.idConversacion = conversacion.idConversacion AND
+        resumenMes.idCalendario = calendario.idCalendario AND
+        calendario.nrc = #{nrc};
+    </select>
 </mapper>
