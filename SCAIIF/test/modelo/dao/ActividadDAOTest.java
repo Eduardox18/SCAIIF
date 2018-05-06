@@ -135,9 +135,30 @@ public class ActividadDAOTest {
         System.out.println("Prueba del recuperarActividadesDisponibles");
         String matricula = "S15011601";
         Integer nrc = 28192;
-        List<ActividadAsesor> expResult = new ArrayList<>();
         List<ActividadAsesor> result = ActividadDAO.recuperarActividadesDisponibles(matricula, nrc);
         assertFalse(result.isEmpty());
         // TODO review the generated test code and remove the default call to fail.
+    }
+
+    /**
+     * Test of recuperarActividadesCalendario method, of class ActividadDAO.
+     */
+    @Test
+    public void testRecuperarActividadesCalendario() throws Exception {
+        System.out.println("Prueba del método recuperarActividadesCalendario");
+        Integer nrc = 28192;
+        List<ActividadAsesor> result = ActividadDAO.recuperarActividadesCalendario(nrc);
+        assertFalse(result.isEmpty());
+    }
+
+    /**
+     * Test of detalleActividad method, of class ActividadDAO.
+     */
+    @Test
+    public void testDetalleActividad() throws Exception {
+        System.out.println("Prueba del método detalleActividad");
+        Integer noActividad = 1;
+        ActividadAsesor result = ActividadDAO.detalleActividad(noActividad);
+        assertNotNull(result);
     }
 }
