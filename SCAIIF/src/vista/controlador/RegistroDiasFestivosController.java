@@ -55,6 +55,7 @@ public class RegistroDiasFestivosController implements Initializable{
             colDia.setCellValueFactory(new PropertyValueFactory<>("diaFestivo"));
             festivosTable.setItems(diasObservable);
         } catch (Exception ex) {
+            ex.printStackTrace();
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
@@ -78,6 +79,7 @@ public class RegistroDiasFestivosController implements Initializable{
             stageTercero.showAndWait();
             llenarTablaDias();
         } catch (IOException ioEx) {
+            ioEx.printStackTrace();
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();

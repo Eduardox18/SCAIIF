@@ -92,7 +92,6 @@ public class DrawerPrincipalController implements Initializable {
                 reservarActividadButton.setDisable(true);
                 consultarListaAsistenciaButton.setDisable(true);
                 registrarAsistenciaButton.setDisable(true);
-                consultarAlumnoButton.setDisable(true);
                 break;
             case 2:
                 altaAlumnoButton.setDisable(true);
@@ -117,7 +116,6 @@ public class DrawerPrincipalController implements Initializable {
                 registrarAsistenciaButton.setDisable(true);
                 crearCalendarioActButton.setDisable(true);
                 registrarCalendarioCursoButton.setDisable(true);
-                //consultarAlumnoButton.setDisable(true);
                 break;
             default:
                 break;

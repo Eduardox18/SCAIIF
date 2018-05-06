@@ -5,19 +5,19 @@
 
 <mapper namespace="DiaFestivo">
     <select id="recuperarDiasFestivos" parameterType="int" resultType="modelo.pojos.DiasFestivos">
-        SELECT idDiasFestivos, diaFestivo FROM diasFestivos WHERE idCalendario = #{idCalendario};
+        SELECT idDiaFestivo, diaFestivo FROM diaFestivo WHERE idCalendario = #{idCalendario};
     </select>
 
     <insert id="agregarDiaFestivo" parameterType="modelo.pojos.DiasFestivos">
-        INSERT INTO diasFestivos(diaFestivo, idCalendario) VALUES (#{diaFestivo}, #{idCalendario});
+        INSERT INTO diaFestivo(diaFestivo, idCalendario) VALUES (#{diaFestivo}, #{idCalendario});
     </insert>
 
     <select id="comprobarSiExiste" parameterType="modelo.pojos.DiasFestivos" resultType="modelo.pojos.DiasFestivos">
-        SELECT * FROM diasFestivos WHERE idCalendario = #{idCalendario} AND diaFestivo = #{diaFestivo};
+        SELECT * FROM diaFestivo WHERE idCalendario = #{idCalendario} AND diaFestivo = #{diaFestivo};
     </select>
 
     <delete id="borrarDiaFestivo" parameterType="int">
-        DELETE FROM diasFestivos WHERE idDiasFestivos = #{idDiasFestivos};
+        DELETE FROM diaFestivo WHERE idDiaFestivo = #{idDiasFestivos};
     </delete>
 
     <select id="getDiasFestivosbyNRC" parameterType="int" resultType="modelo.pojos.DiasFestivos">
