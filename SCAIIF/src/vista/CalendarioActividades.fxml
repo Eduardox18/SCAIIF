@@ -4,33 +4,40 @@
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.CalendarioActividadesController">
    <children>
       <VBox layoutX="24.0" layoutY="37.0" prefHeight="400.0" prefWidth="600.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <Label text="Doble clic sobre cualquier actividad para obtener información detallada.">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="26.0" prefWidth="670.0" VBox.vgrow="NEVER">
+               <children>
+                  <JFXComboBox fx:id="comboPeriodo" labelFloat="true" onAction="#llenarComboCurso" prefHeight="27.0" prefWidth="190.0" promptText="Periodo" />
+                  <Pane prefHeight="31.0" prefWidth="290.0" HBox.hgrow="ALWAYS" />
+                  <JFXComboBox fx:id="comboCurso" labelFloat="true" onAction="#llenarTabla" prefHeight="27.0" prefWidth="190.0" promptText="Curso" />
+               </children>
+            </HBox>
             <TableView fx:id="tablaActividades" prefWidth="553.0">
               <columns>
-                <TableColumn fx:id="columnaFecha" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" text="Fecha" />
-                <TableColumn fx:id="columnaNombre" maxWidth="1.7976931348623157E308" minWidth="430.0" prefWidth="430.0" text="Nombre" />
+                <TableColumn fx:id="columnaFecha" editable="false" maxWidth="259.0" minWidth="130.0" prefWidth="244.0" text="Fecha" />
+                <TableColumn fx:id="columnaNombre" editable="false" maxWidth="1.7976931348623157E308" minWidth="409.0" prefWidth="424.0" sortable="false" text="Nombre" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <JFXComboBox fx:id="comboPeriodo" labelFloat="true" onAction="#llenarComboCurso" prefHeight="27.0" prefWidth="240.0" promptText="Periodo" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <JFXComboBox fx:id="comboCurso" labelFloat="true" onAction="#llenarTabla" prefHeight="27.0" prefWidth="240.0" promptText="Curso" />
-               </children>
-            </HBox>
          </children>
          <padding>
             <Insets bottom="20.0" left="15.0" right="15.0" top="45.0" />
