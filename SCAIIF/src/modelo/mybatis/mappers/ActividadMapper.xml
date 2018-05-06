@@ -55,6 +55,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             parameterType="int">
         SELECT actividad.*, curso.idPeriodo, curso.nombreCurso FROM 
         actividad INNER JOIN curso ON actividad.nrc = curso.nrc WHERE 
-        curso.nrc = #{nrc} AND actividad.idEstado = 1;
+        curso.nrc = #{nrc} AND actividad.idEstado = 2;
+    </select>
+    
+    <select id="detalleActividad" resultType="modelo.pojos.ActividadAsesor"
+            parameterType="int">
+        SELECT actividad.*, usuario.nombre AS nombreAsesor, usuario.apPaterno, 
+        usuario.apMaterno FROM actividad INNER JOIN usuario ON 
+        actividad.noPersonal = usuario.noPersonal WHERE actividad.noActividad = 
+        #{noActividad};
     </select>
 </mapper>

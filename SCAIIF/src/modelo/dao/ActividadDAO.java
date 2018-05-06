@@ -149,4 +149,12 @@ public class ActividadDAO {
         
         return listaActividades;
     }
+    
+    public static ActividadAsesor detalleActividad(Integer noActividad) throws Exception {
+        ActividadAsesor detalleActividad;
+        try(SqlSession conn = MyBatisUtils.getSession()){
+            detalleActividad = conn.selectOne("Actividad.detalleActividad", noActividad);
+        }
+        return detalleActividad;
+    }
 }
