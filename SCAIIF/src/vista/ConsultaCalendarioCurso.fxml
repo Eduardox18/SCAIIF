@@ -21,15 +21,16 @@
       <JFXComboBox fx:id="comboCurso" disable="true" focusColor="BLACK" layoutX="398.0" layoutY="69.0" onAction="#llenarTablaCurso" prefHeight="27.0" prefWidth="167.0" promptText="Curso" unFocusColor="#0f9d58" />
       <TableView fx:id="tablaResumen" layoutX="18.0" layoutY="116.0" prefHeight="204.0" prefWidth="670.0">
         <columns>
-          <TableColumn fx:id="mesCol" prefWidth="104.59935569763184" text="Mes" />
-          <TableColumn fx:id="diasCol" prefWidth="70.86343383789062" text="Días" />
-            <TableColumn fx:id="moduloCol" prefWidth="54.34423828125" text="Módulo" />
-            <TableColumn fx:id="seccionCol" prefWidth="56.42433166503906" text="Sección" />
-            <TableColumn fx:id="limiteCol" prefWidth="132.68841552734375" text="Fecha límite examen" />
-            <TableColumn fx:id="materialCol" prefWidth="255.31155395507812" text="Material a reportar en asesoría" />
+          <TableColumn fx:id="mesCol" prefWidth="62.0" text="Mes" />
+          <TableColumn fx:id="diasCol" prefWidth="54.0" text="Días" />
+            <TableColumn fx:id="moduloCol" prefWidth="61.0" text="Módulo" />
+            <TableColumn fx:id="seccionCol" prefWidth="57.0" text="Sección" />
+            <TableColumn fx:id="limiteCol" minWidth="0.0" prefWidth="135.0" text="Fecha límite examen" />
+            <TableColumn fx:id="materialCol" minWidth="0.0" prefWidth="209.0" text="Material a reportar en asesoría" />
+            <TableColumn fx:id="conversacionCol" prefWidth="91.0" text="Conversación" />
         </columns>
       </TableView>
-      <Label fx:id="labelFestivos" layoutX="20.0" layoutY="334.0" prefHeight="19.0" prefWidth="653.0" text="Días festivos del curso: " wrapText="true">
+      <Label fx:id="labelFestivos" layoutX="20.0" layoutY="334.0" prefHeight="19.0" prefWidth="653.0" text="No se ha seleccionado curso" wrapText="true">
          <font>
             <Font size="15.0" />
          </font>
@@ -39,7 +40,7 @@
             <Font size="15.0" />
          </font>
       </JFXButton>
-      <Label fx:id="vacacionesLabel" layoutX="20.0" layoutY="384.0" prefHeight="19.0" prefWidth="653.0" text="Vacaciones:">
+      <Label fx:id="vacacionesLabel" layoutX="20.0" layoutY="384.0" prefHeight="19.0" prefWidth="653.0" text="No se ha seleccionado curso">
          <font>
             <Font size="15.0" />
          </font>

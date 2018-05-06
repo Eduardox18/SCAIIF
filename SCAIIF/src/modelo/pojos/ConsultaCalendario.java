@@ -4,8 +4,8 @@ import java.sql.Date;
 
 public class ConsultaCalendario {
     private String mes;
-    private Integer diaInicio;
-    private Integer diaFin;
+    private String diaInicio;
+    private String diaFin;
     private Integer noModulo;
     private Integer noSeccion;
     private Date fechaLimiteExamen;
@@ -15,7 +15,7 @@ public class ConsultaCalendario {
     public ConsultaCalendario() {
     }
 
-    public ConsultaCalendario(String mes, Integer diaInicio, Integer diaFin, Integer noModulo, Integer noSeccion,
+    public ConsultaCalendario(String mes, String diaInicio, String diaFin, Integer noModulo, Integer noSeccion,
                               Date fechaLimiteExamen, String nombreMaterial, Integer noConversacion) {
         this.mes = mes;
         this.diaInicio = diaInicio;
@@ -31,9 +31,22 @@ public class ConsultaCalendario {
         return mes;
     }
 
-    public String getDias() {
+    public String getDiaInicio() {
         String dias = diaInicio + " - " + diaFin;
         return dias;
+    }
+
+    public void setDiaInicio(String diaInicio) {
+        this.diaInicio = diaInicio;
+    }
+
+    public String getDiaFin() {
+        String dias = diaInicio + " - " + diaFin;
+        return dias;
+    }
+
+    public void setDiaFin(String diaFin) {
+        this.diaFin = diaFin;
     }
 
     public void setMes(String mes) {

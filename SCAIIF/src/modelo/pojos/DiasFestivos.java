@@ -31,7 +31,7 @@ public class DiasFestivos {
     }
 
     public String getFormatoDiaFestivo() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy", new Locale("ES"));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd 'de' MMMM", new Locale("ES"));
         String diaFestivoFormato = sdf.format(diaFestivo);
         return diaFestivoFormato;
     }

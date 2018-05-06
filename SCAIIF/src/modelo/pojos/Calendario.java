@@ -62,7 +62,7 @@ public class Calendario {
     }
 
     public String getVacaciones() {
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd 'de' MMMM 'de' yyyy", new Locale("ES"));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy", new Locale("ES"));
         String inicio = sdf.format(inicioVacaciones);
         String fin = sdf.format(finVacaciones);
         String cadenaVacaciones = inicio + " - " + fin;

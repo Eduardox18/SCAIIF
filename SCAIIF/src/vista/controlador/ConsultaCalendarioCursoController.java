@@ -10,13 +10,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import modelo.dao.CalendarioDAO;
 import modelo.dao.CursoDAO;
+import modelo.dao.DiaFestivoDAO;
 import modelo.dao.PeriodoDAO;
-import modelo.pojos.ConsultaCalendario;
-import modelo.pojos.Curso;
-import modelo.pojos.Periodo;
+import modelo.pojos.*;
 import vista.Dialogo;
 
 import java.io.IOException;
@@ -52,6 +53,9 @@ public class ConsultaCalendarioCursoController implements Initializable {
 
     @FXML
     private TableColumn materialCol;
+
+    @FXML
+    private TableColumn conversacionCol;
 
     @FXML
     private Label labelFestivos;
@@ -112,6 +116,7 @@ public class ConsultaCalendarioCursoController implements Initializable {
             ObservableList<Periodo> periodosObservable = FXCollections.observableArrayList(periodos);
             comboPeriodo.setItems(periodosObservable);
         } catch (Exception ex) {
+            ex.printStackTrace();
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
@@ -123,7 +128,7 @@ public class ConsultaCalendarioCursoController implements Initializable {
      */
     @FXML
     public void llenarComboCursos() {
-        tablaResumen.setItems(null);
+        limpiarCampos();
         comboCurso.setDisable(false);
         List<Curso> cursos;
         try {
@@ -132,6 +137,7 @@ public class ConsultaCalendarioCursoController implements Initializable {
             ObservableList<Curso> cursosObservable = FXCollections.observableArrayList(cursos);
             comboCurso.setItems(cursosObservable);
         } catch (Exception ex) {
+            ex.printStackTrace();
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
@@ -140,6 +146,55 @@ public class ConsultaCalendarioCursoController implements Initializable {
 
     @FXML
     public void llenarTablaCurso() {
+        if (comboCurso.getSelectionModel().getSelectedItem() != null) {
+            List<ConsultaCalendario> infoCalendarioCurso;
+            List<DiasFestivos> diasFestivos = null;
+            Calendario calendario = null;
 
+            try {
+                infoCalendarioCurso = CalendarioDAO.consultarCalendarioCurso(comboCurso.getSelectionModel().
+                        getSelectedItem().getNrc());
+                ObservableList<ConsultaCalendario> calendarioObservable =
+                        FXCollections.observableArrayList(infoCalendarioCurso);
+                mesCol.setCellValueFactory(new PropertyValueFactory<>("mes"));
+                diasCol.setCellValueFactory(new PropertyValueFactory<>("diaInicio"));
+                moduloCol.setCellValueFactory(new PropertyValueFactory<>("noModulo"));
+                seccionCol.setCellValueFactory(new PropertyValueFactory<>("noSeccion"));
+                limiteCol.setCellValueFactory(new PropertyValueFactory<>("fechaLimiteExamen"));
+                materialCol.setCellValueFactory(new PropertyValueFactory<>("nombreMaterial"));
+                conversacionCol.setCellValueFactory(new PropertyValueFactory<>("noConversacion"));
+                tablaResumen.setItems(calendarioObservable);
+
+                diasFestivos = DiaFestivoDAO.consultarDiasFestivosCurso(comboCurso.getSelectionModel().
+                        getSelectedItem().getNrc());
+
+                calendario = CalendarioDAO.recuperarCalendario(comboCurso.getSelectionModel().
+                        getSelectedItem().getNrc());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                        "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+                dialogo.show();
+            }
+
+            try {
+                String diasFestivosCadena = "Días festivos: ";
+                for (int i = 0; i < diasFestivos.size(); i++) {
+                    diasFestivosCadena += diasFestivos.get(i).getFormatoDiaFestivo() + ", ";
+                }
+                labelFestivos.setText(diasFestivosCadena.substring(0, diasFestivosCadena.length() - 2));
+
+                vacacionesLabel.setText("Vacaciones: " + calendario.getVacaciones());
+            } catch (NullPointerException ex) {
+                //DoNothing
+            }
+
+        }
+    }
+
+    private void limpiarCampos() {
+        tablaResumen.setItems(null);
+        labelFestivos.setText("No se ha seleccionado curso");
+        vacacionesLabel.setText("No se ha seleccionado curso");
     }
 }
