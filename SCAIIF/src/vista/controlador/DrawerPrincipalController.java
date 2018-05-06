@@ -326,7 +326,6 @@ public class DrawerPrincipalController implements Initializable {
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneCalendario);
         } catch (IOException ioEx) {
-            ioEx.printStackTrace();
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                 "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
@@ -345,7 +344,6 @@ public class DrawerPrincipalController implements Initializable {
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneBajas);
         } catch (IOException ioEx) {
-            ioEx.printStackTrace();
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                 "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
@@ -364,7 +362,6 @@ public class DrawerPrincipalController implements Initializable {
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneProximas);
         } catch (IOException ioEx) {
-            ioEx.printStackTrace();
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
@@ -383,7 +380,24 @@ public class DrawerPrincipalController implements Initializable {
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneInfoAlumno);
         } catch (IOException ioEx) {
-            ioEx.printStackTrace();
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
+        }
+    }
+
+    /**
+     * Abre la ventana para consultar el calendario del curso
+     */
+    @FXML
+    public void lanzarConsultarCalendarioCurso() {
+        try {
+            URL calendarioCurso = getClass().getResource("/vista/ConsultaCalendarioCurso.fxml");
+            AnchorPane paneCalendario = FXMLLoader.load(calendarioCurso);
+
+            BorderPane border = LoginController.getPrincipal();
+            border.setCenter(paneCalendario);
+        } catch (IOException ioEx) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();

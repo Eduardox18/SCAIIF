@@ -2,33 +2,35 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.ConsultaCalendarioCurso">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.ConsultaCalendarioCursoController">
    <children>
       <Label layoutX="231.0" layoutY="17.0" text="Calendario de Curso">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="comboPeriodo" focusColor="#55f8ff" layoutX="93.0" layoutY="69.0" prefHeight="27.0" prefWidth="177.0" promptText="Periodo" unFocusColor="#082f8a" />
-      <JFXComboBox fx:id="comboCurso" disable="true" focusColor="#15ff00" layoutX="398.0" layoutY="69.0" prefHeight="27.0" prefWidth="167.0" promptText="Curso" unFocusColor="#0f9d58" />
-      <TableView fx:id="tablaResumen" layoutX="18.0" layoutY="116.0" prefHeight="260.0" prefWidth="670.0">
+      <JFXComboBox fx:id="comboPeriodo" focusColor="BLACK" layoutX="93.0" layoutY="69.0" onAction="#llenarComboCursos" prefHeight="27.0" prefWidth="177.0" promptText="Periodo" unFocusColor="#082f8a" />
+      <JFXComboBox fx:id="comboCurso" disable="true" focusColor="BLACK" layoutX="398.0" layoutY="69.0" onAction="#llenarTablaCurso" prefHeight="27.0" prefWidth="167.0" promptText="Curso" unFocusColor="#0f9d58" />
+      <TableView fx:id="tablaResumen" layoutX="18.0" layoutY="116.0" prefHeight="204.0" prefWidth="670.0">
         <columns>
-          <TableColumn prefWidth="104.59935569763184" text="Mes" />
-          <TableColumn prefWidth="70.86343383789062" text="Días" />
-            <TableColumn prefWidth="54.34423828125" text="Módulo" />
-            <TableColumn prefWidth="56.42433166503906" text="Sección" />
-            <TableColumn prefWidth="132.68841552734375" text="Fecha límite examen" />
-            <TableColumn prefWidth="255.31155395507812" text="Material a reportar en asesoría" />
+          <TableColumn fx:id="mesCol" prefWidth="62.0" text="Mes" />
+          <TableColumn fx:id="diasCol" prefWidth="54.0" text="Días" />
+            <TableColumn fx:id="moduloCol" prefWidth="61.0" text="Módulo" />
+            <TableColumn fx:id="seccionCol" prefWidth="57.0" text="Sección" />
+            <TableColumn fx:id="limiteCol" minWidth="0.0" prefWidth="135.0" text="Fecha límite examen" />
+            <TableColumn fx:id="materialCol" minWidth="0.0" prefWidth="209.0" text="Material a reportar en asesoría" />
+            <TableColumn fx:id="conversacionCol" prefWidth="91.0" text="Conversación" />
         </columns>
       </TableView>
-      <Label fx:id="labelFestivos" layoutX="19.0" layoutY="387.0" text="Días festivos del curso: ">
+      <Label fx:id="labelFestivos" layoutX="20.0" layoutY="334.0" prefHeight="19.0" prefWidth="653.0" text="No se ha seleccionado curso" wrapText="true">
          <font>
             <Font size="15.0" />
          </font>
@@ -38,5 +40,12 @@
             <Font size="15.0" />
          </font>
       </JFXButton>
+      <Label fx:id="vacacionesLabel" layoutX="20.0" layoutY="384.0" prefHeight="19.0" prefWidth="653.0" text="No se ha seleccionado curso">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" onMouseClicked="#mostrarIcono" prefHeight="500.0" prefWidth="700.0" />
+      <JFXHamburger fx:id="menuIcon" layoutX="15.0" layoutY="15.0" />
    </children>
 </AnchorPane>
