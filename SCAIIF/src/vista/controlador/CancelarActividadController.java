@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vista.controlador;
 
 import com.jfoenix.controls.JFXButton;
@@ -20,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextInputDialog;
@@ -34,11 +30,6 @@ import modelo.dao.AlumnoDAO;
 import modelo.pojos.ActividadAsesor;
 import vista.Dialogo;
 
-/**
- * FXML Controller class
- *
- * @author andres
- */
 public class CancelarActividadController implements Initializable {
     
     @FXML
@@ -93,6 +84,9 @@ public class CancelarActividadController implements Initializable {
         tablaActividades.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             btnCancelar.setDisable(false);
         });
+        
+        tablaActividades.setPlaceholder(new Label("No hay actividades para cancelar"));
+        
         llenarTabla();
     }
     
