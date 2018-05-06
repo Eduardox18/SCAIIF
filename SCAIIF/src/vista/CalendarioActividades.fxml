@@ -26,9 +26,9 @@
             </TableView>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXComboBox fx:id="comboMes" labelFloat="true" prefHeight="27.0" prefWidth="190.0" promptText="Mes" />
+                  <JFXComboBox fx:id="comboPeriodo" labelFloat="true" onAction="#llenarComboCurso" prefHeight="27.0" prefWidth="240.0" promptText="Periodo" />
                   <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <JFXComboBox fx:id="comboCurso" labelFloat="true" prefHeight="27.0" prefWidth="190.0" promptText="Curso" />
+                  <JFXComboBox fx:id="comboCurso" labelFloat="true" onAction="#llenarTabla" prefHeight="27.0" prefWidth="240.0" promptText="Curso" />
                </children>
             </HBox>
          </children>

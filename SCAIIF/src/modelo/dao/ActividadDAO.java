@@ -132,4 +132,21 @@ public class ActividadDAO {
         
         return listaActividades;
     } 
+    
+    /**
+     * Recupera las actividades de un curso
+     * @param nrc El nrc del curso del que se desean recuperar las actividades
+     * @return Lista con las actividades del curso
+     * @throws Exception 
+     */
+    public static List<ActividadAsesor> recuperarActividadesCalendario(Integer nrc) 
+            throws Exception {
+        List <ActividadAsesor> listaActividades;
+        
+        try(SqlSession conn = MyBatisUtils.getSession()){
+            listaActividades = conn.selectList("Actividad.actividadesCalendario", nrc);
+        }
+        
+        return listaActividades;
+    }
 }

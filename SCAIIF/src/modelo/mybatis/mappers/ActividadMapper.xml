@@ -40,13 +40,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         #{noActividad};
     </update>
     
-    <select id="actividadesDisponibles" 
-            resultType="modelo.pojos.ActividadAsesor" parameterType="map">
+    <select id="actividadesDisponibles" resultType="modelo.pojos.ActividadAsesor" parameterType="map">
         SELECT actividad.*, usuario.nombre AS nombreAsesor, usuario.apPaterno, 
-        usuario.apMaterno FROM actividad INNER JOIN usuario ON 
-        actividad.noPersonal = usuario.noPersonal WHERE noActividad NOT IN 
-        (SELECT noActividad FROM reservacion WHERE matricula = #{matricula}) AND
-        actividad.nrc = #{nrc};
+        usuario.apMaterno FROM (SELECT actividad.*, count(*) as reserv from
+        reservacion INNER JOIN actividad ON actividad.noActividad = 
+        reservacion.noActividad GROUP BY reservacion.noActividad HAVING 
+        reserv &lt;= 31) AS actividad INNER JOIN usuario ON actividad.noPersonal =
+        usuario.noPersonal WHERE noActividad NOT IN (SELECT noActividad FROM 
+        reservacion WHERE matricula = #{matricula}) AND actividad.nrc = #{nrc}
+        AND actividad.idEstado = 1;
     </select>
-     
+    
+    <select id="actividadesCalendario" resultType="modelo.pojos.ActividadAsesor"
+            parameterType="int">
+        SELECT actividad.*, curso.idPeriodo, curso.nombreCurso FROM 
+        actividad INNER JOIN curso ON actividad.nrc = curso.nrc WHERE 
+        curso.nrc = #{nrc} AND actividad.idEstado = 1;
+    </select>
 </mapper>
