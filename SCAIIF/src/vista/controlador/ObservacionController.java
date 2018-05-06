@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -25,11 +26,6 @@ import modelo.dao.AlumnoDAO;
 import modelo.pojos.Alumno;
 import vista.Dialogo;
 
-/**
- * FXML Controller class
- *
- * @author andres
- */
 public class ObservacionController implements Initializable {
 
     @FXML
@@ -85,6 +81,8 @@ public class ObservacionController implements Initializable {
             botonRegistrar.setDisable(false);
         });
 
+        tablaALumnos.setPlaceholder(new Label("No hay alumnos disponibles"));
+        
         llenarTabla();
     }
 

@@ -10,10 +10,6 @@ import org.apache.ibatis.session.SqlSession;
 import modelo.pojos.Actividad;
 import modelo.pojos.ActividadAsesor;
 
-/**
- *
- * @author lalo
- */
 public class ActividadDAO {
 
     /**

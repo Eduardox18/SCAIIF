@@ -389,4 +389,23 @@ public class DrawerPrincipalController implements Initializable {
             dialogo.show();
         }
     }
+    
+    /**
+     * Abre la ventana para consultar el calendario de actividades
+     */
+    @FXML
+    public void lanzarCalendarioActividades() {
+        try {
+            URL calActividades = getClass().getResource("/vista/CalendarioActividades.fxml");
+            AnchorPane paneCalendario = FXMLLoader.load(calActividades);
+
+            BorderPane border = LoginController.getPrincipal();
+            border.setCenter(paneCalendario);
+        } catch (IOException ioEx) {
+            ioEx.printStackTrace();
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
+        }
+    }
 }
