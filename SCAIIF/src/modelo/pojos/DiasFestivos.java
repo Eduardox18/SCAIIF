@@ -30,6 +30,12 @@ public class DiasFestivos {
         return diaFestivo;
     }
 
+    public String getFormatoDiaFestivo() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy", new Locale("ES"));
+        String diaFestivoFormato = sdf.format(diaFestivo);
+        return diaFestivoFormato;
+    }
+
     public void setDiaFestivo(Date diaFestivo) {
         this.diaFestivo = diaFestivo;
     }

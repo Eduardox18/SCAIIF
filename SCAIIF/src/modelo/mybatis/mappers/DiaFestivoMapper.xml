@@ -19,4 +19,10 @@
     <delete id="borrarDiaFestivo" parameterType="int">
         DELETE FROM diasFestivos WHERE idDiasFestivos = #{idDiasFestivos};
     </delete>
+
+    <select id="getDiasFestivosbyNRC" parameterType="int" resultType="modelo.pojos.DiasFestivos">
+        SELECT diaFestivo from diaFestivo, calendario
+        WHERE diaFestivo.idCalendario = calendario.idCalendario AND
+        calendario.nrc = #{nrc};
+    </select>
 </mapper>
