@@ -128,6 +128,7 @@ public class ConsultaCalendarioCursoController implements Initializable {
      */
     @FXML
     public void llenarComboCursos() {
+        botonImprimir.setDisable(true);
         limpiarCampos();
         comboCurso.setDisable(false);
         List<Curso> cursos;
@@ -147,13 +148,17 @@ public class ConsultaCalendarioCursoController implements Initializable {
     @FXML
     public void llenarTablaCurso() {
         if (comboCurso.getSelectionModel().getSelectedItem() != null) {
+            botonImprimir.setDisable(false);
             List<ConsultaCalendario> infoCalendarioCurso;
             List<DiasFestivos> diasFestivos = null;
             Calendario calendario = null;
 
             try {
+                botonImprimir.setDisable(false);
                 infoCalendarioCurso = CalendarioDAO.consultarCalendarioCurso(comboCurso.getSelectionModel().
                         getSelectedItem().getNrc());
+
+
                 ObservableList<ConsultaCalendario> calendarioObservable =
                         FXCollections.observableArrayList(infoCalendarioCurso);
                 mesCol.setCellValueFactory(new PropertyValueFactory<>("mes"));
@@ -164,6 +169,14 @@ public class ConsultaCalendarioCursoController implements Initializable {
                 materialCol.setCellValueFactory(new PropertyValueFactory<>("nombreMaterial"));
                 conversacionCol.setCellValueFactory(new PropertyValueFactory<>("noConversacion"));
                 tablaResumen.setItems(calendarioObservable);
+
+                if (calendarioObservable.isEmpty()) {
+                    tablaResumen.setPlaceholder(new Label("No hay información del curso seleccionado."));
+                    labelFestivos.setText("");
+                    vacacionesLabel.setText("");
+                } else {
+                    botonImprimir.setDisable(false);
+                }
 
                 diasFestivos = DiaFestivoDAO.consultarDiasFestivosCurso(comboCurso.getSelectionModel().
                         getSelectedItem().getNrc());
@@ -190,6 +203,17 @@ public class ConsultaCalendarioCursoController implements Initializable {
             }
 
         }
+    }
+
+    /**
+     * Muestra el diálogo para imprimir una lista de asistencia
+     */
+    @FXML
+    public void mostrarVentanaImprimir() {
+        Dialogo dialogo = new Dialogo(Alert.AlertType.INFORMATION,
+                "Se está imprimiendo la lista...", "Imprimiendo",
+                ButtonType.OK);
+        dialogo.show();
     }
 
     private void limpiarCampos() {
