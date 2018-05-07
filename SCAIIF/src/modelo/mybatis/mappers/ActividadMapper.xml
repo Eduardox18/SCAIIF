@@ -33,10 +33,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         1;
     </select>
     
-    <select id="getActividadesPorImpartir" parameterType="map"
+    <select id="getActividadesPorImpartir" parameterType="String"
             resultType="modelo.pojos.ActividadAsesor">
-        SELECT nombre, fecha WHERE actividad.idEstado = 
-        1 AND noPersonal = #{noPersonal} AND fecha >= #{fecha};
+        SELECT * From Actividad WHERE nombre = #{nombre};
     </select>
     
     <update id="cambiarEstado" parameterType="map">

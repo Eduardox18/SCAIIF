@@ -6,7 +6,6 @@
 package modelo.dao;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -51,7 +50,7 @@ public class ActividadDAOTest {
         System.out.println("Test del método recuperarHistorial()");
         int noPersonal = 18109;
         String expNombre = "Conversación Inglés I 1";
-        String expFecha = "2018-02-28";
+        String expFecha = "2018-03-29";
         List<Actividad> result = ActividadDAO.recuperarHistorial(noPersonal);
         
         assertEquals(expNombre, result.get(0).getNombre());
@@ -160,5 +159,37 @@ public class ActividadDAOTest {
         Integer noActividad = 1;
         ActividadAsesor result = ActividadDAO.detalleActividad(noActividad);
         assertNotNull(result);
+    }
+    
+    /**
+     * Test of descripcionActividad method, of class ActividadDAO.
+     */
+    @Test
+    public void testDescripcionActividad() throws Exception {
+        System.out.println("Prueba del método descripcionActividad");
+        String nombre = "Prueba Actividad";
+        ActividadAsesor result = ActividadDAO.descripcionActividad(nombre);
+        assertNotNull(result);
+    }
+    
+    /**
+     * Test of recuperarActividadesPorImpartir method, of class ActividadDAO.
+     * Prueba solo utilizable si se cumple con que existen actividades
+     * en la fecha actual o posterior.
+     
+    @Test
+    public void testRecuperarActividadesPorImpartir() throws Exception {
+        System.out.println("Test del método recuperarActividadesPorImpartir()");
+        Integer noPersonal = 18109;
+        String expNombreActividad = "Conversación Inglés I 1";
+        Date fecha = Date.valueOf(LocalDate.now());
+        
+        List<Actividad> resultListaActividad = ActividadDAO.recuperarActividadesPorImpartir(
+                 noPersonal, fecha);
+        
+        assertEquals(expNombreActividad, resultListaActividad.get(0).getNombre());
+        System.out.println("Éxito de igualdad de nombre de la actividad");
+        assertThat(resultListaActividad.get(0), instanceOf(Actividad.class));
+        System.out.println("Éxito de igualdad de clase retornada");
     }
 }

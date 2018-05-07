@@ -104,15 +104,21 @@ public class ActividadDAO {
      */
     public static List<ActividadAsesor> recuperarActividadesPorImpartir(Integer noPersonal,
         Date fecha) throws IOException {
-        List<ActividadAsesor> actividadesPorImpartir;
-        HashMap<String, Object> params = new HashMap<>();
-        params.put("noPersonal", noPersonal);
-        params.put("fecha", fecha);
-        try (SqlSession conn = MyBatisUtils.getSession()) {
-            actividadesPorImpartir = conn.selectList("Actividad.getActividadesPorImpartir", params);
+        List<ActividadAsesor> actividadesProximas = new ArrayList<>();
+        Actividad actividad = new Actividad();
+        actividad.setNoPersonal(noPersonal);
+        actividad.setFecha(fecha);
+        SqlSession conn = null;
+        try {
+            conn = MyBatisUtils.getSession();
+            actividadesProximas = conn.selectList("Actividad.recuperarActividadesAsesor",
+                actividad);
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
         }
-
-        return actividadesPorImpartir;
+        return actividadesProximas;
     }
 
     /**
@@ -182,5 +188,13 @@ public class ActividadDAO {
             detalleActividad = conn.selectOne("Actividad.detalleActividad", noActividad);
         }
         return detalleActividad;
+    }
+    
+    public static ActividadAsesor descripcionActividad(String nombre) throws Exception {
+        ActividadAsesor descripcionActividad;
+        try (SqlSession conn = MyBatisUtils.getSession()) {
+            descripcionActividad = conn.selectOne("Actividad.getActividadesPorImpartir", nombre);
+        }
+        return descripcionActividad;
     }
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.scene.control.Label?>
@@ -23,22 +22,16 @@
                 <Image url="@recursos/user.png" />
             </image>
         </ImageView>
-        <Label fx:id="etiquetaNombreAsesor" layoutX="336.0" layoutY="67.0">
+        <Label fx:id="etiquetaNombreAsesor" layoutX="225.0" layoutY="67.0" prefHeight="27.0" prefWidth="420.0">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
         <TableView fx:id="tablaActividades" layoutX="54.0" layoutY="129.0" prefHeight="287.0" prefWidth="592.0">
             <columns>
-                <TableColumn fx:id="colNombreAct" prefWidth="370.0" text="Nombre Actividad" />
-                <TableColumn fx:id="colFecha" minWidth="0.0" prefWidth="221.0" text="Fecha" />
+                <TableColumn fx:id="colNombreAct" prefWidth="591.0" text="Nombre Actividad" />
             </columns>
         </TableView>
-        <JFXButton fx:id="botonDetalles" onAction="#lanzarDescripcionActividad" layoutX="235.0" layoutY="438.0" prefHeight="41.0" prefWidth="206.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Consultar descripción" textFill="WHITE">
-            <font>
-                <Font size="15.0" />
-            </font>
-        </JFXButton>
         <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" onMouseClicked="#mostrarIcono" prefHeight="500.0" prefWidth="700.0" />
         <JFXHamburger fx:id="menuIcon" layoutX="16.0" layoutY="15.0" />
     </children>
