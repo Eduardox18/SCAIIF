@@ -159,6 +159,7 @@ public class ActividadDAOTest {
         Integer noActividad = 1;
         ActividadAsesor result = ActividadDAO.detalleActividad(noActividad);
         assertNotNull(result);
+        System.out.println("La prueba pasó");
     }
     
     /**
@@ -170,6 +171,7 @@ public class ActividadDAOTest {
         String nombre = "Prueba Actividad";
         ActividadAsesor result = ActividadDAO.descripcionActividad(nombre);
         assertNotNull(result);
+        System.out.println("La prueba pasó");
     }
     
     /**
@@ -191,5 +193,5 @@ public class ActividadDAOTest {
         System.out.println("Éxito de igualdad de nombre de la actividad");
         assertThat(resultListaActividad.get(0), instanceOf(Actividad.class));
         System.out.println("Éxito de igualdad de clase retornada");
-    }
+    }**/
 }
