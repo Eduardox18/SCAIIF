@@ -149,7 +149,9 @@ public class CrearObservacionController implements Initializable {
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneComentario);
         } catch (IOException ioEx) {
-            //Diáogo error
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
         }
     }
 }
