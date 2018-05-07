@@ -420,4 +420,23 @@ public class DrawerPrincipalController implements Initializable {
             dialogo.show();
         }
     }
+    
+    /**
+     * Abre la ventana para consultar las actividades por impartir del asesor
+     */
+    @FXML
+    public void lanzarActividadesPorImpartir() {
+        try {
+            URL actividadesPorImpartir = getClass().getResource("/vista/ActividadesPorImpartir.fxml");
+            AnchorPane paneActividades = FXMLLoader.load(actividadesPorImpartir);
+
+            BorderPane border = LoginController.getPrincipal();
+            border.setCenter(paneActividades);
+        } catch (IOException ioEx) {
+            ioEx.printStackTrace();
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
+        }
+    }
 }

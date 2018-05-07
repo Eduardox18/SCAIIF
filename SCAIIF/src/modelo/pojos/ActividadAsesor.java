@@ -22,18 +22,28 @@ public class ActividadAsesor {
     private String nombreAsesor;
     private String apPaterno;
     private String apMaterno;
+    private Integer cupo;
+
+    public Integer getCupo() {
+        return cupo;
+    }
+
+    public void setCupo(Integer cupo) {
+        this.cupo = cupo;
+    }
 
     public ActividadAsesor() {
     }
 
     public ActividadAsesor(Integer noActividad, String nombre, Time horaInicio, Time horaFin,
-            Date fecha, String nombreAsesor) {
+            Date fecha, String nombreAsesor, Integer cupo) {
         this.noActividad = noActividad;
         this.nombre = nombre;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
         this.fecha = fecha;
         this.nombreAsesor = nombreAsesor;
+        this.cupo = cupo;
     }
     
 
