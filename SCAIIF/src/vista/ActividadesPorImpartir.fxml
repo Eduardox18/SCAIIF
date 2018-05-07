@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.ActividadesPorImpartirController">
+    <children>
+        <Label layoutX="223.0" layoutY="18.0" text="Actividades por Impartir">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="63.0" fitWidth="63.0" layoutX="51.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@recursos/user.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="etiquetaNombreAsesor" layoutX="336.0" layoutY="67.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <TableView fx:id="tablaActividades" layoutX="54.0" layoutY="129.0" prefHeight="287.0" prefWidth="592.0">
+            <columns>
+                <TableColumn fx:id="colNombreAct" prefWidth="370.0" text="Nombre Actividad" />
+                <TableColumn fx:id="colFecha" minWidth="0.0" prefWidth="221.0" text="Fecha" />
+            </columns>
+        </TableView>
+        <JFXButton fx:id="botonDetalles" onAction="#lanzarDescripcionActividad" layoutX="235.0" layoutY="438.0" prefHeight="41.0" prefWidth="206.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Consultar descripción" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </JFXButton>
+        <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" onMouseClicked="#mostrarIcono" prefHeight="500.0" prefWidth="700.0" />
+        <JFXHamburger fx:id="menuIcon" layoutX="16.0" layoutY="15.0" />
+    </children>
+</AnchorPane>

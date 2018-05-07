@@ -189,7 +189,9 @@ public class HistorialAsesoresController implements Initializable {
         dialogo.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 campoNoPersonal.setText("");
+                campoNombre.setText("");
                 botonImprimir.setDisable(true);
+                botonBuscar.setDisable(true);
             }
         });
         
