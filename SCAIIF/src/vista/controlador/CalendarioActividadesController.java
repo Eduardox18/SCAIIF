@@ -93,7 +93,6 @@ public class CalendarioActividadesController implements Initializable {
                                 tablaActividades.getSelectionModel().getSelectedItem().getNoActividad());
                         
                         Dialog detalle = new Dialog();
-                        detalle.setHeaderText(null);
                         detalle.getDialogPane().getButtonTypes().addAll(ButtonType.OK);
 
                         GridPane grid = new GridPane();
@@ -101,16 +100,15 @@ public class CalendarioActividadesController implements Initializable {
                         grid.setVgap(10);
                         grid.setPadding(new Insets(20, 150, 10, 10));
 
-                        grid.add(new Label("Nombre:"), 0, 0);
-                        grid.add(new Label(actividad.getNombre()), 1, 0);
-                        grid.add(new Label("Fecha:"), 0, 1);
-                        grid.add(new Label(actividad.getFecha().toString()), 1, 1);
-                        grid.add(new Label("Hora inicio:"), 0, 2);
-                        grid.add(new Label(actividad.getHoraInicio().toString()), 1, 2);
-                        grid.add(new Label("Hora fin:"), 0, 3);
-                        grid.add(new Label(actividad.getHoraFin().toString()), 1, 3);
-                        grid.add(new Label("Titular:"), 0, 4);
-                        grid.add(new Label(actividad.getNombreAsesor()), 1, 4);
+                        detalle.setHeaderText(actividad.getNombre());
+                        grid.add(new Label("Fecha:"), 0, 0);
+                        grid.add(new Label(actividad.getFecha().toString()), 1, 0);
+                        grid.add(new Label("Hora inicio:"), 0, 1);
+                        grid.add(new Label(actividad.getHoraInicio().toString()), 1, 1);
+                        grid.add(new Label("Hora fin:"), 0, 2);
+                        grid.add(new Label(actividad.getHoraFin().toString()), 1, 2);
+                        grid.add(new Label("Titular:"), 0, 3);
+                        grid.add(new Label(actividad.getNombreAsesor()), 1, 3);
                         
                         detalle.getDialogPane().setContent(grid);
                         detalle.initStyle(StageStyle.UNDECORATED);
