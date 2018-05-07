@@ -82,7 +82,7 @@ public class ActividadesPorImpartirController implements Initializable {
                         ActividadAsesor actividad = ActividadDAO.descripcionActividad(nombreAct);
 
                         Dialog detalle = new Dialog();
-                        detalle.setHeaderText(null);
+                        detalle.setHeaderText("Descripción Actividad");
                         detalle.getDialogPane().getButtonTypes().addAll(ButtonType.OK);
 
                         GridPane grid = new GridPane();
