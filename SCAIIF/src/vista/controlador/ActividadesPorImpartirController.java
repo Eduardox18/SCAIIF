@@ -47,6 +47,8 @@ public class ActividadesPorImpartirController implements Initializable {
     @FXML
     private TableColumn colNombreAct;
     @FXML
+    private TableColumn colFecha;
+    @FXML
     private Label etiquetaNombreAsesor;
 
     /**
@@ -141,6 +143,7 @@ public class ActividadesPorImpartirController implements Initializable {
             actividadesObservable = FXCollections.observableArrayList(ActividadDAO.
                 recuperarActividadesPorImpartir(noPersonal, fechaDate));
             colNombreAct.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
             tablaActividades.setItems(actividadesObservable);
         } catch (Exception ex) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,

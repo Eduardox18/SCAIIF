@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="recuperarActividadesAsesor" 
             parameterType="modelo.pojos.Actividad" 
             resultType="modelo.pojos.Actividad">
-        SELECT noActividad, nombre FROM actividad 
+        SELECT noActividad, nombre, fecha FROM actividad 
         WHERE noPersonal = #{noPersonal} AND fecha >= #{fecha};
     </select>
     

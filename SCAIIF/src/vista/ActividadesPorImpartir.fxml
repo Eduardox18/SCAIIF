@@ -29,7 +29,8 @@
         </Label>
         <TableView fx:id="tablaActividades" layoutX="54.0" layoutY="129.0" prefHeight="287.0" prefWidth="592.0">
             <columns>
-                <TableColumn fx:id="colNombreAct" prefWidth="591.0" text="Nombre Actividad" />
+                <TableColumn fx:id="colNombreAct" prefWidth="386.00001525878906" text="Nombre Actividad" />
+            <TableColumn fx:id="colFecha" prefWidth="204.0" text="Fecha" />
             </columns>
         </TableView>
         <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="230.0" onMouseClicked="#mostrarIcono" prefHeight="500.0" prefWidth="700.0" />
