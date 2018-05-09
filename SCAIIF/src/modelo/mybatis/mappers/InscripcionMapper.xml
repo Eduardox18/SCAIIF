@@ -10,4 +10,8 @@
         SELECT calificacionFinal FROM Inscripcion 
         WHERE matricula = #{matricula} and nrc = #{nrc};
     </select>
+    
+    <delete id="eliminarCurso" parameterType="modelo.pojos.Inscripcion">
+        DELETE FROM Inscripcion WHERE matricula = #{matricula} AND nrc = #{nrc};
+    </delete>
 </mapper>
