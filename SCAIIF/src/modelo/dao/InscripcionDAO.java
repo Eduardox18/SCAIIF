@@ -20,4 +20,31 @@ public class InscripcionDAO {
         }
         return calificacion;
     }
+    
+    /**
+     * Da de baja un alumno del curso al que está inscrito.
+     *
+     * @param inscripcion objeto que provee la matricula y nrc del alumno y curso a dar de baja
+     * @throws java.lang.Exception
+     */
+    public static boolean bajaInscripcion(Inscripcion inscripcion) throws Exception {
+        if (inscripcion == null) {
+            return false;
+        }
+
+        boolean resultado = false;
+        SqlSession conn = null;
+
+        try {
+            conn = MyBatisUtils.getSession();
+            conn.insert("Inscripcion.eliminarCurso", inscripcion);
+            conn.commit();
+            resultado = true;
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return resultado;
+    }
 }

@@ -81,4 +81,31 @@ public class InduccionDAO {
         }
         return infoAlumno;
     }
+    
+    /**
+     * Da de baja un alumno del curso al que está inscrito.
+     *
+     * @param induccion objeto que provee la matricula y nrc del alumno y curso a dar de baja
+     * @throws java.lang.Exception
+     */
+    public static boolean bajaInduccion(Induccion induccion) throws Exception {
+        if (induccion == null) {
+            return false;
+        }
+
+        boolean resultado = false;
+        SqlSession conn = null;
+
+        try {
+            conn = MyBatisUtils.getSession();
+            conn.insert("Induccion.eliminaCurso", induccion);
+            conn.commit();
+            resultado = true;
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return resultado;
+    }
 }
