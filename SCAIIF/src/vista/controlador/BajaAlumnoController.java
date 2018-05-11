@@ -170,20 +170,21 @@ public class BajaAlumnoController implements Initializable {
                 dialogo = new Dialogo(Alert.AlertType.INFORMATION,
                     "Alumno dado de baja del curso exitosamente", "Éxito", ButtonType.OK);
                 dialogo.show();
-                botonBajaCurso.setDisable(true);
-                botonBaja.setDisable(true);
-                botonBuscar.setDisable(true);
-                limpiarCampos();
+                
+                    botonBajaCurso.setDisable(true);
+                    botonBaja.setDisable(true);
+                    botonBuscar.setDisable(true);
+                    limpiarCampos();
+                
+
             } catch (Exception ex) {
                 dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Error al dar de baja del curso", "Error", ButtonType.OK);
                 dialogo.show();
             }
+        } else if (result.get() == ButtonType.NO) {
+            botonBuscar.setDisable(true);
         }
-        botonBaja.setDisable(true);
-        botonBuscar.setDisable(true);
-        botonBajaCurso.setDisable(true);
-        limpiarCampos();
     }
 
     /**
@@ -218,7 +219,7 @@ public class BajaAlumnoController implements Initializable {
             dialogo.show();
 
             botonBaja.setDisable(true);
-            botonBajaCurso.setDisable(true);
+            //botonBajaCurso.setDisable(true);
             limpiarCampos();
         }
     }
@@ -231,7 +232,7 @@ public class BajaAlumnoController implements Initializable {
     private void seleccionarCurso() {
         if (comboCursos.getSelectionModel().getSelectedItem() != null) {
             botonBajaCurso.setDisable(false);
-        } else if (comboCursos.getSelectionModel().getSelectedItem().isEmpty()) {
+        } else {
             botonBajaCurso.setDisable(true);
         }
     }
