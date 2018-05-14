@@ -1,14 +1,20 @@
 package vista.controlador;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,7 +24,13 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import modelo.dao.AlumnoDAO;
+import modelo.dao.CursoDAO;
+import modelo.dao.InduccionDAO;
+import modelo.dao.InscripcionDAO;
 import modelo.pojos.Alumno;
+import modelo.pojos.Curso;
+import modelo.pojos.Induccion;
+import modelo.pojos.Inscripcion;
 import vista.Dialogo;
 
 /**
@@ -38,7 +50,9 @@ public class BajaAlumnoController implements Initializable {
     @FXML
     JFXButton botonBaja;
     @FXML
-    JFXButton botonCancelar;
+    JFXButton botonBajaCurso;
+    @FXML
+    JFXComboBox<String> comboCursos;
     @FXML
     Label lblCorreo;
     @FXML
@@ -76,7 +90,7 @@ public class BajaAlumnoController implements Initializable {
             }
 
         });
-        botonCancelar.setDisable(true);
+        botonBajaCurso.setDisable(true);
         botonBaja.setDisable(true);
         botonBuscar.setDisable(true);
     }
@@ -109,7 +123,7 @@ public class BajaAlumnoController implements Initializable {
             dialogo = new Dialogo(Alert.AlertType.INFORMATION,
                 "El alumno se ha dado de baja correctamente", "Éxito", ButtonType.OK);
             dialogo.show();
-            botonCancelar.setDisable(true);
+            botonBajaCurso.setDisable(true);
             botonBaja.setDisable(true);
             botonBuscar.setDisable(false);
             limpiarCampos();
@@ -122,26 +136,104 @@ public class BajaAlumnoController implements Initializable {
     }
 
     /**
+     * Vuelve la vigencia del alumno a falso, no elimina el registro, solo lo da de baja
+     * (inhabilita).
+     */
+    @FXML
+    public void darBajaCurso() {
+        String matricula = campoMatricula.getText();
+        Induccion induccion = new Induccion();
+        Inscripcion inscripcion = new Inscripcion();
+        List<Curso> nrc = null;
+        List<Integer> nrcCursos = null;
+        int nrcCurso = 0;
+
+        Dialogo dialogo = new Dialogo(Alert.AlertType.CONFIRMATION,
+            "¿Seguro que desea dar de baja al alumno del curso?", "Éxito", ButtonType.YES, ButtonType.NO);
+        Optional<ButtonType> result = dialogo.showAndWait();
+        if (result.get() == ButtonType.YES) {
+            try {
+                nrc = CursoDAO.recuperarCursos(matricula);
+                nrcCursos = new ArrayList<>();
+
+                for (Curso cursosNRC : nrc) {
+                    nrcCursos.add(cursosNRC.getNrc());
+                }
+                nrcCurso = nrcCursos.get(comboCursos.getSelectionModel().getSelectedIndex());
+                induccion.setMatricula(matricula);
+                induccion.setNrc(nrcCurso);
+                inscripcion.setMatricula(matricula);
+                inscripcion.setNrc(nrcCurso);
+
+                InduccionDAO.bajaInduccion(induccion);
+                InscripcionDAO.bajaInscripcion(inscripcion);
+                dialogo = new Dialogo(Alert.AlertType.INFORMATION,
+                    "Alumno dado de baja del curso exitosamente", "Éxito", ButtonType.OK);
+                dialogo.show();
+                
+                    botonBajaCurso.setDisable(true);
+                    botonBaja.setDisable(true);
+                    botonBuscar.setDisable(true);
+                    limpiarCampos();
+                
+
+            } catch (Exception ex) {
+                dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Error al dar de baja del curso", "Error", ButtonType.OK);
+                dialogo.show();
+            }
+        } else if (result.get() == ButtonType.NO) {
+            botonBuscar.setDisable(true);
+        }
+    }
+
+    /**
      * Muestra el nombre completo del alumno y su correo electrónico para corroborar que sea el
      * usuario que desea dar de baja.
      */
     @FXML
     private void recuperarInformacionAlumno() {
         Alumno alumno;
+        List<Curso> cursosAl = null;
+
         try {
             alumno = AlumnoDAO.recuperarInfoAlumno(campoMatricula.getText());
+            cursosAl = CursoDAO.recuperarCursos(campoMatricula.getText());
+            List<String> cursosAlumno = new ArrayList<>();
+
+            for (Curso cursoAlumno : cursosAl) {
+                String infoCurso = cursoAlumno.getNombreCurso();
+                cursosAlumno.add(infoCurso);
+            }
+
+            ObservableList<String> cursosObservable = FXCollections.observableArrayList(cursosAlumno);
+
+            comboCursos.setItems(cursosObservable);
             lblNombre.setText(alumno.getNombre() + " " + alumno.getApPaterno() + " " + alumno.getApMaterno());
             lblCorreo.setText(alumno.getCorreo());
             botonBaja.setDisable(false);
-            botonCancelar.setDisable(false);
         } catch (Exception ex) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                 "La matrícula que ingresa no es válida o no existe", "Error",
                 ButtonType.OK);
             dialogo.show();
+
             botonBaja.setDisable(true);
-            botonCancelar.setDisable(true);
+            //botonBajaCurso.setDisable(true);
             limpiarCampos();
+        }
+    }
+
+    /**
+     * Comprueba que se seleccione un curso para habilitar el botón que da de baja el curso del
+     * alumno.
+     */
+    @FXML
+    private void seleccionarCurso() {
+        if (comboCursos.getSelectionModel().getSelectedItem() != null) {
+            botonBajaCurso.setDisable(false);
+        } else {
+            botonBajaCurso.setDisable(true);
         }
     }
 
@@ -152,6 +244,7 @@ public class BajaAlumnoController implements Initializable {
         campoMatricula.setText("");
         lblNombre.setText("");
         lblCorreo.setText("");
+        comboCursos.setValue("");
     }
 
     /**
@@ -165,23 +258,5 @@ public class BajaAlumnoController implements Initializable {
         } else {
             botonBuscar.setDisable(true);
         }
-    }    
-    
-    /**
-     *
-     * Cierra la ventana actual cuando se cancela la operación o una vez que se haya concluido y
-     * limpia los campos de búsqueda.
-     */
-    @FXML
-    public void cancelar() {
-        Dialogo dialogo = new Dialogo(Alert.AlertType.CONFIRMATION,
-            "¿Está seguro de que desea cancelar la baja del alumno?", "Confirmación",
-            ButtonType.OK, ButtonType.CANCEL);
-
-        dialogo.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                limpiarCampos();
-            }
-        });
     }
 }

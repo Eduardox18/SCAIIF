@@ -16,4 +16,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getInfo" parameterType="String" resultType="modelo.pojos.Induccion">
         SELECT * FROM Induccion WHERE matricula = #{matricula};
     </select>
+    
+    <delete id="eliminaCurso" parameterType="modelo.pojos.Induccion">
+        DELETE FROM Induccion WHERE matricula = #{matricula} AND nrc = #{nrc};
+    </delete>
 </mapper>
