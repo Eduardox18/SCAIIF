@@ -82,6 +82,16 @@ public class Alumno {
     public void setVigente(Integer vigente) {
         this.vigente = vigente;
     }
+    
+    public String getNombreCompleto() {
+        String nombreCompleto;
+        if (apMaterno == null){
+            nombreCompleto = apPaterno + " " + nombre;
+        } else {
+            nombreCompleto = apPaterno + " " + apMaterno + " " + nombre;
+        }
+        return nombreCompleto;
+    }
 
     @Override
     public String toString() {

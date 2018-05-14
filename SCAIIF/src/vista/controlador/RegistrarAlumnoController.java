@@ -2,6 +2,7 @@ package vista.controlador;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import java.net.URL;
@@ -9,16 +10,24 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
+import java.util.List;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import modelo.dao.AlumnoDAO;
+import modelo.dao.CursoDAO;
+import modelo.dao.PeriodoDAO;
 import modelo.pojos.Alumno;
+import modelo.pojos.Curso;
+import modelo.pojos.Periodo;
 import vista.Dialogo;
 
 /**
@@ -55,6 +64,26 @@ public class RegistrarAlumnoController implements Initializable {
     @FXML
     private JFXButton btnRegistrar;
     
+    @FXML
+    private JFXComboBox<Periodo> comboPeriodo;
+    
+    @FXML
+    private JFXComboBox<Curso> comboCurso;
+    
+    @FXML
+    private JFXTextField tfBusqueda;
+    
+    @FXML
+    private JFXButton btnBuscar;
+    
+    @FXML
+    private Label labelNombre;
+    
+    @FXML
+    private Label labelCorreo;
+    
+    
+    
     /**
      * Initializes the controller class.
      * @param url
@@ -71,6 +100,7 @@ public class RegistrarAlumnoController implements Initializable {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
+            ex.printStackTrace();
         }
         
         menuIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -129,6 +159,21 @@ public class RegistrarAlumnoController implements Initializable {
             }
             
         });
+        
+        tfBusqueda.textProperty().addListener(new ChangeListener<String>(){
+            @Override
+            public void changed(ObservableValue<? extends String> observable, 
+                    String oldValue, String newValue) {
+                if(tfBusqueda.getText().length() == 9){
+                    btnBuscar.setDisable(false);
+                } else {
+                    btnBuscar.setDisable(true);
+                }
+            }
+        });
+        
+        llenarComboPeriodo();
+        llenarComboCurso();
     }
 
     @FXML
@@ -157,6 +202,7 @@ public class RegistrarAlumnoController implements Initializable {
             dialogo = new Dialogo(Alert.AlertType.ERROR, 
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
+            ex.printStackTrace();
             return;
         }
         if (matriculaValida) {
@@ -182,6 +228,7 @@ public class RegistrarAlumnoController implements Initializable {
                         dialogo = new Dialogo(Alert.AlertType.ERROR, 
                                 "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
                         dialogo.show();
+                        ex.printStackTrace();
                     }
                 
                 } else {
@@ -285,6 +332,60 @@ public class RegistrarAlumnoController implements Initializable {
             resultado = true;
         }
         return resultado;
+    }
+    
+    private void llenarComboPeriodo() {
+        ObservableList<Periodo> periodosObservables = null;
+        try {
+            periodosObservables = FXCollections.observableArrayList(PeriodoDAO.recuperarPeriodos());
+        } catch (IOException ex) {
+            Dialogo dialogo = new Dialogo(Alert.AlertType.WARNING, 
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
+        }
+        comboPeriodo.setItems(periodosObservables);
+        comboPeriodo.getSelectionModel().selectFirst();
+    }
+    
+    @FXML
+    private void llenarComboCurso() {
+        ObservableList<Curso> cursosObservables = null;
+        
+        try {
+            cursosObservables = FXCollections.observableArrayList(CursoDAO.recuperarCursosDePeriodo(
+                    comboPeriodo.getSelectionModel().getSelectedItem().getIdPeriodo()));
+            
+        } catch (Exception ex) {
+            Dialogo dialogo = new Dialogo(Alert.AlertType.WARNING, 
+                "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
+        }
+        comboCurso.setItems(cursosObservables);
+        comboCurso.getSelectionModel().selectFirst();
+    }
+    
+    @FXML
+    private void buscarAlumno(){
+        List<Alumno> recuperados = null ;
+        try {
+            recuperados = AlumnoDAO.recuperarAlumnos(tfBusqueda.getText());
+        } catch (Exception ex) {
+            Dialogo dialogo = new Dialogo(Alert.AlertType.WARNING, 
+                "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
+        }
+        
+        if(!recuperados.isEmpty()){
+            Alumno alumnoRecuperado = recuperados.get(0);
+            labelNombre.setText(alumnoRecuperado.getNombreCompleto());
+            labelCorreo.setText(alumnoRecuperado.getCorreo());
+        } else {
+            Dialogo dialogo = new Dialogo(Alert.AlertType.WARNING, 
+                "La matrícula que ingresó no está registrada, puede registrar un nuevo alumno en la"
+                + " pestaña \"Registrar alumno\"", "Matrícula no registrada", 
+                ButtonType.OK);
+            dialogo.show();
+        }
     }
     
 }

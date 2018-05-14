@@ -26,7 +26,7 @@ import modelo.dao.AlumnoDAO;
 import modelo.pojos.Alumno;
 import vista.Dialogo;
 
-public class ObservacionController implements Initializable {
+public class RegistrarObservacionController implements Initializable {
 
     @FXML
     private JFXButton botonRegistrar;
@@ -137,6 +137,7 @@ public class ObservacionController implements Initializable {
 
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(paneLista);
+            
         } catch (Exception ex) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR, "No se ha seleccionado a ningún alumno", 
                     "Error", ButtonType.OK);

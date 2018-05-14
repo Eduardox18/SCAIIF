@@ -10,10 +10,10 @@ import javafx.stage.StageStyle;
  */
 public class Dialogo extends Alert{
      
-    public Dialogo(AlertType alertType, String contentText, String titulo, ButtonType... buttons) { 
+    public Dialogo(AlertType alertType, String contentText, String header, ButtonType... buttons) { 
         super(alertType, contentText, buttons); 
-        this.setHeaderText(null); 
-        this.setTitle(titulo); 
+        this.setHeaderText(header); 
+        this.setTitle(null); 
         this.setResizable(false); 
         this.initStyle(StageStyle.UNDECORATED);
     }
