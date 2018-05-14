@@ -138,7 +138,7 @@ public class DrawerPrincipalController implements Initializable {
     @FXML
     public void lanzarComentarioAlumno() {
         try {
-            URL comentarioAlumno = getClass().getResource("/vista/Observacion.fxml");
+            URL comentarioAlumno = getClass().getResource("/vista/RegistrarObservacion.fxml");
             AnchorPane paneComentario = FXMLLoader.load(comentarioAlumno);
 
             BorderPane border = LoginController.getPrincipal();

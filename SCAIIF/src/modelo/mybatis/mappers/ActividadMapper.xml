@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         usuario.apMaterno FROM (SELECT actividad.*, count(*) as reserv from
         reservacion INNER JOIN actividad ON actividad.noActividad = 
         reservacion.noActividad GROUP BY reservacion.noActividad HAVING 
-        reserv &lt;= 31) AS actividad INNER JOIN usuario ON actividad.noPersonal =
+        reserv &lt;= 30) AS actividad INNER JOIN usuario ON actividad.noPersonal =
         usuario.noPersonal WHERE noActividad NOT IN (SELECT noActividad FROM 
         reservacion WHERE matricula = #{matricula}) AND actividad.nrc = #{nrc}
         AND actividad.idEstado = 1;
