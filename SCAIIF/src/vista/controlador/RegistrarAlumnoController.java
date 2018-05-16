@@ -18,12 +18,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import modelo.dao.AlumnoDAO;
 import modelo.dao.CursoDAO;
+import modelo.dao.InscripcionDAO;
 import modelo.dao.PeriodoDAO;
 import modelo.pojos.Alumno;
 import modelo.pojos.Curso;
@@ -82,6 +84,11 @@ public class RegistrarAlumnoController implements Initializable {
     @FXML
     private Label labelCorreo;
     
+    @FXML
+    private JFXButton btnInscribir;
+    
+    @FXML
+    private JFXButton btnLimpiar;
     
     
     /**
@@ -172,6 +179,21 @@ public class RegistrarAlumnoController implements Initializable {
             }
         });
         
+        labelCorreo.textProperty().addListener(new ChangeListener<String>(){
+            @Override
+            public void changed(ObservableValue<? extends String> observable, 
+                    String oldValue, String newValue) {
+                if(!labelCorreo.getText().isEmpty() && !labelNombre.getText().isEmpty()){
+                    btnInscribir.setDisable(false);
+                    btnLimpiar.setDisable(false);
+                    llenarComboCurso();
+                } else {
+                    btnInscribir.setDisable(true);
+                    btnLimpiar.setDisable(true);
+                }
+            }
+        });
+        
         llenarComboPeriodo();
         llenarComboCurso();
     }
@@ -223,7 +245,7 @@ public class RegistrarAlumnoController implements Initializable {
                                 "El alumno se ha registrado correctamente", "Éxito", ButtonType.OK);
                         dialogo.show();
                         btnRegistrar.setDisable(true);
-                        limpiarCampos();
+                        limpiarRegistrar();
                     } catch (Exception ex) {
                         dialogo = new Dialogo(Alert.AlertType.ERROR, 
                                 "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
@@ -299,7 +321,7 @@ public class RegistrarAlumnoController implements Initializable {
     /**
      * Limpia todos los campos y desmarca el checkbox 
      */
-    public void limpiarCampos() {
+    public void limpiarRegistrar() {
         tfMatricula.setText("");
         tfNombre.setText("");
         tfApellidoMaterno.setText("");
@@ -350,10 +372,11 @@ public class RegistrarAlumnoController implements Initializable {
     @FXML
     private void llenarComboCurso() {
         ObservableList<Curso> cursosObservables = null;
+        String matricula = (tfBusqueda.getText().isEmpty()) ? "" : tfBusqueda.getText();
         
         try {
-            cursosObservables = FXCollections.observableArrayList(CursoDAO.recuperarCursosDePeriodo(
-                    comboPeriodo.getSelectionModel().getSelectedItem().getIdPeriodo()));
+            cursosObservables = FXCollections.observableArrayList(CursoDAO.getCursosNoInscritos(
+                    comboPeriodo.getSelectionModel().getSelectedItem().getIdPeriodo(), matricula));
             
         } catch (Exception ex) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.WARNING, 
@@ -385,7 +408,40 @@ public class RegistrarAlumnoController implements Initializable {
                 + " pestaña \"Registrar alumno\"", "Matrícula no registrada", 
                 ButtonType.OK);
             dialogo.show();
+            tfBusqueda.setText("");
+            labelCorreo.setText("");
+            labelNombre.setText("");
         }
+    }
+    
+    @FXML
+    private void inscribirAlumno() {
+        String matricula = tfBusqueda.getText();
+        Integer nrc = comboCurso.getSelectionModel().getSelectedItem().getNrc();
+        Dialogo exito = new Dialogo(Alert.AlertType.INFORMATION, 
+                "La inscripción se realizó correctamente", "Inscripción exitosa", ButtonType.OK);
+
+        
+        try {
+            InscripcionDAO.inscribirAlumno(matricula, nrc);
+            exito.show();
+            limpiarInscribir();
+        } catch (Exception ex) {
+            Dialogo dialogo = new Dialogo(Alert.AlertType.WARNING, 
+                "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
+        }
+        
+        llenarComboCurso();
+    }
+    
+    @FXML
+    private void limpiarInscribir() {
+        comboPeriodo.getSelectionModel().selectFirst();
+        comboCurso.getSelectionModel().selectFirst();
+        tfBusqueda.setText("");
+        labelNombre.setText("");
+        labelCorreo.setText("");
     }
     
 }

@@ -19,4 +19,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         inscripcion.nrc = curso.nrc INNER JOIN alumno ON alumno.matricula = 
         inscripcion.matricula WHERE alumno.matricula = #{matricula};
     </select>
+    
+    <select id="getCursosNoInscritos" parameterType="map" 
+            resultType="modelo.pojos.Curso">
+        SELECT nrc, nombreCurso FROM curso WHERE idPeriodo = #{idPeriodo} AND 
+        nrc NOT IN (SELECT nrc FROM inscripcion WHERE matricula LIKE 
+        CONCAT(#{matricula}, '%'));
+    </select>
 </mapper>

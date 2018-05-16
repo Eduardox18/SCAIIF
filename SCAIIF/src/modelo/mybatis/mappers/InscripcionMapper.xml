@@ -14,4 +14,8 @@
     <delete id="eliminarCurso" parameterType="modelo.pojos.Inscripcion">
         DELETE FROM Inscripcion WHERE matricula = #{matricula} AND nrc = #{nrc};
     </delete>
+    
+    <insert id="inscribirAlumno" parameterType="map">
+        INSERT INTO inscripcion (matricula, nrc) VALUES (#{matricula}, #{nrc});
+    </insert>
 </mapper>

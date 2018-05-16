@@ -1,6 +1,8 @@
 package modelo.dao;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import modelo.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -62,4 +64,15 @@ public class CursoDAO {
         return cursosAlumno;
     }
 
+    public static List<Curso> getCursosNoInscritos (Integer idPeriodo, String matricula) throws Exception{
+        List<Curso> cursos;
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("idPeriodo", idPeriodo);
+        params.put("matricula", matricula);
+        
+        try(SqlSession conn = MyBatisUtils.getSession()){
+            cursos = conn.selectList("Curso.getCursosNoInscritos", params);
+        }
+        return cursos;
+    }
 }
