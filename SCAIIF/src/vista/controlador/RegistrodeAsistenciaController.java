@@ -167,9 +167,7 @@ public class RegistrodeAsistenciaController implements Initializable {
             for (Actividad actividad : noActividad) {
                 noActividades.add(actividad.getNoActividad());
             }
-            numActividad = noActividades.get(comboActividad.getSelectionModel().getSelectedIndex());
-            
-            System.out.println("noActv: " + noActividades.get(comboActividad.getSelectionModel().getSelectedIndex()));
+            numActividad = noActividades.get(comboActividad.getSelectionModel().getSelectedIndex());            
         } catch (IOException | ArrayIndexOutOfBoundsException ex) {
         }
 
