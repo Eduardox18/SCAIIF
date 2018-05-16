@@ -1,5 +1,6 @@
 package modelo.dao;
 
+import java.util.HashMap;
 import modelo.mybatis.MyBatisUtils;
 import modelo.pojos.CalificacionModulo;
 import modelo.pojos.Inscripcion;
@@ -45,6 +46,21 @@ public class InscripcionDAO {
                 conn.close();
             }
         }
+        return resultado;
+    }
+    
+    public static boolean inscribirAlumno(String matricula, Integer nrc) throws Exception {
+        boolean resultado = false;
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("matricula",  matricula);
+        params.put("nrc", nrc);
+        
+        try(SqlSession conn = MyBatisUtils.getSession()){
+            conn.insert("Inscripcion.inscribirAlumno", params);
+            conn.commit();
+            resultado = true;
+        }
+        
         return resultado;
     }
 }
