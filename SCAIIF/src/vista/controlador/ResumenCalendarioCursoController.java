@@ -40,15 +40,6 @@ public class ResumenCalendarioCursoController implements Initializable {
     private JFXDatePicker limiteDP;
 
     @FXML
-    private JFXDatePicker inicioVacacionesDP;
-
-    @FXML
-    private JFXDatePicker finVacacionesDP;
-
-    @FXML
-    private JFXButton festivosButton;
-
-    @FXML
     private JFXButton guardarButton;
 
     @FXML
@@ -108,12 +99,6 @@ public class ResumenCalendarioCursoController implements Initializable {
 
         try {
             calendarioCurso = CalendarioDAO.recuperarCalendario(cursoSeleccionado.getNrc());
-            if (calendarioCurso.getInicioVacaciones() != null) {
-                inicioVacacionesDP.setValue(calendarioCurso.getInicioVacaciones().toLocalDate());
-            }
-            if (calendarioCurso.getFinVacaciones() != null) {
-                finVacacionesDP.setValue(calendarioCurso.getFinVacaciones().toLocalDate());
-            }
             if (calendarioCurso.getFechaLimiteExamen() != null) {
                 limiteDP.setValue(calendarioCurso.getFechaLimiteExamen().toLocalDate());
             }
@@ -152,8 +137,7 @@ public class ResumenCalendarioCursoController implements Initializable {
      */
     @FXML
     public void habilitarGuardar() {
-        if (limiteDP.getValue() != null && inicioVacacionesDP.getValue() != null &&
-                finVacacionesDP.getValue() != null) {
+        if (limiteDP.getValue() != null) {
             guardarButton.setDisable(false);
         } else {
             guardarButton.setDisable(true);
@@ -168,8 +152,6 @@ public class ResumenCalendarioCursoController implements Initializable {
         boolean exito = false;
         Calendario calendario = new Calendario();
         calendario.setFechaLimiteExamen(Date.valueOf(limiteDP.getValue()));
-        calendario.setInicioVacaciones(Date.valueOf(inicioVacacionesDP.getValue()));
-        calendario.setFinVacaciones(Date.valueOf(finVacacionesDP.getValue()));
         calendario.setIdCalendario(idCalendario);
 
         if (comprobarFechas()) {
@@ -199,29 +181,6 @@ public class ResumenCalendarioCursoController implements Initializable {
             Dialogo dialogo = new Dialogo(Alert.AlertType.WARNING,
                     "Una o más fechas no están dentro del periodo", "Fechas inválidas",
                     ButtonType.OK);
-            dialogo.show();
-        }
-    }
-
-    /**
-     * Abre la ventana DiasFestivos
-     */
-    @FXML
-    public void irDiasFestivos() {
-        try {
-            Stage stageSecundario = new Stage();
-            BorderPane paneSecundario = new BorderPane();
-            URL paneFestivoURL = getClass().getResource("/vista/RegistroDiasFestivos.fxml");
-            AnchorPane paneFestivo = FXMLLoader.load(paneFestivoURL);
-
-            paneSecundario.setCenter(paneFestivo);
-            Scene sceneFestivo = new Scene(paneSecundario, 500, 300);
-            stageSecundario.setScene(sceneFestivo);
-            stageSecundario.show();
-        } catch (IOException ioEx) {
-            ioEx.printStackTrace();
-            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
-                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
         }
     }
@@ -257,14 +216,10 @@ public class ResumenCalendarioCursoController implements Initializable {
         Date inicio = SeleccionDeCursoController.periodoSeleccionado.getFechaInicio();
         Date fin = SeleccionDeCursoController.periodoSeleccionado.getFechaFin();
         Date limite = Date.valueOf(limiteDP.getValue());
-        Date inicioVacaciones = Date.valueOf(inicioVacacionesDP.getValue());
-        Date finVacaciones = Date.valueOf(finVacacionesDP.getValue());
 
         boolean flag = false;
 
-        if ((limite.after(inicio) && limite.before(fin)) &&
-                (inicioVacaciones.after(inicio) && inicioVacaciones.before(fin)) &&
-                (finVacaciones.after(inicio) && finVacaciones.before(fin))) {
+        if (limite.after(inicio) && limite.before(fin)) {
             flag = true;
         }
         return flag;

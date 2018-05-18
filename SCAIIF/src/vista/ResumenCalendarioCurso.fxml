@@ -17,41 +17,24 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="30.0" layoutY="100.0" text="Fecha límite de examen:" AnchorPane.leftAnchor="30.0">
+      <Label layoutX="140.0" layoutY="106.0" text="Fecha límite de examen:" AnchorPane.leftAnchor="140.0">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="30.0" layoutY="171.0" text="Fecha de inicio de vacaciones:" AnchorPane.leftAnchor="30.0">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="30.0" layoutY="240.0" text="Fecha de fin de vacaciones:" AnchorPane.leftAnchor="30.0">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <JFXDatePicker fx:id="limiteDP" editable="false" layoutX="288.0" layoutY="92.0" onAction="#habilitarGuardar" onMousePressed="#habilitarGuardar" prefHeight="27.0" prefWidth="200.0" AnchorPane.leftAnchor="288.0" />
-      <JFXDatePicker fx:id="inicioVacacionesDP" editable="false" layoutX="288.0" layoutY="157.0" onAction="#habilitarGuardar" onMousePressed="#habilitarGuardar" prefHeight="27.0" prefWidth="200.0" AnchorPane.leftAnchor="288.0" />
-      <JFXDatePicker fx:id="finVacacionesDP" editable="false" layoutX="288.0" layoutY="224.0" onAction="#habilitarGuardar" onMousePressed="#habilitarGuardar" prefWidth="200.0" AnchorPane.leftAnchor="288.0" />
-      <JFXButton fx:id="festivosButton" layoutX="561.0" layoutY="141.0" onAction="#irDiasFestivos" prefHeight="80.0" prefWidth="80.0" ripplerFill="#55f8ff" style="-fx-background-color: #082F8A;" text="Días Festivos" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <JFXDatePicker fx:id="limiteDP" editable="false" layoutX="398.0" layoutY="98.0" onAction="#habilitarGuardar" onMousePressed="#habilitarGuardar" prefHeight="27.0" prefWidth="200.0" AnchorPane.leftAnchor="398.0" />
+      <Separator layoutY="250.0" prefHeight="17.0" prefWidth="700.0" />
+      <JFXButton fx:id="guardarButton" disable="true" layoutX="317.0" layoutY="198.0" onAction="#guardarResumen" ripplerFill="#15ff00" style="-fx-background-color: #0f9d58;" text="Guardar" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </JFXButton>
-      <Separator layoutY="349.0" prefHeight="17.0" prefWidth="700.0" />
-      <JFXButton fx:id="guardarButton" disable="true" layoutX="320.0" layoutY="292.0" onAction="#guardarResumen" ripplerFill="#15ff00" style="-fx-background-color: #0f9d58;" text="Guardar" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </JFXButton>
-      <Label fx:id="labelMeses" alignment="TOP_LEFT" layoutX="29.0" layoutY="369.0" prefHeight="70.0" prefWidth="642.0" text="*Meses registrados*" wrapText="true">
+      <Label fx:id="labelMeses" alignment="TOP_LEFT" layoutX="31.0" layoutY="285.0" prefHeight="70.0" prefWidth="642.0" text="*Meses registrados*" wrapText="true">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <JFXButton fx:id="nuevoButton" layoutX="326.0" layoutY="450.0" onAction="#registrarNuevoMes" style="-fx-background-color: #082F8A;" text="Nuevo" textFill="WHITE">
+      <JFXButton fx:id="nuevoButton" layoutX="316.0" layoutY="426.0" onAction="#registrarNuevoMes" prefHeight="29.0" prefWidth="84.0" style="-fx-background-color: #082F8A;" text="Nuevo" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>

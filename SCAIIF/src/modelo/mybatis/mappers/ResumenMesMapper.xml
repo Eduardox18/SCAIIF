@@ -5,8 +5,8 @@
 
 <mapper namespace="ResumenMes">
     <insert id="registrarResumen" parameterType="modelo.pojos.ResumenMes">
-        INSERT INTO resumenMes (idCalendario, diaInicio, diaFin, idMes, idSeccion, noMaterial,
-        idModulo, idConversacion) VALUES (#{idCalendario}, #{diaInicio}, #{diaFin}, #{idMes},
+        INSERT INTO resumenMes (idCalendario, idMes, idSeccion, noMaterial,
+        idModulo, idConversacion) VALUES (#{idCalendario}, #{idMes},
         #{idSeccion}, #{noMaterial}, #{idModulo}, #{idConversacion});
     </insert>
 </mapper>

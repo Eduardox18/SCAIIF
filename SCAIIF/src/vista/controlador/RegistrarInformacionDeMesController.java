@@ -37,22 +37,10 @@ public class RegistrarInformacionDeMesController implements Initializable {
     private JFXComboBox<MaterialReportar> comboMaterial;
 
     @FXML
-    private Spinner<Integer> spinnerInicio;
-
-    @FXML
-    private Spinner<Integer> spinnerFin;
-
-    @FXML
     private JFXButton guardarButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        SpinnerValueFactory<Integer> valueFactoryInicio =
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 31, 1);
-        SpinnerValueFactory<Integer> valueFactoryFin =
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 31, 1);
-        spinnerInicio.setValueFactory(valueFactoryInicio);
-        spinnerFin.setValueFactory(valueFactoryFin);
         llenarComboMes();
         llenarComboConversacion();
         llenarComboModulo();
@@ -161,9 +149,7 @@ public class RegistrarInformacionDeMesController implements Initializable {
                 comboMaterial.getSelectionModel().getSelectedItem() != null &&
                 comboConversacion.getSelectionModel().getSelectedItem() != null &&
                 comboSeccion.getSelectionModel().getSelectedItem() != null &&
-                comboModulo.getSelectionModel().getSelectedItem() != null &&
-                spinnerInicio.getValue() != null &&
-                spinnerFin.getValue() != null) {
+                comboModulo.getSelectionModel().getSelectedItem() != null) {
             guardarButton.setDisable(false);
         } else {
             guardarButton.setDisable(true);
@@ -177,8 +163,6 @@ public class RegistrarInformacionDeMesController implements Initializable {
     public void guardarInformacion() {
         boolean exito = false;
         ResumenMes resumen = new ResumenMes();
-        resumen.setDiaInicio(spinnerInicio.getValue());
-        resumen.setDiaFin(spinnerFin.getValue());
         resumen.setIdCalendario(ResumenCalendarioCursoController.idCalendario);
         resumen.setIdConversacion(comboConversacion.getSelectionModel().getSelectedItem().getIdConversacion());
         resumen.setIdMes(comboMes.getSelectionModel().getSelectedItem().getIdMes());

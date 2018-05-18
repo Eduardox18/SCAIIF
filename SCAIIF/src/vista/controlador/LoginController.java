@@ -68,7 +68,9 @@ public class LoginController extends Application {
         try {
             paneLogin = FXMLLoader.load(login);
         } catch (IOException ex) {
-            System.out.println("Error");
+            Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
+                    "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
+            dialogo.show();
         }
 
         root.setCenter(paneLogin);
@@ -107,6 +109,7 @@ public class LoginController extends Application {
             ingresado = UsuarioDAO.recuperarUsuario(Integer.parseInt(campoUsuario.getText()));
             flagContinuar = true;
         } catch (Exception ex) {
+            ex.printStackTrace();
             dialogo = new Dialogo(Alert.AlertType.INFORMATION, "Número de personal no válido",
                     "Número de personal", ButtonType.OK);
             dialogo.show();

@@ -4,25 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="DiaFestivo">
-    <select id="recuperarDiasFestivos" parameterType="int" resultType="modelo.pojos.DiasFestivos">
-        SELECT idDiaFestivo, diaFestivo FROM diaFestivo WHERE idCalendario = #{idCalendario};
-    </select>
-
-    <insert id="agregarDiaFestivo" parameterType="modelo.pojos.DiasFestivos">
-        INSERT INTO diaFestivo(diaFestivo, idCalendario) VALUES (#{diaFestivo}, #{idCalendario});
-    </insert>
-
-    <select id="comprobarSiExiste" parameterType="modelo.pojos.DiasFestivos" resultType="modelo.pojos.DiasFestivos">
-        SELECT * FROM diaFestivo WHERE idCalendario = #{idCalendario} AND diaFestivo = #{diaFestivo};
-    </select>
-
-    <delete id="borrarDiaFestivo" parameterType="int">
-        DELETE FROM diaFestivo WHERE idDiaFestivo = #{idDiasFestivos};
-    </delete>
-
-    <select id="getDiasFestivosbyNRC" parameterType="int" resultType="modelo.pojos.DiasFestivos">
-        SELECT diaFestivo from diaFestivo, calendario
-        WHERE diaFestivo.idCalendario = calendario.idCalendario AND
-        calendario.nrc = #{nrc};
+    <select id="getDiasFestivosbyPeriodo" parameterType="int" resultType="modelo.pojos.DiaFestivo">
+        SELECT diaFestivo FROM diaFestivo WHERE idPeriodo = #{idPeriodo};
     </select>
 </mapper>

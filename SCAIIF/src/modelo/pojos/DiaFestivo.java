@@ -4,18 +4,18 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-public class DiasFestivos {
+public class DiaFestivo {
     private Integer idDiasFestivos;
     private Date diaFestivo;
-    private Integer idCalendario;
+    private Integer idPeriodo;
 
-    public DiasFestivos() {
+    public DiaFestivo() {
     }
 
-    public DiasFestivos(Integer idDiasFestivos, Date diaFestivo, Integer idCalendario) {
+    public DiaFestivo(Integer idDiasFestivos, Date diaFestivo, Integer idPeriodo) {
         this.idDiasFestivos = idDiasFestivos;
         this.diaFestivo = diaFestivo;
-        this.idCalendario = idCalendario;
+        this.idPeriodo = idPeriodo;
     }
 
     public Integer getIdDiasFestivos() {
@@ -40,12 +40,18 @@ public class DiasFestivos {
         this.diaFestivo = diaFestivo;
     }
 
-    public Integer getIdCalendario() {
-        return idCalendario;
+    public Integer getIdPeriodo() {
+        return idPeriodo;
     }
 
-    public void setIdCalendario(Integer idCalendario) {
-        this.idCalendario = idCalendario;
+    public void setIdPeriodo(Integer idPeriodo) {
+        this.idPeriodo = idPeriodo;
     }
 
+    @Override
+    public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd 'de' MMMM", new Locale("ES"));
+        String diaFestivoFormato = sdf.format(diaFestivo);
+        return diaFestivoFormato;
+    }
 }

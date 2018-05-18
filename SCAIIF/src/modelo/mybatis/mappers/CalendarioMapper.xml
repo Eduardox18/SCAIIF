@@ -10,19 +10,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <insert id="actualizarCalendario" parameterType="modelo.pojos.Calendario">
-        UPDATE calendario SET fechaLimiteExamen = #{fechaLimiteExamen},
-        inicioVacaciones = #{inicioVacaciones},
-        finVacaciones = #{finVacaciones} WHERE idCalendario = #{idCalendario};
+        UPDATE calendario SET fechaLimiteExamen = #{fechaLimiteExamen}
+        WHERE idCalendario = #{idCalendario};
     </insert>
 
     <select id="consultarCalendarioCurso" parameterType="int" 
             resultType="modelo.pojos.ConsultaCalendario">
-        SELECT mes.mes, resumenMes.diaInicio, resumenMes.diaFin, 
-        modulo.noModulo, seccion.noSeccion, calendario.fechaLimiteExamen, 
+        SELECT mes.mes, mesPeriodo.diaInicio, mesPeriodo.diaFin,
+        modulo.noModulo, seccion.noSeccion, calendario.fechaLimiteExamen,
         materialReportar.nombreMaterial, conversacion.noConversacion
-        FROM calendario, mes, modulo, seccion, materialReportar, resumenMes, 
-        conversacion WHERE resumenMes.idMes = mes.idMes AND resumenMes.idModulo 
-        = modulo.idModulo AND resumenMes.idSeccion = seccion.idSeccion AND
+        FROM calendario, mes, modulo, seccion, materialReportar, resumenMes,
+        conversacion, mesPeriodo WHERE
+        mesPeriodo.idMes = mes.idMes AND
+        mesPeriodo.idMes = resumenMes.idMes AND
+        resumenMes.idModulo = modulo.idModulo AND
+        resumenMes.idSeccion = seccion.idSeccion AND
         resumenMes.noMaterial = materialReportar.noMaterial AND
         resumenMes.idConversacion = conversacion.idConversacion AND
         resumenMes.idCalendario = calendario.idCalendario AND

@@ -116,7 +116,6 @@ public class ConsultaCalendarioCursoController implements Initializable {
             ObservableList<Periodo> periodosObservable = FXCollections.observableArrayList(periodos);
             comboPeriodo.setItems(periodosObservable);
         } catch (Exception ex) {
-            ex.printStackTrace();
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
@@ -138,7 +137,6 @@ public class ConsultaCalendarioCursoController implements Initializable {
             ObservableList<Curso> cursosObservable = FXCollections.observableArrayList(cursos);
             comboCurso.setItems(cursosObservable);
         } catch (Exception ex) {
-            ex.printStackTrace();
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
@@ -150,8 +148,8 @@ public class ConsultaCalendarioCursoController implements Initializable {
         if (comboCurso.getSelectionModel().getSelectedItem() != null) {
             botonImprimir.setDisable(false);
             List<ConsultaCalendario> infoCalendarioCurso;
-            List<DiasFestivos> diasFestivos = null;
-            Calendario calendario = null;
+            List<DiaFestivo> diasFestivos = null;
+            Periodo periodo = comboPeriodo.getSelectionModel().getSelectedItem();
 
             try {
                 botonImprimir.setDisable(false);
@@ -178,13 +176,8 @@ public class ConsultaCalendarioCursoController implements Initializable {
                     botonImprimir.setDisable(false);
                 }
 
-                diasFestivos = DiaFestivoDAO.consultarDiasFestivosCurso(comboCurso.getSelectionModel().
-                        getSelectedItem().getNrc());
-
-                calendario = CalendarioDAO.recuperarCalendario(comboCurso.getSelectionModel().
-                        getSelectedItem().getNrc());
+                diasFestivos = DiaFestivoDAO.consultarDiasFestivosPeriodo(periodo.getIdPeriodo());
             } catch (Exception ex) {
-                ex.printStackTrace();
                 Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                         "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
                 dialogo.show();
@@ -197,9 +190,9 @@ public class ConsultaCalendarioCursoController implements Initializable {
                 }
                 labelFestivos.setText(diasFestivosCadena.substring(0, diasFestivosCadena.length() - 2));
 
-                vacacionesLabel.setText("Vacaciones: " + calendario.getVacaciones());
+                vacacionesLabel.setText("Vacaciones: " + periodo.getVacaciones());
             } catch (NullPointerException ex) {
-                //DoNothing
+                //Do nothing
             }
 
         }
