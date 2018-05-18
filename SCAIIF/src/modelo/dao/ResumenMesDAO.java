@@ -1,11 +1,9 @@
 package modelo.dao;
 
 import modelo.mybatis.MyBatisUtils;
-import modelo.pojos.Mes;
 import modelo.pojos.ResumenMes;
 import org.apache.ibatis.session.SqlSession;
 
-import java.util.List;
 
 public class ResumenMesDAO {
 

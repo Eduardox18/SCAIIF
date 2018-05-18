@@ -16,7 +16,7 @@ public class CalendarioDAO {
      * @return Calendario del curso
      * @throws Exception
      */
-    public static Calendario recuperarCalendario(int nrc) throws Exception {
+    public static Calendario recuperarCalendario(Integer nrc) throws Exception {
         Calendario calendario = new Calendario();
         SqlSession conn = null;
         try {

@@ -20,7 +20,7 @@ public class ActividadDAO {
      * @return lista de las actividades realizadas y por realizar del Asesor.
      * @throws Exception
      */
-    public static List<Actividad> recuperarHistorial(int noPersonal) throws Exception {
+    public static List<Actividad> recuperarHistorial(Integer noPersonal) throws Exception {
         SqlSession conn = null;
         List<Actividad> historialReservaciones = new ArrayList<>();
         try {
@@ -42,7 +42,7 @@ public class ActividadDAO {
      * @return Regresa una lista de actividades
      * @throws Exception
      */
-    public static List<Actividad> recuperarActividadesAsesor(int noPersonal, Date fecha)
+    public static List<Actividad> recuperarActividadesAsesor(Integer noPersonal, Date fecha)
         throws Exception {
         List<Actividad> actividadesProximas = new ArrayList<>();
         Actividad actividad = new Actividad();

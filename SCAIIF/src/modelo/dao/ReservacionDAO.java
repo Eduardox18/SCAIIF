@@ -24,7 +24,7 @@ public class ReservacionDAO {
      * @return Regresa la lista de alumnos que resevaron
      * @throws Exception 
      */
-    public static List<ListaAsistencia> recuperarAlumnosDeActividad(int noActividad)
+    public static List<ListaAsistencia> recuperarAlumnosDeActividad(Integer noActividad)
         throws Exception {
         List<ListaAsistencia> listaAlumnosReservacion = new ArrayList<>();
         SqlSession conn = null;
@@ -85,7 +85,7 @@ public class ReservacionDAO {
         return resultado;
     }
     
-    public static boolean registrarReservación(String matricula, Integer noActividad) throws Exception {
+    public static boolean registrarReservacion(String matricula, Integer noActividad) throws Exception {
         boolean resultado = false;
         Date fCreacion = Date.valueOf(LocalDate.now());
         HashMap<String, Object> params = new HashMap<>();

@@ -19,7 +19,7 @@ public class UsuarioDAO {
      * @return objeto usuario con el nombre completo del Asesor. 
      * @throws Exception 
      */
-    public static Usuario recuperarAsesor(int noPersonal) throws Exception {
+    public static Usuario recuperarAsesor(Integer noPersonal) throws Exception {
         Usuario nombreAsesor = null;
         SqlSession conn = null;
         try {
@@ -39,7 +39,7 @@ public class UsuarioDAO {
      * @return Regresa un objeto Usuario
      * @throws Exception 
      */
-    public static Usuario recuperarUsuario(int noPersonal) throws Exception {
+    public static Usuario recuperarUsuario(Integer noPersonal) throws Exception {
         Usuario ingresado = new Usuario();
         SqlSession conn = null;
         try {

@@ -195,7 +195,7 @@ public class AlumnoDAO {
      * @return
      * @throws Exception
      */
-    public static List<Alumno> recuperarHistorialAsesores(int noPersonal) throws Exception {
+    public static List<Alumno> recuperarHistorialAsesores(Integer noPersonal) throws Exception {
         SqlSession conn = null;
         List<Alumno> historialAsesores = new ArrayList<>();
         try {

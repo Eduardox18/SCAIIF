@@ -90,6 +90,10 @@ public class ReservarParaAlumnoController implements Initializable {
         tablaActividades.setPlaceholder(new Label("No hay actividades disponibles"));
     }   
     
+    /**
+     * Carga los valores iniciales de la ventana
+     * @param infoAlumno Información del alumno que desea reservar la actividad
+     */
     public void infoVentana(Alumno infoAlumno) {
         this.infoAlumno = infoAlumno;
         labelMatricula.setText(infoAlumno.getMatricula());
@@ -101,6 +105,9 @@ public class ReservarParaAlumnoController implements Initializable {
     }
     
     @FXML
+    /**
+     * Regresa a la ventana donde se selecciona un alumno
+     */
     private void accionRegresar() {
         try {
             URL reservarAct = getClass().getResource("/vista/ReservarActividad.fxml");
@@ -116,6 +123,9 @@ public class ReservarParaAlumnoController implements Initializable {
     }
     
     @FXML
+    /**
+     * Puebla la tabla con las actividades disponibles para el alumno
+     */
     private void llenarTabla(){
         ObservableList<ActividadAsesor> actividadesObservable;
         try {
@@ -136,6 +146,9 @@ public class ReservarParaAlumnoController implements Initializable {
         
     }
     
+    /**
+     * Puebla el combo box con los cursos a los que el alumno esté inscrito
+     */
     private void llenarCombo(){
         ObservableList<Curso> cursoObservable;
         try {
@@ -151,11 +164,15 @@ public class ReservarParaAlumnoController implements Initializable {
     }
     
     @FXML
+    /**
+     * Realiza la reservación y la almacena en la base de datos
+     * 
+     */
     private void realizarReservacion() {
         Integer noActividad = tablaActividades.getSelectionModel().getSelectedItem().getNoActividad();
         Dialogo dialogo;
         try {
-            ReservacionDAO.registrarReservación(infoAlumno.getMatricula(), noActividad);
+            ReservacionDAO.registrarReservacion(infoAlumno.getMatricula(), noActividad);
             llenarTabla();
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -14,7 +14,7 @@ public class MesDAO {
      * @return
      * @throws Exception
      */
-    public static List<Mes> consultarMeses (int idCalendario) throws Exception {
+    public static List<Mes> consultarMeses (Integer idCalendario) throws Exception {
         List<Mes> meses;
         SqlSession conn = null;
         try {
@@ -33,7 +33,7 @@ public class MesDAO {
      * @return Lista de meses
      * @throws Exception
      */
-    public static List<Mes> recuperarMesesPendientes(int idCalendario) throws Exception {
+    public static List<Mes> recuperarMesesPendientes(Integer idCalendario) throws Exception {
         List<Mes> meses;
         SqlSession conn = null;
         try {

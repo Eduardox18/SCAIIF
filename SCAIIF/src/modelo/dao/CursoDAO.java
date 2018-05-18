@@ -1,6 +1,5 @@
 package modelo.dao;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +40,7 @@ public class CursoDAO {
      * @return lista de cursos
      * @throws Exception
      */
-    public static List<Curso> recuperarCursosDePeriodo(int idPeriodo) throws Exception {
+    public static List<Curso> recuperarCursosDePeriodo(Integer idPeriodo) throws Exception {
         List<Curso> cursos;
         SqlSession conn = null;
         try {

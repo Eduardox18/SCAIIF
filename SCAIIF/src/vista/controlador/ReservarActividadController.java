@@ -109,6 +109,9 @@ public class ReservarActividadController implements Initializable {
         }
     }
     
+    /**
+     * Puebla la tabla con los alumnos registrados en el sistema
+     */
     private void llenarTabla() {
         ObservableList<Alumno> alumnosObservable = null;
         try {
@@ -127,6 +130,9 @@ public class ReservarActividadController implements Initializable {
     
     
     @FXML
+    /**
+     * Carga la siguiente ventana donde se reserva la actividad para un alumno específico
+     */
     private void continuarAccion() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/ReservarParaAlumno.fxml"));
@@ -138,7 +144,6 @@ public class ReservarActividadController implements Initializable {
             BorderPane border = LoginController.getPrincipal();
             border.setCenter(pane);
         } catch (IOException ioEx) {
-            ioEx.printStackTrace();
             Dialogo dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();

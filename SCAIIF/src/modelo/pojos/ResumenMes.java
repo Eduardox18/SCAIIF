@@ -1,7 +1,5 @@
 package modelo.pojos;
 
-import java.sql.Date;
-
 public class ResumenMes {
 
     private Integer idResumenMes;

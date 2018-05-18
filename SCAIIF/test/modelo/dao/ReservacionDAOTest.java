@@ -101,7 +101,7 @@ public class ReservacionDAOTest {
         String matricula = "S15011613";
         Integer noActividad = 2;
         boolean expResult = true;
-        boolean result = ReservacionDAO.registrarReservación(matricula, noActividad);
+        boolean result = ReservacionDAO.registrarReservacion(matricula, noActividad);
         assertEquals(expResult, result);
     }
 

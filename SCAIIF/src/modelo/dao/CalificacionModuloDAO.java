@@ -1,10 +1,7 @@
 package modelo.dao;
 
-import java.util.ArrayList;
-import java.util.List;
 import modelo.mybatis.MyBatisUtils;
 import modelo.pojos.CalificacionModulo;
-import modelo.pojos.Modulo;
 import org.apache.ibatis.session.SqlSession;
 
 /**
