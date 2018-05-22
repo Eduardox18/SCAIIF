@@ -92,7 +92,7 @@ public class ReservarActividadController implements Initializable {
             }
         });
         
-        tablaALumnos.setPlaceholder(new Label("No hay ningún alumno disponible"));
+        tablaALumnos.setPlaceholder(new Label("No se encontraron coincidencias"));
         
         llenarTabla();
     }

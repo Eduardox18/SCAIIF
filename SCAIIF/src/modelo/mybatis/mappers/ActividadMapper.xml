@@ -27,10 +27,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getActividadesPendientes" 
             resultType="modelo.pojos.ActividadAsesor">
         SELECT noActividad, actividad.nombre, horaInicio, horaFin, fecha, 
-        usuario.nombre AS nombreAsesor, usuario.apPaterno AS apellidoPAsesor, 
-        usuario.apMaterno AS apellidoMAsesor FROM actividad INNER JOIN usuario 
-        ON actividad.noPersonal = usuario.noPersonal WHERE actividad.idEstado = 
-        1;
+        usuario.nombre AS nombreAsesor, usuario.apPaterno, usuario.apMaterno 
+        FROM actividad INNER JOIN usuario ON actividad.noPersonal = 
+        usuario.noPersonal WHERE actividad.idEstado = 1;
     </select>
     
     <select id="getActividadesPorImpartir" parameterType="String"
