@@ -171,10 +171,12 @@ public class RegistrarAlumnoController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, 
                     String oldValue, String newValue) {
-                if(tfBusqueda.getText().length() == 9){
+                if(tfBusqueda.getText().length() >= 9){
+                    tfBusqueda.setText(tfBusqueda.getText().substring(0, 9));
                     btnBuscar.setDisable(false);
                 } else {
                     btnBuscar.setDisable(true);
+                    btnInscribir.setDisable(true);
                 }
             }
         });
@@ -389,19 +391,18 @@ public class RegistrarAlumnoController implements Initializable {
     
     @FXML
     private void buscarAlumno(){
-        List<Alumno> recuperados = null ;
+        Alumno alumno = null ;
         try {
-            recuperados = AlumnoDAO.recuperarAlumnos(tfBusqueda.getText());
+            alumno = AlumnoDAO.recuperarInfoAlumno(tfBusqueda.getText());
         } catch (Exception ex) {
             Dialogo dialogo = new Dialogo(Alert.AlertType.WARNING, 
                 "Servidor no disponible, intente más tarde", "Error", ButtonType.OK);
             dialogo.show();
         }
         
-        if(!recuperados.isEmpty()){
-            Alumno alumnoRecuperado = recuperados.get(0);
-            labelNombre.setText(alumnoRecuperado.getNombreCompleto());
-            labelCorreo.setText(alumnoRecuperado.getCorreo());
+        if(alumno != null){
+            labelNombre.setText(alumno.getNombreCompleto());
+            labelCorreo.setText(alumno.getCorreo());
         } else {
             Dialogo dialogo = new Dialogo(Alert.AlertType.WARNING, 
                 "La matrícula que ingresó no está registrada, puede registrar un nuevo alumno en la"
