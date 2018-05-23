@@ -7,6 +7,8 @@ package modelo.pojos;
 
 import java.sql.Time;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 /**
  *
@@ -79,8 +81,10 @@ public class ActividadAsesor {
         this.horaFin = horaFin;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public String getFecha() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd 'de' MMMM 'de' YYYY", new Locale("ES"));
+        String fechaActividad = sdf.format(fecha);
+        return fechaActividad;
     }
 
     public void setFecha(Date fecha) {

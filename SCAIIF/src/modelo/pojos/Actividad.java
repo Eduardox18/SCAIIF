@@ -70,8 +70,10 @@ public class Actividad {
         this.horaFin = horaFin;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public String getFecha() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd 'de' MMMM", new Locale("ES"));
+        String fechaActividad = sdf.format(fecha);
+        return fechaActividad;
     }
     
     public String getFechaFormato() {
