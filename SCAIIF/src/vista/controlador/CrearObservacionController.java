@@ -143,7 +143,7 @@ public class CrearObservacionController implements Initializable {
      */
     private void cerrarVentana() {
         try {
-            URL comentarioAlumno = getClass().getResource("/vista/Observacion.fxml");
+            URL comentarioAlumno = getClass().getResource("/vista/RegistrarObservacion.fxml");
             AnchorPane paneComentario = FXMLLoader.load(comentarioAlumno);
 
             BorderPane border = LoginController.getPrincipal();

@@ -24,8 +24,8 @@
             </Label>
             <HBox prefHeight="26.0" prefWidth="670.0" VBox.vgrow="NEVER">
                <children>
-                  <JFXComboBox fx:id="comboPeriodo" labelFloat="true" onAction="#llenarComboCurso" prefHeight="27.0" prefWidth="190.0" promptText="Periodo" />
-                  <Pane prefHeight="31.0" prefWidth="290.0" HBox.hgrow="ALWAYS" />
+                  <JFXComboBox fx:id="comboPeriodo" labelFloat="true" onAction="#llenarComboCurso" prefHeight="27.0" prefWidth="307.0" promptText="Periodo" />
+                  <Pane prefHeight="27.0" prefWidth="134.0" HBox.hgrow="SOMETIMES" />
                   <JFXComboBox fx:id="comboCurso" labelFloat="true" onAction="#llenarTabla" prefHeight="27.0" prefWidth="190.0" promptText="Curso" />
                </children>
             </HBox>
