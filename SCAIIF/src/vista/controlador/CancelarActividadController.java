@@ -140,9 +140,10 @@ public class CancelarActividadController implements Initializable {
             dialogo.show();
         } catch (MessagingException ex) {
             try {
-                ActividadDAO.actualizarEstado(noActividad, 0);
+                ActividadDAO.actualizarEstado(noActividad, 1);
             } catch (IOException ex1) {
             }
+            ex.printStackTrace();
             dialogo = new Dialogo(Alert.AlertType.ERROR, 
                     "Ha ocurrido un error al enviar los correos electrónicos, "
                             + "la actividad no se ha cancelado", "Error al notificar", ButtonType.OK);
