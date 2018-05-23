@@ -61,9 +61,6 @@ public class DrawerPrincipalController implements Initializable {
     private JFXButton registrarAsistenciaButton;
 
     @FXML
-    private JFXButton crearCalendarioActButton;
-
-    @FXML
     private JFXButton consultarCalendarioActButton;
 
     @FXML
@@ -101,7 +98,6 @@ public class DrawerPrincipalController implements Initializable {
                 consultarActividadAsesorButton.setDisable(true);
                 reservarActividadButton.setDisable(true);
                 cancelarActividadButton.setDisable(true);
-                crearCalendarioActButton.setDisable(true);
                 registrarCalendarioCursoButton.setDisable(true);
                 break;
             case 3:
@@ -114,7 +110,6 @@ public class DrawerPrincipalController implements Initializable {
                 consultarPorImpartirButton.setDisable(true);
                 consultarListaAsistenciaButton.setDisable(true);
                 registrarAsistenciaButton.setDisable(true);
-                crearCalendarioActButton.setDisable(true);
                 registrarCalendarioCursoButton.setDisable(true);
                 break;
             default:
