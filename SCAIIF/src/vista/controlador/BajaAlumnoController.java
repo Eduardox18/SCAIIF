@@ -171,12 +171,11 @@ public class BajaAlumnoController implements Initializable {
                     "Alumno dado de baja del curso exitosamente", "Éxito", ButtonType.OK);
                 dialogo.show();
                 
-                    botonBajaCurso.setDisable(true);
-                    botonBaja.setDisable(true);
-                    botonBuscar.setDisable(true);
-                    limpiarCampos();
+                botonBaja.setDisable(true);
+                botonBuscar.setDisable(true);
+                limpiarCampos();
+                botonBajaCurso.setDisable(true);
                 
-
             } catch (Exception ex) {
                 dialogo = new Dialogo(Alert.AlertType.ERROR,
                     "Error al dar de baja del curso", "Error", ButtonType.OK);
@@ -230,7 +229,7 @@ public class BajaAlumnoController implements Initializable {
      */
     @FXML
     private void seleccionarCurso() {
-        if (comboCursos.getSelectionModel().getSelectedItem() != null) {
+        if (!comboCursos.getSelectionModel().getSelectedItem().equals("")) {
             botonBajaCurso.setDisable(false);
         } else {
             botonBajaCurso.setDisable(true);

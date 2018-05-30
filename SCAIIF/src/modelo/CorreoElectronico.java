@@ -20,7 +20,11 @@ public class CorreoElectronico {
     
     public static boolean enviarCorreo(List<String> destinatarios, String asunto, String motivo) throws MessagingException{
         boolean resultado = true;
-
+        
+        if(destinatarios.isEmpty()){
+            return true;
+        }
+        
         try {
             Properties properties = new Properties();
             properties.put("mail.smtp.starttls.enable", "true");
